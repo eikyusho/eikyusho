@@ -1,6 +1,7 @@
 final class AppDimens {
   const AppDimens._();
 
+  // * || Spacing
   /// Size: 0
   static const double none = 0;
 
@@ -41,10 +42,40 @@ final class AppDimens {
   /// Radius: 24
   static const double radiusXl = 24;
 
-  /// * || Button
-  /// Height: 48
-  static const double buttonSize = 48;
+  // * || Button
+  /// Size: 20
+  static const double buttonXs = 20;
 
+  /// Size: 28
+  static const double buttonSm = 28;
+
+  /// Size: 32
+  static const double buttonMd = 32;
+
+  /// Size: 48
+  static const double buttonLg = 48;
+
+  /// Size: 56
+  static const double buttonXl = 56;
+
+  // * || Icon
+  /// Size: 12
+  static const double iconSm = 12;
+
+  /// Size: 20
+  static const double iconMd = 20;
+
+  /// Size: 24
+  static const double iconLg = 24;
+
+  /// Size: 32
+  static const double iconXl = 32;
+
+  // * || Others
   /// Height: 56
-  static const double buttonSizeLg = 56;
+  static const double appBarHeight = 56;
+  /// Height: 64
+  static const double bottomNavigationBarHeight = 64;
+  /// Height: 28
+  static const double logoHeight = 28;
 }

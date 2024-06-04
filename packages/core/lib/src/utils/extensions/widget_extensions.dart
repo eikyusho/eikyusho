@@ -4,9 +4,9 @@ import '../helpers/layout.dart';
 import 'class_extensions.dart';
 
 extension TextStyleExtension on Widget {
-  Widget textStyle(TextStyle? style, {TextAlign? align}) {
+  Widget textStyle(TextStyle style, {required Color color, TextAlign? align}) {
     return DefaultTextStyle.merge(
-      style: style,
+      style: style.apply(color: color),
       textAlign: align,
       child: this,
     );
@@ -97,6 +97,17 @@ extension PaddingExtension on Widget {
   Padding pl(double padding) {
     return Padding(
       padding: EdgeInsets.zero.pl(padding),
+      child: this,
+    );
+  }
+}
+
+extension GestureOnEmptySpace on Widget {
+  /// to detect gestures on the whole container
+  Widget empty() {
+    return Container(
+      width: double.infinity,
+      color: Colors.transparent,
       child: this,
     );
   }

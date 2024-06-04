@@ -15,6 +15,10 @@ command:
     environment:
       sdk: '>=3.4.0 <4.0.0'
 
+    dependencies:
+      # * Dev Utility
+      meta: ^1.12.0 # ? Class annotations
+
     dev_dependencies:
       # ! Code Generation
       build_runner: any

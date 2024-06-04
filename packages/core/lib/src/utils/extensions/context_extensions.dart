@@ -11,14 +11,14 @@ extension ThemeExtension on BuildContext {
   BaseTheme get appTheme => AppTheme.selected(theme.brightness);
 
   ColorsThemeExtension get colors {
-    return theme.extension<ColorsThemeExtension>().or(appTheme.colors);
+    return theme.extension<ColorsThemeExtension>().getOr(appTheme.colors);
   }
 
   TextThemeExtension get textTheme {
-    return theme.extension<TextThemeExtension>().or(appTheme.text);
+    return theme.extension<TextThemeExtension>().getOr(appTheme.text);
   }
 
   ShadowsThemeExtension get shadows {
-    return theme.extension<ShadowsThemeExtension>().or(appTheme.shadows);
+    return theme.extension<ShadowsThemeExtension>().getOr(appTheme.shadows);
   }
 }

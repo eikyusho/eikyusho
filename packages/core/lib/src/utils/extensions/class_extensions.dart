@@ -40,8 +40,8 @@ extension EdgeInsetsExtension on EdgeInsets {
   }
 }
 
-extension OrExtension<T> on T? {
-  T or(T alternative) {
+extension AlternativeExtension<T> on T? {
+  T getOr(T alternative) {
     return this ?? alternative;
   }
 }

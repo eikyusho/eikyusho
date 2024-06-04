@@ -8,5 +8,5 @@ targets:
     builders:
       auto_route_generator:auto_route_generator:
         generate_for:
-          - lib/src/**/presentation/view/**_page.dart # ? for @RoutePage
+          - lib/src/**/presentation/views/**_page.dart # ? for @RoutePage
           - lib/config/router/app_router.dart   # ? for @AutoRouterConfig

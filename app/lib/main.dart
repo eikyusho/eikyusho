@@ -1,20 +1,21 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:core/core.dart';
+import 'package:flutter/foundation.dart';
+
+import 'bootstrap.dart';
+import 'config/app.dart';
 
 void main() {
-  runApp(const MainApp());
-}
+  runZonedGuarded(
+    () => bootstrap(MainApp.new),
+    (error, stack) {
+      if (kDebugMode) {
+        return AppLogger.error(error.toString(), error, stack);
+      }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+      log(error.toString(), stackTrace: stack);
+    },
+  );
 }

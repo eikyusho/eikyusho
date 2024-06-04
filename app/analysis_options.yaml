@@ -1,1 +1,1 @@
-include: package:linter/analysis.yaml
+include: package:linter/analysis_options.yaml

@@ -9,3 +9,5 @@ linter:
   rules:
     public_member_api_docs: false
     sort_pub_dependencies: false
+    always_use_package_imports: false
+    prefer_relative_imports: true

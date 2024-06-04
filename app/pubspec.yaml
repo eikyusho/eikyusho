@@ -10,7 +10,24 @@ dependencies:
   flutter:
     sdk: flutter
 
+  core:
+    path: ../packages/core
+
+  resources:
+    path: ../packages/resources
+
+  # * Routing
+  auto_route: ^8.1.3
+
+  # * State Management
+  flutter_bloc: ^8.1.5
+
 dev_dependencies:
+  # ! Code Generation
+  build_runner: any
+  # * Generator Packages
+  auto_route_generator: ^8.0.0 # ? For AutoRoute
+
   # * Utility
   flutter_native_splash: ^2.4.0 # ? For generating splash screen
 

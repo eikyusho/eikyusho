@@ -1,0 +1,16 @@
+name: eikyusho
+#repository:
+
+packages:
+  - app
+  - packages/*
+
+ide:
+  intellij:
+    enabled: true
+    moduleNamePrefix: eikyusho_
+
+command:
+  bootstrap:
+    environment:
+      sdk: '>=3.4.0 <4.0.0'

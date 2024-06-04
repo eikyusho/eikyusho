@@ -1,0 +1,21 @@
+name: app
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  # * Core
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  # * Utility
+  flutter_native_splash: ^2.4.0 # ? For generating splash screen
+
+  linter: # ? For linting
+    path: ../packages/linter
+
+flutter:
+  uses-material-design: true

@@ -1,20 +1,26 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+import '../router/app_router.dart';
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp.router(
+      title: AppConstants.appName,
+      debugShowCheckedModeBanner: false,
+
+      // Theme
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+
+      // Routing
+      restorationScopeId: AppConstants.appId,
+      routerConfig: _appRouter.config(),
     );
   }
 }

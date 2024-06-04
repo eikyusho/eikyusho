@@ -5,95 +5,95 @@ class ColorsThemeExtension extends ThemeExtension<ColorsThemeExtension> {
     required this.primary,
     required this.primaryVariant,
     required this.background,
-    required this.backgroundVariant,
+    required this.backgroundSecondary,
     required this.backgroundAuxiliary,
     required this.surface,
-    required this.surfaceVariant,
+    required this.surfaceSecondary,
     required this.surfaceAuxiliary,
-    required this.primaryText,
-    required this.secondaryText,
-    required this.auxiliaryText,
-    required this.subduedText,
-    required this.buttonText,
+    required this.textPrimary,
+    required this.textSecondary,
+    required this.textAuxiliary,
+    required this.textSubdued,
+    required this.textButton,
     required this.error,
     required this.success,
     required this.warning,
     required this.info,
-    required this.vividBorder,
-    required this.discreetBorder,
-    required this.inverseBorder,
+    required this.border,
+    required this.borderDiscreet,
+    required this.borderInverse,
   });
 
   final Color primary;
   final Color primaryVariant;
 
   final Color background;
-  final Color backgroundVariant;
+  final Color backgroundSecondary;
   final Color backgroundAuxiliary;
 
   final Color surface;
-  final Color surfaceVariant;
+  final Color surfaceSecondary;
   final Color surfaceAuxiliary;
 
-  final Color primaryText;
-  final Color secondaryText;
-  final Color auxiliaryText;
-  final Color subduedText;
-  final Color buttonText;
+  final Color textPrimary;
+  final Color textSecondary;
+  final Color textAuxiliary;
+  final Color textSubdued;
+  final Color textButton;
 
   final Color error;
   final Color success;
   final Color warning;
   final Color info;
 
-  final Color vividBorder;
-  final Color discreetBorder;
-  final Color inverseBorder;
+  final Color border;
+  final Color borderDiscreet;
+  final Color borderInverse;
 
   @override
   ThemeExtension<ColorsThemeExtension> copyWith({
     Color? primary,
     Color? primaryVariant,
     Color? background,
-    Color? backgroundVariant,
+    Color? backgroundSecondary,
     Color? backgroundAuxiliary,
     Color? surface,
-    Color? surfaceVariant,
+    Color? surfaceSecondary,
     Color? surfaceAuxiliary,
-    Color? primaryText,
-    Color? secondaryText,
-    Color? auxiliaryText,
-    Color? subduedText,
-    Color? buttonText,
+    Color? textPrimary,
+    Color? textSecondary,
+    Color? textAuxiliary,
+    Color? textSubdued,
+    Color? textButton,
     Color? error,
     Color? success,
     Color? warning,
     Color? info,
-    Color? vividBorder,
-    Color? discreetBorder,
-    Color? inverseBorder,
+    Color? border,
+    Color? borderDiscreet,
+    Color? borderInverse,
   }) {
     return ColorsThemeExtension(
       primary: primary ?? this.primary,
       primaryVariant: this.primaryVariant,
       background: background ?? this.background,
-      backgroundVariant: this.backgroundVariant,
+      backgroundSecondary: this.backgroundSecondary,
       backgroundAuxiliary: this.backgroundAuxiliary,
       surface: this.surface,
-      surfaceVariant: this.surfaceVariant,
+      surfaceSecondary: this.surfaceSecondary,
       surfaceAuxiliary: this.surfaceAuxiliary,
-      primaryText: this.primaryText,
-      secondaryText: this.secondaryText,
-      auxiliaryText: this.auxiliaryText,
-      subduedText: this.subduedText,
-      buttonText: this.buttonText,
+      textPrimary: this.textPrimary,
+      textSecondary: this.textSecondary,
+      textAuxiliary: this.textAuxiliary,
+      textSubdued: this.textSubdued,
+      textButton: this.textButton,
       error: this.error,
       success: this.success,
       warning: this.warning,
       info: this.info,
-      vividBorder: this.vividBorder,
-      discreetBorder: this.discreetBorder,
-      inverseBorder: this.inverseBorder,
+      border: this.border,
+      borderDiscreet: this.borderDiscreet,
+      borderInverse: this.borderInverse,
     );
   }
 
@@ -110,26 +110,27 @@ class ColorsThemeExtension extends ThemeExtension<ColorsThemeExtension> {
       primary: Color.lerp(primary, other.primary, t)!,
       primaryVariant: Color.lerp(primaryVariant, other.primaryVariant, t)!,
       background: Color.lerp(background, other.background, t)!,
-      backgroundVariant:
-          Color.lerp(backgroundVariant, other.backgroundVariant, t)!,
+      backgroundSecondary:
+          Color.lerp(backgroundSecondary, other.backgroundSecondary, t)!,
       backgroundAuxiliary:
           Color.lerp(backgroundAuxiliary, other.backgroundAuxiliary, t)!,
       surface: Color.lerp(surface, other.surface, t)!,
-      surfaceVariant: Color.lerp(surfaceVariant, other.surfaceVariant, t)!,
+      surfaceSecondary:
+          Color.lerp(surfaceSecondary, other.surfaceSecondary, t)!,
       surfaceAuxiliary:
           Color.lerp(surfaceAuxiliary, other.surfaceAuxiliary, t)!,
-      primaryText: Color.lerp(primaryText, other.primaryText, t)!,
-      secondaryText: Color.lerp(secondaryText, other.secondaryText, t)!,
-      auxiliaryText: Color.lerp(auxiliaryText, other.auxiliaryText, t)!,
-      subduedText: Color.lerp(subduedText, other.subduedText, t)!,
-      buttonText: Color.lerp(buttonText, other.buttonText, t)!,
+      textPrimary: Color.lerp(textPrimary, other.textPrimary, t)!,
+      textSecondary: Color.lerp(textSecondary, other.textSecondary, t)!,
+      textAuxiliary: Color.lerp(textAuxiliary, other.textAuxiliary, t)!,
+      textSubdued: Color.lerp(textSubdued, other.textSubdued, t)!,
+      textButton: Color.lerp(textButton, other.textButton, t)!,
       error: Color.lerp(error, other.error, t)!,
       success: Color.lerp(success, other.success, t)!,
       warning: Color.lerp(warning, other.warning, t)!,
       info: Color.lerp(info, other.info, t)!,
-      vividBorder: Color.lerp(vividBorder, other.vividBorder, t)!,
-      discreetBorder: Color.lerp(discreetBorder, other.discreetBorder, t)!,
-      inverseBorder: Color.lerp(inverseBorder, other.inverseBorder, t)!,
+      border: Color.lerp(border, other.border, t)!,
+      borderDiscreet: Color.lerp(borderDiscreet, other.borderDiscreet, t)!,
+      borderInverse: Color.lerp(borderInverse, other.borderInverse, t)!,
     );
   }
 }

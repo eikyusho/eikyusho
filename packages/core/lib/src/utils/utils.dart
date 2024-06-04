@@ -3,3 +3,4 @@ export './extensions/context_extensions.dart';
 export './extensions/widget_extensions.dart';
 export './helpers/layout.dart';
 export './helpers/logger.dart';
+export './types/typedefs.dart';

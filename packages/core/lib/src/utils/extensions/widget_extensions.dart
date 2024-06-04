@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../helpers/layout.dart';
-import 'class_extensions.dart';
 
 extension TextStyleExtension on Widget {
   Widget textStyle(TextStyle style, {required Color color, TextAlign? align}) {
@@ -48,7 +47,7 @@ extension PaddingExtension on Widget {
   /// Add padding to all sides of the widget
   Padding pAll(double padding) {
     return Padding(
-      padding: EdgeInsets.zero.all(padding),
+      padding: EdgeInsets.all(padding),
       child: this,
     );
   }
@@ -56,7 +55,7 @@ extension PaddingExtension on Widget {
   /// Add horizontal padding to the widget
   Padding px(double padding) {
     return Padding(
-      padding: EdgeInsets.zero.px(padding),
+      padding: EdgeInsets.symmetric(horizontal: padding),
       child: this,
     );
   }
@@ -64,7 +63,7 @@ extension PaddingExtension on Widget {
   /// Add vertical padding to the widget
   Padding py(double padding) {
     return Padding(
-      padding: EdgeInsets.zero.py(padding),
+      padding: EdgeInsets.symmetric(vertical: padding),
       child: this,
     );
   }
@@ -72,7 +71,7 @@ extension PaddingExtension on Widget {
   /// Add top padding to the widget
   Padding pt(double padding) {
     return Padding(
-      padding: EdgeInsets.zero.pt(padding),
+      padding: EdgeInsets.only(top: padding),
       child: this,
     );
   }
@@ -80,7 +79,7 @@ extension PaddingExtension on Widget {
   /// Add bottom padding to the widget
   Padding pb(double padding) {
     return Padding(
-      padding: EdgeInsets.zero.pb(padding),
+      padding: EdgeInsets.only(bottom: padding),
       child: this,
     );
   }
@@ -88,7 +87,7 @@ extension PaddingExtension on Widget {
   /// Add right padding to the widget
   Padding pr(double padding) {
     return Padding(
-      padding: EdgeInsets.zero.pr(padding),
+      padding: EdgeInsets.only(right: padding),
       child: this,
     );
   }
@@ -96,7 +95,7 @@ extension PaddingExtension on Widget {
   /// Add left padding to the widget
   Padding pl(double padding) {
     return Padding(
-      padding: EdgeInsets.zero.pl(padding),
+      padding: EdgeInsets.only(left: padding),
       child: this,
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core.dart';
+import '../../constants/app_misc.dart';
 import '../base/base_theme.dart';
 import '../base/colors.dart';
 import '../extensions/colors_theme_extension.dart';
@@ -16,23 +16,23 @@ final class LightTheme extends BaseTheme {
       primary: AppColors.primary500,
       primaryVariant: AppColors.primary700,
       background: AppMisc.lightBg,
-      backgroundVariant: AppColors.neutral200,
+      backgroundSecondary: AppColors.neutral200,
       backgroundAuxiliary: AppColors.neutral600,
       surface: AppColors.neutral100,
-      surfaceVariant: AppColors.neutral300,
+      surfaceSecondary: AppColors.neutral300,
       surfaceAuxiliary: AppColors.neutral500,
-      primaryText: AppColors.dark900,
-      secondaryText: AppColors.dark600,
-      auxiliaryText: AppColors.dark400,
-      subduedText: AppColors.dark100,
-      buttonText: AppColors.neutral100,
+      textPrimary: AppColors.dark900,
+      textSecondary: AppColors.dark600,
+      textAuxiliary: AppColors.dark400,
+      textSubdued: AppColors.dark100,
+      textButton: AppColors.neutral100,
       error: AppColors.danger500,
       success: AppColors.success700,
       warning: AppColors.warning600,
       info: AppColors.info600,
-      vividBorder: AppColors.neutral300,
-      discreetBorder: AppColors.neutral200,
-      inverseBorder: AppColors.dark50,
+      border: AppColors.neutral300,
+      borderDiscreet: AppColors.neutral200,
+      borderInverse: AppColors.dark50,
     );
   }
 

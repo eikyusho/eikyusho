@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core.dart';
 import '../base/base_theme.dart';
-import '../base/colors.dart';
 import '../extensions/colors_theme_extension.dart';
 import '../extensions/shadows_theme_extension.dart';
 
@@ -14,24 +14,24 @@ final class DarkTheme extends BaseTheme {
     return const ColorsThemeExtension(
       primary: AppColors.primary500,
       primaryVariant: AppColors.primary700,
-      background: AppColors.dark600,
-      backgroundVariant: AppColors.dark600,
+      background: AppMisc.darkBg,
+      backgroundSecondary: AppColors.dark600,
       backgroundAuxiliary: AppColors.neutral900,
       surface: AppColors.dark800,
-      surfaceVariant: AppColors.dark200,
+      surfaceSecondary: AppColors.dark200,
       surfaceAuxiliary: AppColors.dark400,
-      primaryText: AppColors.neutral50,
-      secondaryText: AppColors.neutral300,
-      auxiliaryText: AppColors.neutral600,
-      subduedText: AppColors.neutral100,
-      buttonText: AppColors.neutral100,
+      textPrimary: AppColors.neutral50,
+      textSecondary: AppColors.neutral300,
+      textAuxiliary: AppColors.neutral600,
+      textSubdued: AppColors.neutral100,
+      textButton: AppColors.neutral100,
       error: AppColors.danger500,
       success: AppColors.success800,
       warning: AppColors.warning600,
       info: AppColors.info600,
-      vividBorder: AppColors.dark300,
-      discreetBorder: AppColors.dark800,
-      inverseBorder: AppColors.neutral400,
+      border: AppColors.dark300,
+      borderDiscreet: AppColors.dark800,
+      borderInverse: AppColors.neutral400,
     );
   }
 

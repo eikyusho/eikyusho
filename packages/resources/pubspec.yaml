@@ -1,0 +1,48 @@
+name: resources
+publish_to: 'none'
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  # * Core
+  flutter:
+    sdk: flutter
+
+  flutter_svg: ^2.0.10+1 # ? SVG rendering
+
+dev_dependencies:
+  # ! Code Generation
+  build_runner: any
+
+  # * Assets Generation
+  flutter_gen: ^5.4.0
+  flutter_gen_runner: any
+
+flutter:
+  assets:
+    - assets/images/
+    - assets/fonts/
+    - assets/icons/
+
+  fonts:
+    - family: Gotham
+      fonts:
+        - asset: assets/fonts/gotham-rnd-book.otf
+        - asset: assets/fonts/gotham-rnd-medium.otf
+          weight: 500
+        - asset: assets/fonts/gotham-rnd-bold.otf
+          weight: 700
+        - asset: assets/fonts/gotham-black.otf
+          weight: 900
+
+flutter_gen:
+  output: lib/src
+
+  assets:
+    outputs:
+      package_parameter_enabled: true
+
+  integrations:
+    flutter_svg: true

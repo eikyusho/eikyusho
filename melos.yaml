@@ -14,3 +14,14 @@ command:
   bootstrap:
     environment:
       sdk: '>=3.4.0 <4.0.0'
+
+    dev_dependencies:
+      # ! Code Generation
+      build_runner: any
+
+scripts:
+  generate:
+    description: Generate necessary files for the project.
+    exec: flutter pub run build_runner build --delete-conflicting-outputs
+    packageFilters:
+      dependsOn: [ build_runner ]

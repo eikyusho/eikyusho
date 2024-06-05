@@ -7,6 +7,9 @@ final class AppStrings {
   static String pageBrowseTitle = 'Browse';
   static String pageSettingsTitle = 'Settings';
 
+  static String discoverListMostPopularTitle = 'Most Popular';
+  static String discoverListRecentlyUpdatedTitle = 'Recently Updated';
+
   static String settingsOptionsProfileTitle = 'Profile';
   static String settingsOptionsAppearanceTitle = 'Appearance';
   static String settingsOptionsAppearanceThemePlaceholder = 'System';

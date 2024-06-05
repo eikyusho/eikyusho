@@ -38,15 +38,15 @@ final class DarkTheme extends BaseTheme {
   @override
   ShadowsThemeExtension get shadows {
     return ShadowsThemeExtension(
-      shadowSm: [
+      sm: [
         style.shadow(opacity: 0.1, blur: 3, offsetDy: 1),
         style.shadow(opacity: 0.2, blur: 2, offsetDy: 1),
       ],
-      shadowMd: [
+      md: [
         style.shadow(opacity: 0.1, blur: 4, offsetDy: 2, spread: -2),
         style.shadow(opacity: 0.2, blur: 8, offsetDy: 4, spread: -2),
       ],
-      shadowLg: [
+      lg: [
         style.shadow(opacity: 0.25, blur: 48, offsetDy: 24, spread: -12),
       ],
     );

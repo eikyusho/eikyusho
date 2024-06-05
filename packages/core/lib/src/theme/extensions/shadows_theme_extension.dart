@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 
 class ShadowsThemeExtension extends ThemeExtension<ShadowsThemeExtension> {
   const ShadowsThemeExtension({
-    required this.shadowSm,
-    required this.shadowMd,
-    required this.shadowLg,
+    required this.sm,
+    required this.md,
+    required this.lg,
   });
 
-  final List<BoxShadow> shadowSm;
-  final List<BoxShadow> shadowMd;
-  final List<BoxShadow> shadowLg;
+  final List<BoxShadow> sm;
+  final List<BoxShadow> md;
+  final List<BoxShadow> lg;
 
   @override
   ThemeExtension<ShadowsThemeExtension> copyWith({
-    List<BoxShadow>? shadowSm,
-    List<BoxShadow>? shadowMd,
-    List<BoxShadow>? shadowLg,
+    List<BoxShadow>? sm,
+    List<BoxShadow>? md,
+    List<BoxShadow>? lg,
   }) {
     return ShadowsThemeExtension(
-      shadowSm: shadowSm ?? this.shadowSm,
-      shadowMd: shadowMd ?? this.shadowMd,
-      shadowLg: shadowLg ?? this.shadowLg,
+      sm: sm ?? this.sm,
+      md: md ?? this.md,
+      lg: lg ?? this.lg,
     );
   }
 
@@ -33,9 +33,9 @@ class ShadowsThemeExtension extends ThemeExtension<ShadowsThemeExtension> {
       return this;
     }
     return ShadowsThemeExtension(
-      shadowSm: BoxShadow.lerpList(shadowSm, other.shadowSm, t)!,
-      shadowMd: BoxShadow.lerpList(shadowMd, other.shadowMd, t)!,
-      shadowLg: BoxShadow.lerpList(shadowLg, other.shadowLg, t)!,
+      sm: BoxShadow.lerpList(sm, other.sm, t)!,
+      md: BoxShadow.lerpList(md, other.md, t)!,
+      lg: BoxShadow.lerpList(lg, other.lg, t)!,
     );
   }
 }

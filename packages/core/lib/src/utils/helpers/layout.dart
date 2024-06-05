@@ -3,24 +3,26 @@ import 'package:flutter/material.dart';
 import '../../../core.dart';
 
 class VSpace extends StatelessWidget {
-  const VSpace(this.height, {super.key});
+  const VSpace(this.height, {super.key, this.factor = 1});
 
   final double height;
+  final double factor;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(height: height);
+    return SizedBox(height: height * factor);
   }
 }
 
 class HSpace extends StatelessWidget {
-  const HSpace(this.width, {super.key});
+  const HSpace(this.width, {super.key, this.factor = 1});
 
   final double width;
+  final double factor;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(width: width);
+    return SizedBox(width: width * factor);
   }
 }
 

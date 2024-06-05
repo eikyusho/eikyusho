@@ -37,6 +37,5 @@ Future<void> bootstrap(Widget Function() builder) async {
     Bloc.observer = const AppBlocObserver();
   }
 
-
   runApp(builder());
 }

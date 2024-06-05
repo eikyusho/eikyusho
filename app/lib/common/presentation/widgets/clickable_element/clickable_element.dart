@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-part 'styles.dart';
+part 'clickable_element.styles.dart';
 
 class ClickableElement extends StatelessWidget {
   const ClickableElement({

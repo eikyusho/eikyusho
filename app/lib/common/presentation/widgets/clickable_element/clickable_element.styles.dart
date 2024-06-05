@@ -1,4 +1,4 @@
-part of 'widget.dart';
+part of 'clickable_element.dart';
 
 enum ClickableElementAnimation { none, overlay, grow, shrink }
 

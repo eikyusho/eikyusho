@@ -1,4 +1,4 @@
-part of 'widget.dart';
+part of 'icon_button.dart';
 
 @immutable
 final class _Styles {

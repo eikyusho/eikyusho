@@ -2,9 +2,9 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
 
-import '../clickable_element/widget.dart';
+import '../clickable_element/clickable_element.dart';
 
-part 'styles.dart';
+part 'icon_button.styles.dart';
 
 class AppIconButton extends StatelessWidget {
   const AppIconButton(

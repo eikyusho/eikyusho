@@ -3,10 +3,10 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
 
-import '../blurred_container/widget.dart';
-import '../icon_button/widget.dart';
+import '../blurred_container/blurred_container.dart';
+import '../icon_button/icon_button.dart';
 
-part 'styles.dart';
+part 'app_bar.styles.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({

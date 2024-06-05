@@ -2,10 +2,10 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
 
-import '../blurred_container/widget.dart';
-import '../clickable_element/widget.dart';
+import '../blurred_container/blurred_container.dart';
+import '../clickable_element/clickable_element.dart';
 
-part 'styles.dart';
+part 'navigation_bar.styles.dart';
 
 class NavbarItem {
   const NavbarItem({required this.icon, required this.label});

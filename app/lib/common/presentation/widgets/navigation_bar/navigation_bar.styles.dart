@@ -1,4 +1,4 @@
-part of 'widget.dart';
+part of 'navigation_bar.dart';
 
 @immutable
 final class _Styles {

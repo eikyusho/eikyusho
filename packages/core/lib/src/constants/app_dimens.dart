@@ -29,6 +29,9 @@ final class AppDimens {
   /// Size: 32
   static const double $4xl = 32;
 
+  // * || Default
+  static const double defaultHorizontalPadding = $2xl;
+
   // * || Radius
   /// Radius: 4
   static const double radiusSm = 4;

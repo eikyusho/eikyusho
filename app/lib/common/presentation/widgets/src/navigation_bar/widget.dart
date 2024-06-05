@@ -7,6 +7,36 @@ import '../clickable_element/widget.dart';
 
 part 'styles.dart';
 
+class NavbarItem {
+  const NavbarItem({required this.icon, required this.label});
+
+  final SvgGenImage icon;
+  final String label;
+}
+
+final destinations = [
+  NavbarItem(
+    icon: _Styles.discoverIcon,
+    label: AppStrings.pageDiscoverTitle,
+  ),
+  NavbarItem(
+    icon: _Styles.libraryIcon,
+    label: AppStrings.pageLibraryTitle,
+  ),
+  NavbarItem(
+    icon: _Styles.searchIcon,
+    label: AppStrings.pageSearchTitle,
+  ),
+  NavbarItem(
+    icon: _Styles.browseIcon,
+    label: AppStrings.pageBrowseTitle,
+  ),
+  NavbarItem(
+    icon: _Styles.settingsIcon,
+    label: AppStrings.pageSettingsTitle,
+  ),
+];
+
 class AppNavigationBar extends StatelessWidget {
   const AppNavigationBar({
     required this.selectedIndex,
@@ -19,43 +49,6 @@ class AppNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget buildNavItem({
-      required int index,
-      required SvgGenImage icon,
-      required String label,
-    }) {
-      final color = _Styles.iconColor(
-        context,
-        isSelected: index == selectedIndex,
-      );
-
-      return Expanded(
-        child: ClickableElement(
-          onTap: () => onTap(index),
-          animation: _Styles.clickAnimation,
-          child: SizedBox.expand(
-            child: Column(
-              mainAxisAlignment: _Styles.navItemAlignment,
-              children: [
-                icon.svg(
-                  colorFilter: ColorFilter.mode(
-                    color,
-                    _Styles.blendMode,
-                  ),
-                  width: _Styles.iconSize,
-                  height: _Styles.iconSize,
-                ),
-                Text(
-                  label,
-                  style: _Styles.labelTextStyle(context, color),
-                ),
-              ],
-            ),
-          ).empty(),
-        ),
-      );
-    }
-
     return BlurredContainer(
       blur: _Styles.blurSigma,
       child: Container(
@@ -63,34 +56,62 @@ class AppNavigationBar extends StatelessWidget {
         padding: _Styles.padding,
         height: _Styles.height,
         child: Row(
-          children: [
-            buildNavItem(
-              index: 0,
-              icon: _Styles.discoverIcon,
-              label: AppStrings.pageDiscoverTitle,
-            ),
-            buildNavItem(
-              index: 1,
-              icon: _Styles.libraryIcon,
-              label: AppStrings.pageLibraryTitle,
-            ),
-            buildNavItem(
-              index: 2,
-              icon: _Styles.searchIcon,
-              label: AppStrings.pageSearchTitle,
-            ),
-            buildNavItem(
-              index: 3,
-              icon: _Styles.browseIcon,
-              label: AppStrings.pageBrowseTitle,
-            ),
-            buildNavItem(
-              index: 4,
-              icon: _Styles.settingsIcon,
-              label: AppStrings.pageSettingsTitle,
-            ),
-          ],
+          children: List.generate(destinations.length, (index) {
+            final destination = destinations[index];
+            final color = _Styles.currentColor(
+              context,
+              isSelected: index == selectedIndex,
+            );
+
+            return NavigationItem(
+              color: color,
+              onTap: () => onTap(index),
+              icon: destination.icon,
+              label: destination.label,
+            );
+          }),
         ).gap(_Styles.itemsGap),
+      ),
+    );
+  }
+}
+
+class NavigationItem extends StatelessWidget {
+  const NavigationItem({
+    required this.color,
+    required this.onTap,
+    required this.icon,
+    required this.label,
+    super.key,
+  });
+
+  final Color color;
+  final SvgGenImage icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ClickableElement(
+        onTap: onTap,
+        animation: _Styles.clickAnimation,
+        child: SizedBox.expand(
+          child: Column(
+            mainAxisAlignment: _Styles.navItemAlignment,
+            children: [
+              icon.svg(
+                colorFilter: ColorFilter.mode(color, _Styles.blendMode),
+                width: _Styles.iconSize,
+                height: _Styles.iconSize,
+              ),
+              Text(label).textStyle(
+                _Styles.labelTextStyle(context),
+                color: color,
+              ),
+            ],
+          ),
+        ).empty(),
       ),
     );
   }

@@ -11,7 +11,7 @@ final class _Styles {
   static const alignment = Alignment.center;
   static const blendMode = AppMisc.blendMode;
 
-  static Color iconColor(BuildContext context) => context.colors.primaryText;
+  static Color iconColor(BuildContext context) => context.colors.textPrimary;
 
   static Color backgroundColor(BuildContext context) => context.colors.surface;
 }

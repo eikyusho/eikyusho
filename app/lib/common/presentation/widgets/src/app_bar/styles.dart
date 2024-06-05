@@ -25,8 +25,8 @@ final class _Styles {
   static TextStyle titleStyle(BuildContext context) =>
       context.textTheme.titleSm.bold;
   
-  static Color logoColor(BuildContext context) => context.colors.primaryText;
-  static Color titleColor(BuildContext context) => context.colors.primaryText;
+  static Color logoColor(BuildContext context) => context.colors.textPrimary;
+  static Color titleColor(BuildContext context) => context.colors.textPrimary;
 
   static Color backgroundColor(BuildContext context) =>
       context.colors.background.withOpacity(AppMisc.blurBgOpacity);

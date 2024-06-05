@@ -20,8 +20,10 @@ enum TextSize {
   /// Font size: 30, Line height: 40
   $3xl(30, 40);
 
-  const TextSize(this.value, this.height);
+  const TextSize(this.value, this._height);
 
   final double value;
-  final double height;
+  final double _height;
+
+  double get height => _height / value;
 }

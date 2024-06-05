@@ -10,3 +10,4 @@ targets:
         generate_for:
           - lib/src/**/presentation/views/**_page.dart # ? for @RoutePage
           - lib/config/router/app_router.dart   # ? for @AutoRouterConfig
+          - lib/config/router/app_tabs_router.dart   # ? for AutoTabsRouter

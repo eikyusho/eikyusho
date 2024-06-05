@@ -21,15 +21,15 @@ final class _Styles {
   static final browseIcon = Assets.icons.compass;
   static final settingsIcon = Assets.icons.gear;
 
-  static Color iconColor(BuildContext context, {required bool isSelected}) {
-    return isSelected ? context.colors.primary : context.colors.secondaryText;
+  static Color currentColor(BuildContext context, {required bool isSelected}) {
+    return isSelected ? context.colors.primary : context.colors.textSecondary;
   }
 
-  static Color backgroundColor(BuildContext context) =>
-      context.colors.background.withOpacity(AppMisc.blurBgOpacity);
+  static Color backgroundColor(BuildContext context) {
+    return context.colors.background.withOpacity(AppMisc.blurBgOpacity);
+  }
 
-  static TextStyle labelTextStyle(BuildContext context, Color color) =>
-      context.textTheme.bodyXs.apply(
-        color: color,
-      );
+  static TextStyle labelTextStyle(BuildContext context) {
+    return context.textTheme.bodyXs.medium;
+  }
 }

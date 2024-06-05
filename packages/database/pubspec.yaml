@@ -1,0 +1,24 @@
+name: database
+publish_to: 'none'
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  # * Core
+  flutter:
+    sdk: flutter
+
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+
+dev_dependencies:
+  # ! Code Generation
+  build_runner: any
+  # * Generator Packages
+  isar_generator: ^3.1.0+1
+
+  # * Utility
+  linter: # ? For linting
+    path: ../linter

@@ -29,3 +29,18 @@ scripts:
     exec: flutter pub run build_runner build --delete-conflicting-outputs
     packageFilters:
       dependsOn: [ build_runner ]
+
+  fix:
+    description: Run dart fix and apply the changes.
+    exec: dart fix --apply
+
+  test:selective_unit_test:
+    description: Run Flutter tests for a specific package in this project.
+    exec: flutter test --coverage --no-pub
+    packageFilters:
+      dirExists: test
+      dependsOn: [ flutter_test ]
+
+  test:
+    description: Run all Flutter tests in this project.
+    run: melos run test:selective_unit_test --no-select

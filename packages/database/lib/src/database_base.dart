@@ -14,7 +14,7 @@ class EikyushoDatabase {
       name: name,
       directory: directory.path,
       [
-        ExtensionSchema,
+        ExtensionEntitySchema,
       ],
     );
 

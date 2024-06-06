@@ -51,9 +51,13 @@ dev_dependencies:
 
   # * Utility
   flutter_native_splash: ^2.4.0 # ? For generating splash screen
+  import_sorter: ^4.6.0 # ? For sorting imports
 
   linter: # ? For linting
     path: ../packages/linter
 
 flutter:
   uses-material-design: true
+
+import_sorter:
+  comments: false

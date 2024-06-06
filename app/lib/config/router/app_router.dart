@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 
-import '../../src/discover/presentation/presentation.dart';
-import 'app_tabs_router.dart';
+import 'package:app/config/router/app_tabs_router.dart';
+import 'package:app/src/discover/presentation/presentation.dart';
 
 part 'app_router.gr.dart';
 

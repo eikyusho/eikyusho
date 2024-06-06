@@ -1,9 +1,10 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
-import '../blurred_container/blurred_container.dart';
-import '../clickable_element/clickable_element.dart';
+import 'package:app/common/presentation/widgets/blurred_container/blurred_container.dart';
+import 'package:app/common/presentation/widgets/clickable_element/clickable_element.dart';
 
 part 'navigation_bar.styles.dart';
 

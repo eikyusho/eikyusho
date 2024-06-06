@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
 
-import '../blurred_container/blurred_container.dart';
-import '../icon_button/icon_button.dart';
+import 'package:app/common/presentation/widgets/blurred_container/blurred_container.dart';
+import 'package:app/common/presentation/widgets/icon_button/icon_button.dart';
 
 part 'app_bar.styles.dart';
 

@@ -1,9 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../common/common.dart';
-import '../../../../../fake/novels.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:core/core.dart';
+
+import 'package:app/common/common.dart';
+import 'package:app/fake/novels.dart';
 
 class DiscoverSpotlight extends StatelessWidget {
   const DiscoverSpotlight({super.key});
@@ -18,7 +19,6 @@ class DiscoverSpotlight extends StatelessWidget {
         enlargeCenterPage: true,
         viewportFraction: 0.65,
         clipBehavior: Clip.none,
-        autoPlay: false,
       ),
       items: novels
           .map((novel) => _SpotlightItem(cover: novel.cover))

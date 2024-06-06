@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:core/core.dart';
 import 'package:database/database.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 @module

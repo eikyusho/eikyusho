@@ -1,9 +1,10 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
-import '../../../../../common/common.dart';
-import '../../../../../fake/novels.dart';
+import 'package:app/common/common.dart';
+import 'package:app/fake/novels.dart';
 
 class _Styles {
   static const double containerHeight = 232;

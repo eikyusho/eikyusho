@@ -1,8 +1,9 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
-import '../clickable_element/clickable_element.dart';
+import 'package:app/common/presentation/widgets/clickable_element/clickable_element.dart';
 
 part 'icon_button.styles.dart';
 

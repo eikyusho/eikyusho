@@ -1,1 +1,7 @@
 include: package:linter/analysis_options.yaml
+
+linter:
+  rules:
+    prefer_relative_imports: false
+    always_use_package_imports: true
+    directives_ordering: false

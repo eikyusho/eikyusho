@@ -1,5 +1,6 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 
 class NovelCard extends StatelessWidget {
   const NovelCard({required this.cover, required this.title, super.key});

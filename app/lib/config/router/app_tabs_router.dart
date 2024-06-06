@@ -1,9 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/common.dart';
-import '../../src/discover/presentation/presentation.dart';
-import 'app_router.dart';
+import 'package:auto_route/auto_route.dart';
+
+import 'package:app/common/common.dart';
+import 'package:app/config/router/app_router.dart';
+import 'package:app/src/discover/presentation/presentation.dart';
 
 part './app_tabs_builders.dart';
 

@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:resources/resources.dart';
 
-import '../../../../common/common.dart';
-import '../widgets/widgets.dart';
+import 'package:app/common/common.dart';
+import 'package:app/src/discover/presentation/widgets/widgets.dart';
 
 class DiscoverPageAppBar extends MainAppBar {
   const DiscoverPageAppBar({super.key});

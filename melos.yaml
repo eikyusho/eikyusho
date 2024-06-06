@@ -24,6 +24,15 @@ command:
       build_runner: any
 
 scripts:
+  prepare:
+    description: Run pre-commit checks.
+    steps:
+      - melos format
+      - melos analyze
+      - melos run fix
+      - melos run test
+      - melos sort
+
   generate:
     description: Generate necessary files for the project.
     exec: flutter pub run build_runner build --delete-conflicting-outputs
@@ -44,3 +53,9 @@ scripts:
   test:
     description: Run all Flutter tests in this project.
     run: melos run test:selective_unit_test --no-select
+
+  sort:
+    description: Sort imports in all Dart files.
+    exec: flutter pub run import_sorter:main
+    packageFilters:
+      dependsOn: [ import_sorter ]

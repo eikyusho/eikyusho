@@ -1,8 +1,9 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../router/app_router.dart';
+import 'package:core/core.dart';
+
+import 'package:app/config/router/app_router.dart';
 
 class MainApp extends StatelessWidget {
   MainApp({super.key});

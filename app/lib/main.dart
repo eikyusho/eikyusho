@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 
-import 'bootstrap.dart';
-import 'config/app.dart';
+import 'package:core/core.dart';
+
+import 'package:app/bootstrap.dart';
+import 'package:app/config/app.dart';
 
 void main() {
   runZonedGuarded(

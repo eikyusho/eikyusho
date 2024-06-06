@@ -8,6 +8,7 @@ export 'src/constants/app_constants.dart';
 export 'src/constants/app_dimens.dart';
 export 'src/constants/app_misc.dart';
 export 'src/constants/app_strings.dart';
+export 'src/enums/exception_types.dart';
 export 'src/errors/exceptions.dart';
 export 'src/services/middlewares/log_middleware.dart';
 export 'src/services/network_manager.dart';

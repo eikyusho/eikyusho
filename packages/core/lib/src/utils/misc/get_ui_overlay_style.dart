@@ -1,21 +1,29 @@
 import 'package:flutter/services.dart';
 
-import '../../constants/app_misc.dart';
+import '../../../core.dart';
 
 SystemUiOverlayStyle getUiOverlayStyle({required bool isDarkMode}) {
   if (isDarkMode) {
     return SystemUiOverlayStyle.light.copyWith(
-      statusBarColor: AppMisc.darkBg.withOpacity(
-        AppMisc.blurBgOpacity,
-      ),
-      systemNavigationBarColor: AppMisc.darkBg,
+      statusBarColor: _getUiOverlayColor(isDarkMode: isDarkMode),
+      systemNavigationBarColor: _getUiOverlayColor(isDarkMode: isDarkMode),
     );
   }
 
   return SystemUiOverlayStyle.dark.copyWith(
-    statusBarColor: AppMisc.lightBg.withOpacity(
+    statusBarColor: _getUiOverlayColor(isDarkMode: isDarkMode),
+    systemNavigationBarColor: _getUiOverlayColor(isDarkMode: isDarkMode),
+  );
+}
+
+Color _getUiOverlayColor({required bool isDarkMode}) {
+  if (isDarkMode) {
+    return AppMisc.darkBg.withOpacity(
       AppMisc.blurBgOpacity,
-    ),
-    systemNavigationBarColor: AppMisc.lightBg,
+    );
+  }
+
+  return AppMisc.lightBg.withOpacity(
+    AppMisc.blurBgOpacity,
   );
 }

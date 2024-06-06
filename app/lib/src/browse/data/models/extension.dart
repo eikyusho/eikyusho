@@ -38,23 +38,3 @@ class Extension extends Equatable {
   @override
   List<Object?> get props => [uuid, language];
 }
-
-class InstalledExtension extends Extension {
-  const InstalledExtension({
-    required super.uuid,
-    required super.name,
-    required super.icon,
-    required super.version,
-    required super.language,
-  });
-
-  factory InstalledExtension.fromJson(Map<String, dynamic> json) {
-    return InstalledExtension(
-      uuid: json['uuid'] as String,
-      name: json['name'] as String,
-      icon: json['icon'] as String,
-      version: json['version'] as String,
-      language: json['language'] as String,
-    );
-  }
-}

@@ -32,6 +32,8 @@ extension ThemeExtension on BuildContext {
 }
 
 extension MediaQueryExtension on BuildContext {
+  bool get isAndroid => theme.platform == TargetPlatform.android;
+
   double get screenHeight => mediaQuery.size.height;
 
   double get screenWidth => mediaQuery.size.width;

@@ -13,7 +13,7 @@ final class _Styles {
   static const titleAlignment = TextAlign.center;
   static const titleLabel = '${AppConstants.appName} Logo';
   static const mainAxisSize = MainAxisSize.min;
-  
+
   static const padding = EdgeInsets.symmetric(
     horizontal: AppDimens.$2xl,
     vertical: AppDimens.md,
@@ -24,7 +24,7 @@ final class _Styles {
 
   static TextStyle titleStyle(BuildContext context) =>
       context.textTheme.titleSm.bold;
-  
+
   static Color logoColor(BuildContext context) => context.colors.textPrimary;
   static Color titleColor(BuildContext context) => context.colors.textPrimary;
 

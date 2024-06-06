@@ -4,6 +4,8 @@ MainAppBar _appBarBuilder(BuildContext _, TabsRouter tabsRouter) {
   switch (tabsRouter.activeIndex) {
     case 0:
       return const DiscoverPageAppBar();
+    case 3:
+      return const BrowsePageAppBar();
     default:
       return const DiscoverPageAppBar();
   }

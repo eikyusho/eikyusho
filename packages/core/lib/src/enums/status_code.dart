@@ -15,7 +15,7 @@ enum StatusCode {
 
   static StatusCode from(int code) {
     return StatusCode.values.firstWhere(
-          (element) => element.code == code,
+      (element) => element.code == code,
       orElse: () => StatusCode.other,
     );
   }

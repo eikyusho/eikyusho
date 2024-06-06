@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:app/injector/injector.dart';
+
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
 
@@ -33,6 +35,8 @@ Future<void> bootstrap(Widget Function() builder) async {
   };
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  await configureDependencies();
 
   if (kDebugMode) {
     Bloc.observer = const AppBlocObserver();

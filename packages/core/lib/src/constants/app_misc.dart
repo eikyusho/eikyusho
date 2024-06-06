@@ -22,6 +22,7 @@ final class AppMisc {
   // Blur bg opacity
   /// Opacity: 0.65
   static const double blurBgOpacity = 0.65;
+
   /// Opacity: 0.5
   static const double blurBgOpacityVariant = 0.5;
 

@@ -77,8 +77,10 @@ final class AppDimens {
   // * || Others
   /// Height: 56
   static const double appBarHeight = 56;
+
   /// Height: 64
   static const double bottomNavigationBarHeight = 64;
+
   /// Height: 28
   static const double logoHeight = 28;
 }

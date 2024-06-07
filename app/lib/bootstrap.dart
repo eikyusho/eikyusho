@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +42,17 @@ Future<void> bootstrap(Widget Function() builder) async {
 
   if (kDebugMode) {
     Bloc.observer = const AppBlocObserver();
+  }
+
+  await SystemChrome.setPreferredOrientations(
+    const [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
+
+  if (Platform.isAndroid) {
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 
   runApp(builder());

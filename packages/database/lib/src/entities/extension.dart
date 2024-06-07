@@ -3,10 +3,10 @@ import 'package:isar/isar.dart';
 part 'extension.g.dart';
 
 @collection
-class ExtensionEntity {
-  ExtensionEntity();
+class Extension {
+  Extension();
 
-  ExtensionEntity.create({
+  Extension.create({
     required this.uuid,
     required this.name,
     required this.icon,

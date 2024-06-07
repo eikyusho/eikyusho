@@ -6,6 +6,7 @@ export 'package:shared_preferences/shared_preferences.dart';
 
 export 'src/constants/app_constants.dart';
 export 'src/constants/app_dimens.dart';
+export 'src/constants/app_endpoints.dart';
 export 'src/constants/app_misc.dart';
 export 'src/constants/app_strings.dart';
 export 'src/enums/exception_types.dart';

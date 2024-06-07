@@ -12,34 +12,30 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        final selectedMode = context.themeMode;
+    final selectedMode = context.themeMode;
 
-        final isDarkMode = switch (selectedMode) {
-          ThemeMode.system => context.isSystemDarkMode,
-          ThemeMode.dark => true,
-          ThemeMode.light => false,
-        };
+    final isDarkMode = switch (selectedMode) {
+      ThemeMode.system => context.isSystemDarkMode,
+      ThemeMode.dark => true,
+      ThemeMode.light => false,
+    };
 
-        SystemChrome.setSystemUIOverlayStyle(
-          getUiOverlayStyle(isDarkMode: isDarkMode),
-        );
+    SystemChrome.setSystemUIOverlayStyle(
+      getUiOverlayStyle(isDarkMode: isDarkMode),
+    );
 
-        return MaterialApp.router(
-          title: AppConstants.appName,
-          debugShowCheckedModeBanner: false,
+    return MaterialApp.router(
+      title: AppConstants.appName,
+      debugShowCheckedModeBanner: false,
 
-          // Theme
-          themeMode: selectedMode,
-          theme: AppTheme.light(),
-          darkTheme: AppTheme.dark(),
+      // Theme
+      themeMode: selectedMode,
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
 
-          // Routing
-          restorationScopeId: AppConstants.appId,
-          routerConfig: _appRouter.config(),
-        );
-      },
+      // Routing
+      restorationScopeId: AppConstants.appId,
+      routerConfig: _appRouter.config(),
     );
   }
 }

@@ -8,6 +8,9 @@ part 'app_router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends _$AppRouter {
+  @override
+  RouteType get defaultRouteType => const RouteType.cupertino();
+
   final isDiscoverInitial = true;
 
   @override

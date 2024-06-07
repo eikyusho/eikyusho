@@ -50,12 +50,15 @@ class AppNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomPadding = context.screenPadding.bottom;
+    final bottomSpace = context.isAndroid ? bottomPadding : AppDimens.none;
+
     return BlurredContainer(
       blur: _Styles.blurSigma,
       child: Container(
         color: _Styles.backgroundColor(context),
-        padding: _Styles.padding,
-        height: _Styles.height,
+        padding: _Styles.padding.copyWith(bottom: bottomSpace),
+        height: _Styles.height + bottomSpace,
         child: Row(
           children: List.generate(destinations.length, (index) {
             final destination = destinations[index];

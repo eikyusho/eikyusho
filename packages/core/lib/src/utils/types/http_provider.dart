@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../constants/app_constants.dart';
+import '../../constants/app_endpoints.dart';
 import '../../enums/cache_policy.dart';
 import '../../enums/status_code.dart';
 import '../utils.dart';
@@ -11,7 +12,7 @@ class HttpProvider {
 
   Dio init() {
     final options = BaseOptions(
-      baseUrl: AppConstants.apiBaseUrl,
+      baseUrl: AppEndpoints.baseUrl,
       contentType: Headers.jsonContentType,
       connectTimeout: AppConstants.connectTimeout,
       sendTimeout: AppConstants.sendTimeout,

@@ -8,7 +8,7 @@ class AppColors {
 
   static const black = Color(0xFF000000);
 
-  static const transparent = Color(0x0A000000);
+  static const transparent = Color(0x00000000);
 
   // * || Accent Colors
   static const primary500 = Color(0xFF7810E0);

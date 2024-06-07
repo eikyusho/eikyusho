@@ -1,41 +1,25 @@
+import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import 'package:app/src/browse/data/data.dart';
 
 part 'extensions_state.dart';
 
+@injectable
 class ExtensionsCubit extends Cubit<ExtensionsState> {
-  ExtensionsCubit() : super(ExtensionsInitial());
+  ExtensionsCubit(this._repository) : super(const ExtensionsLoading());
 
-  Future<void> fetchExtensions() async {
-    emit(ExtensionsLoading());
+  final ExtensionsRepository _repository;
 
-    await Future.delayed(const Duration(seconds: 3));
+  Future<void> getExtensionsAndSources() async {
+    try {
+      final (available, outdated) = await _repository.getExtensionsAndSources();
 
-    emit(
-      ExtensionsLoaded(
-        List<Extension>.generate(
-          10,
-          (index) => Extension(
-            name: 'Extension $index',
-            icon: 'icon',
-            language: 'language',
-            version: '1.0.$index',
-            uuid: 'uuid',
-          ),
-        ),
-        List<InstalledExtension>.generate(
-          3,
-          (index) => InstalledExtension(
-            name: 'Extension $index',
-            icon: 'icon',
-            language: 'language',
-            version: '1.0.$index',
-            uuid: 'uuid',
-          ),
-        ),
-      ),
-    );
+      emit(ExtensionsLoaded(available, outdated));
+    } catch (e) {
+      AppLogger.error(e.toString(), e);
+    }
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/injector/injector.dart';
 import 'package:app/src/browse/presentation/cubits/cubits.dart';
 import 'package:app/src/browse/presentation/widgets/widgets.dart';
 
@@ -16,7 +17,7 @@ class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (context) => ExtensionsCubit(),
+      create: (context) => getIt<ExtensionsCubit>()..getExtensionsAndSources(),
       child: this,
     );
   }
@@ -25,8 +26,13 @@ class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
   Widget build(BuildContext context) {
     final padding = context.screenPaddingWithAppBar;
 
-    final outdatedExtensions = <String>[''];
-    final availableExtensions = <String>[''];
+    final hasOutdated = context.select((ExtensionsCubit cubit) {
+      final currentState = cubit.state;
+
+      if (currentState is! ExtensionsLoaded) return false;
+
+      return currentState.hasOutdated;
+    });
 
     return Scaffold(
       appBar: MainAppBar(
@@ -41,7 +47,7 @@ class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
           SliverToBoxAdapter(
             child: VSpace(padding.top + AppDimens.$2xl),
           ),
-          if (outdatedExtensions.isNotEmpty) ...[
+          if (hasOutdated) ...[
             SectionTitle(title: AppStrings.sectionTitlePendingUpdates),
             ExtensionsListBuilder(
               bottomPadding: AppDimens.lg,
@@ -52,7 +58,7 @@ class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
           SectionTitle(title: AppStrings.sectionTitleAvailableExtensions),
           ExtensionsListBuilder(
             bottomPadding: AppDimens.$2xl,
-            selector: (state) => state.outdated,
+            selector: (state) => state.available,
             type: ExtensionCardType.available,
           ),
         ],

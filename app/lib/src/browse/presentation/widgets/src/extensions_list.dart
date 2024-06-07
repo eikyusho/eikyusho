@@ -40,7 +40,9 @@ class ExtensionsListBuilder<T extends Extension> extends StatelessWidget {
                 final extension = extensions[index];
                 final isLast = extension == extensions.last;
 
-                return Container();
+                return ExtensionCard(extension: extension, type: type).pb(
+                  isLast ? AppDimens.none : AppDimens.lg,
+                );
               },
               childCount: extensions.length,
             ),

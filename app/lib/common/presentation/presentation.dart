@@ -5,4 +5,5 @@ export 'widgets/icon_button.dart';
 export 'widgets/loading.dart';
 export 'widgets/navigation_bar.dart';
 export 'widgets/novel_card.dart';
+export 'widgets/progress_button.dart';
 export 'widgets/separator.dart';

@@ -4,10 +4,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
-import 'package:app/common/presentation/widgets/blurred_container/blurred_container.dart';
-import 'package:app/common/presentation/widgets/icon_button/icon_button.dart';
+import 'package:app/common/presentation/widgets/blurred_container.dart';
+import 'package:app/common/presentation/widgets/icon_button.dart';
 
-part 'app_bar.styles.dart';
+@immutable
+final class _Styles {
+  const _Styles._();
+
+  static const height = AppDimens.appBarHeight;
+  static const buttonsGap = AppDimens.md;
+  static const logoLabel = '${AppConstants.appName} Logo';
+
+  static final optionsIcon = Assets.icons.dotsThreeOutlineFill;
+  static final notificationIcon = Assets.icons.bellBold;
+}
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
@@ -36,29 +46,32 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
 
     return BlurredContainer(
-      blur: _Styles.blurSigma,
+      blur: AppMisc.blurFilter,
       child: SafeArea(
         child: Column(
-          mainAxisSize: _Styles.mainAxisSize,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              color: _Styles.backgroundColor(context),
-              padding: _Styles.padding,
+              color: getBlurredBgColor(context),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppDimens.$2xl,
+                vertical: AppDimens.md,
+              ),
               height: _Styles.height,
               child: Stack(
-                alignment: _Styles.alignment,
+                alignment: Alignment.center,
                 fit: StackFit.expand,
                 children: [
                   if (showLogo)
                     Positioned(
                       left: 0,
                       child: Assets.images.eikyushoLogo.svg(
-                        height: _Styles.logoSize,
+                        height: AppDimens.logoHeight,
                         colorFilter: ColorFilter.mode(
-                          _Styles.logoColor(context),
-                          _Styles.blendMode,
+                          context.colors.textPrimary,
+                          AppMisc.blendMode,
                         ),
-                        semanticsLabel: _Styles.titleLabel,
+                        semanticsLabel: _Styles.logoLabel,
                       ),
                     ),
                   if (title != null)
@@ -66,9 +79,9 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                       left: 0,
                       right: 0,
                       child: title!.textStyle(
-                        _Styles.titleStyle(context),
-                        color: _Styles.titleColor(context),
-                        align: _Styles.titleAlignment,
+                        context.textTheme.titleSm.bold,
+                        color: context.colors.textPrimary,
+                        align: TextAlign.center,
                       ),
                     ),
                   if (showBackButton)

@@ -171,6 +171,13 @@ class _ProgressButtonState extends State<ProgressButton>
       }
     }
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _pulseController.dispose();
+    super.dispose();
+  }
 }
 
 class _ProgressPainter extends CustomPainter {

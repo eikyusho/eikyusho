@@ -9,14 +9,13 @@ import 'package:app/bootstrap.dart';
 import 'package:app/config/app.dart';
 
 void main() {
-  runZonedGuarded(
-    () => bootstrap(MainApp.new),
-    (error, stack) {
-      if (kDebugMode) {
-        return AppLogger.error(error.toString(), error, stack);
-      }
+  runZonedGuarded(() async {
+    await bootstrap(MainApp.new);
+  }, (error, stack) {
+    if (kDebugMode) {
+      return AppLogger.error(error.toString(), error, stack);
+    }
 
-      log(error.toString(), stackTrace: stack);
-    },
-  );
+    log(error.toString(), stackTrace: stack);
+  });
 }

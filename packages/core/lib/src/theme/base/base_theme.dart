@@ -41,7 +41,8 @@ abstract base class BaseTheme {
       primaryColor: colors.primary,
       scaffoldBackgroundColor: colors.background,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primary500,
+        seedColor: colors.primary,
+        primary: colors.primary,
         brightness: brightness,
       ),
       extensions: [

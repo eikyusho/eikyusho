@@ -64,8 +64,10 @@ class AppNavigationBar extends StatelessWidget {
       blur: AppMisc.blurFilter,
       child: Container(
         color: getBlurredBgColor(context),
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.xl,
+        padding: EdgeInsets.only(
+          right: AppDimens.xl,
+          left: AppDimens.xl,
+          bottom: bottomSpace,
         ),
         height: _Styles.height + bottomSpace,
         child: Row(

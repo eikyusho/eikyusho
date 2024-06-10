@@ -3,6 +3,12 @@ import 'package:meta/meta.dart';
 
 import '../enums/exception_types.dart';
 
+enum ExceptionType {
+  server,
+  database,
+  storage,
+}
+
 @immutable
 abstract class _CustomException extends Equatable implements Exception {
   const _CustomException(this.message);
@@ -12,6 +18,14 @@ abstract class _CustomException extends Equatable implements Exception {
 
 class ServerException extends _CustomException {
   const ServerException(super.message, {required this.type, this.statusCode});
+
+  factory ServerException.fromException(Object e) {
+    return ServerException(
+      e.toString(),
+      type: ServerExceptionType.unknown,
+      statusCode: 999,
+    );
+  }
 
   final int? statusCode;
   final ServerExceptionType type;

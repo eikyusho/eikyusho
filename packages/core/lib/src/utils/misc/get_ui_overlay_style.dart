@@ -6,13 +6,13 @@ SystemUiOverlayStyle getUiOverlayStyle({required bool isDarkMode}) {
   if (isDarkMode) {
     return SystemUiOverlayStyle.light.copyWith(
       statusBarColor: _getUiOverlayColor(isDarkMode: isDarkMode),
-      systemNavigationBarColor: _getUiOverlayColor(isDarkMode: isDarkMode),
+      systemNavigationBarColor: AppMisc.darkBg,
     );
   }
 
   return SystemUiOverlayStyle.dark.copyWith(
     statusBarColor: _getUiOverlayColor(isDarkMode: isDarkMode),
-    systemNavigationBarColor: _getUiOverlayColor(isDarkMode: isDarkMode),
+    systemNavigationBarColor: AppMisc.lightBg,
   );
 }
 

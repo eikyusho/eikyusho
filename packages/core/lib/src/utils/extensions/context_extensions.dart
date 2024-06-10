@@ -67,3 +67,17 @@ extension MediaQueryExtension on BuildContext {
 
   bool get isTablet => screenWidth > 600;
 }
+
+extension SnackBarExtension on BuildContext {
+  void showSnackBar({
+    required String message,
+    Duration duration = const Duration(seconds: 3),
+  }) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: duration,
+      ),
+    );
+  }
+}

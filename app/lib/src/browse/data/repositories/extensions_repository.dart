@@ -5,7 +5,10 @@ import 'package:app/src/browse/data/models/installed_extension.dart';
 import 'package:app/src/browse/data/providers/extensions_local_data_provider.dart';
 import 'package:app/src/browse/data/providers/extensions_remote_data_provider.dart';
 
-typedef ExtensionsAndSources = (List<Extension>, List<InstalledExtension>);
+typedef ExtensionsAndSources = (
+  List<AvailableExtension>,
+  List<InstalledExtension>
+);
 
 @injectable
 class ExtensionsRepository {
@@ -23,11 +26,21 @@ class ExtensionsRepository {
   Future<ExtensionsAndSources> getExtensionsAndSources() async {
     final availableExtensions = await _remoteDataProvider.fetchExtensions();
 
-    final outdatedExtensions = await _localDataProvider.setOutdatedExtensions(
+    final dbExtensions = await _localDataProvider.setOutdatedExtensions(
       availableExtensions,
     );
 
-    availableExtensions.removeWhere(outdatedExtensions.contains);
+    final outdatedExtensions = dbExtensions.where((element) {
+      return availableExtensions.any(
+        (e) => e.uuid == element.uuid && element.hasUpdate,
+      );
+    }).toList();
+
+    availableExtensions.removeWhere((element) {
+      return dbExtensions.any(
+        (e) => e.uuid == element.uuid && e.language == element.language,
+      );
+    });
 
     return (availableExtensions, outdatedExtensions);
   }

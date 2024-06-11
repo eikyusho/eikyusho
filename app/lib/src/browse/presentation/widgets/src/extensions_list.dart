@@ -7,7 +7,8 @@ import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/cubits/cubits.dart';
 import 'package:app/src/browse/presentation/widgets/src/extension_card.dart';
 
-class ExtensionsListBuilder<T extends Extension> extends StatelessWidget {
+class ExtensionsListBuilder<T extends AvailableExtension>
+    extends StatelessWidget {
   const ExtensionsListBuilder({
     required this.bottomPadding,
     required this.selector,

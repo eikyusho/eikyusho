@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class Extension extends Equatable {
-  const Extension({
+class AvailableExtension extends Equatable {
+  const AvailableExtension({
     required this.uuid,
     required this.name,
     required this.icon,
@@ -9,8 +9,8 @@ class Extension extends Equatable {
     required this.language,
   });
 
-  factory Extension.fromMap(Map<String, dynamic> map) {
-    return Extension(
+  factory AvailableExtension.fromMap(Map<String, dynamic> map) {
+    return AvailableExtension(
       uuid: map['uuid'] as String,
       name: map['name'] as String,
       icon: map['icon'] as String,
@@ -36,5 +36,5 @@ class Extension extends Equatable {
   }
 
   @override
-  List<Object?> get props => [uuid, language];
+  List<Object> get props => [uuid, language];
 }

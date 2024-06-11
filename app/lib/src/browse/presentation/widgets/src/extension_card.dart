@@ -12,7 +12,7 @@ class ExtensionCard extends StatelessWidget {
   const ExtensionCard({required this.type, required this.extension, super.key});
 
   final ExtensionCardType type;
-  final Extension extension;
+  final AvailableExtension extension;
 
   @override
   Widget build(BuildContext context) {

@@ -11,15 +11,15 @@ class ExtensionsRemoteDataProvider {
 
   final DioClient _client;
 
-  Future<List<Extension>> fetchExtensions() async {
+  Future<List<AvailableExtension>> fetchExtensions() async {
     try {
       final response = await _client.get<String>(AppEndpoints.extensionsList);
 
       final data = response.body.data!;
 
-      final parsedData = List<DataMap>.from(json.decode(data) as List);
-
-      return parsedData.map(Extension.fromMap).toList();
+      return List<DataMap>.from(jsonDecode(data) as List)
+          .map(AvailableExtension.fromMap)
+          .toList();
     } on ServerException {
       rethrow;
     } catch (e) {

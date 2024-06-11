@@ -47,7 +47,7 @@ class ExtensionsLocalDataProvider {
   }
 
   Future<List<InstalledExtension>> setOutdatedExtensions(
-    List<Extension> extensions,
+    List<AvailableExtension> extensions,
   ) async {
     try {
       final outdatedExtensions = await _db.exec(

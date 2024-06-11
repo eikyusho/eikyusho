@@ -25,7 +25,7 @@ final class ExtensionsFailure extends ExtensionsState {
 final class ExtensionsLoaded extends ExtensionsState {
   const ExtensionsLoaded(this.available, this.outdated);
 
-  final List<Extension> available;
+  final List<AvailableExtension> available;
   final List<InstalledExtension> outdated;
 
   bool get hasOutdated => outdated.isNotEmpty;

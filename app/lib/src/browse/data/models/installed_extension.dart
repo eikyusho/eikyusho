@@ -1,8 +1,8 @@
-import 'package:database/database.dart' as database;
+import 'package:database/database.dart';
 
 import 'package:app/src/browse/data/models/extension.dart';
 
-class InstalledExtension extends Extension {
+class InstalledExtension extends AvailableExtension {
   const InstalledExtension({
     required this.id,
     required super.uuid,
@@ -18,7 +18,7 @@ class InstalledExtension extends Extension {
     this.updateVersion,
   });
 
-  factory InstalledExtension.fromDatabase(database.Extension extension) {
+  factory InstalledExtension.fromDatabase(Extension extension) {
     return InstalledExtension(
       id: extension.id,
       uuid: extension.uuid,

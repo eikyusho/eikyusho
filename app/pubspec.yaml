@@ -19,6 +19,13 @@ dependencies:
   resources:
     path: ../packages/resources
 
+  eikyusho_extensions:
+    path: ../../extensions
+
+  eikyusho_web_scraper:
+    path: ../../web_scraper
+
+
   # * Routing
   auto_route: ^8.1.3
 

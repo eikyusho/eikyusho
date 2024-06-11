@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/widgets/src/extension_card.dart';
+import '../../cubits/extension_card/extension_card_cubit.dart';
 
 final class _Styles {
   const _Styles._();
@@ -15,9 +18,14 @@ final class _Styles {
 }
 
 class ExtensionCardButton extends StatelessWidget {
-  const ExtensionCardButton({required this.type, super.key});
+  const ExtensionCardButton({
+    required this.type,
+    required this.extension,
+    super.key,
+  });
 
   final ExtensionCardType type;
+  final AvailableExtension extension;
 
   @override
   Widget build(BuildContext context) {
@@ -35,56 +43,40 @@ class ExtensionCardButton extends StatelessWidget {
       );
     }
 
-    final buttonState = ButtonStateNotifier();
+    return BlocConsumer<ExtensionCardCubit, ExtensionCardState>(
+      bloc: context.read<ExtensionCardCubit>(),
+      listenWhen: (previous, current) {
+        return current is ExtensionCardDownloaded ||
+            current is ExtensionCardError;
+      },
+      buildWhen: (previous, current) => previous != current,
+      listener: (context, state) {
+        if (state is ExtensionCardDownloaded) {
+          return context.showSnackBar(
+            message: 'Extension downloaded: ${extension.name}',
+          );
+        }
 
-    return ListenableBuilder(
-      listenable: buttonState,
-      builder: (context, _) {
+        if (state is ExtensionCardError) {
+          return context.showSnackBar(
+            message: 'Failed to download extension: ${extension.name}',
+          );
+        }
+      },
+      builder: (context, state) {
+        final isDownloading = state is ExtensionCardDownloading;
+
         return ProgressButton(
           context: context,
-          progress: buttonState._progress,
-          state: buttonState._state,
+          progress: state.progress,
+          state: state.state,
           idleIcon: idleIcon,
           color: context.colors.surfaceSecondary,
-          onTap: buttonState._downloading
+          onTap: isDownloading
               ? null
-              : () => _download(buttonState, context),
+              : context.read<ExtensionCardCubit>().download,
         );
       },
     );
-  }
-
-  Future<void> _download(ButtonStateNotifier notifier, BuildContext ctx) async {
-    await notifier.startDownload();
-    for (var i = 0; i <= 1000; i++) {
-      await Future<void>.delayed(const Duration(milliseconds: 1));
-      notifier.updateProgress(i);
-    }
-    notifier.finishDownload(ProgressButtonState.failed);
-  }
-}
-
-@protected
-class ButtonStateNotifier extends ChangeNotifier {
-  bool _downloading = false;
-  double _progress = 0;
-  ProgressButtonState _state = ProgressButtonState.idle;
-
-  Future<void> startDownload() async {
-    _downloading = true;
-    _progress = 0;
-    _state = ProgressButtonState.inProgress;
-    notifyListeners();
-  }
-
-  void updateProgress(int progress) {
-    _progress = progress / 1000;
-    notifyListeners();
-  }
-
-  void finishDownload(ProgressButtonState state) {
-    _downloading = false;
-    _state = state;
-    notifyListeners();
   }
 }

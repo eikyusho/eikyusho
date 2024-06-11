@@ -9,6 +9,7 @@ export 'src/constants/app_dimens.dart';
 export 'src/constants/app_endpoints.dart';
 export 'src/constants/app_misc.dart';
 export 'src/constants/app_strings.dart';
+export 'src/enums/cache_policy.dart';
 export 'src/enums/exception_types.dart';
 export 'src/errors/exceptions.dart';
 export 'src/services/middlewares/log_middleware.dart';

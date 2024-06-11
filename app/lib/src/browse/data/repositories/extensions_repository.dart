@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:app/src/browse/data/models/extension.dart';
@@ -43,5 +44,20 @@ class ExtensionsRepository {
     });
 
     return (availableExtensions, outdatedExtensions);
+  }
+
+  Future<void> installExtension({
+    required AvailableExtension extension,
+    required ProgressGetter progressCallback,
+    required CancelToken cancelToken,
+  }) async {
+    final response = await _remoteDataProvider.downloadExtension(
+      extension: extension,
+      progressCallback: progressCallback,
+      cancelToken: cancelToken,
+    );
+
+    await _localDataProvider.saveExtension(response, extension);
+    await _localDataProvider.storeExtension(extension);
   }
 }

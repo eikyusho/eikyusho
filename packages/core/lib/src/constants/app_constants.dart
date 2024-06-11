@@ -14,4 +14,7 @@ final class AppConstants {
 
   /// Duration: 30s
   static const Duration sendTimeout = Duration(seconds: 30);
+
+  // * || Paths
+  static const String sourcesPath = 'sources';
 }

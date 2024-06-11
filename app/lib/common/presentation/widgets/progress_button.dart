@@ -2,7 +2,7 @@ import 'dart:math' show min;
 
 import 'package:flutter/material.dart';
 
-import 'package:core/core.dart';
+import 'package:core/core.dart' hide Path;
 import 'package:resources/resources.dart';
 
 import 'package:app/common/presentation/widgets/icon_button.dart';

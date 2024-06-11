@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:core/core.dart';
-import 'package:database/database.dart' hide Extension;
+import 'package:database/database.dart';
+import 'package:eikyusho_extensions/extensions.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:app/src/browse/data/models/extension.dart';
@@ -14,9 +17,10 @@ enum SourcesFilter {
 
 @lazySingleton
 class ExtensionsLocalDataProvider {
-  const ExtensionsLocalDataProvider(this._db);
+  const ExtensionsLocalDataProvider(this._db, this._compiler);
 
   final EikyushoDatabase _db;
+  final EikyushoCompiler _compiler;
 
   Future<List<InstalledExtension>> getInstalledExtensions(
     SourcesFilter filter,
@@ -73,6 +77,67 @@ class ExtensionsLocalDataProvider {
       );
 
       return outdatedExtensions.map(InstalledExtension.fromDatabase).toList();
+    } catch (e) {
+      throw DatabaseException(e.toString());
+    }
+  }
+
+  Future<void> saveExtension(
+    RBytes response,
+    AvailableExtension extension,
+  ) async {
+    try {
+      final directory = await StorageManager.appDirectory;
+
+      final data = response.body.data!;
+
+      final savePath = Path.join(
+        directory.path,
+        AppConstants.sourcesPath,
+        extension.uuid,
+      );
+
+      Directory(savePath).createSync(recursive: true);
+
+      await _compiler.decode(savePath, data);
+    } catch (e) {
+      throw StorageException(e.toString());
+    }
+  }
+
+  Future<void> storeExtension(AvailableExtension extension) async {
+    try {
+      final directory = await StorageManager.appDirectory;
+
+      final savePath = Path.joinAll([
+        directory.path,
+        AppConstants.sourcesPath,
+        extension.uuid,
+        Constants.xmlFile,
+      ]);
+
+      final source = File(savePath);
+
+      final parser = EikyushoParser(source.readAsStringSync());
+
+      final dbExtension = Extension.create(
+        uuid: extension.uuid,
+        name: extension.name,
+        icon: extension.icon,
+        version: extension.version,
+        language: extension.language,
+        baseUrl: parser.baseUrl,
+        isEnabled: true,
+        isObsolete: false,
+        hasUpdate: true,
+        discover: true,
+      );
+
+      await _db.exec(
+        (isar) async {
+          await isar.extensions.put(dbExtension);
+        },
+      );
     } catch (e) {
       throw DatabaseException(e.toString());
     }

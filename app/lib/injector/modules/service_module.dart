@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:core/core.dart';
 import 'package:database/database.dart';
+import 'package:eikyusho_extensions/extensions.dart';
 import 'package:injectable/injectable.dart';
 
 @module
@@ -19,6 +20,9 @@ abstract class ServiceModule {
         AppConstants.appName.toLowerCase(),
         await StorageManager.appDirectory,
       );
+
+  @lazySingleton
+  EikyushoCompiler get compiler => const EikyushoCompiler();
 
   @singleton
   DioClient dioClient(Dio dio) => DioClient(dio);

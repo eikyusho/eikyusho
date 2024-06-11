@@ -106,7 +106,7 @@ class _ProgressButtonState extends State<ProgressButton>
     ).animate(_controller);
 
     _iconColorAnimation = ColorTween(
-      begin: context.colors.textPrimary,
+      begin: context.colors.textButton,
       end: context.colors.success.withGreen(160),
     ).animate(_controller);
 
@@ -139,9 +139,16 @@ class _ProgressButtonState extends State<ProgressButton>
       child: AnimatedBuilder(
         animation: Listenable.merge([_controller, _pulseController]),
         builder: (context, child) {
+          final state = widget.state;
+
+          final isLightIdle =
+              !context.isDarkTheme && state == ProgressButtonState.idle;
+
           final iconColor = _pulseController.isAnimating
               ? _iconColorPulseAnimation.value
-              : _iconColorAnimation.value;
+              : isLightIdle
+                  ? context.colors.textPrimary
+                  : _iconColorAnimation.value;
 
           return AppIconButton(
             widget.state._icon.getOr(widget.idleIcon),

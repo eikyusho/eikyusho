@@ -128,9 +128,9 @@ class ExtensionsLocalDataProvider {
         language: extension.language,
         baseUrl: parser.baseUrl,
         isEnabled: true,
-        isObsolete: false,
-        hasUpdate: true,
         discover: true,
+        isObsolete: false,
+        hasUpdate: false,
       );
 
       await _db.exec(

@@ -65,6 +65,11 @@ class ExtensionCardButton extends StatelessWidget {
       },
       builder: (context, state) {
         final isDownloading = state is ExtensionCardDownloading;
+        final isDownloaded = state is ExtensionCardDownloaded;
+
+        final buttonAction = type == ExtensionCardType.update
+            ? context.read<ExtensionCardCubit>().download
+            : context.read<ExtensionCardCubit>().download;
 
         return ProgressButton(
           context: context,
@@ -72,9 +77,7 @@ class ExtensionCardButton extends StatelessWidget {
           state: state.state,
           idleIcon: idleIcon,
           color: context.colors.surfaceSecondary,
-          onTap: isDownloading
-              ? null
-              : context.read<ExtensionCardCubit>().download,
+          onTap: isDownloading || isDownloaded ? null : buttonAction,
         );
       },
     );

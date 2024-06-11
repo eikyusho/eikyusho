@@ -1,10 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:app/src/browse/data/models/extension.dart';
 import 'package:core/core.dart';
 import 'package:eikyusho_extensions/extensions.dart';
 import 'package:injectable/injectable.dart';
-
-import 'package:app/src/browse/data/models/extension.dart';
 
 @lazySingleton
 class ExtensionsRemoteDataProvider {
@@ -34,6 +34,8 @@ class ExtensionsRemoteDataProvider {
     required CancelToken cancelToken,
   }) async {
     try {
+      var milliseconds = 0;
+
       final response = await _client.get<Bytes>(
         urlParser([
           AppEndpoints.extensionsBinaries,
@@ -43,7 +45,12 @@ class ExtensionsRemoteDataProvider {
         options: HttpRequestOptions(
           responseType: ResponseType.bytes,
           cancelToken: cancelToken,
-          onReceiveProgress: progressCallback,
+          onReceiveProgress: (received, total) {
+            milliseconds += 10;
+            Timer(Duration(milliseconds: milliseconds), () {
+              progressCallback(received, total);
+            });
+          },
           cachePolicy: CachePolicy.noCache,
         ),
       );

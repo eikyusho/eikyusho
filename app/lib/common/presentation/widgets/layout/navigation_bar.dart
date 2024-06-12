@@ -3,17 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
-import 'package:app/common/presentation/widgets/blurred_container.dart';
-import 'package:app/common/presentation/widgets/clickable_element.dart';
+import 'package:app/common/presentation/widgets/interactions/clickable_element.dart';
+import 'package:app/common/presentation/widgets/layout/blurred_container.dart';
 
 @immutable
-final class _Styles {
-  const _Styles._();
-
-  static const iconSize = AppDimens.iconXl;
-  static const height = AppDimens.bottomNavigationBarHeight;
-  static const itemsGap = AppDimens.xs;
-  static const clickAnimation = ClickableElementAnimation.none;
+final class _Icons {
+  const _Icons._();
 
   static final discoverIcon = Assets.icons.house;
   static final libraryIcon = Assets.icons.books;
@@ -39,23 +34,23 @@ class AppNavigationBar extends StatelessWidget {
 
     final destinations = [
       NavbarItem(
-        icon: _Styles.discoverIcon,
+        icon: _Icons.discoverIcon,
         label: AppStrings.pageDiscoverTitle,
       ),
       NavbarItem(
-        icon: _Styles.libraryIcon,
+        icon: _Icons.libraryIcon,
         label: AppStrings.pageLibraryTitle,
       ),
       NavbarItem(
-        icon: _Styles.searchIcon,
+        icon: _Icons.searchIcon,
         label: AppStrings.pageSearchTitle,
       ),
       NavbarItem(
-        icon: _Styles.browseIcon,
+        icon: _Icons.browseIcon,
         label: AppStrings.pageBrowseTitle,
       ),
       NavbarItem(
-        icon: _Styles.settingsIcon,
+        icon: _Icons.settingsIcon,
         label: AppStrings.pageSettingsTitle,
       ),
     ];
@@ -69,7 +64,7 @@ class AppNavigationBar extends StatelessWidget {
           left: AppDimens.xl,
           bottom: bottomSpace,
         ),
-        height: _Styles.height + bottomSpace,
+        height: AppDimens.bottomNavigationBarHeight + bottomSpace,
         child: Row(
           children: List.generate(destinations.length, (index) {
             final destination = destinations[index];
@@ -84,7 +79,7 @@ class AppNavigationBar extends StatelessWidget {
               label: destination.label,
             );
           }),
-        ).gap(_Styles.itemsGap),
+        ).gap(AppDimens.xs),
       ),
     );
   }
@@ -116,15 +111,15 @@ class NavigationItem extends StatelessWidget {
     return Expanded(
       child: ClickableElement(
         onTap: onTap,
-        animation: _Styles.clickAnimation,
+        animation: ClickableElementAnimation.none,
         child: SizedBox.expand(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               icon.svg(
                 colorFilter: ColorFilter.mode(color, AppMisc.blendMode),
-                width: _Styles.iconSize,
-                height: _Styles.iconSize,
+                width: AppDimens.iconXl,
+                height: AppDimens.iconXl,
               ),
               Text(label).textStyle(
                 context.textTheme.bodyXs.medium,

@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:app/src/browse/data/models/extension.dart';
 import 'package:core/core.dart';
 import 'package:eikyusho_extensions/extensions.dart';
 import 'package:injectable/injectable.dart';
+
+import 'package:app/src/browse/data/models/extension.dart';
 
 @lazySingleton
 class ExtensionsRemoteDataProvider {

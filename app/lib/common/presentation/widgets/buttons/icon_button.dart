@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
-import 'package:app/common/presentation/widgets/clickable_element.dart';
+import 'package:app/common/presentation/widgets/interactions/clickable_element.dart';
 
 class AppIconButton extends StatelessWidget {
   const AppIconButton(

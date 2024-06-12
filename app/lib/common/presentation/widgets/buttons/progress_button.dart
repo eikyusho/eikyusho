@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart' hide Path;
 import 'package:resources/resources.dart';
 
-import 'package:app/common/presentation/widgets/icon_button.dart';
+import 'package:app/common/presentation/widgets/buttons/icon_button.dart';
 
 enum ProgressButtonState {
   idle,

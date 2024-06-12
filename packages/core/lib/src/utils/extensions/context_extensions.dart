@@ -81,3 +81,19 @@ extension SnackBarExtension on BuildContext {
     );
   }
 }
+
+extension BottomSheetExtension on BuildContext {
+  Future<void> showBottomSheet(
+    Widget child, {
+    double? height,
+  }) async {
+    await showModalBottomSheet<void>(
+      context: this,
+      isScrollControlled: true,
+      constraints: BoxConstraints(
+        maxHeight: height ?? screenHeight * 0.9,
+      ),
+      builder: (_) => child,
+    );
+  }
+}

@@ -6,11 +6,11 @@ import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
+import 'package:app/src/browse/presentation/cubits/extension_card/extension_card_cubit.dart';
 import 'package:app/src/browse/presentation/widgets/src/extension_card.dart';
-import '../../cubits/extension_card/extension_card_cubit.dart';
 
-final class _Styles {
-  const _Styles._();
+final class _Icons {
+  const _Icons._();
 
   static final downloadIcon = Assets.icons.arrowDownBold;
   static final settingsIcon = Assets.icons.slidersHorizontalBold;
@@ -32,11 +32,11 @@ class ExtensionCardButton extends StatelessWidget {
     final isUpdate = type == ExtensionCardType.update;
     final isInstalled = type == ExtensionCardType.installed;
 
-    final idleIcon = isUpdate ? _Styles.updateIcon : _Styles.downloadIcon;
+    final idleIcon = isUpdate ? _Icons.updateIcon : _Icons.downloadIcon;
 
     if (isInstalled) {
       return AppIconButton(
-        _Styles.settingsIcon,
+        _Icons.settingsIcon,
         iconSize: AppDimens.iconLg,
         iconColor: context.colors.textAuxiliary,
         color: AppColors.transparent,

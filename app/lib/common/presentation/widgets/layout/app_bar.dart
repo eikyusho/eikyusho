@@ -4,19 +4,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
-import 'package:app/common/presentation/widgets/blurred_container.dart';
-import 'package:app/common/presentation/widgets/icon_button.dart';
+import 'package:app/common/presentation/widgets/buttons/icon_button.dart';
+import 'package:app/common/presentation/widgets/layout/blurred_container.dart';
 
 @immutable
-final class _Styles {
-  const _Styles._();
+final class _Icons {
+  const _Icons._();
 
-  static const height = AppDimens.appBarHeight;
-  static const buttonsGap = AppDimens.md;
-  static const logoLabel = '${AppConstants.appName} Logo';
-
-  static final optionsIcon = Assets.icons.dotsThreeOutlineFill;
-  static final notificationIcon = Assets.icons.bellBold;
+  static final options = Assets.icons.dotsThreeOutlineFill;
+  static final notifications = Assets.icons.bellBold;
 }
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -57,7 +53,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 horizontal: AppDimens.$2xl,
                 vertical: AppDimens.md,
               ),
-              height: _Styles.height,
+              height: AppDimens.appBarHeight,
               child: Stack(
                 alignment: Alignment.center,
                 fit: StackFit.expand,
@@ -71,7 +67,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                           context.colors.textPrimary,
                           AppMisc.blendMode,
                         ),
-                        semanticsLabel: _Styles.logoLabel,
+                        semanticsLabel: '${AppConstants.appName} Logo',
                       ),
                     ),
                   if (title != null)
@@ -103,16 +99,16 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                       children: [
                         if (actionButton != null)
                           AppIconButton(
-                            actionIcon.getOr(_Styles.optionsIcon),
+                            actionIcon.getOr(_Icons.options),
                             onPressed: actionButton,
                           ),
                         if (showNotificationButton)
                           AppIconButton(
-                            _Styles.notificationIcon,
+                            _Icons.notifications,
                             onPressed: () {},
                           ),
                       ],
-                    ).gap(_Styles.buttonsGap),
+                    ).gap(AppDimens.md),
                   ),
                 ],
               ),
@@ -124,5 +120,5 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(_Styles.height);
+  Size get preferredSize => const Size.fromHeight(AppDimens.appBarHeight);
 }

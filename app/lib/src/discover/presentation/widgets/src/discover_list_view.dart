@@ -6,9 +6,7 @@ import 'package:resources/resources.dart';
 import 'package:app/common/common.dart';
 import 'package:app/fake/novels.dart';
 
-class _Styles {
-  static const double containerHeight = 232;
-}
+const double kContainerHeight = 232;
 
 class DiscoverListHeader extends StatelessWidget {
   const DiscoverListHeader({required this.title, super.key});
@@ -45,7 +43,7 @@ class DiscoverMostPopularListView extends StatelessWidget {
           title: Text(AppStrings.discoverListMostPopularTitle),
         ),
         SizedBox(
-          height: _Styles.containerHeight,
+          height: kContainerHeight,
           child: DiscoverListContent(
             novels: $TempData().getListTwo(),
             isLoading: false,
@@ -67,7 +65,7 @@ class DiscoverRecentlyUpdatedListView extends StatelessWidget {
           title: Text(AppStrings.discoverListRecentlyUpdatedTitle),
         ),
         SizedBox(
-          height: _Styles.containerHeight,
+          height: kContainerHeight,
           child: DiscoverListContent(
             novels: $TempData().getListThree(),
             isLoading: true,

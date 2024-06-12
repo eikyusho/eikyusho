@@ -4,15 +4,6 @@ import 'package:core/core.dart';
 
 enum ClickableElementAnimation { none, overlay, grow, shrink }
 
-@immutable
-final class _Styles {
-  const _Styles._();
-
-  static const double initialScale = 1;
-
-  static const animationDuration = AppMisc.fastDuration;
-}
-
 class ClickableElement extends StatelessWidget {
   const ClickableElement({
     required this.child,
@@ -34,6 +25,7 @@ class ClickableElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final animationNotifier = _AnimationValueNotifier();
+    const duration = AppMisc.fastDuration;
 
     return GestureDetector(
       onTap: onTap,
@@ -46,7 +38,7 @@ class ClickableElement extends StatelessWidget {
         listenable: animationNotifier,
         builder: (context, child) {
           return AnimatedScale(
-            duration: _Styles.animationDuration,
+            duration: duration,
             scale: animationNotifier.scale,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(borderRadius),
@@ -56,7 +48,7 @@ class ClickableElement extends StatelessWidget {
                   if (animation == ClickableElementAnimation.overlay)
                     Positioned.fill(
                       child: AnimatedContainer(
-                        duration: _Styles.animationDuration,
+                        duration: duration,
                         color: animationNotifier.isPressing
                             ? context.colors.primary.withOpacity(0.1)
                             : AppColors.transparent,
@@ -74,7 +66,9 @@ class ClickableElement extends StatelessWidget {
 }
 
 class _AnimationValueNotifier extends ChangeNotifier {
-  double scale = _Styles.initialScale;
+  static const double _initial = 1;
+
+  double scale = _initial;
   bool isPressing = false;
 
   void animate(ClickableElementAnimation animation) {
@@ -82,14 +76,14 @@ class _AnimationValueNotifier extends ChangeNotifier {
     scale = switch (animation) {
       ClickableElementAnimation.grow => 1.05,
       ClickableElementAnimation.shrink => 0.95,
-      _ => _Styles.initialScale,
+      _ => _initial,
     };
     notifyListeners();
   }
 
   void reset() {
     isPressing = false;
-    scale = _Styles.initialScale;
+    scale = _initial;
     notifyListeners();
   }
 }

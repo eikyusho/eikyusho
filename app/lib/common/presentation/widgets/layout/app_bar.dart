@@ -24,6 +24,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showNotificationButton = false,
     this.actionIcon,
     this.actionButton,
+    this.onBack,
   });
 
   final Widget? title;
@@ -32,7 +33,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showNotificationButton;
 
   final SvgGenImage? actionIcon;
-  final void Function()? actionButton;
+  final VoidCallback? actionButton;
+  final VoidCallback? onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +90,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                         onPressed: () {
                           AppLogger.debug('Back button pressed');
                           if (context.router.canPop()) {
+                            onBack?.call();
                             context.back();
                           }
                         },

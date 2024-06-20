@@ -1,10 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/src/discover/presentation/cubits/discover_cubit.dart';
+import 'package:app/src/discover/presentation/widgets/src/select_source_bottom_sheet.dart';
 import 'package:app/src/discover/presentation/widgets/widgets.dart';
 
 class DiscoverPageAppBar extends MainAppBar {
@@ -16,7 +19,14 @@ class DiscoverPageAppBar extends MainAppBar {
       showLogo: true,
       showNotificationButton: true,
       actionIcon: Assets.icons.puzzlePieceBold,
-      actionButton: () {},
+      actionButton: () {
+        context.showBottomSheet(
+          BlocProvider(
+            create: (_) => context.read<DiscoverCubit>(),
+            child: const SelectSourceBottomSheet(),
+          ),
+        );
+      },
     );
   }
 }

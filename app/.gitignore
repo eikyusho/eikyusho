@@ -44,3 +44,4 @@ app.*.map.json
 
 # Injector
 *.config.dart
+/devtools_options.yaml

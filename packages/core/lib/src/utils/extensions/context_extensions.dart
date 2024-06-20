@@ -90,8 +90,12 @@ extension BottomSheetExtension on BuildContext {
     await showModalBottomSheet<void>(
       context: this,
       isScrollControlled: true,
+      sheetAnimationStyle: AnimationStyle(
+        duration: const Duration(milliseconds: 500),
+      ),
+      barrierColor: AppColors.black.withOpacity(.65),
       constraints: BoxConstraints(
-        maxHeight: height ?? screenHeight * 0.9,
+        maxHeight: height ?? responsiveHeight(.9),
       ),
       builder: (_) => child,
     );

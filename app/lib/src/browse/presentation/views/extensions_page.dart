@@ -8,6 +8,7 @@ import 'package:resources/resources.dart';
 import 'package:app/common/common.dart';
 import 'package:app/injector/injector.dart';
 import 'package:app/src/browse/presentation/cubits/cubits.dart';
+import 'package:app/src/browse/presentation/presentation.dart';
 import 'package:app/src/browse/presentation/widgets/widgets.dart';
 
 @RoutePage()
@@ -40,28 +41,36 @@ class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
         title: Text(AppStrings.pageExtensionsTitle),
         actionIcon: Assets.icons.dotsThreeOutlineFill,
         actionButton: () {},
+        onBack: browseCubit.getSources,
       ),
       extendBodyBehindAppBar: true,
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: VSpace(padding.top + AppDimens.$2xl),
-          ),
-          if (hasOutdated) ...[
-            SectionTitle(title: AppStrings.sectionTitlePendingUpdates),
-            ExtensionsListBuilder(
-              bottomPadding: AppDimens.lg,
-              selector: (state) => state.outdated,
-              type: ExtensionCardType.update,
-            ),
-          ],
-          SectionTitle(title: AppStrings.sectionTitleAvailableExtensions),
-          ExtensionsListBuilder(
-            bottomPadding: AppDimens.$2xl,
-            selector: (state) => state.available,
-            type: ExtensionCardType.available,
-          ),
-        ],
+      body: BlocSelector<ExtensionsCubit, ExtensionsState, bool>(
+        selector: (state) => state is ExtensionsLoaded,
+        builder: (context, isLoaded) {
+          if (!isLoaded) return const Loading();
+
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: VSpace(padding.top + AppDimens.$2xl),
+              ),
+              if (hasOutdated) ...[
+                SectionTitle(title: AppStrings.sectionTitlePendingUpdates),
+                ExtensionsListBuilder(
+                  bottomPadding: AppDimens.lg,
+                  selector: (state) => state.outdated,
+                  type: ExtensionCardType.update,
+                ),
+              ],
+              SectionTitle(title: AppStrings.sectionTitleAvailableExtensions),
+              ExtensionsListBuilder(
+                bottomPadding: AppDimens.$2xl,
+                selector: (state) => state.available,
+                type: ExtensionCardType.available,
+              ),
+            ],
+          );
+        },
       ),
     );
   }

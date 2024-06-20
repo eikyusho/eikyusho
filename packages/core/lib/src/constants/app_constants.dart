@@ -17,4 +17,7 @@ final class AppConstants {
 
   // * || Paths
   static const String sourcesPath = 'sources';
+
+  // * || Keys
+  static const String discoverSelectedSourceKey = 'discoverSelectedSource';
 }

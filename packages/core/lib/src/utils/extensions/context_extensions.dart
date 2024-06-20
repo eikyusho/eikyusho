@@ -101,3 +101,16 @@ extension BottomSheetExtension on BuildContext {
     );
   }
 }
+
+extension DialogExtension on BuildContext {
+  Future<void> showAppDialog(
+    Widget child, {
+    bool barrierDismissible = true,
+  }) async {
+    await showDialog<void>(
+      context: this,
+      barrierDismissible: barrierDismissible,
+      builder: (_) => child,
+    );
+  }
+}

@@ -32,4 +32,19 @@ final class AppStrings {
 
   /// Buttons
   static String buttonClose = 'Close';
+  static String buttonUninstallExtension = 'Uninstall Extension';
+  static String buttonCancel = 'Cancel';
+  static String buttonConfirm = 'Confirm';
+
+  /// Label
+  static String labelVersion = 'Version';
+  static String labelLanguage = 'Language';
+
+  /// Toggle
+  static String toggleActiveExtension = 'Active';
+
+  /// Dialog
+  static String dialogUninstallExtension = 'Uninstall Extension';
+  static String dialogDescriptionUninstallExtension =
+      'Are you sure you want to uninstall this extension?';
 }

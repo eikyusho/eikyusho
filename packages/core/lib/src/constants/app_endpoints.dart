@@ -7,4 +7,5 @@ final class AppEndpoints {
   static const String baseUrl = '$source/extensions/main';
   static const String extensionsList = '/index.min.json';
   static const String extensionsBinaries = '/bin';
+  static const String extensions = '$baseUrl/$extensionsBinaries';
 }

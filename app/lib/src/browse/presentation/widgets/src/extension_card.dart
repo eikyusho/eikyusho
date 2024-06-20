@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:eikyusho_extensions/extensions.dart';
@@ -9,6 +9,7 @@ import 'package:app/injector/injector.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/cubits/extension_card/extension_card_cubit.dart';
 import 'package:app/src/browse/presentation/widgets/src/extension_card_button.dart';
+import 'package:app/src/browse/presentation/widgets/src/extension_icon.dart';
 
 enum ExtensionCardType { available, installed, update }
 
@@ -34,11 +35,7 @@ class ExtensionCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Image.network(
-              width: 56,
-              height: 56,
-              getIconUrl(),
-            ),
+            ExtensionIcon(extension: extension, imageSize: 56),
             const HSpace(AppDimens.sm),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

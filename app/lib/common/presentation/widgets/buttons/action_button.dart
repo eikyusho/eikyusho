@@ -27,7 +27,7 @@ class ActionButton extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: AppDimens.buttonLg,
-        padding: const EdgeInsets.all(AppDimens.sm),
+        padding: const EdgeInsets.all(AppDimens.md),
         decoration: BoxDecoration(
           color: context.colors.surface,
           boxShadow: context.shadows.sm,

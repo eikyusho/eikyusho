@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 
-import 'package:app/common/presentation/widgets/buttons/button.dart';
+import 'package:app/common/presentation/presentation.dart';
 
 enum AppBottomSheetType { singleAction, doubleAction }
 

@@ -39,6 +39,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const ExtensionsPage()),
       );
     },
+    NovelRoute.name: (routeData) {
+      final args = routeData.argsAs<NovelRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: NovelPage(
+          novel: args.novel,
+          key: args.key,
+        ),
+      );
+    },
   };
 }
 
@@ -96,4 +106,41 @@ class ExtensionsRoute extends PageRouteInfo<void> {
   static const String name = 'ExtensionsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [NovelPage]
+class NovelRoute extends PageRouteInfo<NovelRouteArgs> {
+  NovelRoute({
+    required Novel novel,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          NovelRoute.name,
+          args: NovelRouteArgs(
+            novel: novel,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'NovelRoute';
+
+  static const PageInfo<NovelRouteArgs> page = PageInfo<NovelRouteArgs>(name);
+}
+
+class NovelRouteArgs {
+  const NovelRouteArgs({
+    required this.novel,
+    this.key,
+  });
+
+  final Novel novel;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'NovelRouteArgs{novel: $novel, key: $key}';
+  }
 }

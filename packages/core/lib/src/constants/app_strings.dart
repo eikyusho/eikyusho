@@ -16,6 +16,7 @@ final class AppStrings {
   // Section Title
   static String sectionTitlePendingUpdates = 'Pending Updates';
   static String sectionTitleAvailableExtensions = 'Available Extensions';
+  static String sectionTitleChapters = 'Chapters';
 
   /// Settings Options Titles
   static String settingsOptionsTitleProfile = 'Profile';
@@ -39,6 +40,9 @@ final class AppStrings {
   /// Label
   static String labelVersion = 'Version';
   static String labelLanguage = 'Language';
+  static String labelChapters = 'Chapters';
+  static String labelStatus = 'Status';
+  static String labelViews = 'Views';
 
   /// Toggle
   static String toggleActiveExtension = 'Active';

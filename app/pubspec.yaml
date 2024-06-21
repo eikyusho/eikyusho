@@ -70,6 +70,7 @@ flutter:
     - family: Gotham
       fonts:
         - asset: ../packages/resources/assets/fonts/gotham-rnd-book.otf
+          weight: 400
         - asset: ../packages/resources/assets/fonts/gotham-rnd-medium.otf
           weight: 500
         - asset: ../packages/resources/assets/fonts/gotham-rnd-bold.otf

@@ -27,6 +27,7 @@ class DiscoverContentCubit extends Cubit<DiscoverContentState> {
     final novels = rawNovels
         .map(
           (novel) => Novel(
+            source,
             title: novel.title,
             cover: novel.cover,
             link: novel.url,
@@ -48,6 +49,7 @@ class DiscoverContentCubit extends Cubit<DiscoverContentState> {
     final novels = rawNovels
         .map(
           (novel) => Novel(
+            source,
             title: novel.title,
             cover: novel.cover,
             link: novel.url,
@@ -69,6 +71,7 @@ class DiscoverContentCubit extends Cubit<DiscoverContentState> {
     final novels = rawNovels
         .map(
           (novel) => Novel(
+            source,
             title: novel.title,
             cover: novel.cover,
             link: novel.url,

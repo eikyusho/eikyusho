@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
-import 'package:eikyusho_extensions/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:app/common/common.dart';
@@ -63,17 +62,6 @@ class ExtensionCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  String getIconUrl() {
-    return urlParser(
-      [
-        AppEndpoints.baseUrl,
-        AppEndpoints.extensionsBinaries,
-        extension.uuid,
-        Constants.imgPreviewFile,
-      ],
     );
   }
 }

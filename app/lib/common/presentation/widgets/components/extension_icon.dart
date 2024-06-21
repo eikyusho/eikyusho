@@ -38,17 +38,17 @@ class ExtensionIcon extends StatelessWidget {
           }
 
           if (snapshot.hasData) {
-            final isNetworkImage = snapshot.requireData is NetworkImage;
-
             return Image(
               width: imageSize,
               height: imageSize,
               image: snapshot.requireData,
-              loadingBuilder: isNetworkImage
-                  ? (_, __, ___) {
-                      return const Loading();
-                    }
-                  : null,
+              loadingBuilder: (_, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                }
+
+                return const Loading();
+              },
               errorBuilder: (_, __, ___) {
                 return buildErrorIcon(context);
               },

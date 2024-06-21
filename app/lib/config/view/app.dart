@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:core/core.dart';
 
 import 'package:app/config/router/app_router.dart';
+import 'package:app/config/view/provider.dart';
 
 class MainApp extends StatelessWidget {
   MainApp({super.key});
@@ -24,18 +25,20 @@ class MainApp extends StatelessWidget {
       getUiOverlayStyle(isDarkMode: isDarkMode),
     );
 
-    return MaterialApp.router(
-      title: AppConstants.appName,
-      debugShowCheckedModeBanner: false,
+    return AppProvider(
+      child: MaterialApp.router(
+        title: AppConstants.appName,
+        debugShowCheckedModeBanner: false,
 
-      // Theme
-      themeMode: selectedMode,
-      theme: AppTheme.light(),
-      darkTheme: AppTheme.dark(),
+        // Theme
+        themeMode: selectedMode,
+        theme: AppTheme.light(),
+        darkTheme: AppTheme.dark(),
 
-      // Routing
-      restorationScopeId: AppConstants.appId,
-      routerConfig: _appRouter.config(),
+        // Routing
+        restorationScopeId: AppConstants.appId,
+        routerConfig: _appRouter.config(),
+      ),
     );
   }
 }

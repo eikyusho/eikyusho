@@ -9,6 +9,7 @@ import 'package:app/common/common.dart';
 import 'package:app/injector/injector.dart';
 import 'package:app/src/browse/presentation/presentation.dart';
 import 'package:app/src/browse/presentation/widgets/widgets.dart';
+import 'package:app/src/discover/presentation/presentation.dart';
 
 @RoutePage()
 class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
@@ -34,42 +35,47 @@ class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
       return currentState.hasOutdated;
     });
 
-    return Scaffold(
-      appBar: MainAppBar(
-        showBackButton: true,
-        title: Text(AppStrings.pageExtensionsTitle),
-        actionIcon: Assets.icons.dotsThreeOutlineFill,
-        actionButton: () {},
-        onBack: browseCubit.getSources,
-      ),
-      extendBodyBehindAppBar: true,
-      body: BlocSelector<ExtensionsCubit, ExtensionsState, bool>(
-        selector: (state) => state is ExtensionsLoaded,
-        builder: (context, isLoaded) {
-          if (!isLoaded) return const Loading();
+    return PopScope(
+      onPopInvoked: (isPop) {
+        browseCubit.getSources();
+        context.read<DiscoverCubit>().getSources();
+      },
+      child: Scaffold(
+        appBar: MainAppBar(
+          showBackButton: true,
+          title: Text(AppStrings.pageExtensionsTitle),
+          actionIcon: Assets.icons.dotsThreeOutlineFill,
+          actionButton: () {},
+        ),
+        extendBodyBehindAppBar: true,
+        body: BlocSelector<ExtensionsCubit, ExtensionsState, bool>(
+          selector: (state) => state is ExtensionsLoaded,
+          builder: (context, isLoaded) {
+            if (!isLoaded) return const Loading();
 
-          return CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: VSpace(padding.top + AppDimens.$2xl),
-              ),
-              if (hasOutdated) ...[
-                SectionTitle(title: AppStrings.sectionTitlePendingUpdates),
+            return CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: VSpace(padding.top + AppDimens.$2xl),
+                ),
+                if (hasOutdated) ...[
+                  SectionTitle(title: AppStrings.sectionTitlePendingUpdates),
+                  ExtensionsListBuilder(
+                    bottomPadding: AppDimens.lg,
+                    selector: (state) => state.outdated,
+                    type: ExtensionCardType.update,
+                  ),
+                ],
+                SectionTitle(title: AppStrings.sectionTitleAvailableExtensions),
                 ExtensionsListBuilder(
-                  bottomPadding: AppDimens.lg,
-                  selector: (state) => state.outdated,
-                  type: ExtensionCardType.update,
+                  bottomPadding: AppDimens.$2xl,
+                  selector: (state) => state.available,
+                  type: ExtensionCardType.available,
                 ),
               ],
-              SectionTitle(title: AppStrings.sectionTitleAvailableExtensions),
-              ExtensionsListBuilder(
-                bottomPadding: AppDimens.$2xl,
-                selector: (state) => state.available,
-                type: ExtensionCardType.available,
-              ),
-            ],
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

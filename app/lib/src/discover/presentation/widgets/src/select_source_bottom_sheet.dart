@@ -17,7 +17,6 @@ class SelectSourceBottomSheet extends StatelessWidget {
         SizedBox(
           height: 200,
           child: BlocBuilder<DiscoverCubit, DiscoverState>(
-            bloc: context.read<DiscoverCubit>()..getSources(),
             builder: (context, state) {
               return switch (state) {
                 DiscoverLoading() => const Loading(),

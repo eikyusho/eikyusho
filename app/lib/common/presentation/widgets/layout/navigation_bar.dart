@@ -29,9 +29,6 @@ class AppNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bottomPadding = context.screenPadding.bottom;
-    final bottomSpace = context.isAndroid ? bottomPadding : AppDimens.none;
-
     final destinations = [
       NavbarItem(
         icon: _Icons.discoverIcon,
@@ -59,12 +56,10 @@ class AppNavigationBar extends StatelessWidget {
       blur: AppMisc.blurFilter,
       child: Container(
         color: getBlurredBgColor(context),
-        padding: EdgeInsets.only(
-          right: AppDimens.xl,
-          left: AppDimens.xl,
-          bottom: bottomSpace,
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimens.xl,
         ),
-        height: AppDimens.bottomNavigationBarHeight + bottomSpace,
+        height: AppDimens.bottomNavigationBarHeight,
         child: Row(
           children: List.generate(destinations.length, (index) {
             final destination = destinations[index];

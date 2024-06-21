@@ -86,10 +86,12 @@ extension BottomSheetExtension on BuildContext {
   Future<void> showBottomSheet(
     Widget child, {
     double? height,
+    bool isDismissable = true,
   }) async {
     await showModalBottomSheet<void>(
       context: this,
       isScrollControlled: true,
+      isDismissible: isDismissable,
       sheetAnimationStyle: AnimationStyle(
         duration: const Duration(milliseconds: 500),
       ),

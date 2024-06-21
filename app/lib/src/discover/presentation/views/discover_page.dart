@@ -20,9 +20,12 @@ class DiscoverPageAppBar extends MainAppBar {
       showNotificationButton: true,
       actionIcon: Assets.icons.puzzlePieceBold,
       actionButton: () {
+        final cubit = context.read<DiscoverCubit>();
+
         context.showBottomSheet(
+          isDismissable: cubit.state is! DiscoverLoading,
           BlocProvider(
-            create: (_) => context.read<DiscoverCubit>(),
+            create: (_) => cubit,
             child: const SelectSourceBottomSheet(),
           ),
         );

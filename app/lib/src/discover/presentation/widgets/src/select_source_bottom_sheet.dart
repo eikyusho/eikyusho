@@ -50,7 +50,11 @@ class SelectSourceBottomSheet extends StatelessWidget {
 
         return ClickableElement(
           onTap: () {
-            context.read<DiscoverCubit>().selectSource(source);
+            context.read<DiscoverCubit>().selectSource(source).then(
+              (value) {
+                if (value) Navigator.of(context).pop();
+              },
+            );
           },
           child: SourceOption(
             source: source,

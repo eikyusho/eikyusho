@@ -39,14 +39,14 @@ class DiscoverCubit extends Cubit<DiscoverState> {
     }
   }
 
-  Future<void> selectSource(AvailableExtension source) async {
+  Future<bool> selectSource(AvailableExtension source) async {
     final isLoaded = state is DiscoverLoaded;
     final isUninitialized = state is DiscoverUninitialized;
 
-    if (!isLoaded && !isUninitialized) return;
+    if (!isLoaded && !isUninitialized) return false;
 
     if (isLoaded && source.uuid == (state as DiscoverLoaded).selected.uuid) {
-      return;
+      return false;
     }
 
     try {
@@ -56,5 +56,7 @@ class DiscoverCubit extends Cubit<DiscoverState> {
     }
 
     await getSources(withLoading: true);
+
+    return true;
   }
 }

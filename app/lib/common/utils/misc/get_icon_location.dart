@@ -15,19 +15,12 @@ Future<ImageProvider<Object>> getIconLocation(
     return NetworkImage(_getRemotePath(extension));
   }
 
-  final sourcePath = await _getLocalPath(extension);
+  final sourcePath = await getSourcePath(extension.uuid);
   final iconPath = _getIconFilename(density);
 
   final path = Path.join(sourcePath, iconPath);
 
   return FileImage(File(path));
-}
-
-Future<String> _getLocalPath(InstalledExtension extension) async {
-  final directory = await StorageManager.appDirectory;
-  final uuid = extension.uuid;
-
-  return Path.join(directory.path, AppConstants.sourcesPath, uuid);
 }
 
 String _getRemotePath(AvailableExtension extension) {

@@ -21,29 +21,43 @@ class SelectSourceBottomSheet extends StatelessWidget {
           child: BlocBuilder<DiscoverCubit, DiscoverState>(
             bloc: context.read<DiscoverCubit>()..getSources(),
             builder: (context, state) {
-              if (state is DiscoverLoading) return const Loading();
-
-              if (state is DiscoverError) throw UnimplementedError();
-
-              final sources = (state as DiscoverLoaded).sources;
-
-              return ListView.separated(
-                itemCount: sources.length,
-                separatorBuilder: (_, __) => const VSpace(AppDimens.md),
-                itemBuilder: (context, index) {
-                  final source = sources[index];
-                  final selected = sources.first;
-
-                  return SourceOption(
-                    source: source,
-                    selectedSource: selected,
-                  );
-                },
-              );
+              return switch (state) {
+                DiscoverLoading() => const Loading(),
+                DiscoverError() => throw UnimplementedError(),
+                DiscoverEmpty() => const Text('Empty'),
+                DiscoverUninitialized() => buildListView(state.sources, null),
+                DiscoverLoaded() => buildListView(
+                    state.sources,
+                    state.selected.uuid,
+                  ),
+              };
             },
           ),
         ),
       ],
+    );
+  }
+
+  Widget buildListView(List<AvailableExtension> sources, String? selected) {
+    return ListView.separated(
+      itemCount: sources.length,
+      separatorBuilder: (_, __) => const VSpace(AppDimens.md),
+      itemBuilder: (context, index) {
+        final source = sources[index];
+        final selectedSource = sources.where(
+          (s) => s.uuid == selected,
+        );
+
+        return ClickableElement(
+          onTap: () {
+            context.read<DiscoverCubit>().selectSource(source);
+          },
+          child: SourceOption(
+            source: source,
+            selectedSource: selectedSource.firstOrNull,
+          ),
+        );
+      },
     );
   }
 }
@@ -57,7 +71,7 @@ class SourceOption extends StatelessWidget {
   });
 
   final AvailableExtension source;
-  final AvailableExtension selectedSource;
+  final AvailableExtension? selectedSource;
 
   @override
   Widget build(BuildContext context) {
@@ -113,11 +127,4 @@ class SourceOption extends StatelessWidget {
       ),
     );
   }
-}
-
-class Source {
-  Source(this.name);
-
-  final String icon = '';
-  final String name;
 }

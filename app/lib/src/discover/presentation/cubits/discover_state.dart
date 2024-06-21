@@ -11,15 +11,30 @@ final class DiscoverLoading extends DiscoverState {
   List<Object> get props => [];
 }
 
-final class DiscoverLoaded extends DiscoverState {
-  const DiscoverLoaded(this.sources) : super();
+final class DiscoverEmpty extends DiscoverState {
+  const DiscoverEmpty();
+
+  @override
+  List<Object> get props => [];
+}
+
+final class DiscoverUninitialized extends DiscoverState {
+  const DiscoverUninitialized(this.sources);
 
   final List<InstalledExtension> sources;
 
-  bool get hasExtensions => sources.isNotEmpty;
-
   @override
   List<Object> get props => [sources];
+}
+
+final class DiscoverLoaded extends DiscoverState {
+  const DiscoverLoaded(this.sources, this.selected);
+
+  final List<InstalledExtension> sources;
+  final EikyushoSource selected;
+
+  @override
+  List<Object?> get props => [sources, selected];
 }
 
 final class DiscoverError extends DiscoverState {

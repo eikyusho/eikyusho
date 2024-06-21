@@ -41,6 +41,13 @@ class DatabaseException extends _CustomException {
   List<Object?> get props => [message];
 }
 
+class PreferencesException extends _CustomException {
+  const PreferencesException(super.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
 class StorageException extends _CustomException {
   const StorageException(super.message);
 

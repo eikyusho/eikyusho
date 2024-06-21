@@ -44,15 +44,30 @@ class DiscoverPage extends StatelessWidget {
         top: padding.top + AppDimens.$2xl,
         bottom: padding.bottom + AppDimens.$2xl,
       ),
-      child: Column(
-        children: [
-          const DiscoverSpotlight().px(AppDimens.defaultHorizontalPadding),
-          const VSpace(AppDimens.$4xl),
-          const DiscoverMostPopularListView(),
-          const VSpace(AppDimens.$2xl),
-          const DiscoverRecentlyUpdatedListView(),
-        ],
+      child: BlocBuilder<DiscoverCubit, DiscoverState>(
+        buildWhen: (previous, current) => previous != current,
+        builder: (context, state) {
+          return switch (state) {
+            DiscoverLoading() => const Loading(),
+            DiscoverError() => throw UnimplementedError(),
+            DiscoverEmpty() => const Text('Empty'),
+            DiscoverUninitialized() => const Text('Uninitialized'),
+            DiscoverLoaded() => buildPage(state),
+          };
+        },
       ),
+    );
+  }
+
+  Widget buildPage(DiscoverLoaded state) {
+    return Column(
+      children: [
+        const DiscoverSpotlight().px(AppDimens.defaultHorizontalPadding),
+        const VSpace(AppDimens.$4xl),
+        const DiscoverMostPopularListView(),
+        const VSpace(AppDimens.$2xl),
+        const DiscoverRecentlyUpdatedListView(),
+      ],
     );
   }
 }

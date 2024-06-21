@@ -9,7 +9,6 @@ import 'package:app/injector/injector.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/cubits/extension_card/extension_card_cubit.dart';
 import 'package:app/src/browse/presentation/widgets/src/extension_card_button.dart';
-import 'package:app/src/browse/presentation/widgets/src/extension_icon.dart';
 
 enum ExtensionCardType { available, installed, update }
 

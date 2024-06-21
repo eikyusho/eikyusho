@@ -2,7 +2,7 @@ import 'package:eikyusho_web_scraper/eikyusho_web_scraper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:app/src/discover/data/data.dart';
+import 'package:app/common/common.dart';
 
 part 'discover_content_state.dart';
 

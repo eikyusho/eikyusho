@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 
 import 'package:app/common/common.dart';
-import 'package:app/src/discover/data/data.dart';
 
 class DiscoverListContent extends StatelessWidget {
   const DiscoverListContent({

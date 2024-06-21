@@ -30,7 +30,7 @@ abstract class _$AppRouter extends RootStackRouter {
     DiscoverRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const DiscoverPage(),
+        child: WrappedRoute(child: const DiscoverPage()),
       );
     },
     ExtensionsRoute.name: (routeData) {

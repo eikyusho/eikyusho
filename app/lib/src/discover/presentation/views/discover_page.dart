@@ -6,8 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
-import 'package:app/src/discover/presentation/cubits/discover_cubit.dart';
-import 'package:app/src/discover/presentation/widgets/src/select_source_bottom_sheet.dart';
+import 'package:app/src/discover/presentation/cubits/cubits.dart';
 import 'package:app/src/discover/presentation/widgets/widgets.dart';
 
 class DiscoverPageAppBar extends MainAppBar {
@@ -35,8 +34,16 @@ class DiscoverPageAppBar extends MainAppBar {
 }
 
 @RoutePage()
-class DiscoverPage extends StatelessWidget {
+class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
   const DiscoverPage({super.key});
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (_) => DiscoverContentCubit(),
+      child: this,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,27 +57,39 @@ class DiscoverPage extends StatelessWidget {
       child: BlocBuilder<DiscoverCubit, DiscoverState>(
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
+          if (state is DiscoverLoaded) {
+            context.read<DiscoverContentCubit>().load(state.selected);
+          }
+
           return switch (state) {
             DiscoverLoading() => const Loading(),
             DiscoverError() => throw UnimplementedError(),
             DiscoverEmpty() => const Text('Empty'),
             DiscoverUninitialized() => const Text('Uninitialized'),
-            DiscoverLoaded() => buildPage(state),
+            DiscoverLoaded() => buildPage(),
           };
         },
       ),
     );
   }
 
-  Widget buildPage(DiscoverLoaded state) {
-    return Column(
-      children: [
-        const DiscoverSpotlight().px(AppDimens.defaultHorizontalPadding),
-        const VSpace(AppDimens.$4xl),
-        const DiscoverMostPopularListView(),
-        const VSpace(AppDimens.$2xl),
-        const DiscoverRecentlyUpdatedListView(),
-      ],
+  Widget buildPage() {
+    return BlocBuilder<DiscoverContentCubit, DiscoverContentState>(
+      builder: (context, state) {
+        if (state is DiscoverContentError) {
+          throw UnimplementedError();
+        }
+
+        return const Column(
+          children: [
+            DiscoverSpotlights(),
+            VSpace(AppDimens.$4xl),
+            DiscoverMostPopularListView(),
+            VSpace(AppDimens.$2xl),
+            DiscoverRecentlyUpdatedListView(),
+          ],
+        );
+      },
     );
   }
 }

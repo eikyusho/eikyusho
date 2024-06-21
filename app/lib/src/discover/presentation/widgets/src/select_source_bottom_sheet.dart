@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
-import 'package:app/src/discover/presentation/cubits/discover_cubit.dart';
+import 'package:app/src/discover/presentation/cubits/cubits.dart';
 
 class SelectSourceBottomSheet extends StatelessWidget {
   const SelectSourceBottomSheet({super.key});

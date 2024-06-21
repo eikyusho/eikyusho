@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../../constants/app_dimens.dart';
@@ -45,24 +47,47 @@ extension MediaQueryExtension on BuildContext {
     return padding.copyWith(top: padding.top + AppDimens.appBarHeight);
   }
 
-  double responsiveHeight(double relativeHeight, {double? absoluteHeight}) {
-    final height = screenHeight * relativeHeight;
-
-    if (absoluteHeight != null) {
-      return height.clamp(0, absoluteHeight);
-    }
-
-    return height;
+  double responsiveHeight(
+    double relativeHeight, {
+    double? absoluteHeight,
+    bool biggest = false,
+  }) {
+    return _responsiveSize(
+      biggest: biggest,
+      screenSize: screenHeight,
+      relativeSize: relativeHeight,
+      absoluteSize: absoluteHeight,
+    );
   }
 
-  double responsiveWidth(double relativeWidth, {double? absoluteWidth}) {
-    final width = screenWidth * relativeWidth;
+  double responsiveWidth(
+    double relativeWidth, {
+    double? absoluteWidth,
+    bool biggest = false,
+  }) {
+    return _responsiveSize(
+      biggest: biggest,
+      screenSize: screenWidth,
+      relativeSize: relativeWidth,
+      absoluteSize: absoluteWidth,
+    );
+  }
 
-    if (absoluteWidth != null) {
-      return width.clamp(0, absoluteWidth);
+  double _responsiveSize({
+    required double relativeSize,
+    required double screenSize,
+    required bool biggest,
+    double? absoluteSize,
+  }) {
+    final size = screenSize * relativeSize;
+
+    if (absoluteSize != null) {
+      if (biggest) return max(size, absoluteSize);
+
+      return size.clamp(0, absoluteSize);
     }
 
-    return width;
+    return size;
   }
 
   bool get isTablet => screenWidth > 600;

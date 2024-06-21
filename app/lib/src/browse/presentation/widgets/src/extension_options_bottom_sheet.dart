@@ -5,7 +5,6 @@ import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
-import 'package:app/src/browse/presentation/widgets/src/extension_icon.dart';
 
 class ExtensionOptionsBottomSheet extends StatelessWidget {
   const ExtensionOptionsBottomSheet({required this.extension, super.key});

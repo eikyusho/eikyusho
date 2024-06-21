@@ -2,7 +2,6 @@ import 'package:eikyusho_web_scraper/eikyusho_web_scraper.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:app/src/browse/data/data.dart';
-import 'package:app/src/discover/data/models/novel.dart';
 import 'package:app/src/discover/data/providers/discover_local_data_provider.dart';
 
 typedef ExtensionsAndSources = (

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
@@ -79,8 +77,6 @@ class SourceOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = Uint8List(1);
-
     return Container(
       height: AppDimens.buttonLg,
       padding: const EdgeInsets.symmetric(
@@ -93,23 +89,7 @@ class SourceOption extends StatelessWidget {
       ),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(AppDimens.sm),
-            child: Image.memory(
-              image,
-              width: AppDimens.iconXl,
-              height: AppDimens.iconXl,
-              semanticLabel: '${source.name} icon',
-              errorBuilder: (ctx, e, ee) {
-                /// Delete
-                return Container(
-                  color: context.colors.primary,
-                  width: 32,
-                  height: 32,
-                );
-              },
-            ),
-          ),
+          ExtensionIcon(extension: source, imageSize: 32),
           const HSpace(AppDimens.md),
           Text(source.name).textStyle(
             context.textTheme.bodyLg.medium,

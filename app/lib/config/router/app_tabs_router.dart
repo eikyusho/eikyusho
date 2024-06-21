@@ -8,7 +8,6 @@ import 'package:app/config/router/app_router.dart';
 import 'package:app/injector/injector.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/presentation.dart';
-import 'package:app/src/discover/presentation/cubits/discover_cubit.dart';
 import 'package:app/src/discover/presentation/presentation.dart';
 
 part './app_tabs_builders.dart';

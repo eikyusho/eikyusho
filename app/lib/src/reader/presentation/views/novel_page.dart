@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/src/reader/presentation/widgets/widgets.dart';
 
-@RoutePage()
 class NovelPage extends StatelessWidget {
   const NovelPage({required this.novel, super.key});
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
@@ -11,9 +10,7 @@ import 'package:app/src/browse/presentation/presentation.dart';
 import 'package:app/src/browse/presentation/widgets/widgets.dart';
 import 'package:app/src/discover/presentation/presentation.dart';
 
-@RoutePage()
-class DisabledExtensionsPage extends StatelessWidget
-    implements AutoRouteWrapper {
+class DisabledExtensionsPage extends StatelessWidget {
   const DisabledExtensionsPage({super.key});
 
   @override

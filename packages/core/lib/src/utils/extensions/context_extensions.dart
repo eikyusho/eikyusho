@@ -115,6 +115,7 @@ extension BottomSheetExtension on BuildContext {
     await showModalBottomSheet<void>(
       context: this,
       isScrollControlled: true,
+      useRootNavigator: true,
       isDismissible: isDismissable,
       sheetAnimationStyle: AnimationStyle(
         duration: const Duration(milliseconds: 500),

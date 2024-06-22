@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:app/common/common.dart';
-import 'package:app/config/app.dart';
 import 'package:app/src/discover/presentation/cubits/cubits.dart';
 
 class DiscoverSpotlights extends StatelessWidget {
@@ -61,11 +59,7 @@ class _SpotlightItem extends StatelessWidget {
       child: ClickableElement(
         borderRadius: AppDimens.radiusLg,
         animation: ClickableElementAnimation.shrink,
-        onTap: () {
-          context.pushRoute(
-            NovelRoute(novel: novel),
-          );
-        },
+        onTap: () {},
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(

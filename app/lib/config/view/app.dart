@@ -7,12 +7,12 @@ import 'package:app/config/router/app_router.dart';
 import 'package:app/config/view/provider.dart';
 
 class MainApp extends StatelessWidget {
-  MainApp({super.key});
-
-  final _appRouter = AppRouter();
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const appRouter = AppNavigation();
+
     final selectedMode = context.themeMode;
 
     final isDarkMode = switch (selectedMode) {
@@ -37,7 +37,7 @@ class MainApp extends StatelessWidget {
 
         // Routing
         restorationScopeId: AppConstants.appId,
-        routerConfig: _appRouter.config(),
+        routerConfig: appRouter.config(),
       ),
     );
   }

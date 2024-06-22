@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
@@ -89,10 +88,11 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                         Assets.icons.caretLeftBold,
                         onPressed: () {
                           AppLogger.debug('Back button pressed');
-                          if (context.router.canPop()) {
-                            onBack?.call();
-                            context.back();
-                          }
+                          throw UnimplementedError();
+                          // if (context.router.canPop()) {
+                          //   onBack?.call();
+                          //   context.back();
+                          // }
                         },
                       ),
                     ),

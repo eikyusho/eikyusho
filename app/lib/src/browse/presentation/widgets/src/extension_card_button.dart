@@ -7,9 +7,8 @@ import 'package:resources/resources.dart';
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/cubits/cubits.dart';
-import 'package:app/src/browse/presentation/widgets/widgets.dart';
-
 import 'package:app/src/browse/presentation/views/browse_page.dart';
+import 'package:app/src/browse/presentation/widgets/widgets.dart';
 
 final class _Icons {
   const _Icons._();

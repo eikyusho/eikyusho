@@ -144,16 +144,66 @@ class ExtensionsLocalDataProvider {
   }
 
   Future<void> changeExtensionState(int id, {required bool isEnabled}) async {
-    await _db.exec(
-      (isar) async {
-        final extension = await isar.extensions.get(id);
+    try {
+      await _db.exec(
+        (isar) async {
+          final extension = await isar.extensions.get(id);
 
-        if (extension == null) return;
+          if (extension == null) return;
 
-        extension.isEnabled = isEnabled;
+          extension.isEnabled = isEnabled;
 
-        await isar.extensions.put(extension);
-      },
-    );
+          await isar.extensions.put(extension);
+        },
+      );
+    } catch (e) {
+      throw DatabaseException(e.toString());
+    }
+  }
+
+  Future<void> toggleExtensionDiscover(int id, {required bool discover}) async {
+    try {
+      await _db.exec(
+        (isar) async {
+          final extension = await isar.extensions.get(id);
+
+          if (extension == null) return;
+
+          extension.discover = discover;
+
+          await isar.extensions.put(extension);
+        },
+      );
+    } catch (e) {
+      throw DatabaseException(e.toString());
+    }
+  }
+
+  Future<void> deleteExtension(int id) async {
+    try {
+      await _db.exec(
+        (isar) async {
+          await isar.extensions.delete(id);
+        },
+      );
+    } catch (e) {
+      throw DatabaseException(e.toString());
+    }
+  }
+
+  Future<void> removeExtension(InstalledExtension extension) async {
+    try {
+      final directory = await StorageManager.appDirectory;
+
+      final savePath = Path.join(
+        directory.path,
+        AppConstants.sourcesPath,
+        extension.uuid,
+      );
+
+      Directory(savePath).deleteSync(recursive: true);
+    } catch (e) {
+      throw StorageException(e.toString());
+    }
   }
 }

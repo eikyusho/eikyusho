@@ -68,4 +68,17 @@ class ExtensionsRepository {
   Future<void> disableExtension(int id) async {
     await _localDataProvider.changeExtensionState(id, isEnabled: false);
   }
+
+  Future<void> enableDiscoverExtension(int id) async {
+    await _localDataProvider.toggleExtensionDiscover(id, discover: true);
+  }
+
+  Future<void> disableDiscoverExtension(int id) async {
+    await _localDataProvider.toggleExtensionDiscover(id, discover: false);
+  }
+
+  Future<void> uninstallExtension(InstalledExtension extension) async {
+    await _localDataProvider.deleteExtension(extension.id);
+    await _localDataProvider.removeExtension(extension);
+  }
 }

@@ -1,5 +1,6 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
 class TextInput extends StatelessWidget {

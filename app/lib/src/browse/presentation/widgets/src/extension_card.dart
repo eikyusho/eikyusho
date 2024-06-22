@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/injector/injector.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/cubits/cubits.dart';
 import 'package:app/src/browse/presentation/widgets/src/extension_card_button.dart';
-import 'package:resources/resources.dart';
 
 enum ExtensionCardType { available, installed, update }
 

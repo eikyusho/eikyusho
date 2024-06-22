@@ -7,6 +7,7 @@ import 'package:resources/resources.dart';
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/presentation.dart';
+import 'package:app/src/discover/presentation/cubits/cubits.dart';
 
 class ExtensionOptionsBottomSheet extends StatelessWidget {
   const ExtensionOptionsBottomSheet({required this.extension, super.key});
@@ -60,12 +61,22 @@ class ExtensionOptionsBottomSheet extends StatelessWidget {
         const VSpace(AppDimens.md),
         ToggleTile(
           text: AppStrings.toggleDiscoverExtension,
-          value: extension.isEnabled,
+          value: extension.discover,
           onTap: (value) {
             if (value) {
-              context.read<BrowseCubit>().enableExtension(extension);
+              context
+                  .read<BrowseCubit>()
+                  .enableDiscoverExtension(extension)
+                  .then((_) {
+                context.read<DiscoverCubit>().getSources();
+              });
             } else {
-              context.read<BrowseCubit>().disableExtension(extension);
+              context
+                  .read<BrowseCubit>()
+                  .disableDiscoverExtension(extension)
+                  .then((_) {
+                context.read<DiscoverCubit>().getSources();
+              });
             }
           },
         ),
@@ -77,14 +88,18 @@ class ExtensionOptionsBottomSheet extends StatelessWidget {
           onTap: () async {
             await showDialog<void>(
               context: context,
-              builder: (context) => AppDialog(
-                type: DialogType.danger,
-                title: Text(AppStrings.dialogUninstallExtension),
-                description: Text(
-                  AppStrings.dialogDescriptionUninstallExtension,
-                ),
-                onConfirm: () {},
-              ),
+              builder: (context) =>
+                  AppDialog(
+                    type: DialogType.danger,
+                    title: Text(AppStrings.dialogUninstallExtension),
+                    description: Text(
+                      AppStrings.dialogDescriptionUninstallExtension,
+                    ),
+                    onConfirm: () {
+                      context.read<BrowseCubit>().uninstallExtension(extension);
+                      Navigator.of(context).pop();
+                    },
+                  ),
             );
           },
         ),

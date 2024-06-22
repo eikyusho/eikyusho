@@ -30,12 +30,10 @@ class NovelInfo extends StatelessWidget {
           width: context.responsiveWidth(
             0.25,
             absoluteWidth: 123,
-            biggest: true,
           ),
           height: context.responsiveHeight(
             0.25,
             absoluteHeight: 164,
-            biggest: true,
           ),
           decoration: BoxDecoration(
             color: context.colors.surface,

@@ -142,4 +142,18 @@ class ExtensionsLocalDataProvider {
       throw DatabaseException(e.toString());
     }
   }
+
+  void changeExtensionState(int id, {required bool isEnabled}) {
+    _db.exec(
+      (isar) async {
+        final extension = await isar.extensions.get(id);
+
+        if (extension == null) return;
+
+        extension.isEnabled = isEnabled;
+
+        await isar.extensions.put(extension);
+      },
+    );
+  }
 }

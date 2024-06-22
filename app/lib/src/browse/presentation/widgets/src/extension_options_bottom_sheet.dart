@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
+import 'package:app/src/browse/presentation/presentation.dart';
 
 class ExtensionOptionsBottomSheet extends StatelessWidget {
   const ExtensionOptionsBottomSheet({required this.extension, super.key});
@@ -46,7 +48,14 @@ class ExtensionOptionsBottomSheet extends StatelessWidget {
         const VSpace(AppDimens.lg),
         ToggleTile(
           text: AppStrings.toggleActiveExtension,
-          onTap: () {},
+          value: extension.isEnabled,
+          onTap: (value) {
+            if (value) {
+              browseCubit.enableExtension(extension);
+            } else {
+              browseCubit.disableExtension(extension);
+            }
+          },
         ),
         const VSpace(AppDimens.md),
         ActionButton(

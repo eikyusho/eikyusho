@@ -50,10 +50,9 @@ extension MediaQueryExtension on BuildContext {
   double responsiveHeight(
     double relativeHeight, {
     double? absoluteHeight,
-    bool biggest = false,
   }) {
     return _responsiveSize(
-      biggest: biggest,
+      biggest: isTablet,
       screenSize: screenHeight,
       relativeSize: relativeHeight,
       absoluteSize: absoluteHeight,
@@ -66,7 +65,7 @@ extension MediaQueryExtension on BuildContext {
     bool biggest = false,
   }) {
     return _responsiveSize(
-      biggest: biggest,
+      biggest: isTablet,
       screenSize: screenWidth,
       relativeSize: relativeWidth,
       absoluteSize: absoluteWidth,

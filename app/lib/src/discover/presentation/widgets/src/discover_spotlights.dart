@@ -17,7 +17,6 @@ class DiscoverSpotlights extends StatelessWidget {
     final height = context.responsiveHeight(
       0.5,
       absoluteHeight: 380,
-      biggest: true,
     );
 
     return BlocBuilder<DiscoverContentCubit, DiscoverContentState>(

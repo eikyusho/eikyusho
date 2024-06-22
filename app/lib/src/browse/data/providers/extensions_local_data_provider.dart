@@ -143,8 +143,8 @@ class ExtensionsLocalDataProvider {
     }
   }
 
-  void changeExtensionState(int id, {required bool isEnabled}) {
-    _db.exec(
+  Future<void> changeExtensionState(int id, {required bool isEnabled}) async {
+    await _db.exec(
       (isar) async {
         final extension = await isar.extensions.get(id);
 

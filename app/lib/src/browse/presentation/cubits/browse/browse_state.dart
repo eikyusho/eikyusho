@@ -13,10 +13,10 @@ final class BrowseLoading extends BrowseState {
   List<Object> get props => [isRefreshing];
 }
 
-final class BrowseFailure extends BrowseState {
-  const BrowseFailure(this.error);
+final class BrowseError extends BrowseState {
+  const BrowseError(this.error);
 
-  final String error;
+  final Exception error;
 
   @override
   List<Object> get props => [error];

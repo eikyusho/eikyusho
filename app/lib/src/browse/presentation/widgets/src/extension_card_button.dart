@@ -7,7 +7,6 @@ import 'package:resources/resources.dart';
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/cubits/cubits.dart';
-import 'package:app/src/browse/presentation/views/browse_page.dart';
 import 'package:app/src/browse/presentation/widgets/widgets.dart';
 
 final class _Icons {
@@ -41,19 +40,23 @@ class ExtensionCardButton extends StatelessWidget {
         iconSize: AppDimens.iconLg,
         iconColor: context.colors.textAuxiliary,
         color: AppColors.transparent,
-        onPressed: () => context.showBottomSheet(
-          BlocProvider.value(
-            value: browseCubit,
-            child: ExtensionOptionsBottomSheet(
-              extension: extension as InstalledExtension,
+        onPressed: () {
+          context.showBottomSheet(
+            BlocProvider.value(
+              value: context.read<BrowseCubit>(),
+              child: BlocProvider.value(
+                value: context.read<ExtensionCardCubit>(),
+                child: ExtensionOptionsBottomSheet(
+                  extension: extension as InstalledExtension,
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       );
     }
 
     return BlocConsumer<ExtensionCardCubit, ExtensionCardState>(
-      bloc: context.read<ExtensionCardCubit>(),
       listenWhen: (previous, current) {
         return current is ExtensionCardDownloaded ||
             current is ExtensionCardError;

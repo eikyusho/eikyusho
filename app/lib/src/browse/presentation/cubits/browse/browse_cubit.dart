@@ -1,18 +1,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:app/src/browse/data/data.dart';
 
 part 'browse_state.dart';
 
-@injectable
 class BrowseCubit extends Cubit<BrowseState> {
   BrowseCubit(this._repository) : super(const BrowseLoading());
 
   final ExtensionsRepository _repository;
 
-  Future<void> getSources() async {
+  Future<void> getEnabledSources() async {
     emit(const BrowseLoading());
 
     final sources = await _repository.getSources(
@@ -22,15 +20,25 @@ class BrowseCubit extends Cubit<BrowseState> {
     emit(BrowseLoaded(sources));
   }
 
-  Future<void> enableExtension(InstalledExtension extension) async {
-    _repository.enableExtension(extension.id);
+  Future<void> getDisabledSources() async {
+    emit(const BrowseLoading());
 
-    await getSources();
+    final sources = await _repository.getSources(
+      filter: SourcesFilter.onlyDisabled,
+    );
+
+    emit(BrowseLoaded(sources));
+  }
+
+  Future<void> enableExtension(InstalledExtension extension) async {
+    await _repository.enableExtension(extension.id);
+
+    await getEnabledSources();
   }
 
   Future<void> disableExtension(InstalledExtension extension) async {
-    _repository.disableExtension(extension.id);
+    await _repository.disableExtension(extension.id);
 
-    await getSources();
+    await getEnabledSources();
   }
 }

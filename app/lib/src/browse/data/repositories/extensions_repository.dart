@@ -61,11 +61,11 @@ class ExtensionsRepository {
     await _localDataProvider.storeExtension(extension);
   }
 
-  void enableExtension(int id) {
-    _localDataProvider.changeExtensionState(id, isEnabled: true);
+  Future<void> enableExtension(int id) async {
+    await _localDataProvider.changeExtensionState(id, isEnabled: true);
   }
 
-  void disableExtension(int id) {
-    _localDataProvider.changeExtensionState(id, isEnabled: false);
+  Future<void> disableExtension(int id) async {
+    await _localDataProvider.changeExtensionState(id, isEnabled: false);
   }
 }

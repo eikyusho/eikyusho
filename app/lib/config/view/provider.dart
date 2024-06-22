@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:app/injector/injector.dart';
 import 'package:app/src/browse/data/data.dart';
+import 'package:app/src/browse/presentation/presentation.dart';
 import 'package:app/src/discover/data/data.dart';
 import 'package:app/src/discover/presentation/presentation.dart';
 
@@ -21,6 +22,11 @@ class AppProvider extends StatelessWidget {
             getIt<ExtensionsRepository>(),
             getIt<DiscoverRepository>(),
           )..getSources(),
+        ),
+        BlocProvider(
+          create: (_) => BrowseCubit(
+            getIt<ExtensionsRepository>(),
+          )..getEnabledSources(),
         ),
       ],
       child: child,

@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
-import 'package:app/common/presentation/views/empty_page.dart';
 import 'package:app/config/app.dart';
 import 'package:app/src/discover/presentation/cubits/cubits.dart';
 import 'package:app/src/discover/presentation/widgets/widgets.dart';
@@ -44,7 +43,7 @@ class DiscoverView extends StatelessWidget {
       context.showBottomSheet(
         isDismissable: cubit.state is! DiscoverLoading,
         BlocProvider.value(
-          value: cubit,
+          value: context.read<DiscoverCubit>(),
           child: const SelectSourceBottomSheet(),
         ),
       );
@@ -139,7 +138,7 @@ class DiscoverView extends StatelessWidget {
       image: Assets.images.wentWrong,
       message: AppStrings.emptyStateError,
       description: AppStrings.emptyStateDescriptionError,
-      error: error.toString(),
+      error: error,
     );
   }
 

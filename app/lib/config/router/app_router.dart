@@ -114,6 +114,16 @@ class AppNavigation {
                   builder: (context, state) {
                     return const BrowsePage();
                   },
+                  routes: [
+                    RouteBuilder(
+                      path: _Route.extensions.path,
+                      name: _Route.extensions.name,
+                      parentNavigatorKey: _rootNavigatorKey,
+                      builder: (context, state) {
+                        return const ExtensionsPage();
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -350,8 +350,28 @@ class $AssetsImagesGen {
   SvgGenImage get eikyushoLogo =>
       const SvgGenImage('assets/images/eikyusho-logo.svg');
 
+  /// File path: assets/images/empty-collection.png
+  AssetGenImage get emptyCollection =>
+      const AssetGenImage('assets/images/empty-collection.png');
+
+  /// File path: assets/images/empty-list.png
+  AssetGenImage get emptyList =>
+      const AssetGenImage('assets/images/empty-list.png');
+
+  /// File path: assets/images/network.png
+  AssetGenImage get network => const AssetGenImage('assets/images/network.png');
+
+  /// File path: assets/images/not-found.png
+  AssetGenImage get notFound =>
+      const AssetGenImage('assets/images/not-found.png');
+
+  /// File path: assets/images/went-wrong.png
+  AssetGenImage get wentWrong =>
+      const AssetGenImage('assets/images/went-wrong.png');
+
   /// List of all assets
-  List<SvgGenImage> get values => [eikyushoLogo];
+  List<dynamic> get values =>
+      [eikyushoLogo, emptyCollection, emptyList, network, notFound, wentWrong];
 }
 
 class Assets {
@@ -362,6 +382,86 @@ class Assets {
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+}
+
+class AssetGenImage {
+  const AssetGenImage(this._assetName, {this.size = null});
+
+  final String _assetName;
+
+  static const String package = 'resources';
+
+  final Size? size;
+
+  Image image({
+    Key? key,
+    AssetBundle? bundle,
+    ImageFrameBuilder? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    String? semanticLabel,
+    bool excludeFromSemantics = false,
+    double? scale,
+    double? width,
+    double? height,
+    Color? color,
+    Animation<double>? opacity,
+    BlendMode? colorBlendMode,
+    BoxFit? fit,
+    AlignmentGeometry alignment = Alignment.center,
+    ImageRepeat repeat = ImageRepeat.noRepeat,
+    Rect? centerSlice,
+    bool matchTextDirection = false,
+    bool gaplessPlayback = false,
+    bool isAntiAlias = false,
+    @Deprecated('Do not specify package for a generated library asset')
+    String? package = package,
+    FilterQuality filterQuality = FilterQuality.low,
+    int? cacheWidth,
+    int? cacheHeight,
+  }) {
+    return Image.asset(
+      _assetName,
+      key: key,
+      bundle: bundle,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      scale: scale,
+      width: width,
+      height: height,
+      color: color,
+      opacity: opacity,
+      colorBlendMode: colorBlendMode,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      centerSlice: centerSlice,
+      matchTextDirection: matchTextDirection,
+      gaplessPlayback: gaplessPlayback,
+      isAntiAlias: isAntiAlias,
+      package: package,
+      filterQuality: filterQuality,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+    );
+  }
+
+  ImageProvider provider({
+    AssetBundle? bundle,
+    @Deprecated('Do not specify package for a generated library asset')
+    String? package = package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => 'packages/resources/$_assetName';
 }
 
 class SvgGenImage {

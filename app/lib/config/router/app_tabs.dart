@@ -13,7 +13,6 @@ class TabsScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      extendBodyBehindAppBar: true,
       body: navigationShell,
       bottomNavigationBar: AppNavigationBar(
         selectedIndex: navigationShell.currentIndex,

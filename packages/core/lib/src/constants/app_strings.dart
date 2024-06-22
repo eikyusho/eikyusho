@@ -36,6 +36,7 @@ final class AppStrings {
   static String buttonUninstallExtension = 'Uninstall Extension';
   static String buttonCancel = 'Cancel';
   static String buttonConfirm = 'Confirm';
+  static String buttonSelectSource = 'Select Source';
 
   /// Label
   static String labelVersion = 'Version';
@@ -51,4 +52,12 @@ final class AppStrings {
   static String dialogUninstallExtension = 'Uninstall Extension';
   static String dialogDescriptionUninstallExtension =
       'Are you sure you want to uninstall this extension?';
+
+  /// Empty State
+  static String emptyStateNoSources = 'No sources available';
+  static String emptyStateDescriptionNoSources =
+      'You have not added any sources yet.';
+  static String emptyStateNoSelectedSource = 'No source selected';
+  static String emptyStateDescriptionNoSelectedSource =
+      'Select a source to see the discover page.';
 }

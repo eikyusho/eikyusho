@@ -10,11 +10,11 @@ class BrowseCubit extends Cubit<BrowseState> {
 
   final ExtensionsRepository _repository;
 
-  Future<void> getEnabledSources() async {
+  Future<void> getSources() async {
     emit(const BrowseLoading());
 
     final sources = await _repository.getSources(
-      filter: SourcesFilter.onlyEnabled,
+      filter: SourcesFilter.none,
     );
 
     emit(BrowseLoaded(sources));
@@ -33,12 +33,12 @@ class BrowseCubit extends Cubit<BrowseState> {
   Future<void> enableExtension(InstalledExtension extension) async {
     await _repository.enableExtension(extension.id);
 
-    await getEnabledSources();
+    await getSources();
   }
 
   Future<void> disableExtension(InstalledExtension extension) async {
     await _repository.disableExtension(extension.id);
 
-    await getEnabledSources();
+    await getSources();
   }
 }

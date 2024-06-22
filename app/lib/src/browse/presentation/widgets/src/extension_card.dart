@@ -8,6 +8,7 @@ import 'package:app/injector/injector.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/cubits/cubits.dart';
 import 'package:app/src/browse/presentation/widgets/src/extension_card_button.dart';
+import 'package:resources/resources.dart';
 
 enum ExtensionCardType { available, installed, update }
 
@@ -19,6 +20,10 @@ class ExtensionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isInstalled = extension is InstalledExtension;
+    final isDisabled =
+        isInstalled && !(extension as InstalledExtension).isEnabled;
+
     return BlocProvider(
       create: (context) => ExtensionCardCubit(
         getIt<ExtensionsRepository>(),
@@ -33,25 +38,21 @@ class ExtensionCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            ExtensionIcon(extension: extension, imageSize: 56),
+            Opacity(
+              opacity: isDisabled ? 0.5 : 1.0,
+              child: ExtensionIcon(extension: extension, imageSize: 56),
+            ),
             const HSpace(AppDimens.sm),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(extension.name).textStyle(
                   context.textTheme.bodyLg.medium,
-                  color: context.colors.textPrimary,
+                  color: isDisabled
+                      ? context.colors.textAuxiliary
+                      : context.colors.textPrimary,
                 ),
-                Row(
-                  children: [
-                    Text(extension.language),
-                    const Separator.dot(),
-                    Text(extension.version),
-                  ],
-                ).gap(AppDimens.sm).textStyle(
-                      context.textTheme.bodySm.regular,
-                      color: context.colors.textSecondary,
-                    ),
+                buildMetadata(context, isDisabled: isDisabled),
               ],
             ),
             const Spacer(),
@@ -63,5 +64,55 @@ class ExtensionCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget buildVersion(BuildContext context) {
+    if (this.extension is! InstalledExtension) {
+      return Text(this.extension.version);
+    }
+
+    final extension = this.extension as InstalledExtension;
+
+    if (extension.updateVersion == null) {
+      return Text(extension.version);
+    }
+
+    return Row(
+      children: [
+        Text(
+          extension.version,
+          style: TextStyle(color: context.colors.warning),
+        ),
+        Assets.icons.caretRightBold.svg(
+          width: AppDimens.iconXs,
+          height: AppDimens.iconXs,
+          colorFilter: svgColor(context.colors.textSubdued),
+        ),
+        Text(
+          extension.updateVersion ?? '',
+          style: TextStyle(color: context.colors.success),
+        ),
+      ],
+    ).gap(AppDimens.xs);
+  }
+
+  Widget buildMetadata(BuildContext context, {required bool isDisabled}) {
+    if (isDisabled) {
+      return Text(
+        AppStrings.metaDisabled,
+        style: TextStyle(color: context.colors.warning),
+      );
+    }
+
+    return Row(
+      children: [
+        Text(extension.language),
+        const Separator.dot(),
+        buildVersion(context),
+      ],
+    ).gap(AppDimens.sm).textStyle(
+          context.textTheme.bodySm.regular,
+          color: context.colors.textSecondary,
+        );
   }
 }

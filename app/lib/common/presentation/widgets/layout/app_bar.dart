@@ -63,10 +63,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                       left: 0,
                       child: Assets.images.eikyushoLogo.svg(
                         height: AppDimens.logoHeight,
-                        colorFilter: ColorFilter.mode(
-                          context.colors.textPrimary,
-                          AppMisc.blendMode,
-                        ),
+                        colorFilter: svgColor(context.colors.textPrimary),
                         semanticsLabel: '${AppConstants.appName} Logo',
                       ),
                     ),

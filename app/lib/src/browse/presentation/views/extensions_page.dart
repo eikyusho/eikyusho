@@ -23,7 +23,7 @@ class ExtensionsPage extends StatelessWidget {
       child: PopScope(
         onPopInvoked: (isPop) {
           context.read<DiscoverCubit>().getSources();
-          context.read<BrowseCubit>().getEnabledSources();
+          context.read<BrowseCubit>().getSources();
         },
         child: const ExtensionsView(),
       ),

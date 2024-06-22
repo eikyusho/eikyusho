@@ -71,10 +71,7 @@ class AppDialog extends StatelessWidget {
                   child: type._icon.svg(
                     width: iconSize,
                     height: iconSize,
-                    colorFilter: ColorFilter.mode(
-                      type.color(context),
-                      AppMisc.blendMode,
-                    ),
+                    colorFilter: svgColor(type.color(context)),
                   ),
                 ),
                 title.textStyle(

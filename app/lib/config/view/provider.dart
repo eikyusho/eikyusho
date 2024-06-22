@@ -26,7 +26,7 @@ class AppProvider extends StatelessWidget {
         BlocProvider(
           create: (_) => BrowseCubit(
             getIt<ExtensionsRepository>(),
-          )..getEnabledSources(),
+          )..getSources(),
         ),
       ],
       child: child,

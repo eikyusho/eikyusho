@@ -11,8 +11,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const appRouter = AppNavigation();
-
     final selectedMode = context.themeMode;
 
     final isDarkMode = switch (selectedMode) {
@@ -37,7 +35,7 @@ class MainApp extends StatelessWidget {
 
         // Routing
         restorationScopeId: AppConstants.appId,
-        routerConfig: appRouter.config(),
+        routerConfig: AppNavigation.config,
       ),
     );
   }

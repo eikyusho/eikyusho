@@ -72,10 +72,7 @@ class NovelInfo extends StatelessWidget {
                 Assets.icons.caretRightBold.svg(
                   height: AppDimens.iconXs,
                   width: AppDimens.iconXs,
-                  colorFilter: ColorFilter.mode(
-                    context.colors.primary,
-                    AppMisc.blendMode,
-                  ),
+                  colorFilter: svgColor(context.colors.primary),
                 ),
               ],
             ).gap(AppDimens.xs).textStyle(

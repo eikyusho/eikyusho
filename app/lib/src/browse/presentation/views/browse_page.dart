@@ -16,7 +16,7 @@ class BrowsePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: context.read<BrowseCubit>()..getEnabledSources(),
+      value: context.read<BrowseCubit>()..getSources(),
       child: const BrowseView(),
     );
   }
@@ -27,8 +27,6 @@ class BrowseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final padding = context.screenPaddingWithAppBar;
-
     return Scaffold(
       appBar: MainAppBar(
         showLogo: true,
@@ -45,33 +43,85 @@ class BrowseView extends StatelessWidget {
           return switch (state) {
             BrowseLoading() => const Loading(),
             BrowseError() => buildErrorPage(state.error),
-            BrowseLoaded() => buildPage(state, padding),
+            BrowseLoaded() => buildPage(state),
           };
         },
       ),
     );
   }
 
-  Widget buildPage(BrowseLoaded state, EdgeInsets padding) {
-    final sources = state.sources;
+  Widget buildPage(BrowseLoaded state) {
+    final showDisabled = ValueNotifier(false);
 
-    return ListView.separated(
-      padding: EdgeInsets.only(
-        top: padding.top + AppDimens.$2xl,
-        bottom: padding.bottom + AppDimens.$2xl,
-        left: AppDimens.defaultHorizontalPadding,
-        right: AppDimens.defaultHorizontalPadding,
-      ),
-      separatorBuilder: (_, __) => const VSpace(AppDimens.md),
-      itemBuilder: (BuildContext context, int index) {
-        final source = sources[index];
+    return Builder(
+      builder: (context) {
+        final padding = context.screenPadding;
 
-        return ExtensionCard(
-          type: ExtensionCardType.installed,
-          extension: source,
+        return Padding(
+          padding: EdgeInsets.only(
+            top: padding.top + AppDimens.$2xl,
+            bottom: padding.bottom + AppDimens.$2xl,
+            left: AppDimens.defaultHorizontalPadding,
+            right: AppDimens.defaultHorizontalPadding,
+          ),
+          child: Column(
+            children: [
+              TextInput(
+                placeholder: 'Search',
+                prefixIcon: Assets.icons.magnifyingGlassBold,
+              ),
+              const VSpace(AppDimens.xl),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(AppStrings.toggleShowDisabled).textStyle(
+                    context.textTheme.bodyMd.medium,
+                    color: context.colors.textPrimary,
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: showDisabled,
+                    builder: (context, value, child) {
+                      return Toggle(
+                        value: showDisabled.value,
+                        onChanged: (value) {
+                          showDisabled.value = value;
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+              const VSpace(AppDimens.lg),
+              ValueListenableBuilder(
+                valueListenable: showDisabled,
+                builder: (context, value, child) {
+                  final sources = value
+                      ? state.sources
+                      : state.sources
+                          .where((source) => source.isEnabled)
+                          .toList();
+
+                  return Expanded(
+                    child: ListView.separated(
+                      padding: EdgeInsets.zero,
+                      separatorBuilder: (_, __) => const VSpace(AppDimens.md),
+                      itemBuilder: (BuildContext context, int index) {
+                        final source = sources[index];
+
+                        return ExtensionCard(
+                          type: ExtensionCardType.installed,
+                          extension: source,
+                        );
+                      },
+                      itemCount: sources.length,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         );
       },
-      itemCount: sources.length,
     );
   }
 

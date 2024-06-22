@@ -100,10 +100,7 @@ class EmptyPage extends StatelessWidget {
         icon.svg(
           width: AppDimens.iconMd,
           height: AppDimens.iconMd,
-          colorFilter: ColorFilter.mode(
-            context.colors.textSecondary,
-            AppMisc.blendMode,
-          ),
+          colorFilter: svgColor(context.colors.textSecondary),
         ),
         const HSpace(AppDimens.sm),
         Text(message).textStyle(

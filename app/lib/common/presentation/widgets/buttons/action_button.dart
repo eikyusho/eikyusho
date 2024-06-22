@@ -40,10 +40,7 @@ class ActionButton extends StatelessWidget {
           children: [
             if (icon != null)
               icon!.svg(
-                colorFilter: ColorFilter.mode(
-                  _getColor(context, danger: dangerAction),
-                  AppMisc.blendMode,
-                ),
+                colorFilter: svgColor(_getColor(context, danger: dangerAction)),
                 height: AppDimens.iconLg,
                 width: AppDimens.iconLg,
               ),

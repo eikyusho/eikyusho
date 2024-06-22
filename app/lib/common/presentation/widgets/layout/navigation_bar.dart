@@ -112,7 +112,7 @@ class NavigationItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               icon.svg(
-                colorFilter: ColorFilter.mode(color, AppMisc.blendMode),
+                colorFilter: svgColor(color),
                 width: AppDimens.iconXl,
                 height: AppDimens.iconXl,
               ),

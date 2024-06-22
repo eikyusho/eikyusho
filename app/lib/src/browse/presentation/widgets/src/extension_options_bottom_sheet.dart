@@ -58,6 +58,18 @@ class ExtensionOptionsBottomSheet extends StatelessWidget {
           },
         ),
         const VSpace(AppDimens.md),
+        ToggleTile(
+          text: AppStrings.toggleDiscoverExtension,
+          value: extension.isEnabled,
+          onTap: (value) {
+            if (value) {
+              context.read<BrowseCubit>().enableExtension(extension);
+            } else {
+              context.read<BrowseCubit>().disableExtension(extension);
+            }
+          },
+        ),
+        const VSpace(AppDimens.md),
         ActionButton(
           icon: Assets.icons.trashBold,
           text: AppStrings.buttonUninstallExtension,

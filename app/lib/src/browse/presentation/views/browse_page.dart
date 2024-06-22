@@ -7,8 +7,6 @@ import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/config/app.dart';
-import 'package:app/injector/injector.dart';
-import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/cubits/cubits.dart';
 import 'package:app/src/browse/presentation/widgets/widgets.dart';
 

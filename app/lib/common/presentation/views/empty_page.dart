@@ -23,7 +23,7 @@ class EmptyPage extends StatelessWidget {
   final String message;
   final String description;
   final String? tip;
-  final String? error;
+  final Exception? error;
   final String? actionText;
   final VoidCallback? onAction;
 
@@ -63,7 +63,11 @@ class EmptyPage extends StatelessWidget {
             ],
             if (hasError) ...[
               const Spacer(),
-              buildInfo(context, Assets.icons.warningCircleBold, error!),
+              buildInfo(
+                context,
+                Assets.icons.warningCircleBold,
+                error!.toString(),
+              ),
               const VSpace(AppDimens.$2xl),
             ],
             if (hasAction) ...[

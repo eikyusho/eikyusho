@@ -29,7 +29,7 @@ class ClickableElement extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      onDoubleTap: onDoubleTap,
+      onDoubleTap: onDoubleTap ?? onTap,
       onLongPress: onLongPress,
       onTapDown: (details) => animationNotifier.animate(animation),
       onTapUp: (details) => animationNotifier.reset(),

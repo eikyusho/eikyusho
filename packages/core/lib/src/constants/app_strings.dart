@@ -68,6 +68,9 @@ final class AppStrings {
   static String emptyStateDescriptionError =
       'An error occurred while loading the page.';
 
+  static String emptyStateDescriptionErrorSources =
+      'An error occurred while loading the sources.';
+
   static String emptyStateErrorLoading = 'Loading error';
   static String emptyStateDescriptionErrorLoading =
       "Couldn't establish a connection.";

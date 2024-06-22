@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/presentation/widgets/buttons/icon_button.dart';
@@ -23,7 +24,6 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showNotificationButton = false,
     this.actionIcon,
     this.actionButton,
-    this.onBack,
   });
 
   final Widget? title;
@@ -33,7 +33,6 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final SvgGenImage? actionIcon;
   final VoidCallback? actionButton;
-  final VoidCallback? onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -86,14 +85,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                       left: 0,
                       child: AppIconButton(
                         Assets.icons.caretLeftBold,
-                        onPressed: () {
-                          AppLogger.debug('Back button pressed');
-                          throw UnimplementedError();
-                          // if (context.router.canPop()) {
-                          //   onBack?.call();
-                          //   context.back();
-                          // }
-                        },
+                        onPressed: context.canPop() ? context.pop : null,
                       ),
                     ),
                   Positioned(

@@ -11,21 +11,26 @@ class EmptyPage extends StatelessWidget {
     required this.message,
     required this.description,
     this.tip,
+    this.error,
+    this.actionIcon,
     this.actionText,
     this.onAction,
     super.key,
   });
 
   final AssetGenImage image;
+  final SvgGenImage? actionIcon;
   final String message;
   final String description;
   final String? tip;
+  final String? error;
   final String? actionText;
   final VoidCallback? onAction;
 
   @override
   Widget build(BuildContext context) {
     final hasTip = tip != null;
+    final hasError = error != null;
     final hasAction = actionText != null && onAction != null;
     final padding = context.screenPadding;
 
@@ -49,25 +54,29 @@ class EmptyPage extends StatelessWidget {
             Text(description).textStyle(
               context.textTheme.bodySm.regular,
               color: context.colors.textSecondary,
+              align: TextAlign.center,
             ),
-            if (hasAction) ...[
+            if (hasTip) ...[
               const Spacer(),
+              buildInfo(context, Assets.icons.infoBold, tip!),
+              const VSpace(AppDimens.$2xl),
+            ],
+            if (hasError) ...[
+              const Spacer(),
+              buildInfo(context, Assets.icons.warningCircleBold, error!),
+              const VSpace(AppDimens.$2xl),
+            ],
+            if (hasAction) ...[
+              if (!hasTip && !hasError) const Spacer(),
               ActionButton(
-                icon: null,
+                icon: actionIcon,
                 center: true,
                 text: actionText!,
                 onTap: onAction!,
               ).px(AppDimens.$2xl),
             ],
             const VSpace(AppDimens.xl),
-            if (hasTip) ...[
-              const Spacer(),
-              Text(description).textStyle(
-                context.textTheme.bodySm.regular,
-                color: context.colors.textSecondary,
-              ),
-            ],
-            if (actionText == null) const Spacer(),
+            if (!hasAction && !hasTip && !hasError) const Spacer(),
           ],
         ),
       ),
@@ -78,5 +87,26 @@ class EmptyPage extends StatelessWidget {
     return text.split(' ').map((word) {
       return word[0].toUpperCase() + word.substring(1);
     }).join(' ');
+  }
+
+  Widget buildInfo(BuildContext context, SvgGenImage icon, String message) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        icon.svg(
+          width: AppDimens.iconMd,
+          height: AppDimens.iconMd,
+          colorFilter: ColorFilter.mode(
+            context.colors.textSecondary,
+            AppMisc.blendMode,
+          ),
+        ),
+        const HSpace(AppDimens.sm),
+        Text(message).textStyle(
+          context.textTheme.bodySm.regular,
+          color: context.colors.textSecondary,
+        ),
+      ],
+    );
   }
 }

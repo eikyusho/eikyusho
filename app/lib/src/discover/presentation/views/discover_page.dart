@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
-import 'package:app/common/data/views/empty_page.dart';
+import 'package:app/common/presentation/views/empty_page.dart';
 import 'package:app/config/app.dart';
 import 'package:app/src/discover/presentation/cubits/cubits.dart';
 import 'package:app/src/discover/presentation/widgets/widgets.dart';
@@ -28,22 +28,34 @@ class DiscoverView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void showBottomSheet() {
+      final cubit = context.read<DiscoverCubit>();
+
+      final state = cubit.state;
+
+      if (state is DiscoverEmpty) return;
+
+      if (state is DiscoverError) {
+        if (state.sources == null) {
+          return;
+        }
+      }
+
+      context.showBottomSheet(
+        isDismissable: cubit.state is! DiscoverLoading,
+        BlocProvider.value(
+          value: cubit,
+          child: const SelectSourceBottomSheet(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: MainAppBar(
         showLogo: true,
         showNotificationButton: true,
         actionIcon: Assets.icons.puzzlePieceBold,
-        actionButton: () {
-          final cubit = context.read<DiscoverCubit>();
-
-          context.showBottomSheet(
-            isDismissable: cubit.state is! DiscoverLoading,
-            BlocProvider(
-              create: (_) => cubit,
-              child: const SelectSourceBottomSheet(),
-            ),
-          );
-        },
+        actionButton: showBottomSheet,
       ),
       extendBodyBehindAppBar: true,
       body: BlocBuilder<DiscoverCubit, DiscoverState>(
@@ -55,7 +67,7 @@ class DiscoverView extends StatelessWidget {
 
           return switch (state) {
             DiscoverLoading() => const Loading(),
-            DiscoverError() => throw UnimplementedError(),
+            DiscoverError() => buildErrorPage(state.error),
             DiscoverEmpty() => buildEmptyPage(context),
             DiscoverUninitialized() => buildUninitializedPage(context),
             DiscoverLoaded() => buildPage(),
@@ -71,7 +83,7 @@ class DiscoverView extends StatelessWidget {
         final padding = context.screenPadding;
 
         if (state is DiscoverContentError) {
-          throw UnimplementedError();
+          return buildContentErrorPage(context);
         }
 
         return SingleChildScrollView(
@@ -107,13 +119,36 @@ class DiscoverView extends StatelessWidget {
 
   Widget buildUninitializedPage(BuildContext context) {
     return EmptyPage(
-      image: Assets.images.emptyList,
+      image: Assets.images.error,
       message: AppStrings.emptyStateNoSelectedSource,
       description: AppStrings.emptyStateDescriptionNoSelectedSource,
       actionText: AppStrings.buttonSelectSource,
       onAction: () {
-        context.pushNamed(AppRoute.extensions);
+        context.showBottomSheet(
+          BlocProvider(
+            create: (_) => context.read<DiscoverCubit>(),
+            child: const SelectSourceBottomSheet(),
+          ),
+        );
       },
+    );
+  }
+
+  Widget buildErrorPage(Exception error) {
+    return EmptyPage(
+      image: Assets.images.wentWrong,
+      message: AppStrings.emptyStateError,
+      description: AppStrings.emptyStateDescriptionError,
+      error: error.toString(),
+    );
+  }
+
+  Widget buildContentErrorPage(BuildContext context) {
+    return EmptyPage(
+      image: Assets.images.wentWrong,
+      message: AppStrings.emptyStateErrorLoading,
+      description: AppStrings.emptyStateDescriptionErrorLoading,
+      tip: AppStrings.tipDoubleTapDiscover,
     );
   }
 }

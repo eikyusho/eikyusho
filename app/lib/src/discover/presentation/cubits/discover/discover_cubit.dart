@@ -15,6 +15,8 @@ class DiscoverCubit extends Cubit<DiscoverState> {
   final ExtensionsRepository _extensionsRepository;
   final DiscoverRepository _discoverRepository;
 
+  List<AvailableExtension>? sources;
+
   Future<void> getSources({bool withLoading = false}) async {
     if (withLoading) emit(const DiscoverLoading());
 
@@ -22,6 +24,8 @@ class DiscoverCubit extends Cubit<DiscoverState> {
       final sources = await _extensionsRepository.getSources(
         filter: SourcesFilter.onlyDiscover,
       );
+
+      if (sources.isNotEmpty) this.sources = sources;
 
       if (sources.isEmpty) {
         return emit(const DiscoverEmpty());
@@ -34,8 +38,8 @@ class DiscoverCubit extends Cubit<DiscoverState> {
       }
 
       emit(DiscoverLoaded(sources, selected));
-    } catch (e) {
-      emit(const DiscoverError('TODO: DB, Prefs, Storage'));
+    } on Exception catch (e) {
+      emit(DiscoverError(e, sources));
     }
   }
 
@@ -52,7 +56,7 @@ class DiscoverCubit extends Cubit<DiscoverState> {
     try {
       await _discoverRepository.setDiscoverSource(source.uuid);
     } on PreferencesException catch (e) {
-      emit(DiscoverError('TODO: $e'));
+      emit(DiscoverError(e, sources));
     }
 
     await getSources(withLoading: true);

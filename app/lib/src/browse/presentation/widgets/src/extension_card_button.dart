@@ -42,8 +42,8 @@ class ExtensionCardButton extends StatelessWidget {
         iconColor: context.colors.textAuxiliary,
         color: AppColors.transparent,
         onPressed: () => context.showBottomSheet(
-          BlocProvider(
-            create: (_) => browseCubit,
+          BlocProvider.value(
+            value: browseCubit,
             child: ExtensionOptionsBottomSheet(
               extension: extension as InstalledExtension,
             ),

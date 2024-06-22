@@ -358,6 +358,9 @@ class $AssetsImagesGen {
   AssetGenImage get emptyList =>
       const AssetGenImage('assets/images/empty-list.png');
 
+  /// File path: assets/images/error.png
+  AssetGenImage get error => const AssetGenImage('assets/images/error.png');
+
   /// File path: assets/images/network.png
   AssetGenImage get network => const AssetGenImage('assets/images/network.png');
 
@@ -370,8 +373,15 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/went-wrong.png');
 
   /// List of all assets
-  List<dynamic> get values =>
-      [eikyushoLogo, emptyCollection, emptyList, network, notFound, wentWrong];
+  List<dynamic> get values => [
+        eikyushoLogo,
+        emptyCollection,
+        emptyList,
+        error,
+        network,
+        notFound,
+        wentWrong
+      ];
 }
 
 class Assets {

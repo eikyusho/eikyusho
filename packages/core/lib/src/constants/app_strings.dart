@@ -37,6 +37,8 @@ final class AppStrings {
   static String buttonCancel = 'Cancel';
   static String buttonConfirm = 'Confirm';
   static String buttonSelectSource = 'Select Source';
+  static String buttonHelp = 'Help';
+  static String buttonRetry = 'Retry';
 
   /// Label
   static String labelVersion = 'Version';
@@ -60,4 +62,17 @@ final class AppStrings {
   static String emptyStateNoSelectedSource = 'No source selected';
   static String emptyStateDescriptionNoSelectedSource =
       'Select a source to see the discover page.';
+
+  /// Empty State Error
+  static String emptyStateError = 'Something went wrong';
+  static String emptyStateDescriptionError =
+      'An error occurred while loading the page.';
+
+  static String emptyStateErrorLoading = 'Loading error';
+  static String emptyStateDescriptionErrorLoading =
+      "Couldn't establish a connection.";
+
+  /// Tips
+  static String tipDoubleTapDiscover =
+      'Double tap "Discover" to see the WebView.';
 }

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -50,10 +49,6 @@ Future<void> bootstrap(Widget Function() builder) async {
       DeviceOrientation.portraitDown,
     ],
   );
-
-  if (Platform.isAndroid) {
-    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  }
 
   runApp(builder());
 }

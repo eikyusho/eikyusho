@@ -10,13 +10,15 @@ class ActionButton extends StatelessWidget {
     required this.icon,
     required this.text,
     required this.onTap,
+    this.center = false,
     this.dangerAction = false,
     super.key,
   });
 
-  final SvgGenImage icon;
+  final SvgGenImage? icon;
   final String text;
   final bool dangerAction;
+  final bool center;
   final VoidCallback onTap;
 
   @override
@@ -33,15 +35,18 @@ class ActionButton extends StatelessWidget {
           boxShadow: context.shadows.sm,
         ),
         child: Row(
+          mainAxisAlignment:
+              center ? MainAxisAlignment.center : MainAxisAlignment.start,
           children: [
-            icon.svg(
-              colorFilter: ColorFilter.mode(
-                _getColor(context, danger: dangerAction),
-                AppMisc.blendMode,
+            if (icon != null)
+              icon!.svg(
+                colorFilter: ColorFilter.mode(
+                  _getColor(context, danger: dangerAction),
+                  AppMisc.blendMode,
+                ),
+                height: AppDimens.iconLg,
+                width: AppDimens.iconLg,
               ),
-              height: AppDimens.iconLg,
-              width: AppDimens.iconLg,
-            ),
             Text(text).textStyle(
               context.textTheme.bodyLg.medium,
               color: _getColor(

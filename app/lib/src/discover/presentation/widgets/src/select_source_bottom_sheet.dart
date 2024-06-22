@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
-import 'package:app/src/discover/presentation/cubits/discover_cubit.dart';
+import 'package:app/src/discover/presentation/cubits/cubits.dart';
 
 class SelectSourceBottomSheet extends StatelessWidget {
   const SelectSourceBottomSheet({super.key});
@@ -17,12 +17,11 @@ class SelectSourceBottomSheet extends StatelessWidget {
         SizedBox(
           height: 200,
           child: BlocBuilder<DiscoverCubit, DiscoverState>(
-            bloc: context.read<DiscoverCubit>()..getSources(),
             builder: (context, state) {
               return switch (state) {
                 DiscoverLoading() => const Loading(),
-                DiscoverError() => throw UnimplementedError(),
-                DiscoverEmpty() => const Text('Empty'),
+                DiscoverError() => buildListView(state.sources!, null),
+                DiscoverEmpty() => const SizedBox(),
                 DiscoverUninitialized() => buildListView(state.sources, null),
                 DiscoverLoaded() => buildListView(
                     state.sources,

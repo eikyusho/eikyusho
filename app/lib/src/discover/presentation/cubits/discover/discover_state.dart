@@ -38,10 +38,11 @@ final class DiscoverLoaded extends DiscoverState {
 }
 
 final class DiscoverError extends DiscoverState {
-  const DiscoverError(this.message);
+  const DiscoverError(this.error, this.sources);
 
-  final String message;
+  final Exception error;
+  final List<AvailableExtension>? sources;
 
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [error, sources];
 }

@@ -27,14 +27,14 @@ dependencies:
 
 
   # * Routing
-  auto_route: ^8.2.0
+  go_router: ^14.2.0
 
   # * State Management
-  flutter_bloc: ^8.1.5
+  flutter_bloc: ^8.1.6
 
   # * Dependency Injection
   get_it: ^7.7.0
-  injectable: ^2.4.1
+  injectable: ^2.4.2
 
   # * Dev Utility
   equatable: ^2.0.5 # ? For value equality
@@ -47,7 +47,6 @@ dev_dependencies:
   # ! Code Generation
   build_runner: any
   # * Generator Packages
-  auto_route_generator: ^8.0.0 # ? For AutoRoute
   injectable_generator: ^2.6.1 # ? For Injectable
 
   # ! Testing
@@ -70,6 +69,7 @@ flutter:
     - family: Gotham
       fonts:
         - asset: ../packages/resources/assets/fonts/gotham-rnd-book.otf
+          weight: 400
         - asset: ../packages/resources/assets/fonts/gotham-rnd-medium.otf
           weight: 500
         - asset: ../packages/resources/assets/fonts/gotham-rnd-bold.otf

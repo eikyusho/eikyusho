@@ -1,6 +1,7 @@
 export './extensions/class_extensions.dart';
 export './extensions/context_extensions.dart';
 export './extensions/widget_extensions.dart';
+export './helpers/formatter.dart';
 export './helpers/layout.dart';
 export './helpers/logger.dart';
 export './helpers/path.dart';

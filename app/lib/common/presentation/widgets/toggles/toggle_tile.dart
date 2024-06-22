@@ -4,25 +4,22 @@ import 'package:core/core.dart';
 
 import 'package:app/common/presentation/widgets/toggles/toggle.dart';
 
-class ToggleTile extends StatefulWidget {
+class ToggleTile extends StatelessWidget {
   const ToggleTile({
     required this.text,
+    required this.value,
     required this.onTap,
     super.key,
   });
 
   final String text;
-  final VoidCallback onTap;
-
-  @override
-  State<ToggleTile> createState() => _ToggleButtonState();
-}
-
-class _ToggleButtonState extends State<ToggleTile> {
-  bool isEnable = false;
+  final bool value;
+  final ValueChanged<bool> onTap;
 
   @override
   Widget build(BuildContext context) {
+    final isEnabled = ValueNotifier(value);
+
     return Container(
       width: double.infinity,
       height: AppDimens.buttonLg,
@@ -38,12 +35,23 @@ class _ToggleButtonState extends State<ToggleTile> {
       ),
       child: Row(
         children: [
-          Text(widget.text).textStyle(
+          Text(text).textStyle(
             context.textTheme.bodyMd.medium,
             color: context.colors.textPrimary,
           ),
           const Spacer(),
-          Toggle(value: false, onChanged: (value) {}),
+          ValueListenableBuilder(
+            valueListenable: isEnabled,
+            builder: (context, value, child) {
+              return Toggle(
+                value: value,
+                onChanged: (value) {
+                  isEnabled.value = value;
+                  onTap(value);
+                },
+              );
+            },
+          ),
         ],
       ),
     );

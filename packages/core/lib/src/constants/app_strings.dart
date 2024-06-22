@@ -16,6 +16,7 @@ final class AppStrings {
   // Section Title
   static String sectionTitlePendingUpdates = 'Pending Updates';
   static String sectionTitleAvailableExtensions = 'Available Extensions';
+  static String sectionTitleChapters = 'Chapters';
 
   /// Settings Options Titles
   static String settingsOptionsTitleProfile = 'Profile';
@@ -35,10 +36,16 @@ final class AppStrings {
   static String buttonUninstallExtension = 'Uninstall Extension';
   static String buttonCancel = 'Cancel';
   static String buttonConfirm = 'Confirm';
+  static String buttonSelectSource = 'Select Source';
+  static String buttonHelp = 'Help';
+  static String buttonRetry = 'Retry';
 
   /// Label
   static String labelVersion = 'Version';
   static String labelLanguage = 'Language';
+  static String labelChapters = 'Chapters';
+  static String labelStatus = 'Status';
+  static String labelViews = 'Views';
 
   /// Toggle
   static String toggleActiveExtension = 'Active';
@@ -47,4 +54,25 @@ final class AppStrings {
   static String dialogUninstallExtension = 'Uninstall Extension';
   static String dialogDescriptionUninstallExtension =
       'Are you sure you want to uninstall this extension?';
+
+  /// Empty State
+  static String emptyStateNoSources = 'No sources available';
+  static String emptyStateDescriptionNoSources =
+      'You have not added any sources yet.';
+  static String emptyStateNoSelectedSource = 'No source selected';
+  static String emptyStateDescriptionNoSelectedSource =
+      'Select a source to see the discover page.';
+
+  /// Empty State Error
+  static String emptyStateError = 'Something went wrong';
+  static String emptyStateDescriptionError =
+      'An error occurred while loading the page.';
+
+  static String emptyStateErrorLoading = 'Loading error';
+  static String emptyStateDescriptionErrorLoading =
+      "Couldn't establish a connection.";
+
+  /// Tips
+  static String tipDoubleTapDiscover =
+      'Double tap "Discover" to see the WebView.';
 }

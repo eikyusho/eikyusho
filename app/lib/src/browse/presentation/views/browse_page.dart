@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -23,23 +23,14 @@ class BrowsePageAppBar extends MainAppBar {
       showNotificationButton: true,
       actionIcon: Assets.icons.planetBold,
       actionButton: () {
-        context.router.push(const ExtensionsRoute());
+        context.pushNamed(AppRoute.settings);
       },
     );
   }
 }
 
-@RoutePage()
-class BrowsePage extends StatelessWidget implements AutoRouteWrapper {
+class BrowsePage extends StatelessWidget {
   const BrowsePage({super.key});
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (context) => browseCubit..getSources(),
-      child: this,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

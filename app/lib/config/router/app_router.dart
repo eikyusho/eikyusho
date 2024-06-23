@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
+import 'package:app/common/common.dart';
 import 'package:app/config/router/app_tabs.dart';
 import 'package:app/src/browse/presentation/presentation.dart';
 import 'package:app/src/discover/presentation/presentation.dart';
@@ -45,6 +46,18 @@ class AppNavigation {
                 builder: (context, state) {
                   return const DiscoverPage();
                 },
+                routes: [
+                  RouteBuilder(
+                    path: _Route.discoverList.path,
+                    name: _Route.discoverList.name,
+                    builder: (context, state) {
+                      return DiscoverListPage(
+                        title: state.uri.queryParameters['title']!,
+                        novels: state.extra! as List<Novel>,
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

@@ -6,7 +6,7 @@ class NovelCard extends StatelessWidget {
   const NovelCard({required this.cover, required this.title, super.key});
 
   final ImageProvider cover;
-  final Text title;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class NovelCard extends StatelessWidget {
         Flexible(
           flex: 0,
           child: SizedBox(
-            child: title.textStyle(
+            child: Text('$title\n', maxLines: 2).textStyle(
               context.textTheme.bodySm.medium.apply(
                 overflow: TextOverflow.ellipsis,
               ),

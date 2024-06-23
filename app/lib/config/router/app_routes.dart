@@ -7,6 +7,7 @@ enum _Route {
   browse('/browse', name: 'Browse'),
   settings('/settings', name: 'Settings'),
   extensions('extensions', name: 'Extensions'),
+  discoverList('discover-list', name: 'DiscoverList'),
   novel('/novel', name: 'Novel');
 
   const _Route(this.path, {required this.name});
@@ -17,6 +18,7 @@ enum _Route {
 
 class AppRoute {
   static const discover = _Route.discover;
+  static String discoverList = _Route.discoverList.name;
 
   static String library = _Route.library.name;
   static String search = _Route.search.name;

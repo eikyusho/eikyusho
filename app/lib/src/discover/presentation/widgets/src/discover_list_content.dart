@@ -48,10 +48,7 @@ class DiscoverListContent extends StatelessWidget {
       itemBuilder: (context, index) {
         final novel = novels[index];
         return NovelCard(
-          title: Text(
-            '${novel.title}\n',
-            maxLines: AppMisc.novelTitleMaxLines,
-          ),
+          title: novel.title,
           cover: NetworkImage(novel.cover),
         );
       },

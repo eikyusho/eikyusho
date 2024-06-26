@@ -17,7 +17,11 @@ final class AppConstants {
 
   // * || Paths
   static const String sourcesPath = 'sources';
+}
 
-  // * || Keys
-  static const String discoverSelectedSourceKey = 'discoverSelectedSource';
+class StorageKeys {
+  const StorageKeys._();
+
+  static const String initialLocation = 'initial_location';
+  static const String discoverSelectedSource = 'discover_selected_source';
 }

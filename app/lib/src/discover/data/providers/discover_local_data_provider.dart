@@ -15,7 +15,7 @@ class DiscoverLocalDataProvider {
 
   Future<void> setDiscoverSource(String uuid) async {
     try {
-      await _prefsManager.save(AppConstants.discoverSelectedSourceKey, uuid);
+      await _prefsManager.save(StorageKeys.discoverSelectedSource, uuid);
     } catch (e) {
       throw PreferencesException(e.toString());
     }
@@ -24,7 +24,7 @@ class DiscoverLocalDataProvider {
   Future<String?> getSelectedSourceIdentifier() async {
     try {
       return await _prefsManager.read<String>(
-        AppConstants.discoverSelectedSourceKey,
+        StorageKeys.discoverSelectedSource,
       );
     } catch (e) {
       throw PreferencesException(e.toString());

@@ -23,11 +23,28 @@ class AppRouter extends _$AppRouter {
           initial: true,
           page: AppTabsRouterRoute.page,
           children: [
-            AutoRoute(page: DiscoverRoute.page, initial: isDiscoverInitial),
+            AutoRoute(
+              page: EmptyDiscoverRoute.page,
+              initial: isDiscoverInitial,
+              children: [
+                AutoRoute(page: DiscoverRoute.page, initial: true),
+                AutoRoute(page: DiscoverListRoute.page),
+              ],
+            ),
             AutoRoute(page: BrowseRoute.page),
           ],
         ),
         AutoRoute(page: ExtensionsRoute.page),
         AutoRoute(page: NovelRoute.page),
       ];
+}
+
+@RoutePage()
+class EmptyDiscoverPage extends StatelessWidget {
+  const EmptyDiscoverPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const AutoRouter();
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:app/config/app.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
@@ -18,6 +19,14 @@ class DiscoverMostPopularListView extends StatelessWidget {
       children: [
         DiscoverListHeader(
           title: Text(AppStrings.discoverListMostPopularTitle),
+          onPressed: (state) {
+            context.router.push(
+              DiscoverListRoute(
+                novels: state.mostPopular,
+                title: AppStrings.discoverListMostPopularTitle,
+              ),
+            );
+          },
         ),
         BlocBuilder<DiscoverContentCubit, DiscoverContentState>(
           builder: (context, state) {
@@ -46,6 +55,14 @@ class DiscoverRecentlyUpdatedListView extends StatelessWidget {
       children: [
         DiscoverListHeader(
           title: Text(AppStrings.discoverListRecentlyUpdatedTitle),
+          onPressed: (state) {
+            context.router.navigate(
+              DiscoverListRoute(
+                novels: state.recentlyUpdated,
+                title: AppStrings.discoverListRecentlyUpdatedTitle,
+              ),
+            );
+          },
         ),
         BlocBuilder<DiscoverContentCubit, DiscoverContentState>(
           builder: (context, state) {

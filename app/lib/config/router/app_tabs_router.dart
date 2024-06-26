@@ -14,11 +14,8 @@ class AppTabsRouterPage extends StatelessWidget {
     return const AutoTabsScaffold(
       animationCurve: Curves.easeInOut,
       routes: [
-        DiscoverRoute(),
-        DiscoverRoute(),
-        DiscoverRoute(),
+        EmptyDiscoverRoute(),
         BrowseRoute(),
-        DiscoverRoute(),
       ],
       extendBody: true,
       bottomNavigationBuilder: _bottomNavigationBuilder,

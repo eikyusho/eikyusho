@@ -27,10 +27,27 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BrowsePage(),
       );
     },
+    DiscoverListRoute.name: (routeData) {
+      final args = routeData.argsAs<DiscoverListRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DiscoverListPage(
+          novels: args.novels,
+          title: args.title,
+          key: args.key,
+        ),
+      );
+    },
     DiscoverRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: WrappedRoute(child: const DiscoverPage()),
+      );
+    },
+    EmptyDiscoverRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const EmptyDiscoverPage(),
       );
     },
     ExtensionsRoute.name: (routeData) {
@@ -81,6 +98,49 @@ class BrowseRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [DiscoverListPage]
+class DiscoverListRoute extends PageRouteInfo<DiscoverListRouteArgs> {
+  DiscoverListRoute({
+    required List<Novel> novels,
+    required String title,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DiscoverListRoute.name,
+          args: DiscoverListRouteArgs(
+            novels: novels,
+            title: title,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'DiscoverListRoute';
+
+  static const PageInfo<DiscoverListRouteArgs> page =
+      PageInfo<DiscoverListRouteArgs>(name);
+}
+
+class DiscoverListRouteArgs {
+  const DiscoverListRouteArgs({
+    required this.novels,
+    required this.title,
+    this.key,
+  });
+
+  final List<Novel> novels;
+
+  final String title;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DiscoverListRouteArgs{novels: $novels, title: $title, key: $key}';
+  }
+}
+
+/// generated route for
 /// [DiscoverPage]
 class DiscoverRoute extends PageRouteInfo<void> {
   const DiscoverRoute({List<PageRouteInfo>? children})
@@ -90,6 +150,20 @@ class DiscoverRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'DiscoverRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [EmptyDiscoverPage]
+class EmptyDiscoverRoute extends PageRouteInfo<void> {
+  const EmptyDiscoverRoute({List<PageRouteInfo>? children})
+      : super(
+          EmptyDiscoverRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EmptyDiscoverRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

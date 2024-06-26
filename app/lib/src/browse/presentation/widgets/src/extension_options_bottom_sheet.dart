@@ -7,7 +7,6 @@ import 'package:resources/resources.dart';
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/presentation.dart';
-
 import 'package:app/src/discover/presentation/presentation.dart';
 
 class ExtensionOptionsBottomSheet extends StatelessWidget {

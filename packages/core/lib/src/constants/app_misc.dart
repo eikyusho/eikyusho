@@ -28,7 +28,4 @@ final class AppMisc {
 
   /// BlendMode: srcIn
   static const BlendMode blendMode = BlendMode.srcIn;
-
-  /// Novel title max lines
-  static const int novelTitleMaxLines = 2;
 }

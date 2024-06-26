@@ -23,8 +23,6 @@ class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    final padding = context.screenPaddingWithAppBar;
-
     bool canShowBottomSheet(DiscoverState state) {
       if (state is DiscoverEmpty) return false;
 
@@ -64,7 +62,7 @@ class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
 
           return switch (state) {
             DiscoverLoading() => const Loading(),
-            DiscoverError() => throw UnimplementedError(),
+            DiscoverError() => buildErrorPage(state.error),
             DiscoverEmpty() => buildEmptyPage(context),
             DiscoverUninitialized() => buildUninitializedPage(context),
             DiscoverLoaded() => buildPage(),
@@ -80,7 +78,7 @@ class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
         final padding = context.screenPadding;
 
         if (state is DiscoverContentError) {
-          throw UnimplementedError();
+          return buildContentErrorPage(context);
         }
 
         return SingleChildScrollView(

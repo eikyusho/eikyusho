@@ -20,8 +20,8 @@ class SelectSourceBottomSheet extends StatelessWidget {
             builder: (context, state) {
               return switch (state) {
                 DiscoverLoading() => const Loading(),
-                DiscoverError() => throw UnimplementedError(),
-                DiscoverEmpty() => const Text('Empty'),
+                DiscoverError() => buildListView(state.sources!, null),
+                DiscoverEmpty() => const SizedBox(),
                 DiscoverUninitialized() => buildListView(state.sources, null),
                 DiscoverLoaded() => buildListView(
                     state.sources,

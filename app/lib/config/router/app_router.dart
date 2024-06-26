@@ -18,7 +18,8 @@ class AppRouter extends _$AppRouter {
   final isDiscoverInitial = true;
 
   @override
-  List<AutoRoute> get routes => [
+  List<AutoRoute> get routes =>
+      [
         AutoRoute(
           initial: true,
           page: AppTabsRouterRoute.page,
@@ -39,12 +40,3 @@ class AppRouter extends _$AppRouter {
       ];
 }
 
-@RoutePage()
-class EmptyDiscoverPage extends StatelessWidget {
-  const EmptyDiscoverPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const AutoRouter();
-  }
-}

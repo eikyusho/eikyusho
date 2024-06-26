@@ -10,8 +10,8 @@ import 'package:app/src/discover/presentation/cubits/cubits.dart';
 import 'package:app/src/discover/presentation/widgets/widgets.dart';
 
 @RoutePage()
-class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
-  const DiscoverPage({super.key});
+class EmptyDiscoverPage extends StatelessWidget implements AutoRouteWrapper {
+  const EmptyDiscoverPage({super.key});
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -20,6 +20,16 @@ class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
       child: this,
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return const AutoRouter();
+  }
+}
+
+@RoutePage()
+class DiscoverPage extends StatelessWidget {
+  const DiscoverPage({super.key});
 
   @override
   Widget build(BuildContext context) {

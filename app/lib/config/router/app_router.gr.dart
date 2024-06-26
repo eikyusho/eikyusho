@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BrowsePage(),
       );
     },
+    ChapterRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ChapterPage(),
+      );
+    },
     DiscoverListRoute.name: (routeData) {
       final args = routeData.argsAs<DiscoverListRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -60,11 +66,10 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<NovelRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(
-            child: NovelPage(
+        child: NovelPage(
           novel: args.novel,
           key: args.key,
-        )),
+        ),
       );
     },
   };
@@ -94,6 +99,20 @@ class BrowseRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'BrowseRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ChapterPage]
+class ChapterRoute extends PageRouteInfo<void> {
+  const ChapterRoute({List<PageRouteInfo>? children})
+      : super(
+          ChapterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ChapterRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

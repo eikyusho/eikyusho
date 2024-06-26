@@ -5,8 +5,8 @@ import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 
-class NovelDetails extends StatelessWidget {
-  const NovelDetails({super.key});
+class NovelAdditionalDetails extends StatelessWidget {
+  const NovelAdditionalDetails({super.key});
 
   @override
   Widget build(BuildContext context) {

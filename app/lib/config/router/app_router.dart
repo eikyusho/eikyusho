@@ -18,8 +18,7 @@ class AppRouter extends _$AppRouter {
   final isDiscoverInitial = true;
 
   @override
-  List<AutoRoute> get routes =>
-      [
+  List<AutoRoute> get routes => [
         AutoRoute(
           initial: true,
           page: AppTabsRouterRoute.page,
@@ -37,6 +36,6 @@ class AppRouter extends _$AppRouter {
         ),
         AutoRoute(page: ExtensionsRoute.page),
         AutoRoute(page: NovelRoute.page),
+        AutoRoute(page: ChapterRoute.page),
       ];
 }
-

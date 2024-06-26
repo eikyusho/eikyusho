@@ -1,5 +1,6 @@
 //GENERATED BARREL FILE
-export './widgets/dialogs/dialog.dart';
+export 'views/empty_page.dart';
+export 'widgets/dialogs/dialog.dart';
 export 'widgets/buttons/action_button.dart';
 export 'widgets/buttons/button.dart';
 export 'widgets/buttons/icon_button.dart';

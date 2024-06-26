@@ -36,6 +36,7 @@ final class AppStrings {
   static String buttonUninstallExtension = 'Uninstall Extension';
   static String buttonCancel = 'Cancel';
   static String buttonConfirm = 'Confirm';
+  static String buttonSelectSource = 'Select Source';
 
   /// Label
   static String labelVersion = 'Version';
@@ -51,4 +52,28 @@ final class AppStrings {
   static String dialogUninstallExtension = 'Uninstall Extension';
   static String dialogDescriptionUninstallExtension =
       'Are you sure you want to uninstall this extension?';
+
+  /// Empty State
+  static String emptyStateNoSources = 'No sources available';
+  static String emptyStateDescriptionNoSources =
+      'You have not added any sources yet.';
+  static String emptyStateNoSelectedSource = 'No source selected';
+  static String emptyStateDescriptionNoSelectedSource =
+      'Select a source to see the discover page.';
+
+  /// Empty State Error
+  static String emptyStateError = 'Something went wrong';
+  static String emptyStateDescriptionError =
+      'An error occurred while loading the page.';
+
+  static String emptyStateDescriptionErrorSources =
+      'An error occurred while loading the sources.';
+
+  static String emptyStateErrorLoading = 'Loading error';
+  static String emptyStateDescriptionErrorLoading =
+      "Couldn't establish a connection.";
+
+  /// Tips
+  static String tipDoubleTapDiscover =
+      'Double tap "Discover" to see the WebView.';
 }

@@ -1,6 +1,6 @@
+import 'package:app/config/app.dart';
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
@@ -55,27 +55,21 @@ class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
         actionButton: showBottomSheet,
       ),
       extendBodyBehindAppBar: true,
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          top: padding.top + AppDimens.$2xl,
-          bottom: padding.bottom + AppDimens.$2xl,
-        ),
-        child: BlocBuilder<DiscoverCubit, DiscoverState>(
-          buildWhen: (previous, current) => previous != current,
-          builder: (context, state) {
-            if (state is DiscoverLoaded) {
-              context.read<DiscoverContentCubit>().load(state.selected);
-            }
+      body: BlocBuilder<DiscoverCubit, DiscoverState>(
+        buildWhen: (previous, current) => previous != current,
+        builder: (context, state) {
+          if (state is DiscoverLoaded) {
+            context.read<DiscoverContentCubit>().load(state.selected);
+          }
 
-            return switch (state) {
-              DiscoverLoading() => const Loading(),
-              DiscoverError() => throw UnimplementedError(),
-              DiscoverEmpty() => const Text('Empty'),
-              DiscoverUninitialized() => const Text('Uninitialized'),
-              DiscoverLoaded() => buildPage(),
-            };
-          },
-        ),
+          return switch (state) {
+            DiscoverLoading() => const Loading(),
+            DiscoverError() => throw UnimplementedError(),
+            DiscoverEmpty() => buildEmptyPage(context),
+            DiscoverUninitialized() => buildUninitializedPage(context),
+            DiscoverLoaded() => buildPage(),
+          };
+        },
       ),
     );
   }
@@ -83,20 +77,75 @@ class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
   Widget buildPage() {
     return BlocBuilder<DiscoverContentCubit, DiscoverContentState>(
       builder: (context, state) {
+        final padding = context.screenPadding;
+
         if (state is DiscoverContentError) {
           throw UnimplementedError();
         }
 
-        return const Column(
-          children: [
-            DiscoverSpotlights(),
-            VSpace(AppDimens.$4xl),
-            DiscoverMostPopularListView(),
-            VSpace(AppDimens.$2xl),
-            DiscoverRecentlyUpdatedListView(),
-          ],
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            top: padding.top + AppDimens.$2xl,
+            bottom: padding.bottom + AppDimens.$2xl,
+          ),
+          child: const Column(
+            children: [
+              DiscoverSpotlights(),
+              VSpace(AppDimens.$4xl),
+              DiscoverMostPopularListView(),
+              VSpace(AppDimens.$2xl),
+              DiscoverRecentlyUpdatedListView(),
+            ],
+          ),
         );
       },
+    );
+  }
+
+  Widget buildEmptyPage(BuildContext context) {
+    return EmptyPage(
+      image: Assets.images.emptyList,
+      message: AppStrings.emptyStateNoSources,
+      description: AppStrings.emptyStateDescriptionNoSources,
+      actionText: AppStrings.pageBrowseTitle,
+      onAction: () {
+        context.router.push(const ExtensionsRoute());
+      },
+    );
+  }
+
+  Widget buildUninitializedPage(BuildContext context) {
+    return EmptyPage(
+      image: Assets.images.error,
+      message: AppStrings.emptyStateNoSelectedSource,
+      description: AppStrings.emptyStateDescriptionNoSelectedSource,
+      actionText: AppStrings.buttonSelectSource,
+      onAction: () {
+        context.showBottomSheet(
+          BlocProvider(
+            create: (_) => context.read<DiscoverCubit>(),
+            child: const SelectSourceBottomSheet(),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget buildErrorPage(Exception error) {
+    return EmptyPage(
+      image: Assets.images.wentWrong,
+      message: AppStrings.emptyStateError,
+      description: AppStrings.emptyStateDescriptionError,
+      error: error,
+    );
+  }
+
+  Widget buildContentErrorPage(BuildContext context) {
+    return EmptyPage(
+      image: Assets.images.wentWrong,
+      message: AppStrings.emptyStateErrorLoading,
+      description: AppStrings.emptyStateDescriptionErrorLoading,
+      tip: AppStrings.tipDoubleTapDiscover,
     );
   }
 }

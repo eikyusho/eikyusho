@@ -1,29 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/config/app.dart';
-import 'package:app/injector/injector.dart';
-import 'package:app/src/browse/presentation/cubits/browse/browse_cubit.dart';
+import 'package:app/src/browse/presentation/cubits/cubits.dart';
 import 'package:app/src/browse/presentation/widgets/widgets.dart';
 
-final browseCubit = getIt<BrowseCubit>();
-
 @RoutePage()
-class BrowsePage extends StatelessWidget implements AutoRouteWrapper {
+class BrowsePage extends StatelessWidget {
   const BrowsePage({super.key});
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (context) => browseCubit..getSources(),
-      child: this,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +28,12 @@ class BrowsePage extends StatelessWidget implements AutoRouteWrapper {
       ),
       extendBodyBehindAppBar: true,
       body: BlocBuilder<BrowseCubit, BrowseState>(
+        bloc: context.read<BrowseCubit>()..getSources(),
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
           if (state is BrowseLoading) return const Loading();
 
-          if (state is BrowseFailure) throw UnimplementedError();
+          if (state is BrowseError) throw UnimplementedError();
 
           final extensions = (state as BrowseLoaded).sources;
 

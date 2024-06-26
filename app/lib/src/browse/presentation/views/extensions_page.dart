@@ -37,8 +37,8 @@ class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
 
     return PopScope(
       onPopInvoked: (isPop) {
-        browseCubit.getSources();
         context.read<DiscoverCubit>().getSources();
+        context.read<BrowseCubit>().getSources();
       },
       child: Scaffold(
         appBar: MainAppBar(

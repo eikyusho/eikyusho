@@ -24,7 +24,7 @@ abstract class _$AppRouter extends RootStackRouter {
     BrowseRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(child: const BrowsePage()),
+        child: const BrowsePage(),
       );
     },
     DiscoverRoute.name: (routeData) {

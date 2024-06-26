@@ -7,7 +7,6 @@ import 'package:resources/resources.dart';
 import 'package:app/common/common.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/cubits/cubits.dart';
-import 'package:app/src/browse/presentation/views/browse_page.dart';
 import 'package:app/src/browse/presentation/widgets/widgets.dart';
 
 final class _Icons {
@@ -43,7 +42,7 @@ class ExtensionCardButton extends StatelessWidget {
         color: AppColors.transparent,
         onPressed: () => context.showBottomSheet(
           BlocProvider(
-            create: (_) => browseCubit,
+            create: (_) => context.read<BrowseCubit>(),
             child: ExtensionOptionsBottomSheet(
               extension: extension as InstalledExtension,
             ),

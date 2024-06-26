@@ -1,12 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:app/src/browse/data/data.dart';
 
 part 'browse_state.dart';
 
-@injectable
 class BrowseCubit extends Cubit<BrowseState> {
   BrowseCubit(this._repository) : super(const BrowseLoading());
 
@@ -23,13 +21,13 @@ class BrowseCubit extends Cubit<BrowseState> {
   }
 
   Future<void> enableExtension(InstalledExtension extension) async {
-    _repository.enableExtension(extension.id);
+    await _repository.enableExtension(extension.id);
 
     await getSources();
   }
 
   Future<void> disableExtension(InstalledExtension extension) async {
-    _repository.disableExtension(extension.id);
+    await _repository.disableExtension(extension.id);
 
     await getSources();
   }

@@ -14,7 +14,7 @@ class BrowseCubit extends Cubit<BrowseState> {
     emit(const BrowseLoading());
 
     final sources = await _repository.getSources(
-      filter: SourcesFilter.onlyEnabled,
+      filter: SourcesFilter.none,
     );
 
     emit(BrowseLoaded(sources));

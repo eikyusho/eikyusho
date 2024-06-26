@@ -15,7 +15,8 @@ class BrowsePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final padding = context.screenPadding;
+    final showDisabled = ValueNotifier(false);
+    final padding = context.screenPaddingWithAppBar;
 
     return Scaffold(
       appBar: MainAppBar(
@@ -27,36 +28,87 @@ class BrowsePage extends StatelessWidget {
         },
       ),
       extendBodyBehindAppBar: true,
-      body: BlocBuilder<BrowseCubit, BrowseState>(
-        bloc: context.read<BrowseCubit>()..getSources(),
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          if (state is BrowseLoading) return const Loading();
+      body: Padding(
+        padding: EdgeInsets.only(
+          top: padding.top + AppDimens.$2xl,
+          bottom: padding.bottom + AppDimens.$2xl,
+          left: AppDimens.defaultHorizontalPadding,
+          right: AppDimens.defaultHorizontalPadding,
+        ),
+        child: Column(
+          children: [
+            // const VSpace(AppDimens.xl),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(AppStrings.toggleShowDisabled).textStyle(
+                  context.textTheme.bodyMd.medium,
+                  color: context.colors.textPrimary,
+                ),
+                ValueListenableBuilder(
+                  valueListenable: showDisabled,
+                  builder: (context, value, child) {
+                    return Toggle(
+                      value: showDisabled.value,
+                      onChanged: (value) {
+                        showDisabled.value = value;
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+            const VSpace(AppDimens.lg),
+            BlocBuilder<BrowseCubit, BrowseState>(
+              bloc: context.read<BrowseCubit>()..getSources(),
+              buildWhen: (previous, current) => previous != current,
+              builder: (context, state) {
+                return switch (state) {
+                  BrowseLoading() => const Loading(),
+                  BrowseError() => buildErrorPage(state.error),
+                  BrowseLoaded() => buildPage(state, showDisabled),
+                };
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
-          if (state is BrowseError) throw UnimplementedError();
-
-          final extensions = (state as BrowseLoaded).sources;
+  Widget buildPage(BrowseLoaded state, ValueNotifier<bool> showDisabled) {
+    return Expanded(
+      child: ValueListenableBuilder(
+        valueListenable: showDisabled,
+        builder: (context, value, child) {
+          final sources = value
+              ? state.sources
+              : state.sources.where((source) => source.isEnabled).toList();
 
           return ListView.separated(
-            padding: EdgeInsets.only(
-              top: padding.top + AppDimens.$2xl,
-              bottom: padding.bottom + AppDimens.$2xl,
-              left: AppDimens.defaultHorizontalPadding,
-              right: AppDimens.defaultHorizontalPadding,
-            ),
+            padding: EdgeInsets.zero,
             separatorBuilder: (_, __) => const VSpace(AppDimens.md),
             itemBuilder: (BuildContext context, int index) {
-              final extension = extensions[index];
+              final source = sources[index];
 
               return ExtensionCard(
                 type: ExtensionCardType.installed,
-                extension: extension,
+                extension: source,
               );
             },
-            itemCount: extensions.length,
+            itemCount: sources.length,
           );
         },
       ),
+    );
+  }
+
+  Widget buildErrorPage(Exception error) {
+    return EmptyPage(
+      image: Assets.images.error,
+      message: AppStrings.emptyStateError,
+      description: AppStrings.emptyStateDescriptionErrorSources,
+      error: error,
     );
   }
 }

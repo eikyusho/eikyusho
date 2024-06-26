@@ -1,4 +1,3 @@
-import 'package:app/config/app.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/config/app.dart';
 import 'package:app/src/discover/presentation/cubits/cubits.dart';
 import 'package:app/src/discover/presentation/widgets/widgets.dart';
 

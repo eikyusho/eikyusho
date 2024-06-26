@@ -36,10 +36,7 @@ class AppIconButton extends StatelessWidget {
         child: icon.svg(
           width: iconSize.getOr(AppDimens.iconMd),
           height: iconSize.getOr(AppDimens.iconMd),
-          colorFilter: ColorFilter.mode(
-            iconColor.getOr(context.colors.textPrimary),
-            AppMisc.blendMode,
-          ),
+          colorFilter: svgColor(iconColor.getOr(context.colors.textPrimary)),
         ),
       ),
     );

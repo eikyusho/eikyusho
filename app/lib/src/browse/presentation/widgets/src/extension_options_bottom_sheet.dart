@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';

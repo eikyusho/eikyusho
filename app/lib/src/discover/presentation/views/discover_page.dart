@@ -9,30 +9,6 @@ import 'package:app/common/common.dart';
 import 'package:app/src/discover/presentation/cubits/cubits.dart';
 import 'package:app/src/discover/presentation/widgets/widgets.dart';
 
-class DiscoverPageAppBar extends MainAppBar {
-  const DiscoverPageAppBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MainAppBar(
-      showLogo: true,
-      showNotificationButton: true,
-      actionIcon: Assets.icons.puzzlePieceBold,
-      actionButton: () {
-        final cubit = context.read<DiscoverCubit>();
-
-        context.showBottomSheet(
-          isDismissable: cubit.state is! DiscoverLoading,
-          BlocProvider(
-            create: (_) => cubit,
-            child: const SelectSourceBottomSheet(),
-          ),
-        );
-      },
-    );
-  }
-}
-
 @RoutePage()
 class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
   const DiscoverPage({super.key});
@@ -47,28 +23,59 @@ class DiscoverPage extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    final padding = context.screenPadding;
+    final padding = context.screenPaddingWithAppBar;
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.only(
-        top: padding.top + AppDimens.$2xl,
-        bottom: padding.bottom + AppDimens.$2xl,
+    bool canShowBottomSheet(DiscoverState state) {
+      if (state is DiscoverEmpty) return false;
+
+      if (state is DiscoverError) return false;
+
+      return true;
+    }
+
+    void showBottomSheet() {
+      final cubit = context.read<DiscoverCubit>();
+
+      if (!canShowBottomSheet(cubit.state)) return;
+
+      context.showBottomSheet(
+        isDismissable: cubit.state is! DiscoverLoading,
+        BlocProvider.value(
+          value: context.read<DiscoverCubit>(),
+          child: const SelectSourceBottomSheet(),
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: MainAppBar(
+        showLogo: true,
+        showNotificationButton: true,
+        actionIcon: Assets.icons.puzzlePieceBold,
+        actionButton: showBottomSheet,
       ),
-      child: BlocBuilder<DiscoverCubit, DiscoverState>(
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          if (state is DiscoverLoaded) {
-            context.read<DiscoverContentCubit>().load(state.selected);
-          }
+      extendBodyBehindAppBar: true,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          top: padding.top + AppDimens.$2xl,
+          bottom: padding.bottom + AppDimens.$2xl,
+        ),
+        child: BlocBuilder<DiscoverCubit, DiscoverState>(
+          buildWhen: (previous, current) => previous != current,
+          builder: (context, state) {
+            if (state is DiscoverLoaded) {
+              context.read<DiscoverContentCubit>().load(state.selected);
+            }
 
-          return switch (state) {
-            DiscoverLoading() => const Loading(),
-            DiscoverError() => throw UnimplementedError(),
-            DiscoverEmpty() => const Text('Empty'),
-            DiscoverUninitialized() => const Text('Uninitialized'),
-            DiscoverLoaded() => buildPage(),
-          };
-        },
+            return switch (state) {
+              DiscoverLoading() => const Loading(),
+              DiscoverError() => throw UnimplementedError(),
+              DiscoverEmpty() => const Text('Empty'),
+              DiscoverUninitialized() => const Text('Uninitialized'),
+              DiscoverLoaded() => buildPage(),
+            };
+          },
+        ),
       ),
     );
   }

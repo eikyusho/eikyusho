@@ -31,4 +31,22 @@ class BrowseCubit extends Cubit<BrowseState> {
 
     await getSources();
   }
+
+  Future<void> enableDiscoverExtension(InstalledExtension extension) async {
+    await _repository.enableDiscoverExtension(extension.id);
+
+    await getSources();
+  }
+
+  Future<void> disableDiscoverExtension(InstalledExtension extension) async {
+    await _repository.disableDiscoverExtension(extension.id);
+
+    await getSources();
+  }
+
+  Future<void> uninstallExtension(InstalledExtension extension) async {
+    await _repository.uninstallExtension(extension);
+
+    await getSources();
+  }
 }

@@ -98,8 +98,8 @@ class AppDialog extends StatelessWidget {
                   Button(
                     text: AppStrings.buttonConfirm,
                     onTap: () {
-                      Navigator.of(context).pop();
                       onConfirm();
+                      Navigator.of(context).pop();
                     },
                   ).expanded(),
                 ],

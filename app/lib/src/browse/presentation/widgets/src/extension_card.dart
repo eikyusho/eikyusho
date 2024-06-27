@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:eikyusho_extensions/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
@@ -84,14 +85,16 @@ class ExtensionCard extends StatelessWidget {
           extension.version,
           style: TextStyle(color: context.colors.warning),
         ),
-        Assets.icons.caretRightBold.svg(
+        Assets.icons.arrowsClockwiseBold.svg(
           width: AppDimens.iconXs,
           height: AppDimens.iconXs,
-          colorFilter: svgColor(context.colors.textSubdued),
+          colorFilter: svgColor(context.colors.textAuxiliary),
         ),
         Text(
           extension.updateVersion ?? '',
-          style: TextStyle(color: context.colors.success),
+        ).textStyle(
+          context.textTheme.bodySm.medium,
+          color: context.colors.success.withGreen(145),
         ),
       ],
     ).gap(AppDimens.xs);
@@ -107,7 +110,7 @@ class ExtensionCard extends StatelessWidget {
 
     return Row(
       children: [
-        Text(extension.language),
+        Text(Language.getName(extension.language)),
         const Separator.dot(),
         buildVersion(context),
       ],

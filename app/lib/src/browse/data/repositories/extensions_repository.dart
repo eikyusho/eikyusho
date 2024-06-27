@@ -57,8 +57,23 @@ class ExtensionsRepository {
       cancelToken: cancelToken,
     );
 
-    await _localDataProvider.saveExtension(response, extension);
-    await _localDataProvider.storeExtension(extension);
+    final path = await _localDataProvider.storeExtension(response, extension);
+    await _localDataProvider.saveExtension(path, extension);
+  }
+
+  Future<void> updateExtension({
+    required InstalledExtension extension,
+    required ProgressGetter progressCallback,
+    required CancelToken cancelToken,
+  }) async {
+    final response = await _remoteDataProvider.downloadExtension(
+      extension: extension,
+      progressCallback: progressCallback,
+      cancelToken: cancelToken,
+    );
+
+    final path = await _localDataProvider.storeExtension(response, extension);
+    await _localDataProvider.updateExtension(path, extension);
   }
 
   Future<void> enableExtension(int id) async {

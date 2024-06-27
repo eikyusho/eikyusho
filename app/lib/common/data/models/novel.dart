@@ -15,5 +15,5 @@ class Novel extends Equatable {
   final EikyushoSource source;
 
   @override
-  List<Object?> get props => [title, cover, link, source];
+  List<Object?> get props => [title, link, source];
 }

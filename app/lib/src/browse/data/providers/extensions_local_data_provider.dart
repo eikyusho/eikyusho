@@ -82,7 +82,7 @@ class ExtensionsLocalDataProvider {
     }
   }
 
-  Future<void> saveExtension(
+  Future<String> storeExtension(
     RBytes response,
     AvailableExtension extension,
   ) async {
@@ -100,25 +100,16 @@ class ExtensionsLocalDataProvider {
       Directory(savePath).createSync(recursive: true);
 
       await _compiler.decode(savePath, data);
+
+      return savePath;
     } catch (e) {
       throw StorageException(e.toString());
     }
   }
 
-  Future<void> storeExtension(AvailableExtension extension) async {
+  Future<void> saveExtension(String path, AvailableExtension extension) async {
     try {
-      final directory = await StorageManager.appDirectory;
-
-      final savePath = Path.joinAll([
-        directory.path,
-        AppConstants.sourcesPath,
-        extension.uuid,
-        Constants.xmlFile,
-      ]);
-
-      final source = File(savePath);
-
-      final parser = EikyushoParser(source.readAsStringSync());
+      final source = await _readExtension(path);
 
       final dbExtension = Extension.create(
         uuid: extension.uuid,
@@ -126,15 +117,40 @@ class ExtensionsLocalDataProvider {
         icon: extension.icon,
         version: extension.version,
         language: extension.language,
-        baseUrl: parser.baseUrl,
+        baseUrl: source.baseUrl,
         isEnabled: true,
         discover: true,
         isObsolete: false,
         hasUpdate: false,
       );
 
+      await _db.exec((isar) async => isar.extensions.put(dbExtension));
+    } catch (e) {
+      throw DatabaseException(e.toString());
+    }
+  }
+
+  Future<void> updateExtension(
+    String path,
+    InstalledExtension extension,
+  ) async {
+    try {
+      final source = await _readExtension(path);
+
       await _db.exec(
         (isar) async {
+          final dbExtension = await isar.extensions.get(extension.id);
+
+          if (dbExtension == null) return;
+
+          dbExtension
+            ..name = source.name
+            ..version = source.version
+            ..baseUrl = source.baseUrl
+            ..isObsolete = source.isObsolete
+            ..updateVersion = null
+            ..hasUpdate = false;
+
           await isar.extensions.put(dbExtension);
         },
       );
@@ -182,9 +198,7 @@ class ExtensionsLocalDataProvider {
   Future<void> deleteExtension(int id) async {
     try {
       await _db.exec(
-        (isar) async {
-          await isar.extensions.delete(id);
-        },
+        (isar) async => isar.extensions.delete(id),
       );
     } catch (e) {
       throw DatabaseException(e.toString());
@@ -202,6 +216,16 @@ class ExtensionsLocalDataProvider {
       );
 
       Directory(savePath).deleteSync(recursive: true);
+    } catch (e) {
+      throw StorageException(e.toString());
+    }
+  }
+
+  Future<EikyushoParser> _readExtension(String savePath) async {
+    try {
+      final source = File(Path.join(savePath, Constants.xmlFile));
+
+      return EikyushoParser(source.readAsStringSync());
     } catch (e) {
       throw StorageException(e.toString());
     }

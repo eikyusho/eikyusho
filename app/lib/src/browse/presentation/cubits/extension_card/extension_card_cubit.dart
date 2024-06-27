@@ -16,6 +16,8 @@ class ExtensionCardCubit extends Cubit<ExtensionCardState> {
 
   CancelToken cancelToken = CancelToken();
 
+  bool get isUpdate => extension is InstalledExtension;
+
   Future<void> download() async {
     emit(const ExtensionCardDownloading(0));
 
@@ -27,7 +29,22 @@ class ExtensionCardCubit extends Cubit<ExtensionCardState> {
       );
     } catch (e) {
       AppLogger.error(e.toString());
-      emit(ExtensionCardError(e.toString()));
+      emit(const ExtensionCardError(isUpdate: false));
+    }
+  }
+
+  Future<void> update() async {
+    emit(const ExtensionCardDownloading(0));
+
+    try {
+      await _repository.updateExtension(
+        extension: extension as InstalledExtension,
+        progressCallback: _progressEmitter,
+        cancelToken: cancelToken,
+      );
+    } catch (e) {
+      AppLogger.error(e.toString());
+      emit(const ExtensionCardError(isUpdate: true));
     }
   }
 
@@ -37,7 +54,12 @@ class ExtensionCardCubit extends Cubit<ExtensionCardState> {
     }
 
     if (progress == total) {
-      emit(const ExtensionCardDownloaded());
+      if (isUpdate) {
+        emit(const ExtensionCardDownloaded(isUpdate: true));
+        return;
+      }
+
+      emit(const ExtensionCardDownloaded(isUpdate: false));
     }
   }
 }

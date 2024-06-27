@@ -34,49 +34,23 @@ class ExtensionCardButton extends StatelessWidget {
 
     final idleIcon = isUpdate ? _Icons.updateIcon : _Icons.downloadIcon;
 
-    if (isInstalled) {
-      return AppIconButton(
-        _Icons.settingsIcon,
-        iconSize: AppDimens.iconLg,
-        iconColor: context.colors.textAuxiliary,
-        color: AppColors.transparent,
-        onPressed: () => context.showBottomSheet(
-          BlocProvider.value(
-            value: context.read<BrowseCubit>(),
-            child: ExtensionOptionsBottomSheet(
-              extension: extension as InstalledExtension,
-            ),
-          ),
-        ),
-      );
-    }
+    if (isInstalled) return buildInstallButton(context);
 
     return BlocConsumer<ExtensionCardCubit, ExtensionCardState>(
       bloc: context.read<ExtensionCardCubit>(),
       listenWhen: (previous, current) {
-        return current is ExtensionCardDownloaded ||
-            current is ExtensionCardError;
+        if (current is ExtensionCardDownloaded) return true;
+        if (current is ExtensionCardError) return true;
+        return false;
       },
       buildWhen: (previous, current) => previous != current,
-      listener: (context, state) {
-        if (state is ExtensionCardDownloaded) {
-          return context.showSnackBar(
-            message: 'Extension downloaded: ${extension.name}',
-          );
-        }
-
-        if (state is ExtensionCardError) {
-          return context.showSnackBar(
-            message: 'Failed to download extension: ${extension.name}',
-          );
-        }
-      },
+      listener: showSnackBarMessage,
       builder: (context, state) {
         final isDownloading = state is ExtensionCardDownloading;
         final isDownloaded = state is ExtensionCardDownloaded;
 
         final buttonAction = type == ExtensionCardType.update
-            ? context.read<ExtensionCardCubit>().download
+            ? context.read<ExtensionCardCubit>().update
             : context.read<ExtensionCardCubit>().download;
 
         return ProgressButton(
@@ -89,5 +63,37 @@ class ExtensionCardButton extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget buildInstallButton(BuildContext context) {
+    return AppIconButton(
+      _Icons.settingsIcon,
+      iconSize: AppDimens.iconLg,
+      iconColor: context.colors.textAuxiliary,
+      color: AppColors.transparent,
+      onPressed: () => context.showBottomSheet(
+        BlocProvider.value(
+          value: context.read<BrowseCubit>(),
+          child: ExtensionOptionsBottomSheet(
+            extension: extension as InstalledExtension,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showSnackBarMessage(BuildContext context, ExtensionCardState state) {
+    final message = switch (state) {
+      ExtensionCardDownloaded() => state.isUpdate
+          ? AppStrings.extensionUpdated
+          : AppStrings.extensionInstalled,
+      ExtensionCardError() =>
+        state.isUpdate ? AppStrings.failedToUpdate : AppStrings.failedToInstall,
+      _ => '',
+    };
+
+    if (message.isEmpty) return;
+
+    context.showSnackBar(message: '$message: ${extension.name}');
   }
 }

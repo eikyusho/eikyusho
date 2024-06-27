@@ -20,14 +20,18 @@ final class ExtensionCardDownloading extends ExtensionCardState {
 }
 
 final class ExtensionCardDownloaded extends ExtensionCardState {
-  const ExtensionCardDownloaded() : super(1, ProgressButtonState.finished);
+  const ExtensionCardDownloaded({required this.isUpdate})
+      : super(1, ProgressButtonState.finished);
+
+  final bool isUpdate;
 }
 
 final class ExtensionCardError extends ExtensionCardState {
-  const ExtensionCardError(this.message) : super(1, ProgressButtonState.failed);
+  const ExtensionCardError({required this.isUpdate})
+      : super(1, ProgressButtonState.failed);
 
-  final String message;
+  final bool isUpdate;
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [isUpdate];
 }

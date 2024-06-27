@@ -82,4 +82,10 @@ final class AppStrings {
   /// Tips
   static String tipDoubleTapDiscover =
       'Double tap "Discover" to see the WebView.';
+
+  /// Snackbars
+  static String extensionInstalled = 'Extension installed';
+  static String extensionUpdated = 'Extension updated';
+  static String failedToInstall = 'Failed to install';
+  static String failedToUpdate = 'Failed to update';
 }

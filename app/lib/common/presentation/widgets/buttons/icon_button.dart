@@ -10,9 +10,10 @@ class AppIconButton extends StatelessWidget {
     this.icon, {
     this.onPressed,
     this.color,
-    this.size,
-    this.iconSize,
+    this.size = AppDimens.buttonMd,
+    this.iconSize = AppDimens.iconMd,
     this.iconColor,
+    this.child,
     super.key,
   });
 
@@ -20,8 +21,9 @@ class AppIconButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Color? color;
   final Color? iconColor;
-  final double? size;
-  final double? iconSize;
+  final double size;
+  final double iconSize;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +32,18 @@ class AppIconButton extends StatelessWidget {
       borderRadius: AppDimens.radiusMd,
       child: Container(
         color: color.getOr(context.colors.surface),
-        width: size.getOr(AppDimens.buttonMd),
-        height: size.getOr(AppDimens.buttonMd),
+        width: size,
+        height: size,
         alignment: Alignment.center,
-        child: icon.svg(
-          width: iconSize.getOr(AppDimens.iconMd),
-          height: iconSize.getOr(AppDimens.iconMd),
-          colorFilter: svgColor(iconColor.getOr(context.colors.textPrimary)),
-        ),
+        child: child != null
+            ? child!
+            : icon.svg(
+                width: iconSize,
+                height: iconSize,
+                colorFilter: svgColor(
+                  iconColor.getOr(context.colors.textPrimary),
+                ),
+              ),
       ),
     );
   }

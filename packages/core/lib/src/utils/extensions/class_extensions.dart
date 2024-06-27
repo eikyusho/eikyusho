@@ -15,9 +15,3 @@ extension AlternativeExtension<T> on T? {
     return this ?? alternative;
   }
 }
-
-extension LimitSizeExtension<T> on List<T> {
-  List<T> limit(int size) {
-    return length > size ? sublist(0, size) : this;
-  }
-}

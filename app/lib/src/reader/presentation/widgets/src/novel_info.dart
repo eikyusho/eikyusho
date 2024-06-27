@@ -7,19 +7,11 @@ import 'package:app/common/common.dart';
 
 class NovelInfo extends StatelessWidget {
   const NovelInfo({
-    required this.title,
-    required this.cover,
-    required this.author,
-    required this.source,
-    required this.language,
+    required this.details,
     super.key,
   });
 
-  final String title;
-  final String cover;
-  final String author;
-  final String source;
-  final String language;
+  final NovelDetails details;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +33,7 @@ class NovelInfo extends StatelessWidget {
           ),
           child: Image(
             image: ResizeImage(
-              NetworkImage(cover),
+              NetworkImage(details.cover),
               width: 123,
               height: 164,
             ),
@@ -52,30 +44,27 @@ class NovelInfo extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title).textStyle(
+            Text(details.title).textStyle(
               context.textTheme.bodyLg.bold,
               color: context.colors.textPrimary,
             ),
             const VSpace(AppDimens.sm),
-            Text(author).textStyle(
+            Text(details.author).textStyle(
               context.textTheme.bodyMd.medium,
               color: context.colors.textAuxiliary,
             ),
             const VSpace(AppDimens.sm),
             Row(
               children: [
-                Text(source),
+                Text(details.source.name),
                 Separator.dot(
                   color: context.colors.primary,
                 ),
-                Text(language.toUpperCase()),
+                Text(details.source.language.toUpperCase()),
                 Assets.icons.caretRightBold.svg(
                   height: AppDimens.iconXs,
                   width: AppDimens.iconXs,
-                  colorFilter: ColorFilter.mode(
-                    context.colors.primary,
-                    AppMisc.blendMode,
-                  ),
+                  colorFilter: svgColor(context.colors.primary),
                 ),
               ],
             ).gap(AppDimens.xs).textStyle(

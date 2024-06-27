@@ -3,20 +3,17 @@ enum NovelStatus {
   ongoing,
   hiatus,
   dropped,
+  cancelled,
   unknown;
 
   String get name {
-    switch (this) {
-      case NovelStatus.completed:
-        return 'Completed';
-      case NovelStatus.ongoing:
-        return 'Ongoing';
-      case NovelStatus.hiatus:
-        return 'Hiatus';
-      case NovelStatus.dropped:
-        return 'Dropped';
-      case NovelStatus.unknown:
-        return 'Unknown';
-    }
+    return switch (this) {
+      NovelStatus.completed => 'Completed',
+      NovelStatus.ongoing => 'Ongoing',
+      NovelStatus.hiatus => 'Hiatus',
+      NovelStatus.dropped => 'Dropped',
+      NovelStatus.cancelled => 'Cancelled',
+      NovelStatus.unknown => 'Unknown'
+    };
   }
 }

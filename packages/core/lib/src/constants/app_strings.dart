@@ -38,6 +38,7 @@ final class AppStrings {
   static String buttonCancel = 'Cancel';
   static String buttonConfirm = 'Confirm';
   static String buttonSelectSource = 'Select Source';
+  static String buttonWebView = 'WebView';
 
   /// Label
   static String labelVersion = 'Version';

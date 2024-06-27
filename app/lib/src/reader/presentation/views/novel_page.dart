@@ -1,59 +1,107 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/config/app.dart';
+import 'package:app/injector/injector.dart';
+import 'package:app/src/reader/data/data.dart';
+import 'package:app/src/reader/presentation/cubits/cubits.dart';
 import 'package:app/src/reader/presentation/widgets/widgets.dart';
 
 @RoutePage()
-class NovelPage extends StatelessWidget {
+class NovelPage extends StatelessWidget implements AutoRouteWrapper {
   const NovelPage({required this.novel, super.key});
 
   final Novel novel;
 
   @override
-  Widget build(BuildContext context) {
-    final source = novel.source;
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) => NovelCubit(
+        getIt<NovelRepository>(),
+      )..getNovelDetails(novel),
+      child: this,
+    );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(
         showBackButton: true,
         actionIcon: Assets.icons.shareFatBold,
         actionButton: () {},
       ),
-      body: Column(
+      body: BlocBuilder<NovelCubit, NovelState>(
+        builder: (context, state) {
+          return switch (state) {
+            NovelLoading() => const Loading(),
+            NovelLoaded() => buildPage(state),
+            NovelError() => buildErrorPage(state),
+          };
+        },
+      ),
+    );
+  }
+
+  Widget buildPage(NovelLoaded state) {
+    final novel = state.novel;
+
+    final status = novel.source.getStatus(novel.status);
+    final novelStatus = getStatus(status);
+
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: AppDimens.$2xl,
+        bottom: AppDimens.$2xl,
+        left: AppDimens.defaultHorizontalPadding,
+        right: AppDimens.defaultHorizontalPadding,
+      ),
+      child: Column(
         children: [
           NovelInfo(
-            title: novel.title,
-            source: source.name,
-            language: source.language,
-            cover: novel.cover,
-            author: 'Author Name',
+            details: novel,
           ),
           const VSpace(AppDimens.$2xl),
-          const NovelStats(
-            chapterCount: 2345,
-            status: NovelStatus.completed,
-            viewCount: 165000,
+          NovelStats(
+            chapterCount: novel.chapterCount,
+            status: novelStatus,
+            viewCount: Formatter.viewCount(novel.viewCount),
           ),
           const VSpace(AppDimens.$2xl),
-          const NovelDetails(),
+          ExpandableDetails(
+            description: novel.description,
+            genres: novel.genres,
+          ),
           const VSpace(AppDimens.lg),
-          Separator.horizontal(
-            size: double.infinity,
-            color: context.colors.borderDiscreet,
+          Builder(
+            builder: (context) {
+              return Separator.horizontal(
+                size: double.infinity,
+                color: context.colors.borderDiscreet,
+              );
+            },
           ),
           const VSpace(AppDimens.sm),
-          Expanded(
-            child: ColoredBox(
-              color: context.colors.background,
-              child: const NovelChapters(),
-            ),
+          const Expanded(
+            child: NovelChapters(),
           ),
         ],
-      ).pAll(AppDimens.defaultHorizontalPadding),
+      ),
+    );
+  }
+
+  Widget buildErrorPage(NovelError state) {
+    return EmptyPage(
+      image: Assets.images.error,
+      message: AppStrings.emptyStateError,
+      description: AppStrings.emptyStateDescriptionError,
+      error: state.error,
+      actionText: AppStrings.buttonWebView,
+      onAction: () {},
     );
   }
 }

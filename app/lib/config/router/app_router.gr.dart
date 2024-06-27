@@ -66,10 +66,11 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<NovelRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: NovelPage(
+        child: WrappedRoute(
+            child: NovelPage(
           novel: args.novel,
           key: args.key,
-        ),
+        )),
       );
     },
   };

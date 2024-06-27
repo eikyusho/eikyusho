@@ -16,7 +16,7 @@ class DiscoverListContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final novels = this.novels.limit(6);
+    final novels = this.novels.take(6).toList();
 
     if (isLoading) {
       return const Loading();

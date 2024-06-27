@@ -30,17 +30,16 @@ class DiscoverSpotlights extends StatelessWidget {
         }
 
         return CarouselSlider(
-          options: CarouselOptions(
-            height: height,
-            enlargeCenterPage: true,
-            viewportFraction: 0.65,
-            clipBehavior: Clip.none,
-          ),
-          items: state.spotlights
-              .map((novel) => _SpotlightItem(novel: novel))
-              .toList()
-              .limit(5),
-        );
+            options: CarouselOptions(
+              height: height,
+              enlargeCenterPage: true,
+              viewportFraction: 0.65,
+              clipBehavior: Clip.none,
+            ),
+            items: state.spotlights
+                .map((novel) => _SpotlightItem(novel: novel))
+                .take(5)
+                .toList());
       },
     ).px(AppDimens.defaultHorizontalPadding);
   }

@@ -14,7 +14,7 @@ class NovelStats extends StatelessWidget {
 
   final int chapterCount;
   final NovelStatus status;
-  final int viewCount;
+  final String viewCount;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class NovelStats extends StatelessWidget {
         const Separator.vertical(size: separator),
         _NovelStat(
           label: AppStrings.labelViews,
-          value: Formatter.viewCount(viewCount),
+          value: viewCount,
         ),
       ],
     ).gap(AppDimens.md);

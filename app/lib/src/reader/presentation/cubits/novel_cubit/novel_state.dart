@@ -11,23 +11,19 @@ sealed class NovelState extends Equatable {
 
 final class NovelLoading extends NovelState {}
 
-final class NovelInfoLoaded extends NovelState {
-  const NovelInfoLoaded(this.novel);
-
-  final NovelDetails novel;
-
-  @override
-  List<Object> get props => [novel, isLocal];
-}
-
-final class NovelChaptersLoaded extends NovelState {
-  const NovelChaptersLoaded(this.novel, this.chapters);
+final class NovelLoaded extends NovelState {
+  const NovelLoaded(
+    this.novel, {
+    this.chapters = const [],
+    this.isLoading = false,
+  });
 
   final NovelDetails novel;
   final List<Chapter> chapters;
+  final bool isLoading;
 
   @override
-  List<Object> get props => [novel, chapters, isLocal];
+  List<Object> get props => [novel, chapters, isLocal, isLoading];
 }
 
 final class NovelError extends NovelState {

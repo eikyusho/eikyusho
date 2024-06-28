@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:app/common/common.dart';
-import 'package:app/src/reader/data/repositories/novel_repository.dart';
+import 'package:app/src/reader/data/data.dart';
 
 part 'novel_state.dart';
 
@@ -16,22 +16,30 @@ class NovelCubit extends Cubit<NovelState> {
     emit(NovelLoading());
     try {
       final novelDetails = await _novelRepository.getNovelDetails(novel);
-      emit(NovelInfoLoaded(novelDetails));
+      await loadChapters(novelDetails);
     } on Exception catch (e) {
       emit(NovelError(e));
     }
   }
 
   Future<void> loadChapters(NovelDetails novel) async {
-    if (state is! NovelInfoLoaded) return;
+    emit(NovelLoaded(novel, isLoading: true));
 
     try {
-      final novelChapters = await _novelRepository.getNovelChapters(novel);
-      emit(
-        NovelChaptersLoaded((state as NovelInfoLoaded).novel, novelChapters),
-      );
-    } on Exception catch (e) {
+      final chapters = await _novelRepository.getNovelChapters(novel);
+      emit(NovelLoaded(novel, chapters: chapters));
+    } on ServerException catch (e) {
       emit(NovelError(e));
     }
+  }
+
+  void _addChapters(NovelDetails novel, List<Chapter> chapters) {
+    if (state is! NovelLoaded) return;
+
+    final newChapters = [...(state as NovelLoaded).chapters, ...chapters];
+
+    emit(
+      NovelLoaded(novel, chapters: newChapters, isLoading: true),
+    );
   }
 }

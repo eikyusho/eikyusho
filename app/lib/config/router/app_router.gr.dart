@@ -18,8 +18,8 @@ import 'package:app/config/router/app_tabs.dart' as _i1;
 import 'package:app/src/browse/presentation/views/browse_page.dart' as _i2;
 import 'package:app/src/browse/presentation/views/extensions_page.dart' as _i6;
 import 'package:app/src/discover/presentation/views/discover_page.dart' as _i5;
-import 'package:app/src/reader/presentation/views/chapter_page.dart' as _i3;
 import 'package:app/src/reader/presentation/views/novel_page.dart' as _i7;
+import 'package:app/src/reader/presentation/views/reader_page.dart' as _i3;
 
 import 'package:app/src/discover/presentation/views/discover_list_page.dart'
     as _i4;
@@ -42,9 +42,13 @@ abstract class $AppRouter extends _i8.RootStackRouter {
       );
     },
     ChapterRoute.name: (routeData) {
+      final args = routeData.argsAs<ChapterRouteArgs>();
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.ChapterPage(),
+        child: _i3.ReaderPage(
+          chapter: args.chapter,
+          key: args.key,
+        ),
       );
     },
     DiscoverListRoute.name: (routeData) {
@@ -119,17 +123,41 @@ class BrowseRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.ChapterPage]
-class ChapterRoute extends _i8.PageRouteInfo<void> {
-  const ChapterRoute({List<_i8.PageRouteInfo>? children})
-      : super(
+/// [_i3.ReaderPage]
+class ChapterRoute extends _i8.PageRouteInfo<ChapterRouteArgs> {
+  ChapterRoute({
+    required _i9.Chapter chapter,
+    _i10.Key? key,
+    List<_i8.PageRouteInfo>? children,
+  }) : super(
           ChapterRoute.name,
+          args: ChapterRouteArgs(
+            chapter: chapter,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ChapterRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static const _i8.PageInfo<ChapterRouteArgs> page =
+      _i8.PageInfo<ChapterRouteArgs>(name);
+}
+
+class ChapterRouteArgs {
+  const ChapterRouteArgs({
+    required this.chapter,
+    this.key,
+  });
+
+  final _i9.Chapter chapter;
+
+  final _i10.Key? key;
+
+  @override
+  String toString() {
+    return 'ChapterRouteArgs{chapter: $chapter, key: $key}';
+  }
 }
 
 /// generated route for

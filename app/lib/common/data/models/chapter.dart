@@ -1,5 +1,6 @@
-import 'package:app/common/data/models/novel.dart';
 import 'package:equatable/equatable.dart';
+
+import 'package:app/common/data/models/novel.dart';
 
 class Chapter extends Equatable {
   const Chapter(

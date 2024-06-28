@@ -7,17 +7,17 @@ class NovelDetails extends Novel {
     required super.cover,
     required super.link,
     required this.author,
-    required this.chapterCount,
+    required this.chapters,
     required this.status,
-    required this.viewCount,
+    required this.views,
     required this.description,
     required this.genres,
   });
 
   final String author;
-  final int chapterCount;
+  final int chapters;
   final String status;
-  final String viewCount;
+  final String views;
   final String description;
   final List<String> genres;
 }

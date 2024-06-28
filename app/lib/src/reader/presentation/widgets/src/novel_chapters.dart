@@ -1,5 +1,3 @@
-import 'package:app/src/reader/presentation/cubits/cubits.dart';
-import 'package:app/src/reader/presentation/cubits/cubits.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
@@ -7,27 +5,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
-import 'package:app/config/app.dart';
+import 'package:app/src/reader/presentation/cubits/cubits.dart';
+import 'package:app/src/reader/presentation/widgets/src/chapter_tile.dart';
 
 class NovelChapters extends StatelessWidget {
-  const NovelChapters({super.key});
+  const NovelChapters({
+    required this.novel,
+    required this.isAscending,
+    super.key,
+  });
+
+  final NovelDetails novel;
+  final ValueNotifier<bool> isAscending;
 
   @override
   Widget build(BuildContext context) {
-    final isAscending = ValueNotifier<bool>(true);
-    final state = context.read<NovelCubit>().state;
-
-    final novel = switch (state) {
-      NovelInfoLoaded() => state.novel,
-      NovelChaptersLoaded() => state.novel,
-      _ => null,
-    };
-
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: 44,
-          padding: const EdgeInsets.symmetric(vertical: AppDimens.md),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -35,11 +31,11 @@ class NovelChapters extends StatelessWidget {
                 context.textTheme.bodyMd.medium,
                 color: context.colors.textPrimary,
               ),
-              ValueListenableBuilder<bool>(
+              ValueListenableBuilder(
                 valueListenable: isAscending,
-                builder: (context, ascending, child) {
+                builder: (context, value, child) {
                   return AppIconButton(
-                    ascending
+                    value
                         ? Assets.icons.sortAscendingBold
                         : Assets.icons.sortDescendingBold,
                     color: context.colors.background,
@@ -52,114 +48,44 @@ class NovelChapters extends StatelessWidget {
             ],
           ),
         ),
+        const VSpace(AppDimens.xs),
         BlocBuilder<NovelCubit, NovelState>(
-          buildWhen: (previous, current) {
-            if (current is NovelInfoLoaded) return true;
-            if (current is NovelChaptersLoaded) return true;
-            return false;
-          },
-          bloc: context.read<NovelCubit>()..loadChapters(novel!),
           builder: (context, state) {
-            if (state is! NovelChaptersLoaded) {
-              return const Expanded(
-                child: Loading(),
-              );
+            if (state is! NovelLoaded) {
+              return const Loading();
             }
 
-            return Expanded(
-              child: ValueListenableBuilder(
-                valueListenable: isAscending,
-                builder: (context, ascending, child) {
-                  return ListView.separated(
-                    reverse: !ascending,
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.only(top: AppDimens.xs),
-                    separatorBuilder: (_, __) => const VSpace(AppDimens.md),
-                    itemBuilder: (context, index) {
-                      final chapter = state.chapters[index];
-
-                      return ChapterTile(
-                        number: chapter.number,
-                        title: chapter.title,
-                        date: chapter.date,
-                      );
-                    },
-                    itemCount: state.chapters.length,
-                  );
-                },
-              ),
+            return ValueListenableBuilder(
+              valueListenable: isAscending,
+              builder: (context, value, child) {
+                return Column(
+                  children: gapView(
+                    AppDimens.md,
+                    isVertical: true,
+                    children: value
+                        ? buildList(state)
+                        : buildList(state).reversed.toList(),
+                  ),
+                );
+              },
             );
           },
         ),
       ],
     );
   }
-}
 
-class ChapterTile extends StatelessWidget {
-  const ChapterTile({
-    required this.number,
-    required this.title,
-    required this.date,
-    super.key,
-  });
-
-  final int number;
-  final String title;
-  final String date;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClickableElement(
-      borderRadius: AppDimens.radiusLg,
-      onTap: () {
-        context.router.push(const ChapterRoute());
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.md,
-          vertical: AppDimens.sm,
-        ),
-        color: context.colors.surface,
-        child: Row(
-          children: [
-            Text('$number').textStyle(
-              context.textTheme.bodyLg.regular,
-              color: context.colors.textSecondary,
-            ),
-            const HSpace(AppDimens.sm),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ).textStyle(
-                    context.textTheme.bodyMd.medium,
-                    color: context.colors.textPrimary,
-                  ),
-                  const VSpace(AppDimens.xs),
-                  Text(date).textStyle(
-                    context.textTheme.bodyXs.regular,
-                    color: context.colors.textAuxiliary,
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
-            ProgressButton(
-              idleIcon: Assets.icons.arrowDownBold,
-              color: context.colors.surfaceSecondary,
-              state: ProgressButtonState.idle,
-              context: context,
-              progress: 1,
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
-    );
+  List<Widget> buildList(NovelLoaded state) {
+    return [
+      ...state.chapters.map((chapter) {
+        return ChapterTile(
+          chapter: chapter,
+        );
+      }),
+      if (state.isLoading) ...[
+        const VSpace(AppDimens.md),
+        const Loading(),
+      ],
+    ];
   }
 }

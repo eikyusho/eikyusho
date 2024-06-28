@@ -6,37 +6,47 @@ import 'package:app/common/common.dart';
 @lazySingleton
 class NovelRemoteDataProvider {
   Future<NovelDetails> getNovelDetails(Novel novel) async {
-    final novelDetails = await novel.source.getNovelDetails(novel.link);
+    try {
+      final novelDetails = await novel.source.getNovelDetails(novel.link);
 
-    return NovelDetails(
-      novel.source,
-      title: novelDetails.title,
-      cover: novel.cover,
-      link: novel.link,
-      author: novelDetails.author,
-      chapterCount: novelDetails.chapters,
-      status: novelDetails.status,
-      viewCount: novelDetails.views,
-      description: novelDetails.description,
-      genres: novelDetails.genres,
-    );
+      return NovelDetails(
+        novel.source,
+        title: novelDetails.title,
+        cover: novel.cover,
+        link: novel.link,
+        author: novelDetails.author,
+        chapters: novelDetails.chapters,
+        status: novelDetails.status,
+        views: novelDetails.views,
+        description: novelDetails.description,
+        genres: novelDetails.genres,
+      );
+    } catch (e) {
+      throw ServerException.fromException(e);
+    }
   }
 
   Future<List<Chapter>> getNovelChapters(NovelDetails novel) async {
-    final chapters = await novel.source.getNovelChapters(novel.link);
+    try {
+      final chapters = await novel.source.getNovelChapters(novel.link);
 
-    AppLogger.debug(chapters.toString());
-
-    return chapters
-        .map(
-          (chapter) => Chapter(
-            novel,
-            title: chapter.title,
-            link: chapter.link,
-            number: chapter.number,
-            date: chapter.date,
-          ),
-        )
-        .toList();
+      return chapters
+          .map(
+            (chapter) => Chapter(
+              novel,
+              title: chapter.title,
+              link: chapter.link,
+              number: chapter.number,
+              date: chapter.date,
+            ),
+          )
+          .toList();
+    } catch (e) {
+      throw ServerException.fromException(e);
+    }
+  }
+    } catch (e) {
+      throw ServerException.fromException(e);
+    }
   }
 }

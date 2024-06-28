@@ -39,7 +39,8 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
         builder: (context, state) {
           return switch (state) {
             NovelLoading() => const Loading(),
-            NovelLoaded() => buildPage(state),
+            NovelInfoLoaded() => buildPage(state, isLoading: true),
+            NovelChaptersLoaded() => buildPage(state, isLoading: false),
             NovelError() => buildErrorPage(state),
           };
         },
@@ -47,10 +48,15 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
     );
   }
 
-  Widget buildPage(NovelLoaded state) {
-    final novel = state.novel;
+  Widget buildPage(NovelState state, {required bool isLoading}) {
+    final novel = isLoading
+        ? (state as NovelInfoLoaded).novel
+        : (state as NovelChaptersLoaded).novel;
 
     final status = novel.source.getStatus(novel.status);
+
+    AppLogger.debug(novel.status);
+    AppLogger.debug(status);
     final novelStatus = getStatus(status);
 
     return Padding(

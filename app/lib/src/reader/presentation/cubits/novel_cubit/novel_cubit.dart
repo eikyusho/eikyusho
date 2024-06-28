@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,20 @@ class NovelCubit extends Cubit<NovelState> {
     emit(NovelLoading());
     try {
       final novelDetails = await _novelRepository.getNovelDetails(novel);
-      emit(NovelLoaded(novelDetails));
+      emit(NovelInfoLoaded(novelDetails));
+    } on Exception catch (e) {
+      emit(NovelError(e));
+    }
+  }
+
+  Future<void> loadChapters(NovelDetails novel) async {
+    if (state is! NovelInfoLoaded) return;
+
+    try {
+      final novelChapters = await _novelRepository.getNovelChapters(novel);
+      emit(
+        NovelChaptersLoaded((state as NovelInfoLoaded).novel, novelChapters),
+      );
     } on Exception catch (e) {
       emit(NovelError(e));
     }

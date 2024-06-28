@@ -1,6 +1,9 @@
+import 'package:app/src/reader/presentation/cubits/cubits.dart';
+import 'package:app/src/reader/presentation/cubits/cubits.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -12,6 +15,13 @@ class NovelChapters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isAscending = ValueNotifier<bool>(true);
+    final state = context.read<NovelCubit>().state;
+
+    final novel = switch (state) {
+      NovelInfoLoaded() => state.novel,
+      NovelChaptersLoaded() => state.novel,
+      _ => null,
+    };
 
     return Column(
       children: [
@@ -42,26 +52,44 @@ class NovelChapters extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(
-          child: ValueListenableBuilder(
-            valueListenable: isAscending,
-            builder: (context, ascending, child) {
-              return ListView.separated(
-                reverse: !ascending,
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.only(top: AppDimens.xs),
-                separatorBuilder: (_, __) => const VSpace(AppDimens.md),
-                itemBuilder: (context, index) {
-                  return ChapterTile(
-                    number: index + 1,
-                    title: 'Chapter',
-                    date: '2021-01-${index + 1}',
+        BlocBuilder<NovelCubit, NovelState>(
+          buildWhen: (previous, current) {
+            if (current is NovelInfoLoaded) return true;
+            if (current is NovelChaptersLoaded) return true;
+            return false;
+          },
+          bloc: context.read<NovelCubit>()..loadChapters(novel!),
+          builder: (context, state) {
+            if (state is! NovelChaptersLoaded) {
+              return const Expanded(
+                child: Loading(),
+              );
+            }
+
+            return Expanded(
+              child: ValueListenableBuilder(
+                valueListenable: isAscending,
+                builder: (context, ascending, child) {
+                  return ListView.separated(
+                    reverse: !ascending,
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.only(top: AppDimens.xs),
+                    separatorBuilder: (_, __) => const VSpace(AppDimens.md),
+                    itemBuilder: (context, index) {
+                      final chapter = state.chapters[index];
+
+                      return ChapterTile(
+                        number: chapter.number,
+                        title: chapter.title,
+                        date: chapter.date,
+                      );
+                    },
+                    itemCount: state.chapters.length,
                   );
                 },
-                itemCount: 10,
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ],
     );
@@ -100,19 +128,25 @@ class ChapterTile extends StatelessWidget {
               color: context.colors.textSecondary,
             ),
             const HSpace(AppDimens.sm),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title).textStyle(
-                  context.textTheme.bodyMd.medium,
-                  color: context.colors.textPrimary,
-                ),
-                const VSpace(AppDimens.xs),
-                Text(date).textStyle(
-                  context.textTheme.bodyXs.regular,
-                  color: context.colors.textAuxiliary,
-                ),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ).textStyle(
+                    context.textTheme.bodyMd.medium,
+                    color: context.colors.textPrimary,
+                  ),
+                  const VSpace(AppDimens.xs),
+                  Text(date).textStyle(
+                    context.textTheme.bodyXs.regular,
+                    color: context.colors.textAuxiliary,
+                  ),
+                ],
+              ),
             ),
             const Spacer(),
             ProgressButton(

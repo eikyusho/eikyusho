@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:app/common/common.dart';
@@ -19,5 +20,23 @@ class NovelRemoteDataProvider {
       description: novelDetails.description,
       genres: novelDetails.genres,
     );
+  }
+
+  Future<List<Chapter>> getNovelChapters(NovelDetails novel) async {
+    final chapters = await novel.source.getNovelChapters(novel.link);
+
+    AppLogger.debug(chapters.toString());
+
+    return chapters
+        .map(
+          (chapter) => Chapter(
+            novel,
+            title: chapter.title,
+            link: chapter.link,
+            number: chapter.number,
+            date: chapter.date,
+          ),
+        )
+        .toList();
   }
 }

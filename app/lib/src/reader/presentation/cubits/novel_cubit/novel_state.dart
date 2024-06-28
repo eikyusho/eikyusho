@@ -1,22 +1,33 @@
 part of 'novel_cubit.dart';
 
 sealed class NovelState extends Equatable {
-  const NovelState();
-}
+  const NovelState({this.isLocal = false});
 
-final class NovelLoading extends NovelState {
-  @override
-  List<Object> get props => [];
-}
-
-final class NovelLoaded extends NovelState {
-  const NovelLoaded(this.novel, {this.isLocal = false});
-
-  final NovelDetails novel;
   final bool isLocal;
 
   @override
-  List<Object> get props => [novel];
+  List<Object> get props => [isLocal];
+}
+
+final class NovelLoading extends NovelState {}
+
+final class NovelInfoLoaded extends NovelState {
+  const NovelInfoLoaded(this.novel);
+
+  final NovelDetails novel;
+
+  @override
+  List<Object> get props => [novel, isLocal];
+}
+
+final class NovelChaptersLoaded extends NovelState {
+  const NovelChaptersLoaded(this.novel, this.chapters);
+
+  final NovelDetails novel;
+  final List<Chapter> chapters;
+
+  @override
+  List<Object> get props => [novel, chapters, isLocal];
 }
 
 final class NovelError extends NovelState {
@@ -25,5 +36,5 @@ final class NovelError extends NovelState {
   final Exception error;
 
   @override
-  List<Object> get props => [error];
+  List<Object> get props => [error, isLocal];
 }

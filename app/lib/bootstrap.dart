@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:app/config/app.dart';
 import 'package:app/injector/injector.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -27,6 +28,8 @@ class AppBlocObserver extends BlocObserver {
 }
 
 Future<void> bootstrap(Widget Function() builder) async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
 
@@ -34,8 +37,6 @@ Future<void> bootstrap(Widget Function() builder) async {
       AppLogger.error(details.exceptionAsString(), details, details.stack);
     }
   };
-
-  WidgetsFlutterBinding.ensureInitialized();
 
   await configureDependencies();
 
@@ -49,6 +50,8 @@ Future<void> bootstrap(Widget Function() builder) async {
       DeviceOrientation.portraitDown,
     ],
   );
+
+  await AppNavigation.setupRouter();
 
   runApp(builder());
 }

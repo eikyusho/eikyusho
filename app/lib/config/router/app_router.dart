@@ -1,27 +1,45 @@
-import 'package:flutter/material.dart';
-
 import 'package:auto_route/auto_route.dart';
+import 'package:core/core.dart';
 
-import 'package:app/common/common.dart';
-import 'package:app/config/router/app_tabs_router.dart';
-import 'package:app/src/browse/presentation/presentation.dart';
-import 'package:app/src/discover/presentation/presentation.dart';
-import 'package:app/src/reader/presentation/presentation.dart';
+import 'package:app/config/router/app_router.gr.dart';
+import 'package:app/injector/injector.dart';
 
-part 'app_router.gr.dart';
+class AppNavigation {
+  const AppNavigation();
+
+  static late final String _initialLocation;
+
+  static Future<void> setupRouter() async {
+    _initialLocation = await _getInitialLocation();
+  }
+
+  static Future<String> _getInitialLocation() async {
+    final prefs = getIt<SharedPrefsManager>();
+
+    final location = await prefs.read<String>(StorageKeys.initialLocation);
+
+    return location ?? DiscoverRoute.name;
+  }
+}
 
 @AutoRouterConfig()
-class AppRouter extends _$AppRouter {
+class AppRouter extends $AppRouter {
   @override
   RouteType get defaultRouteType => const RouteType.cupertino();
 
-  final isDiscoverInitial = true;
+  bool get isLibraryInitial {
+    return AppNavigation._initialLocation == 'LibraryRoute.name';
+  }
+
+  bool get isDiscoverInitial {
+    return !isLibraryInitial;
+  }
 
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
           initial: true,
-          page: AppTabsRouterRoute.page,
+          page: AppTabsRouter.page,
           children: [
             AutoRoute(
               page: EmptyDiscoverRoute.page,

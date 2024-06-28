@@ -30,7 +30,7 @@ class DiscoverContentCubit extends Cubit<DiscoverContentState> {
             source,
             title: novel.title,
             cover: novel.cover,
-            link: novel.url,
+            link: novel.link,
           ),
         )
         .toList();
@@ -52,7 +52,7 @@ class DiscoverContentCubit extends Cubit<DiscoverContentState> {
             source,
             title: novel.title,
             cover: novel.cover,
-            link: novel.url,
+            link: novel.link,
           ),
         )
         .toList();
@@ -74,7 +74,7 @@ class DiscoverContentCubit extends Cubit<DiscoverContentState> {
             source,
             title: novel.title,
             cover: novel.cover,
-            link: novel.url,
+            link: novel.link,
           ),
         )
         .toList();

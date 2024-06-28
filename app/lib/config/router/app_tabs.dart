@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
 
-import 'package:go_router/go_router.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/config/router/app_router.gr.dart';
 
-class TabsScaffold extends StatelessWidget {
-  const TabsScaffold({required this.navigationShell, super.key});
-
-  final StatefulNavigationShell navigationShell;
+@RoutePage(name: 'AppTabsRouter')
+class AppTabs extends StatelessWidget {
+  const AppTabs({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const AutoTabsScaffold(
+      animationCurve: Curves.easeInOut,
+      routes: [
+        EmptyDiscoverRoute(),
+        BrowseRoute(),
+      ],
       extendBody: true,
-      body: navigationShell,
-      bottomNavigationBar: AppNavigationBar(
-        selectedIndex: navigationShell.currentIndex,
-        onTap: (index) => goToBranch(index, navigationShell),
-      ),
+      bottomNavigationBuilder: _bottomNavigationBuilder,
     );
   }
+}
 
-  void goToBranch(int index, StatefulNavigationShell navigationShell) {
-    navigationShell.goBranch(
-      index,
-      initialLocation: index == navigationShell.currentIndex,
-    );
-  }
+AppNavigationBar _bottomNavigationBuilder(
+  BuildContext _,
+  TabsRouter tabsRouter,
+) {
+  return AppNavigationBar(
+    selectedIndex: tabsRouter.activeIndex,
+    onTap: (index) {
+      tabsRouter.setActiveIndex(index);
+    },
+  );
 }

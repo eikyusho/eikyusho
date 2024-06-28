@@ -7,37 +7,51 @@
 // ignore_for_file: type=lint
 // coverage:ignore-file
 
-part of 'app_router.dart';
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 
-abstract class _$AppRouter extends RootStackRouter {
-  // ignore: unused_element
-  _$AppRouter({super.navigatorKey});
+import 'package:flutter/material.dart' as _i10;
+
+import 'package:auto_route/auto_route.dart' as _i8;
+
+import 'package:app/common/common.dart' as _i9;
+import 'package:app/config/router/app_tabs.dart' as _i1;
+import 'package:app/src/browse/presentation/views/browse_page.dart' as _i2;
+import 'package:app/src/browse/presentation/views/extensions_page.dart' as _i6;
+import 'package:app/src/discover/presentation/views/discover_page.dart' as _i5;
+import 'package:app/src/reader/presentation/views/chapter_page.dart' as _i3;
+import 'package:app/src/reader/presentation/views/novel_page.dart' as _i7;
+
+import 'package:app/src/discover/presentation/views/discover_list_page.dart'
+    as _i4;
+
+abstract class $AppRouter extends _i8.RootStackRouter {
+  $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, PageFactory> pagesMap = {
-    AppTabsRouterRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+  final Map<String, _i8.PageFactory> pagesMap = {
+    AppTabsRouter.name: (routeData) {
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AppTabsRouterPage(),
+        child: const _i1.AppTabs(),
       );
     },
     BrowseRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const BrowsePage(),
+        child: const _i2.BrowsePage(),
       );
     },
     ChapterRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ChapterPage(),
+        child: const _i3.ChapterPage(),
       );
     },
     DiscoverListRoute.name: (routeData) {
       final args = routeData.argsAs<DiscoverListRouteArgs>();
-      return AutoRoutePage<dynamic>(
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: DiscoverListPage(
+        child: _i4.DiscoverListPage(
           novels: args.novels,
           title: args.title,
           key: args.key,
@@ -45,29 +59,29 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     DiscoverRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const DiscoverPage(),
+        child: const _i5.DiscoverPage(),
       );
     },
     EmptyDiscoverRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(child: const EmptyDiscoverPage()),
+        child: _i8.WrappedRoute(child: const _i5.EmptyDiscoverPage()),
       );
     },
     ExtensionsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(child: const ExtensionsPage()),
+        child: _i8.WrappedRoute(child: const _i6.ExtensionsPage()),
       );
     },
     NovelRoute.name: (routeData) {
       final args = routeData.argsAs<NovelRouteArgs>();
-      return AutoRoutePage<dynamic>(
+      return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(
-            child: NovelPage(
+        child: _i8.WrappedRoute(
+            child: _i7.NovelPage(
           novel: args.novel,
           key: args.key,
         )),
@@ -77,23 +91,23 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [AppTabsRouterPage]
-class AppTabsRouterRoute extends PageRouteInfo<void> {
-  const AppTabsRouterRoute({List<PageRouteInfo>? children})
+/// [_i1.AppTabs]
+class AppTabsRouter extends _i8.PageRouteInfo<void> {
+  const AppTabsRouter({List<_i8.PageRouteInfo>? children})
       : super(
-          AppTabsRouterRoute.name,
+          AppTabsRouter.name,
           initialChildren: children,
         );
 
-  static const String name = 'AppTabsRouterRoute';
+  static const String name = 'AppTabsRouter';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [BrowsePage]
-class BrowseRoute extends PageRouteInfo<void> {
-  const BrowseRoute({List<PageRouteInfo>? children})
+/// [_i2.BrowsePage]
+class BrowseRoute extends _i8.PageRouteInfo<void> {
+  const BrowseRoute({List<_i8.PageRouteInfo>? children})
       : super(
           BrowseRoute.name,
           initialChildren: children,
@@ -101,13 +115,13 @@ class BrowseRoute extends PageRouteInfo<void> {
 
   static const String name = 'BrowseRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [ChapterPage]
-class ChapterRoute extends PageRouteInfo<void> {
-  const ChapterRoute({List<PageRouteInfo>? children})
+/// [_i3.ChapterPage]
+class ChapterRoute extends _i8.PageRouteInfo<void> {
+  const ChapterRoute({List<_i8.PageRouteInfo>? children})
       : super(
           ChapterRoute.name,
           initialChildren: children,
@@ -115,17 +129,17 @@ class ChapterRoute extends PageRouteInfo<void> {
 
   static const String name = 'ChapterRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [DiscoverListPage]
-class DiscoverListRoute extends PageRouteInfo<DiscoverListRouteArgs> {
+/// [_i4.DiscoverListPage]
+class DiscoverListRoute extends _i8.PageRouteInfo<DiscoverListRouteArgs> {
   DiscoverListRoute({
-    required List<Novel> novels,
+    required List<_i9.Novel> novels,
     required String title,
-    Key? key,
-    List<PageRouteInfo>? children,
+    _i10.Key? key,
+    List<_i8.PageRouteInfo>? children,
   }) : super(
           DiscoverListRoute.name,
           args: DiscoverListRouteArgs(
@@ -138,8 +152,8 @@ class DiscoverListRoute extends PageRouteInfo<DiscoverListRouteArgs> {
 
   static const String name = 'DiscoverListRoute';
 
-  static const PageInfo<DiscoverListRouteArgs> page =
-      PageInfo<DiscoverListRouteArgs>(name);
+  static const _i8.PageInfo<DiscoverListRouteArgs> page =
+      _i8.PageInfo<DiscoverListRouteArgs>(name);
 }
 
 class DiscoverListRouteArgs {
@@ -149,11 +163,11 @@ class DiscoverListRouteArgs {
     this.key,
   });
 
-  final List<Novel> novels;
+  final List<_i9.Novel> novels;
 
   final String title;
 
-  final Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {
@@ -162,9 +176,9 @@ class DiscoverListRouteArgs {
 }
 
 /// generated route for
-/// [DiscoverPage]
-class DiscoverRoute extends PageRouteInfo<void> {
-  const DiscoverRoute({List<PageRouteInfo>? children})
+/// [_i5.DiscoverPage]
+class DiscoverRoute extends _i8.PageRouteInfo<void> {
+  const DiscoverRoute({List<_i8.PageRouteInfo>? children})
       : super(
           DiscoverRoute.name,
           initialChildren: children,
@@ -172,13 +186,13 @@ class DiscoverRoute extends PageRouteInfo<void> {
 
   static const String name = 'DiscoverRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [EmptyDiscoverPage]
-class EmptyDiscoverRoute extends PageRouteInfo<void> {
-  const EmptyDiscoverRoute({List<PageRouteInfo>? children})
+/// [_i5.EmptyDiscoverPage]
+class EmptyDiscoverRoute extends _i8.PageRouteInfo<void> {
+  const EmptyDiscoverRoute({List<_i8.PageRouteInfo>? children})
       : super(
           EmptyDiscoverRoute.name,
           initialChildren: children,
@@ -186,13 +200,13 @@ class EmptyDiscoverRoute extends PageRouteInfo<void> {
 
   static const String name = 'EmptyDiscoverRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [ExtensionsPage]
-class ExtensionsRoute extends PageRouteInfo<void> {
-  const ExtensionsRoute({List<PageRouteInfo>? children})
+/// [_i6.ExtensionsPage]
+class ExtensionsRoute extends _i8.PageRouteInfo<void> {
+  const ExtensionsRoute({List<_i8.PageRouteInfo>? children})
       : super(
           ExtensionsRoute.name,
           initialChildren: children,
@@ -200,16 +214,16 @@ class ExtensionsRoute extends PageRouteInfo<void> {
 
   static const String name = 'ExtensionsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [NovelPage]
-class NovelRoute extends PageRouteInfo<NovelRouteArgs> {
+/// [_i7.NovelPage]
+class NovelRoute extends _i8.PageRouteInfo<NovelRouteArgs> {
   NovelRoute({
-    required Novel novel,
-    Key? key,
-    List<PageRouteInfo>? children,
+    required _i9.Novel novel,
+    _i10.Key? key,
+    List<_i8.PageRouteInfo>? children,
   }) : super(
           NovelRoute.name,
           args: NovelRouteArgs(
@@ -221,7 +235,8 @@ class NovelRoute extends PageRouteInfo<NovelRouteArgs> {
 
   static const String name = 'NovelRoute';
 
-  static const PageInfo<NovelRouteArgs> page = PageInfo<NovelRouteArgs>(name);
+  static const _i8.PageInfo<NovelRouteArgs> page =
+      _i8.PageInfo<NovelRouteArgs>(name);
 }
 
 class NovelRouteArgs {
@@ -230,9 +245,9 @@ class NovelRouteArgs {
     this.key,
   });
 
-  final Novel novel;
+  final _i9.Novel novel;
 
-  final Key? key;
+  final _i10.Key? key;
 
   @override
   String toString() {

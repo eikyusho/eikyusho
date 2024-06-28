@@ -13,7 +13,7 @@ class NovelRemoteDataProvider {
       cover: novel.cover,
       link: novel.link,
       author: novelDetails.author,
-      chapterCount: novelDetails.chapterCount,
+      chapterCount: novelDetails.chapters,
       status: novelDetails.status,
       viewCount: novelDetails.views,
       description: novelDetails.description,

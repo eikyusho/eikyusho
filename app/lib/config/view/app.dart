@@ -7,7 +7,9 @@ import 'package:app/config/router/app_router.dart';
 import 'package:app/config/view/provider.dart';
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class MainApp extends StatelessWidget {
 
         // Routing
         restorationScopeId: AppConstants.appId,
-        routerConfig: AppNavigation.config,
+        routerConfig: _appRouter.config(),
       ),
     );
   }

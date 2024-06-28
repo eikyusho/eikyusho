@@ -27,7 +27,7 @@ dependencies:
 
 
   # * Routing
-  go_router: ^14.2.0
+  auto_route: ^8.2.0
 
   # * State Management
   flutter_bloc: ^8.1.6
@@ -46,7 +46,9 @@ dependencies:
 dev_dependencies:
   # ! Code Generation
   build_runner: any
+
   # * Generator Packages
+  auto_route_generator: any # ? For AutoRoute
   injectable_generator: ^2.6.1 # ? For Injectable
 
   # ! Testing

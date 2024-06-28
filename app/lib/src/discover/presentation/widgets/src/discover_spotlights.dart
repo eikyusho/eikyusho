@@ -5,6 +5,7 @@ import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/config/app.dart';
 import 'package:app/src/discover/presentation/cubits/cubits.dart';
 
 class DiscoverSpotlights extends StatelessWidget {
@@ -29,16 +30,17 @@ class DiscoverSpotlights extends StatelessWidget {
         }
 
         return CarouselSlider(
-            options: CarouselOptions(
-              height: height,
-              enlargeCenterPage: true,
-              viewportFraction: 0.65,
-              clipBehavior: Clip.none,
-            ),
-            items: state.spotlights
-                .map((novel) => _SpotlightItem(novel: novel))
-                .take(5)
-                .toList());
+          options: CarouselOptions(
+            height: height,
+            enlargeCenterPage: true,
+            viewportFraction: 0.65,
+            clipBehavior: Clip.none,
+          ),
+          items: state.spotlights
+              .map((novel) => _SpotlightItem(novel: novel))
+              .take(5)
+              .toList(),
+        );
       },
     ).px(AppDimens.defaultHorizontalPadding);
   }
@@ -58,7 +60,11 @@ class _SpotlightItem extends StatelessWidget {
       child: ClickableElement(
         borderRadius: AppDimens.radiusLg,
         animation: ClickableElementAnimation.shrink,
-        onTap: () {},
+        onTap: () {
+          context.router.push(
+            NovelRoute(novel: novel),
+          );
+        },
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(

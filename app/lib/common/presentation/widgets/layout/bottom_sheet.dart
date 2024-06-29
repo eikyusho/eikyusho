@@ -52,8 +52,8 @@ class AppBottomSheet extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colors.background,
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(AppDimens.radiusXl),
-          topRight: Radius.circular(AppDimens.radiusXl),
+          topLeft: Radius.circular(AppDimens.radius2Xl),
+          topRight: Radius.circular(AppDimens.radius2Xl),
         ),
       ),
       child: Column(

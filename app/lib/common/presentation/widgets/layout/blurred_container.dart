@@ -21,6 +21,12 @@ class BlurredContainer extends StatelessWidget {
   }
 }
 
-Color getBlurredBgColor(BuildContext context) {
-  return context.colors.background.withOpacity(AppMisc.blurBgOpacity);
+Color getBlurredBgColor(BuildContext context, {Color? color, double? opacity}) {
+  if (color != null) {
+    return color.withOpacity(opacity ?? AppMisc.blurBgOpacity);
+  }
+
+  return context.colors.background.withOpacity(
+    opacity ?? AppMisc.blurBgOpacity,
+  );
 }

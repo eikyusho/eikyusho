@@ -14,6 +14,8 @@ class ChapterTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final date = chapter.date.isEmpty ? 'N/A' : chapter.date;
+
     return ClickableElement(
       borderRadius: AppDimens.radiusLg,
       onTap: () {
@@ -47,7 +49,7 @@ class ChapterTile extends StatelessWidget {
                     color: context.colors.textPrimary,
                   ),
                   const VSpace(AppDimens.xs),
-                  Text(chapter.date).textStyle(
+                  Text(date).textStyle(
                     context.textTheme.bodyXs.regular,
                     color: context.colors.textAuxiliary,
                   ),

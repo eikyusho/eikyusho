@@ -21,10 +21,10 @@ final class AppMisc {
 
   // Blur bg opacity
   /// Opacity: 0.65
-  static const double blurBgOpacity = 0.65;
+  static const double blurBgOpacity = 0.75;
 
   /// Opacity: 0.5
-  static const double blurBgOpacityVariant = 0.5;
+  static const double blurBgOpacityVariant = 0.6;
 
   /// BlendMode: srcIn
   static const BlendMode blendMode = BlendMode.srcIn;

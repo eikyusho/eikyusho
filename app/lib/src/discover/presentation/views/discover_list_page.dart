@@ -32,39 +32,19 @@ class DiscoverListPage extends StatelessWidget {
   }
 
   Widget buildPage() {
-    return Builder(
-      builder: (context) {
-        final padding = context.screenPadding;
-
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: .55,
-            crossAxisSpacing: AppDimens.sm,
-            mainAxisSpacing: AppDimens.md,
-          ),
-          padding: EdgeInsets.only(
-            top: padding.top + AppDimens.$2xl,
-            bottom: padding.bottom + AppDimens.$2xl,
-            left: AppDimens.defaultHorizontalPadding,
-            right: AppDimens.defaultHorizontalPadding,
-          ),
-          itemBuilder: (context, index) {
-            final novel = novels[index];
-
-            return ClickableElement(
-              onTap: () {
-                context.router.push(
-                  NovelRoute(novel: novel),
-                );
-              },
-              child: NovelCard(
-                title: novel.title,
-                cover: NetworkImage(novel.cover),
-              ),
+    return NovelGrid(
+      novels: novels,
+      builder: (context, novel) {
+        return ClickableElement(
+          onTap: () {
+            context.router.push(
+              NovelRoute(novel: novel),
             );
           },
-          itemCount: novels.length,
+          child: NovelCard(
+            title: novel.title,
+            cover: NetworkImage(novel.cover),
+          ),
         );
       },
     );

@@ -42,8 +42,11 @@ final class AppDimens {
   /// Radius: 12
   static const double radiusLg = 12;
 
+  /// Radius: 16
+  static const double radiusXl = 16;
+
   /// Radius: 24
-  static const double radiusXl = 24;
+  static const double radius2Xl = 24;
 
   // * || Button
   /// Size: 20

@@ -39,7 +39,8 @@ final class AppStrings {
   static String buttonConfirm = 'Confirm';
   static String buttonSelectSource = 'Select Source';
   static String buttonWebView = 'WebView';
-  static String buttonNextChapter = 'Next Chapter';
+  static String buttonRead = 'Read';
+  static String buttonContinueReading = 'Continue';
 
   /// Label
   static String labelVersion = 'Version';

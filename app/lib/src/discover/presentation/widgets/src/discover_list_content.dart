@@ -56,6 +56,7 @@ class DiscoverListContent extends StatelessWidget {
       itemBuilder: (context, index) {
         final novel = novels[index];
         return ClickableElement(
+          animation: ClickableElementAnimation.grow,
           onTap: () {
             context.router.push(NovelRoute(novel: novel));
           },

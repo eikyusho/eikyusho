@@ -69,7 +69,7 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
             ),
             const VSpace(AppDimens.$2xl),
             NovelStats(
-              chapterCount: novel.chapters,
+              chapterCount: novel.chapterCount,
               status: novelStatus,
               viewCount: Formatter.viewCount(novel.views),
             ),

@@ -1,14 +1,13 @@
-import 'dart:io';
-
 import 'package:core/core.dart';
 import 'package:database/database.dart';
-import 'package:eikyusho_extensions/extensions.dart';
 import 'package:eikyusho_web_scraper/eikyusho_web_scraper.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:app/common/utils/utils.dart';
+
 @lazySingleton
 class DiscoverLocalDataProvider {
-  DiscoverLocalDataProvider(this._prefsManager, this._db);
+  const DiscoverLocalDataProvider(this._prefsManager, this._db);
 
   final SharedPrefsManager _prefsManager;
   final EikyushoDatabase _db;
@@ -49,14 +48,7 @@ class DiscoverLocalDataProvider {
 
   Future<EikyushoSource?> getDiscoverSource(String uuid) async {
     try {
-      final sourcePath = await getSourcePath(uuid);
-      final sourceFile = Path.join(sourcePath, Constants.xmlFile);
-
-      final sourceData = File(sourceFile);
-
-      final parser = EikyushoParser(sourceData.readAsStringSync());
-
-      return EikyushoSource(parser, uuid);
+      return loadSource(uuid);
     } catch (e) {
       throw StorageException(e.toString());
     }

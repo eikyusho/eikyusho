@@ -36,6 +36,7 @@ class DiscoverListPage extends StatelessWidget {
       novels: novels,
       builder: (context, novel) {
         return ClickableElement(
+          animation: ClickableElementAnimation.grow,
           onTap: () {
             context.router.push(
               NovelRoute(novel: novel),

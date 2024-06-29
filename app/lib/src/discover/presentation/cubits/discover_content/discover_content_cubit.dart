@@ -16,8 +16,8 @@ class DiscoverContentCubit extends Cubit<DiscoverContentState> {
       await _fetchSpotlights(source);
       await _fetchMostPopular(source);
       await _fetchRecentlyUpdated(source);
-    } catch (e) {
-      emit(DiscoverContentError(e.toString()));
+    } on Exception catch (e) {
+      emit(DiscoverContentError(e));
     }
   }
 

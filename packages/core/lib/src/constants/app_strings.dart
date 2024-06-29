@@ -39,6 +39,7 @@ final class AppStrings {
   static String buttonConfirm = 'Confirm';
   static String buttonSelectSource = 'Select Source';
   static String buttonWebView = 'WebView';
+  static String buttonNextChapter = 'Next Chapter';
 
   /// Label
   static String labelVersion = 'Version';
@@ -80,9 +81,12 @@ final class AppStrings {
   static String emptyStateDescriptionErrorLoading =
       "Couldn't establish a connection.";
 
+  static String emptyStateErrorLoadingNovel = "Couldn't load the novel list.";
+
   /// Tips
   static String tipDoubleTapDiscover =
       'Double tap "Discover" to see the WebView.';
+  static String tipOpenWebView = 'Open WebView to check the content.';
 
   /// Snackbars
   static String extensionInstalled = 'Extension installed';

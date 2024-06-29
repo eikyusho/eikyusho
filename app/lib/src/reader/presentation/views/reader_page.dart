@@ -1,15 +1,14 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/config/app.dart';
 import 'package:app/injector/injector.dart';
 import 'package:app/src/reader/data/data.dart';
 import 'package:app/src/reader/presentation/cubits/cubits.dart';
-import 'package:resources/resources.dart';
 
 @RoutePage()
 class ReaderPage extends StatefulWidget implements AutoRouteWrapper {

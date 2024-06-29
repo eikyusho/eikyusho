@@ -36,7 +36,11 @@ class DiscoverPage extends StatelessWidget {
     bool canShowBottomSheet(DiscoverState state) {
       if (state is DiscoverEmpty) return false;
 
-      if (state is DiscoverError) return false;
+      if (state is DiscoverError) {
+        if (state.sources == null) {
+          return false;
+        }
+      }
 
       return true;
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 
@@ -23,12 +24,18 @@ class DiscoverListContent extends StatelessWidget {
     }
 
     if (novels.isEmpty) {
-      return Container(
-        alignment: Alignment.center,
-        child: Text(
-          '||REPLACE|| ERROR',
-          style: context.textTheme.bodySm.medium,
-        ),
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Assets.images.notFound.image(
+            width: context.responsiveWidth(.5),
+          ),
+          const VSpace(AppDimens.md),
+          Text(AppStrings.emptyStateErrorLoadingNovel).textStyle(
+            context.textTheme.bodySm.medium,
+            color: context.colors.textPrimary,
+          ),
+        ],
       );
     }
 

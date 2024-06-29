@@ -55,10 +55,10 @@ final class DiscoverContentInitial extends DiscoverContentState {
 }
 
 final class DiscoverContentError extends DiscoverContentState {
-  const DiscoverContentError(this.message);
+  const DiscoverContentError(this.error);
 
-  final String message;
+  final Exception error;
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [error];
 }

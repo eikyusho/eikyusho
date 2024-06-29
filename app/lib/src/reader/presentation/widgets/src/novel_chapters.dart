@@ -9,14 +9,9 @@ import 'package:app/src/reader/presentation/cubits/cubits.dart';
 import 'package:app/src/reader/presentation/widgets/src/chapter_tile.dart';
 
 class NovelChapters extends StatelessWidget {
-  const NovelChapters({
-    required this.novel,
-    required this.isAscending,
-    super.key,
-  });
+  const NovelChapters({required this.novel, super.key});
 
   final NovelDetails novel;
-  final ValueNotifier<bool> isAscending;
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +27,14 @@ class NovelChapters extends StatelessWidget {
                 color: context.colors.textPrimary,
               ),
               ValueListenableBuilder(
-                valueListenable: isAscending,
+                valueListenable: context.read<NovelCubit>().isAscending,
                 builder: (context, value, child) {
                   return AppIconButton(
                     value
                         ? Assets.icons.sortAscendingBold
                         : Assets.icons.sortDescendingBold,
                     color: context.colors.background,
-                    onPressed: () {
-                      isAscending.value = !isAscending.value;
-                    },
+                    onPressed: context.read<NovelCubit>().toggleSort,
                   );
                 },
               ),
@@ -56,7 +49,7 @@ class NovelChapters extends StatelessWidget {
             }
 
             return ValueListenableBuilder(
-              valueListenable: isAscending,
+              valueListenable: context.read<NovelCubit>().isAscending,
               builder: (context, value, child) {
                 return Column(
                   children: gapView(
@@ -80,6 +73,7 @@ class NovelChapters extends StatelessWidget {
       ...state.chapters.map((chapter) {
         return ChapterTile(
           chapter: chapter,
+          chapters: state.chapters,
         );
       }),
       if (state.isLoading) ...[

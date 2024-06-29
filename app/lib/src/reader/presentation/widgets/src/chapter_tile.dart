@@ -7,9 +7,10 @@ import 'package:app/common/common.dart';
 import 'package:app/config/app.dart';
 
 class ChapterTile extends StatelessWidget {
-  const ChapterTile({required this.chapter, super.key});
+  const ChapterTile({required this.chapter, required this.chapters, super.key});
 
   final Chapter chapter;
+  final List<Chapter> chapters;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ChapterTile extends StatelessWidget {
       borderRadius: AppDimens.radiusLg,
       onTap: () {
         context.router.push(
-          ChapterRoute(chapter: chapter),
+          ReaderRoute(chapter: chapter, chapters: chapters),
         );
       },
       child: Container(

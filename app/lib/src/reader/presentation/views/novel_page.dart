@@ -21,19 +21,15 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-      NovelCubit(
+      create: (context) => NovelCubit(
         getIt<NovelRepository>(),
-      )
-        ..getNovelDetails(novel),
+      )..getNovelDetails(novel),
       child: this,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final isAscending = ValueNotifier(true);
-
     return Scaffold(
       appBar: MainAppBar(
         showBackButton: true,
@@ -44,7 +40,7 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
         builder: (context, state) {
           return switch (state) {
             NovelLoading() => const Loading(),
-            NovelLoaded() => buildPage(state, isAscending),
+            NovelLoaded() => buildPage(state),
             NovelError() => buildErrorPage(state),
           };
         },
@@ -52,7 +48,7 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
     );
   }
 
-  Widget buildPage(NovelLoaded state, ValueNotifier<bool> isAscending) {
+  Widget buildPage(NovelLoaded state) {
     final novel = state.novel;
 
     final status = novel.source.getStatus(novel.status);
@@ -90,7 +86,7 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
           },
         ),
         const VSpace(AppDimens.sm),
-        NovelChapters(novel: novel, isAscending: isAscending),
+        NovelChapters(novel: novel),
       ],
     );
   }

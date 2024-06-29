@@ -45,6 +45,10 @@ class NovelRemoteDataProvider {
       throw ServerException.fromException(e);
     }
   }
+
+  Future<String> getChapter(Chapter chapter) async {
+    try {
+      return await chapter.novel.source.getChapterContent(chapter.link);
     } catch (e) {
       throw ServerException.fromException(e);
     }

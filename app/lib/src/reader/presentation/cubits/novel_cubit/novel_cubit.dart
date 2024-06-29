@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:app/common/common.dart';
@@ -11,6 +12,7 @@ class NovelCubit extends Cubit<NovelState> {
   NovelCubit(this._novelRepository) : super(NovelLoading());
 
   final NovelRepository _novelRepository;
+  final ValueNotifier<bool> isAscending = ValueNotifier(true);
 
   Future<void> getNovelDetails(Novel novel) async {
     emit(NovelLoading());
@@ -33,13 +35,7 @@ class NovelCubit extends Cubit<NovelState> {
     }
   }
 
-  void _addChapters(NovelDetails novel, List<Chapter> chapters) {
-    if (state is! NovelLoaded) return;
-
-    final newChapters = [...(state as NovelLoaded).chapters, ...chapters];
-
-    emit(
-      NovelLoaded(novel, chapters: newChapters, isLoading: true),
-    );
+  void toggleSort() {
+    isAscending.value = !isAscending.value;
   }
 }

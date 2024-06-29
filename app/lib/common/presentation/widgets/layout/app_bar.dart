@@ -26,7 +26,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actionButton,
   });
 
-  final Widget? title;
+  final Text? title;
   final bool showLogo;
   final bool showBackButton;
   final bool showNotificationButton;
@@ -71,10 +71,21 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                     Positioned(
                       left: 0,
                       right: 0,
-                      child: title!.textStyle(
-                        context.textTheme.titleSm.bold,
-                        color: context.colors.textPrimary,
-                        align: TextAlign.center,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: context.responsiveWidth(0.62),
+                            child: Text(
+                              title!.data!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ).textStyle(
+                              context.textTheme.titleSm.bold,
+                              color: context.colors.textPrimary,
+                              align: TextAlign.center,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   if (showBackButton)

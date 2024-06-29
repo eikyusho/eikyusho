@@ -54,6 +54,6 @@ class AppRouter extends $AppRouter {
         ),
         AutoRoute(page: ExtensionsRoute.page),
         AutoRoute(page: NovelRoute.page),
-        AutoRoute(page: ChapterRoute.page),
+        AutoRoute(page: ReaderRoute.page),
       ];
 }

@@ -8,21 +8,18 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-import 'package:flutter/material.dart' as _i10;
-
-import 'package:auto_route/auto_route.dart' as _i8;
-
 import 'package:app/common/common.dart' as _i9;
 import 'package:app/config/router/app_tabs.dart' as _i1;
 import 'package:app/src/browse/presentation/views/browse_page.dart' as _i2;
-import 'package:app/src/browse/presentation/views/extensions_page.dart' as _i6;
-import 'package:app/src/discover/presentation/views/discover_page.dart' as _i5;
-import 'package:app/src/reader/presentation/views/novel_page.dart' as _i7;
-import 'package:app/src/reader/presentation/views/reader_page.dart' as _i3;
-
+import 'package:app/src/browse/presentation/views/extensions_page.dart' as _i5;
 import 'package:app/src/discover/presentation/views/discover_list_page.dart'
-    as _i4;
+    as _i3;
+import 'package:app/src/discover/presentation/views/discover_page.dart' as _i4;
+import 'package:app/src/reader/presentation/views/novel_page.dart' as _i6;
+import 'package:app/src/reader/presentation/views/reader_page.dart' as _i7;
+import 'package:auto_route/auto_route.dart' as _i8;
+import 'package:flutter/cupertino.dart' as _i11;
+import 'package:flutter/material.dart' as _i10;
 
 abstract class $AppRouter extends _i8.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -41,21 +38,11 @@ abstract class $AppRouter extends _i8.RootStackRouter {
         child: const _i2.BrowsePage(),
       );
     },
-    ChapterRoute.name: (routeData) {
-      final args = routeData.argsAs<ChapterRouteArgs>();
-      return _i8.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i3.ReaderPage(
-          chapter: args.chapter,
-          key: args.key,
-        ),
-      );
-    },
     DiscoverListRoute.name: (routeData) {
       final args = routeData.argsAs<DiscoverListRouteArgs>();
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i4.DiscoverListPage(
+        child: _i3.DiscoverListPage(
           novels: args.novels,
           title: args.title,
           key: args.key,
@@ -65,19 +52,19 @@ abstract class $AppRouter extends _i8.RootStackRouter {
     DiscoverRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.DiscoverPage(),
+        child: const _i4.DiscoverPage(),
       );
     },
     EmptyDiscoverRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i8.WrappedRoute(child: const _i5.EmptyDiscoverPage()),
+        child: _i8.WrappedRoute(child: const _i4.EmptyDiscoverPage()),
       );
     },
     ExtensionsRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i8.WrappedRoute(child: const _i6.ExtensionsPage()),
+        child: _i8.WrappedRoute(child: const _i5.ExtensionsPage()),
       );
     },
     NovelRoute.name: (routeData) {
@@ -85,8 +72,20 @@ abstract class $AppRouter extends _i8.RootStackRouter {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i8.WrappedRoute(
-            child: _i7.NovelPage(
+            child: _i6.NovelPage(
           novel: args.novel,
+          key: args.key,
+        )),
+      );
+    },
+    ReaderRoute.name: (routeData) {
+      final args = routeData.argsAs<ReaderRouteArgs>();
+      return _i8.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i8.WrappedRoute(
+            child: _i7.ReaderPage(
+          chapter: args.chapter,
+          chapters: args.chapters,
           key: args.key,
         )),
       );
@@ -123,45 +122,7 @@ class BrowseRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.ReaderPage]
-class ChapterRoute extends _i8.PageRouteInfo<ChapterRouteArgs> {
-  ChapterRoute({
-    required _i9.Chapter chapter,
-    _i10.Key? key,
-    List<_i8.PageRouteInfo>? children,
-  }) : super(
-          ChapterRoute.name,
-          args: ChapterRouteArgs(
-            chapter: chapter,
-            key: key,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'ChapterRoute';
-
-  static const _i8.PageInfo<ChapterRouteArgs> page =
-      _i8.PageInfo<ChapterRouteArgs>(name);
-}
-
-class ChapterRouteArgs {
-  const ChapterRouteArgs({
-    required this.chapter,
-    this.key,
-  });
-
-  final _i9.Chapter chapter;
-
-  final _i10.Key? key;
-
-  @override
-  String toString() {
-    return 'ChapterRouteArgs{chapter: $chapter, key: $key}';
-  }
-}
-
-/// generated route for
-/// [_i4.DiscoverListPage]
+/// [_i3.DiscoverListPage]
 class DiscoverListRoute extends _i8.PageRouteInfo<DiscoverListRouteArgs> {
   DiscoverListRoute({
     required List<_i9.Novel> novels,
@@ -204,7 +165,7 @@ class DiscoverListRouteArgs {
 }
 
 /// generated route for
-/// [_i5.DiscoverPage]
+/// [_i4.DiscoverPage]
 class DiscoverRoute extends _i8.PageRouteInfo<void> {
   const DiscoverRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -218,7 +179,7 @@ class DiscoverRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.EmptyDiscoverPage]
+/// [_i4.EmptyDiscoverPage]
 class EmptyDiscoverRoute extends _i8.PageRouteInfo<void> {
   const EmptyDiscoverRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -232,7 +193,7 @@ class EmptyDiscoverRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.ExtensionsPage]
+/// [_i5.ExtensionsPage]
 class ExtensionsRoute extends _i8.PageRouteInfo<void> {
   const ExtensionsRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -246,7 +207,7 @@ class ExtensionsRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.NovelPage]
+/// [_i6.NovelPage]
 class NovelRoute extends _i8.PageRouteInfo<NovelRouteArgs> {
   NovelRoute({
     required _i9.Novel novel,
@@ -280,5 +241,48 @@ class NovelRouteArgs {
   @override
   String toString() {
     return 'NovelRouteArgs{novel: $novel, key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i7.ReaderPage]
+class ReaderRoute extends _i8.PageRouteInfo<ReaderRouteArgs> {
+  ReaderRoute({
+    required _i9.Chapter chapter,
+    required List<_i9.Chapter> chapters,
+    _i11.Key? key,
+    List<_i8.PageRouteInfo>? children,
+  }) : super(
+          ReaderRoute.name,
+          args: ReaderRouteArgs(
+            chapter: chapter,
+            chapters: chapters,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ReaderRoute';
+
+  static const _i8.PageInfo<ReaderRouteArgs> page =
+      _i8.PageInfo<ReaderRouteArgs>(name);
+}
+
+class ReaderRouteArgs {
+  const ReaderRouteArgs({
+    required this.chapter,
+    required this.chapters,
+    this.key,
+  });
+
+  final _i9.Chapter chapter;
+
+  final List<_i9.Chapter> chapters;
+
+  final _i11.Key? key;
+
+  @override
+  String toString() {
+    return 'ReaderRouteArgs{chapter: $chapter, chapters: $chapters, key: $key}';
   }
 }

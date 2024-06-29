@@ -16,4 +16,8 @@ class NovelRepository {
   Future<List<Chapter>> getNovelChapters(NovelDetails novel) async {
     return _remoteDataProvider.getNovelChapters(novel);
   }
+
+  Future<String> getChapter(Chapter chapter) async {
+    return _remoteDataProvider.getChapter(chapter);
+  }
 }

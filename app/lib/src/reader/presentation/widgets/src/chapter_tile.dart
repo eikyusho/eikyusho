@@ -29,7 +29,7 @@ class ChapterTile extends StatelessWidget {
         color: context.colors.surface,
         child: Row(
           children: [
-            Text('${chapter.number}').textStyle(
+            Text(chapter.number).textStyle(
               context.textTheme.bodyLg.regular,
               color: context.colors.textSecondary,
             ),

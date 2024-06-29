@@ -32,6 +32,15 @@ class ServerException extends _CustomException {
 
   @override
   List<Object?> get props => [message, type, statusCode];
+
+  @override
+  String toString() {
+    if (statusCode == 999) {
+      return message;
+    }
+
+    return super.toString();
+  }
 }
 
 class DatabaseException extends _CustomException {

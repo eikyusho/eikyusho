@@ -103,25 +103,22 @@ class _ReaderPageState extends State<ReaderPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: AppDimens.md),
-                decoration: BoxDecoration(
-                  color: context.colors.surfaceAuxiliary,
-                  borderRadius: BorderRadius.circular(AppDimens.md),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
+              RichText(
+                text: TextSpan(
                   children: [
-                    Text(
-                      '${chapter.number}',
-                      style: TextStyle(color: context.colors.textSecondary),
+                    TextSpan(
+                      text: '${chapter.number} ',
+                      style: context.textTheme.titleSm.regular.copyWith(
+                        color: context.colors.textSecondary,
+                      ),
                     ),
-                    const HSpace(AppDimens.sm),
-                    Text(chapter.title),
+                    TextSpan(
+                      text: chapter.title,
+                      style: context.textTheme.titleSm.medium.copyWith(
+                        color: context.colors.textSubdued,
+                      ),
+                    ),
                   ],
-                ).textStyle(
-                  context.textTheme.titleSm.regular,
-                  color: context.colors.textSubdued,
                 ),
               ),
               const VSpace(AppDimens.$2xl),

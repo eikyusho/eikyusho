@@ -94,20 +94,33 @@ class EmptyPage extends StatelessWidget {
   }
 
   Widget buildInfo(BuildContext context, SvgGenImage icon, String message) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        icon.svg(
-          width: AppDimens.iconMd,
-          height: AppDimens.iconMd,
-          colorFilter: svgColor(context.colors.textSecondary),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDimens.defaultHorizontalPadding,
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            icon.svg(
+              width: AppDimens.iconMd,
+              height: AppDimens.iconMd,
+              colorFilter: svgColor(context.colors.textSecondary),
+            ),
+            const HSpace(AppDimens.sm),
+            Flexible(
+              child: Text(
+                message,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ).textStyle(
+                context.textTheme.bodySm.regular,
+                color: context.colors.textSecondary,
+              ),
+            ),
+          ],
         ),
-        const HSpace(AppDimens.sm),
-        Text(message).textStyle(
-          context.textTheme.bodySm.regular,
-          color: context.colors.textSecondary,
-        ),
-      ],
+      ),
     );
   }
 }

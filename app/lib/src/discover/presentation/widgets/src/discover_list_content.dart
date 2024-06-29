@@ -4,6 +4,7 @@ import 'package:core/core.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/config/app.dart';
 
 class DiscoverListContent extends StatelessWidget {
   const DiscoverListContent({
@@ -54,9 +55,14 @@ class DiscoverListContent extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         final novel = novels[index];
-        return NovelCard(
-          title: novel.title,
-          cover: NetworkImage(novel.cover),
+        return ClickableElement(
+          onTap: () {
+            context.router.push(NovelRoute(novel: novel));
+          },
+          child: NovelCard(
+            title: novel.title,
+            cover: NetworkImage(novel.cover),
+          ),
         );
       },
     );

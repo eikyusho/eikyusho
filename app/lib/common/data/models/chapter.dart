@@ -11,7 +11,7 @@ class Chapter extends Equatable {
     required this.date,
   });
 
-  final int number;
+  final String number;
   final String title;
   final String link;
   final String date;

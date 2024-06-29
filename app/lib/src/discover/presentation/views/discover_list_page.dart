@@ -52,9 +52,16 @@ class DiscoverListPage extends StatelessWidget {
           itemBuilder: (context, index) {
             final novel = novels[index];
 
-            return NovelCard(
-              title: novel.title,
-              cover: NetworkImage(novel.cover),
+            return ClickableElement(
+              onTap: () {
+                context.router.push(
+                  NovelRoute(novel: novel),
+                );
+              },
+              child: NovelCard(
+                title: novel.title,
+                cover: NetworkImage(novel.cover),
+              ),
             );
           },
           itemCount: novels.length,

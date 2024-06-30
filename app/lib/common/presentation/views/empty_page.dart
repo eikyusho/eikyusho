@@ -58,15 +58,17 @@ class EmptyPage extends StatelessWidget {
             ),
             if (hasTip) ...[
               const Spacer(),
-              buildInfo(context, Assets.icons.infoBold, tip!),
+              InfoMessage(
+                icon: Assets.icons.infoBold,
+                message: tip!,
+              ),
               const VSpace(AppDimens.$2xl),
             ],
             if (hasError) ...[
               const Spacer(),
-              buildInfo(
-                context,
-                Assets.icons.warningCircleBold,
-                error!.toString(),
+              InfoMessage(
+                icon: Assets.icons.warningCircleBold,
+                message: error!.toString(),
               ),
               const VSpace(AppDimens.$2xl),
             ],
@@ -91,36 +93,5 @@ class EmptyPage extends StatelessWidget {
     return text.split(' ').map((word) {
       return word[0].toUpperCase() + word.substring(1);
     }).join(' ');
-  }
-
-  Widget buildInfo(BuildContext context, SvgGenImage icon, String message) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppDimens.defaultHorizontalPadding,
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon.svg(
-              width: AppDimens.iconMd,
-              height: AppDimens.iconMd,
-              colorFilter: svgColor(context.colors.textSecondary),
-            ),
-            const HSpace(AppDimens.sm),
-            Flexible(
-              child: Text(
-                message,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ).textStyle(
-                context.textTheme.bodySm.regular,
-                color: context.colors.textSecondary,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

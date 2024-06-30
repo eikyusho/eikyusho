@@ -14,14 +14,23 @@ final class SearchLoading extends SearchState {
   List<Object> get props => [];
 }
 
-final class SearchLoaded extends SearchState {
-  const SearchLoaded(this.novels, {this.isLocalSearch = false});
+final class SearchEmpty extends SearchState {
+  const SearchEmpty({required this.showTip});
 
-  final bool isLocalSearch;
-  final List<Novel> novels;
+  final bool showTip;
 
   @override
-  List<Object> get props => [novels, isLocalSearch];
+  List<Object> get props => [showTip];
+}
+
+final class SearchLoaded extends SearchState {
+  const SearchLoaded(this.novels, {this.showTip = false});
+
+  final List<Novel> novels;
+  final bool showTip;
+
+  @override
+  List<Object> get props => [novels, showTip];
 }
 
 final class SearchError extends SearchState {

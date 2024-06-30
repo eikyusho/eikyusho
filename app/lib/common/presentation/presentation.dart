@@ -10,6 +10,7 @@ export './widgets/components/novel_card.dart';
 export './widgets/components/novel_grid.dart';
 export './widgets/dialogs/dialog.dart';
 export './widgets/form/text_input.dart';
+export './widgets/indicators/info_message.dart';
 export './widgets/indicators/loading.dart';
 export './widgets/interactions/clickable_element.dart';
 export './widgets/layout/app_bar.dart';

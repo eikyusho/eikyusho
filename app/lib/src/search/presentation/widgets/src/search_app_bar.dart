@@ -24,15 +24,25 @@ class SearchAppBar extends MainAppBarChild {
         vertical: AppDimens.lg,
       ),
       height: height,
-      child: TextInput(
-        onChanged: (value) {
-          debouncer.run(() {
-            context.read<SearchCubit>().searchLocally(value);
-          });
+      child: ValueListenableBuilder(
+        valueListenable: context.read<SearchCubit>().globalMode,
+        builder: (context, value, child) {
+          return TextInput(
+            hint: value
+                ? AppStrings.hintSearchGlobally
+                : AppStrings.hintSearchLocally,
+            value: context.read<SearchCubit>().query.value,
+            prefixIcon: Assets.icons.magnifyingGlassBold,
+            suffixIcon: Assets.icons.slidersHorizontalBold,
+            isSuffixActive: true,
+            onChanged: (value) {
+              context.read<SearchCubit>().query.value = value;
+              debouncer.run(() {
+                context.read<SearchCubit>().search(value);
+              });
+            },
+          );
         },
-        prefixIcon: Assets.icons.magnifyingGlassBold,
-        suffixIcon: Assets.icons.slidersHorizontalBold,
-        isSuffixActive: true,
       ),
     );
   }

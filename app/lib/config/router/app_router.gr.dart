@@ -105,7 +105,7 @@ abstract class $AppRouter extends _i11.RootStackRouter {
     SearchRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i11.WrappedRoute(child: const _i9.SearchPage()),
+        child: const _i9.SearchPage(),
       );
     },
     WebViewRoute.name: (routeData) {

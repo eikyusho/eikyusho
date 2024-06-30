@@ -7,6 +7,7 @@ import 'package:resources/resources.dart';
 import 'package:app/common/presentation/widgets/interactions/clickable_element.dart';
 import 'package:app/common/presentation/widgets/layout/blurred_container.dart';
 import 'package:app/src/discover/presentation/cubits/cubits.dart';
+import 'package:app/src/search/presentation/presentation.dart';
 
 @immutable
 final class _Icons {
@@ -65,13 +66,9 @@ class AppNavigationBar extends StatelessWidget {
         child: Row(
           children: List.generate(destinations.length, (index) {
             final destination = destinations[index];
-            final color = index == selectedIndex
-                ? context.colors.primary
-                : context.colors.textSecondary;
-
             return NavigationItem(
               index: index,
-              color: color,
+              selected: index == selectedIndex,
               onTap: () => onTap(index),
               icon: destination.icon,
               label: destination.label,
@@ -93,7 +90,7 @@ class NavbarItem {
 class NavigationItem extends StatelessWidget {
   const NavigationItem({
     required this.index,
-    required this.color,
+    required this.selected,
     required this.onTap,
     required this.icon,
     required this.label,
@@ -101,18 +98,33 @@ class NavigationItem extends StatelessWidget {
   });
 
   final int index;
-  final Color color;
+  final bool selected;
   final SvgGenImage icon;
   final String label;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
+    final color = switch (selected) {
+      true => context.colors.primary,
+      false => context.colors.textSecondary,
+    };
+
     return Expanded(
       child: ClickableElement(
         onTap: onTap,
         onDoubleTap: () {
-          if (index == 0) context.read<DiscoverCubit>().openWebView(context);
+          switch (index) {
+            case 0:
+              context.read<DiscoverCubit>().openWebView(context);
+              return;
+            case 2:
+              if (selected) context.read<SearchCubit>().changeGlobalMode();
+              return;
+            case 3:
+            default:
+              return;
+          }
         },
         animation: ClickableElementAnimation.none,
         child: SizedBox.expand(

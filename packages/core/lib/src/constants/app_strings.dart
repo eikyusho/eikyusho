@@ -53,6 +53,11 @@ final class AppStrings {
   static String labelViews = 'Views';
   static String labelShowMode = 'Show in';
 
+// Hint
+  static String hintSearch = 'Search';
+  static String hintSearchGlobally = 'Search Globally';
+  static String hintSearchLocally = 'Search Locally';
+
   /// Meta
   static String metaDisabled = 'Disabled';
 
@@ -100,9 +105,15 @@ final class AppStrings {
   static String emptyStateDescriptionNoCompletedNovels =
       "You haven't completed any\nnovels yet.";
 
+  static String emptyStateNoResultsFound = 'No Results Found';
+  static String emptyStateDescriptionNoResultsFound =
+      'Try adjusting your search\nto find what you are looking for.';
+
   /// Tips
   static String tipDoubleTapDiscover =
       'Double tap "Discover" to see the WebView.';
+  static String tipSearchGlobally = 'Double tap "Search" to search globally.';
+  static String tipSearchLocally = 'Double tap "Search" to search locally.';
   static String tipOpenWebView = 'Open WebView to check the content.';
 
   /// Snackbars

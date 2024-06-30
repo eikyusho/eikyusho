@@ -6,26 +6,12 @@ import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/config/app.dart';
-import 'package:app/injector/injector.dart';
-import 'package:app/src/library/data/data.dart';
-import 'package:app/src/search/data/data.dart';
 import 'package:app/src/search/presentation/cubits/cubits.dart';
 import 'package:app/src/search/presentation/widgets/widgets.dart';
 
 @RoutePage()
-class SearchPage extends StatelessWidget implements AutoRouteWrapper {
+class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SearchCubit(
-        getIt<SearchRepository>(),
-        getIt<LibraryRepository>(),
-      ),
-      child: this,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +26,7 @@ class SearchPage extends StatelessWidget implements AutoRouteWrapper {
             SearchInitial() => const SizedBox.shrink(),
             SearchLoading() => const Loading(),
             SearchLoaded() => buildPage(state),
+            SearchEmpty() => buildEmptyPage(state),
             SearchError() => buildErrorPage(state.error),
           };
         },
@@ -65,6 +52,27 @@ class SearchPage extends StatelessWidget implements AutoRouteWrapper {
                 child: SearchShowMode(),
               ),
             ),
+            if (state.showTip)
+              SliverPadding(
+                padding: const EdgeInsets.only(
+                  left: AppDimens.defaultHorizontalPadding,
+                  right: AppDimens.defaultHorizontalPadding,
+                  bottom: AppDimens.lg,
+                ),
+                sliver: ValueListenableBuilder(
+                  valueListenable: context.read<SearchCubit>().globalMode,
+                  builder: (context, mode, child) {
+                    return SliverToBoxAdapter(
+                      child: InfoMessage(
+                        icon: Assets.icons.infoBold,
+                        message: mode
+                            ? AppStrings.tipSearchLocally
+                            : AppStrings.tipSearchGlobally,
+                      ),
+                    );
+                  },
+                ),
+              ),
             ValueListenableBuilder(
               valueListenable: context.read<SearchCubit>().showMode,
               builder: (context, mode, child) {
@@ -79,6 +87,15 @@ class SearchPage extends StatelessWidget implements AutoRouteWrapper {
           ],
         );
       },
+    );
+  }
+
+  Widget buildEmptyPage(SearchEmpty state) {
+    return EmptyPage(
+      image: Assets.images.notFound,
+      message: AppStrings.emptyStateNoResultsFound,
+      description: AppStrings.emptyStateDescriptionNoResultsFound,
+      tip: state.showTip ? AppStrings.tipSearchGlobally : null,
     );
   }
 

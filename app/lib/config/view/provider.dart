@@ -8,7 +8,9 @@ import 'package:app/src/browse/presentation/presentation.dart';
 import 'package:app/src/discover/data/data.dart';
 import 'package:app/src/discover/presentation/presentation.dart';
 import 'package:app/src/library/data/data.dart';
-import 'package:app/src/library/presentation/cubits/cubits.dart';
+import 'package:app/src/library/presentation/presentation.dart';
+import 'package:app/src/search/data/data.dart';
+import 'package:app/src/search/presentation/presentation.dart';
 
 class AppProvider extends StatelessWidget {
   const AppProvider({required this.child, super.key});
@@ -29,6 +31,12 @@ class AppProvider extends StatelessWidget {
           create: (_) => LibraryCubit(
             getIt<LibraryRepository>(),
           )..loadLibrary(),
+        ),
+        BlocProvider(
+          create: (_) => SearchCubit(
+            getIt<SearchRepository>(),
+            getIt<LibraryRepository>(),
+          ),
         ),
         BlocProvider(
           create: (_) => BrowseCubit(

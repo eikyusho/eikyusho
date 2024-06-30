@@ -8,6 +8,7 @@ import 'package:app/common/common.dart';
 class TextInput extends StatefulWidget {
   const TextInput({
     required this.prefixIcon,
+    required this.hint,
     this.suffixIcon,
     this.isSuffixActive = false,
     this.onSuffixPressed,
@@ -17,6 +18,7 @@ class TextInput extends StatefulWidget {
   });
 
   final String value;
+  final String hint;
   final SvgGenImage prefixIcon;
   final SvgGenImage? suffixIcon;
   final bool isSuffixActive;
@@ -97,7 +99,7 @@ class _TextInputState extends State<TextInput> {
                   color: context.colors.textAuxiliary,
                 ),
                 contentPadding: EdgeInsets.zero,
-                hintText: 'Search',
+                hintText: widget.hint,
               ),
             ),
           ),

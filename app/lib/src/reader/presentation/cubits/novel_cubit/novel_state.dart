@@ -14,6 +14,7 @@ final class NovelLoading extends NovelState {}
 final class NovelLoaded extends NovelState {
   const NovelLoaded(
     this.novel, {
+    super.isLocal,
     this.chapters = const [],
     this.isLoading = false,
   });

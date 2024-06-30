@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:isar/isar.dart';
 
 import 'entities/extension.dart';
+import 'entities/novel.dart';
 
 class EikyushoDatabase {
   const EikyushoDatabase._(this._database);
@@ -15,6 +16,7 @@ class EikyushoDatabase {
       directory: directory.path,
       [
         ExtensionSchema,
+        LibraryNovelSchema,
       ],
     );
 

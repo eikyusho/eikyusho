@@ -36,6 +36,7 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
         actionIcon: Assets.icons.shareFatBold,
         actionButton: () {},
       ),
+      extendBodyBehindAppBar: true,
       body: BlocBuilder<NovelCubit, NovelState>(
         builder: (context, state) {
           return switch (state) {
@@ -54,50 +55,78 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
     final status = novel.source.getStatus(novel.status);
     final novelStatus = getStatus(status);
 
-    return Stack(
-      children: [
-        ListView(
-          padding: const EdgeInsets.only(
-            top: AppDimens.$2xl,
-            bottom: AppDimens.$2xl,
-            left: AppDimens.defaultHorizontalPadding,
-            right: AppDimens.defaultHorizontalPadding,
-          ),
+    return Builder(
+      builder: (context) {
+        final padding = context.screenPadding;
+
+        return Stack(
           children: [
-            NovelInfo(
-              details: novel,
+            CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding: EdgeInsets.only(
+                    top: padding.top + AppDimens.$2xl,
+                    left: AppDimens.defaultHorizontalPadding,
+                    right: AppDimens.defaultHorizontalPadding,
+                  ),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        NovelInfo(
+                          details: novel,
+                        ),
+                        const VSpace(AppDimens.$2xl),
+                        NovelStats(
+                          chapterCount: novel.chapterCount,
+                          status: novelStatus,
+                          viewCount: Formatter.viewCount(novel.views),
+                        ),
+                        const VSpace(AppDimens.$2xl),
+                        ExpandableDetails(
+                          description: novel.description,
+                          genres: novel.genres,
+                        ),
+                        const VSpace(AppDimens.lg),
+                        Builder(
+                          builder: (context) {
+                            return Separator.horizontal(
+                              size: double.infinity,
+                              color: context.colors.borderDiscreet,
+                            );
+                          },
+                        ),
+                        const VSpace(AppDimens.sm),
+                        const NovelChapterHeader(),
+                        const VSpace(AppDimens.xs),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.only(
+                    left: AppDimens.defaultHorizontalPadding,
+                    right: AppDimens.defaultHorizontalPadding,
+                    bottom:
+                        AppDimens.$2xl + AppDimens.bottomNavigationBarHeight,
+                  ),
+                  sliver: state.isLoading
+                      ? const SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: Loading(),
+                        )
+                      : NovelChaptersList(chapters: state.chapters),
+                ),
+              ],
             ),
-            const VSpace(AppDimens.$2xl),
-            NovelStats(
-              chapterCount: novel.chapterCount,
-              status: novelStatus,
-              viewCount: Formatter.viewCount(novel.views),
+            const Positioned(
+              left: AppDimens.md,
+              right: AppDimens.md,
+              bottom: 0,
+              child: NovelFloatingButton(),
             ),
-            const VSpace(AppDimens.$2xl),
-            ExpandableDetails(
-              description: novel.description,
-              genres: novel.genres,
-            ),
-            const VSpace(AppDimens.lg),
-            Builder(
-              builder: (context) {
-                return Separator.horizontal(
-                  size: double.infinity,
-                  color: context.colors.borderDiscreet,
-                );
-              },
-            ),
-            const VSpace(AppDimens.sm),
-            NovelChapters(novel: novel),
           ],
-        ),
-        const Positioned(
-          left: AppDimens.md,
-          right: AppDimens.md,
-          bottom: 0,
-          child: NovelFloatingButton(),
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -109,47 +138,6 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
       error: state.error,
       actionText: AppStrings.buttonWebView,
       onAction: () {},
-    );
-  }
-}
-
-class NovelFloatingButton extends StatelessWidget {
-  const NovelFloatingButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlurredContainer(
-      blur: AppMisc.blurFilter,
-      child: Container(
-        height: AppDimens.bottomNavigationBarHeight,
-        padding: const EdgeInsets.all(AppDimens.sm),
-        decoration: BoxDecoration(
-          color: getBlurredBgColor(
-            context,
-            color: context.colors.backgroundSecondary,
-          ),
-          borderRadius: BorderRadius.circular(AppDimens.radiusMd),
-          boxShadow: context.shadows.md,
-        ),
-        child: Row(
-          children: [
-            Flexible(
-              child: Button(
-                text: AppStrings.buttonRead,
-                onTap: () {},
-              ),
-            ),
-            const HSpace(AppDimens.sm),
-            AppIconButton(
-              Assets.icons.heartBold,
-              size: AppDimens.buttonLg,
-              iconSize: AppDimens.iconLg,
-              color: context.colors.background,
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

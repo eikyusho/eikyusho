@@ -7,65 +7,76 @@ import 'package:app/common/common.dart';
 import 'package:app/config/app.dart';
 
 class ChapterTile extends StatelessWidget {
-  const ChapterTile({required this.chapter, required this.chapters, super.key});
+  const ChapterTile({
+    required this.chapter,
+    required this.chapters,
+    required this.isLast,
+    super.key,
+  });
 
   final Chapter chapter;
   final List<Chapter> chapters;
+  final bool isLast;
 
   @override
   Widget build(BuildContext context) {
     final date = chapter.date.isEmpty ? 'N/A' : chapter.date;
 
-    return ClickableElement(
-      borderRadius: AppDimens.radiusLg,
-      onTap: () {
-        context.router.push(
-          ReaderRoute(chapter: chapter, chapters: chapters),
-        );
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.md,
-          vertical: AppDimens.sm,
-        ),
-        color: context.colors.surface,
-        child: Row(
-          children: [
-            Text(chapter.number).textStyle(
-              context.textTheme.bodyLg.regular,
-              color: context.colors.textSecondary,
-            ),
-            const HSpace(AppDimens.sm),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    chapter.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ).textStyle(
-                    context.textTheme.bodyMd.medium,
-                    color: context.colors.textPrimary,
-                  ),
-                  const VSpace(AppDimens.xs),
-                  Text(date).textStyle(
-                    context.textTheme.bodyXs.regular,
-                    color: context.colors.textAuxiliary,
-                  ),
-                ],
+    return Container(
+      margin: EdgeInsets.only(
+        bottom: isLast ? 0 : AppDimens.md,
+      ),
+      child: ClickableElement(
+        borderRadius: AppDimens.radiusLg,
+        onTap: () {
+          context.router.push(
+            ReaderRoute(chapter: chapter, chapters: chapters),
+          );
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimens.md,
+            vertical: AppDimens.sm,
+          ),
+          color: context.colors.surface,
+          child: Row(
+            children: [
+              Text(chapter.number).textStyle(
+                context.textTheme.bodyLg.regular,
+                color: context.colors.textSecondary,
               ),
-            ),
-            const HSpace(AppDimens.sm),
-            ProgressButton(
-              idleIcon: Assets.icons.arrowDownBold,
-              color: context.colors.surfaceSecondary,
-              state: ProgressButtonState.idle,
-              context: context,
-              progress: 1,
-              onTap: () {},
-            ),
-          ],
+              const HSpace(AppDimens.sm),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      chapter.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ).textStyle(
+                      context.textTheme.bodyMd.medium,
+                      color: context.colors.textPrimary,
+                    ),
+                    const VSpace(AppDimens.xs),
+                    Text(date).textStyle(
+                      context.textTheme.bodyXs.regular,
+                      color: context.colors.textAuxiliary,
+                    ),
+                  ],
+                ),
+              ),
+              const HSpace(AppDimens.sm),
+              ProgressButton(
+                idleIcon: Assets.icons.arrowDownBold,
+                color: context.colors.surfaceSecondary,
+                state: ProgressButtonState.idle,
+                context: context,
+                progress: 1,
+                onTap: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );

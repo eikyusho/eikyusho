@@ -8,78 +8,67 @@ import 'package:app/common/common.dart';
 import 'package:app/src/reader/presentation/cubits/cubits.dart';
 import 'package:app/src/reader/presentation/widgets/src/chapter_tile.dart';
 
-class NovelChapters extends StatelessWidget {
-  const NovelChapters({required this.novel, super.key});
-
-  final NovelDetails novel;
+class NovelChapterHeader extends StatelessWidget {
+  const NovelChapterHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 44,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(AppStrings.sectionTitleChapters).textStyle(
-                context.textTheme.bodyMd.medium,
-                color: context.colors.textPrimary,
-              ),
-              ValueListenableBuilder(
-                valueListenable: context.read<NovelCubit>().isAscending,
-                builder: (context, value, child) {
-                  return AppIconButton(
-                    value
-                        ? Assets.icons.sortAscendingBold
-                        : Assets.icons.sortDescendingBold,
-                    color: context.colors.background,
-                    onPressed: context.read<NovelCubit>().toggleSort,
-                  );
-                },
-              ),
-            ],
+    return SizedBox(
+      height: 44,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(AppStrings.sectionTitleChapters).textStyle(
+            context.textTheme.bodyMd.medium,
+            color: context.colors.textPrimary,
           ),
-        ),
-        const VSpace(AppDimens.xs),
-        BlocBuilder<NovelCubit, NovelState>(
-          builder: (context, state) {
-            if (state is! NovelLoaded) {
-              return const Loading();
-            }
-
-            return ValueListenableBuilder(
-              valueListenable: context.read<NovelCubit>().isAscending,
-              builder: (context, value, child) {
-                return Column(
-                  children: gapView(
-                    AppDimens.md,
-                    isVertical: true,
-                    children: value
-                        ? buildList(state)
-                        : buildList(state).reversed.toList(),
-                  ),
-                );
-              },
-            );
-          },
-        ),
-      ],
+          ValueListenableBuilder(
+            valueListenable: context.read<NovelCubit>().isAscending,
+            builder: (context, value, child) {
+              return AppIconButton(
+                value
+                    ? Assets.icons.sortAscendingBold
+                    : Assets.icons.sortDescendingBold,
+                color: context.colors.background,
+                onPressed: context.read<NovelCubit>().toggleSort,
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
+}
 
-  List<Widget> buildList(NovelLoaded state) {
-    return [
-      ...state.chapters.map((chapter) {
-        return ChapterTile(
-          chapter: chapter,
-          chapters: state.chapters,
+class NovelChaptersList extends StatelessWidget {
+  const NovelChaptersList({required this.chapters, super.key});
+
+  final List<Chapter> chapters;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: context.read<NovelCubit>().isAscending,
+      builder: (context, value, child) {
+        final chapters =
+            value ? this.chapters : this.chapters.reversed.toList();
+
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              final chapter = chapters[index];
+              final isLast = index == chapters.length - 1;
+
+              return ChapterTile(
+                chapter: chapter,
+                chapters: chapters,
+                isLast: isLast,
+              );
+            },
+            childCount: chapters.length,
+          ),
         );
-      }),
-      if (state.isLoading) ...[
-        const VSpace(AppDimens.md),
-        const Loading(),
-      ],
-    ];
+      },
+    );
   }
 }

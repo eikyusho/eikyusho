@@ -1,21 +1,27 @@
 import 'package:core/core.dart';
+import 'package:eikyusho_web_scraper/eikyusho_web_scraper.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:app/common/common.dart';
 
 @lazySingleton
 class NovelRemoteDataProvider {
-  Future<NovelDetails> getNovelDetails(Novel novel) async {
+  const NovelRemoteDataProvider();
+
+  Future<NovelDetails> getNovelDetails(
+    EikyushoSource source,
+    String link,
+  ) async {
     try {
-      final novelDetails = await novel.source.getNovelDetails(novel.link);
+      final novelDetails = await source.getNovelDetails(link);
 
       return NovelDetails(
-        novel.source,
+        source,
         title: novelDetails.title,
-        cover: novel.cover,
-        link: novel.link,
+        cover: novelDetails.cover,
+        link: novelDetails.link,
         author: novelDetails.author,
-        chapters: novelDetails.chapters,
+        chapterCount: novelDetails.chapters,
         status: novelDetails.status,
         views: novelDetails.views,
         description: novelDetails.description,

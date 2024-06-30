@@ -94,4 +94,8 @@ final class AppStrings {
   static String extensionUpdated = 'Extension updated';
   static String failedToInstall = 'Failed to install';
   static String failedToUpdate = 'Failed to update';
+
+  /// Exceptions
+  static const String extensionNotFound = 'Extension not found';
+  static const String novelNotFound = 'Novel not found';
 }

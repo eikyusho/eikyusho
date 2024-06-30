@@ -18,20 +18,35 @@ class NovelCubit extends Cubit<NovelState> {
   Future<void> getNovelDetails(Novel novel) async {
     emit(NovelLoading());
     try {
-      final novelDetails = await _novelRepository.getNovelDetails(novel);
-      await loadChapters(novelDetails);
+      final (details, isLocal) = await _novelRepository.getNovelDetails(novel);
+      await _loadChapters(details, isLocal: isLocal);
     } on Exception catch (e) {
       emit(NovelError(e));
     }
   }
 
-  Future<void> loadChapters(NovelDetails novel) async {
+  Future<void> _loadChapters(
+    NovelDetails novel, {
+    required bool isLocal,
+  }) async {
     emit(NovelLoaded(novel, isLoading: true));
 
     try {
-      final chapters = await _novelRepository.getNovelChapters(novel);
-      emit(NovelLoaded(novel, chapters: chapters));
+      final chapters = await _novelRepository.getNovelChapters(
+        novel,
+        isLocal: isLocal,
+      );
+      emit(NovelLoaded(novel, chapters: chapters, isLocal: isLocal));
     } on ServerException catch (e) {
+      emit(NovelError(e));
+    }
+  }
+
+  Future<void> addToLibrary(NovelDetails novel, List<Chapter> chapters) async {
+    try {
+      await _novelRepository.addToLibrary(novel, chapters);
+      emit(NovelLoaded(novel, chapters: chapters, isLocal: true));
+    } on Exception catch (e) {
       emit(NovelError(e));
     }
   }

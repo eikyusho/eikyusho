@@ -28,7 +28,7 @@ class AppRouter extends $AppRouter {
   RouteType get defaultRouteType => const RouteType.cupertino();
 
   bool get isLibraryInitial {
-    return AppNavigation._initialLocation == 'LibraryRoute.name';
+    return AppNavigation._initialLocation == LibraryRoute.name;
   }
 
   bool get isDiscoverInitial {
@@ -49,6 +49,7 @@ class AppRouter extends $AppRouter {
                 AutoRoute(page: DiscoverListRoute.page),
               ],
             ),
+            AutoRoute(page: LibraryRoute.page, initial: isLibraryInitial),
             AutoRoute(page: BrowseRoute.page),
           ],
         ),

@@ -15,6 +15,7 @@ class AppTabs extends StatelessWidget {
       animationCurve: Curves.easeInOut,
       routes: [
         EmptyDiscoverRoute(),
+        LibraryRoute(),
         BrowseRoute(),
       ],
       extendBody: true,

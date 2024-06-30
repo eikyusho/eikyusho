@@ -1,3 +1,5 @@
+import 'package:app/src/library/data/data.dart';
+import 'package:app/src/library/presentation/cubits/cubits.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +24,11 @@ class AppProvider extends StatelessWidget {
             getIt<ExtensionsRepository>(),
             getIt<DiscoverRepository>(),
           )..getSources(),
+        ),
+        BlocProvider(
+          create: (_) => LibraryCubit(
+            getIt<LibraryRepository>(),
+          )..loadLibrary(),
         ),
         BlocProvider(
           create: (_) => BrowseCubit(

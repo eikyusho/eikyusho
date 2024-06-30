@@ -51,6 +51,17 @@ class NovelCubit extends Cubit<NovelState> {
     }
   }
 
+  Future<void> removeFromLibrary(NovelDetails novel) async {
+    if (state is! NovelLoaded) return;
+
+    try {
+      await _novelRepository.removeFromLibrary(novel);
+      emit(NovelLoaded(novel, chapters: (state as NovelLoaded).chapters));
+    } on Exception catch (e) {
+      emit(NovelError(e));
+    }
+  }
+
   void toggleSort() {
     isAscending.value = !isAscending.value;
   }

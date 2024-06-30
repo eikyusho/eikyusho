@@ -7,12 +7,14 @@ class Novel extends Equatable {
     required this.title,
     required this.cover,
     required this.link,
+    this.isCompleted,
   });
 
   final String title;
   final String cover;
   final String link;
   final EikyushoSource source;
+  final bool? isCompleted;
 
   @override
   List<Object?> get props => [title, link, source];

@@ -18,6 +18,9 @@ final class AppStrings {
   static String sectionTitleAvailableExtensions = 'Available Extensions';
   static String sectionTitleLastUsed = 'Last Used';
   static String sectionTitleChapters = 'Chapters';
+  static String sectionTitleReading = 'Reading';
+  static String sectionTitleCompleted = 'Completed';
+  static String sectionTitleCollections = 'Collections';
 
   /// Settings Options Titles
   static String settingsOptionsTitleProfile = 'Profile';

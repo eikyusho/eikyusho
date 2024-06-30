@@ -24,12 +24,14 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showNotificationButton = false,
     this.actionIcon,
     this.actionButton,
+    this.bottom,
   });
 
   final Text? title;
   final bool showLogo;
   final bool showBackButton;
   final bool showNotificationButton;
+  final MainAppBarBottom? bottom;
 
   final SvgGenImage? actionIcon;
   final VoidCallback? actionButton;
@@ -118,6 +120,11 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
             ),
+            if (bottom != null)
+              SizedBox(
+                width: double.infinity,
+                child: bottom,
+              ),
           ],
         ),
       ),
@@ -125,5 +132,17 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(AppDimens.appBarHeight);
+  Size get preferredSize {
+    if (bottom == null) {
+      return const Size.fromHeight(AppDimens.appBarHeight);
+    }
+
+    return Size.fromHeight(AppDimens.appBarHeight + bottom!.height);
+  }
+}
+
+abstract class MainAppBarBottom extends StatelessWidget {
+  const MainAppBarBottom({super.key});
+
+  double get height;
 }

@@ -1,3 +1,4 @@
+import 'package:app/src/library/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
@@ -24,11 +25,17 @@ class NovelFloatingButton extends StatelessWidget {
   }
 
   Widget buildButton(BuildContext context, NovelLoaded state) {
-    void addToLibrary() {
-      context.read<NovelCubit>().addToLibrary(state.novel, state.chapters);
+    Future<void> addToLibrary() async {
+      await context
+          .read<NovelCubit>()
+          .addToLibrary(state.novel, state.chapters);
+      if (context.mounted) await context.read<LibraryCubit>().loadLibrary();
     }
 
-    void removeFromLibrary() {}
+    Future<void> removeFromLibrary() async {
+      await context.read<NovelCubit>().removeFromLibrary(state.novel);
+      if (context.mounted) await context.read<LibraryCubit>().loadLibrary();
+    }
 
     return BlurredContainer(
       blur: AppMisc.blurFilter,

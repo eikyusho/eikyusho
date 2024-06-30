@@ -25,6 +25,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actionIcon,
     this.actionButton,
     this.bottom,
+    this.child,
   });
 
   final Text? title;
@@ -32,6 +33,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
   final bool showNotificationButton;
   final MainAppBarBottom? bottom;
+  final MainAppBarChild? child;
 
   final SvgGenImage? actionIcon;
   final VoidCallback? actionButton;
@@ -43,83 +45,89 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       'Cannot show both logo and title/back button at the same time.',
     );
 
+    assert(
+      !(bottom != null && child != null),
+      'Cannot show both bottom and child at the same time.',
+    );
+
     return BlurredContainer(
       blur: AppMisc.blurFilter,
       child: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              color: getBlurredBgColor(context),
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppDimens.$2xl,
-                vertical: AppDimens.md,
-              ),
-              height: AppDimens.appBarHeight,
-              child: Stack(
-                alignment: Alignment.center,
-                fit: StackFit.expand,
-                children: [
-                  if (showLogo)
-                    Positioned(
-                      left: 0,
-                      child: Assets.images.eikyushoLogo.svg(
-                        height: AppDimens.logoHeight,
-                        colorFilter: svgColor(context.colors.textPrimary),
-                        semanticsLabel: '${AppConstants.appName} Logo',
-                      ),
-                    ),
-                  if (title != null)
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: context.responsiveWidth(0.62),
-                            child: Text(
-                              title!.data!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ).textStyle(
-                              context.textTheme.titleSm.bold,
-                              color: context.colors.textPrimary,
-                              align: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  if (showBackButton)
-                    Positioned(
-                      left: 0,
-                      child: AppIconButton(
-                        Assets.icons.caretLeftBold,
-                        onPressed: context.router.canPop()
-                            ? context.router.back
-                            : null,
-                      ),
-                    ),
-                  Positioned(
-                    right: 0,
-                    child: Row(
-                      children: [
-                        if (actionButton != null)
-                          AppIconButton(
-                            actionIcon.getOr(_Icons.options),
-                            onPressed: actionButton,
-                          ),
-                        if (showNotificationButton)
-                          AppIconButton(
-                            _Icons.notifications,
-                            onPressed: () {},
-                          ),
-                      ],
-                    ).gap(AppDimens.md),
+            child ??
+                Container(
+                  color: getBlurredBgColor(context),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimens.$2xl,
+                    vertical: AppDimens.md,
                   ),
-                ],
-              ),
-            ),
+                  height: AppDimens.appBarHeight,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    fit: StackFit.expand,
+                    children: [
+                      if (showLogo)
+                        Positioned(
+                          left: 0,
+                          child: Assets.images.eikyushoLogo.svg(
+                            height: AppDimens.logoHeight,
+                            colorFilter: svgColor(context.colors.textPrimary),
+                            semanticsLabel: '${AppConstants.appName} Logo',
+                          ),
+                        ),
+                      if (title != null)
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: context.responsiveWidth(0.62),
+                                child: Text(
+                                  title!.data!,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ).textStyle(
+                                  context.textTheme.titleSm.bold,
+                                  color: context.colors.textPrimary,
+                                  align: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      if (showBackButton)
+                        Positioned(
+                          left: 0,
+                          child: AppIconButton(
+                            Assets.icons.caretLeftBold,
+                            onPressed: context.router.canPop()
+                                ? context.router.back
+                                : null,
+                          ),
+                        ),
+                      Positioned(
+                        right: 0,
+                        child: Row(
+                          children: [
+                            if (actionButton != null)
+                              AppIconButton(
+                                actionIcon.getOr(_Icons.options),
+                                onPressed: actionButton,
+                              ),
+                            if (showNotificationButton)
+                              AppIconButton(
+                                _Icons.notifications,
+                                onPressed: () {},
+                              ),
+                          ],
+                        ).gap(AppDimens.md),
+                      ),
+                    ],
+                  ),
+                ),
             if (bottom != null)
               SizedBox(
                 width: double.infinity,
@@ -133,6 +141,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize {
+    if (child != null) {
+      return Size.fromHeight(child!.height);
+    }
+
     if (bottom == null) {
       return const Size.fromHeight(AppDimens.appBarHeight);
     }
@@ -143,6 +155,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 abstract class MainAppBarBottom extends StatelessWidget {
   const MainAppBarBottom({super.key});
+
+  double get height;
+}
+
+abstract class MainAppBarChild extends StatelessWidget {
+  const MainAppBarChild({super.key});
 
   double get height;
 }

@@ -31,7 +31,7 @@ class LibraryLocalDataProvider {
 
             final uuid = novel.source.value!.uuid;
 
-            sources.add(await getNovelSource(uuid));
+            sources.add(await loadSource(uuid));
           }
         },
       );
@@ -64,13 +64,5 @@ class LibraryLocalDataProvider {
 
   Future<List<Novel>> getCollection() async {
     return [];
-  }
-
-  Future<EikyushoSource> getNovelSource(String uuid) async {
-    try {
-      return loadSource(uuid);
-    } catch (e) {
-      throw StorageException(e.toString());
-    }
   }
 }

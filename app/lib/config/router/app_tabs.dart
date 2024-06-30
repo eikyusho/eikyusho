@@ -16,6 +16,7 @@ class AppTabs extends StatelessWidget {
       routes: [
         EmptyDiscoverRoute(),
         LibraryRoute(),
+        SearchRoute(),
         BrowseRoute(),
       ],
       extendBody: true,

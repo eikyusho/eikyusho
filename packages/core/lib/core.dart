@@ -1,7 +1,7 @@
 /// Core package for Eikyusho
 library core;
 
-export 'package:dio/dio.dart';
+export 'package:dio/dio.dart' hide Transformer;
 export 'package:shared_preferences/shared_preferences.dart';
 
 export 'src/constants/app_constants.dart';

@@ -50,6 +50,7 @@ class AppRouter extends $AppRouter {
               ],
             ),
             AutoRoute(page: LibraryRoute.page, initial: isLibraryInitial),
+            AutoRoute(page: SearchRoute.page),
             AutoRoute(page: BrowseRoute.page),
           ],
         ),

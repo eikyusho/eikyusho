@@ -47,10 +47,6 @@ class DiscoverLocalDataProvider {
   }
 
   Future<EikyushoSource?> getDiscoverSource(String uuid) async {
-    try {
-      return loadSource(uuid);
-    } catch (e) {
-      throw StorageException(e.toString());
-    }
+    return loadSource(uuid);
   }
 }

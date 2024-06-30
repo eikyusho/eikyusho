@@ -12,6 +12,7 @@ class Novel extends Equatable {
     this.novelAuthor,
     this.isCompleted,
     this.extension,
+    this.isInLibrary,
   });
 
   final String title;
@@ -21,6 +22,7 @@ class Novel extends Equatable {
   final bool? isCompleted;
   final AvailableExtension? extension;
   final String? novelAuthor;
+  final bool? isInLibrary;
 
   @override
   List<Object?> get props => [title, link, source];

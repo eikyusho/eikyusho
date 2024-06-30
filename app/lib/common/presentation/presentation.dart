@@ -8,6 +8,7 @@ export './widgets/components/expandable_details.dart';
 export './widgets/components/extension_icon.dart';
 export './widgets/components/novel_card.dart';
 export './widgets/components/novel_grid.dart';
+export './widgets/components/novel_list.dart';
 export './widgets/dialogs/dialog.dart';
 export './widgets/form/text_input.dart';
 export './widgets/indicators/loading.dart';

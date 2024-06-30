@@ -52,6 +52,7 @@ class LibraryLocalDataProvider {
           title: e.title,
           cover: e.cover,
           link: e.link,
+          novelAuthor: e.author,
           isCompleted: e.completed,
           extension: extension,
         );

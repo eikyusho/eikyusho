@@ -50,8 +50,8 @@ class LibraryPage extends StatelessWidget {
         Expanded(
           child: TabBarView(
             children: [
-              buildNovelsTab(readingNovels),
-              buildNovelsTab(completedNovels),
+              buildNovelsListTab(readingNovels),
+              buildNovelsGridTab(completedNovels),
               buildCollectionsTab(),
             ],
           ),
@@ -68,7 +68,7 @@ class LibraryPage extends StatelessWidget {
     );
   }
 
-  Widget buildNovelsTab(List<Novel> novels) {
+  Widget buildNovelsGridTab(List<Novel> novels) {
     return NovelGrid(
       novels: novels,
       builder: (context, novel) {
@@ -81,6 +81,35 @@ class LibraryPage extends StatelessWidget {
             title: novel.title,
             cover: NetworkImage(novel.cover),
             extension: novel.extension,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget buildNovelsListTab(List<Novel> novels) {
+    return Builder(
+      builder: (context) {
+        final height = context.screenHeight;
+
+        return SizedBox(
+          height: height,
+          child: NovelList(
+            novels: novels,
+            builder: (context, novel) {
+              return ClickableElement(
+                animation: ClickableElementAnimation.grow,
+                onTap: () {
+                  context.router.push(NovelRoute(novel: novel));
+                },
+                child: NovelWideCard(
+                  title: novel.title,
+                  cover: NetworkImage(novel.cover),
+                  extension: novel.extension,
+                  author: novel.novelAuthor,
+                ),
+              );
+            },
           ),
         );
       },

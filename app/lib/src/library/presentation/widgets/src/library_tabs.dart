@@ -15,6 +15,7 @@ class LibraryTabs extends MainAppBarBottom {
         top: AppDimens.$2xl,
         left: AppDimens.defaultHorizontalPadding,
         right: AppDimens.defaultHorizontalPadding,
+        bottom: AppDimens.sm,
       ),
       child: Container(
         height: tabBarHeight,
@@ -49,5 +50,5 @@ class LibraryTabs extends MainAppBarBottom {
   static const double tabBarHeight = 48;
 
   @override
-  double get height => tabBarHeight + AppDimens.$2xl;
+  double get height => tabBarHeight + AppDimens.$2xl + AppDimens.sm;
 }

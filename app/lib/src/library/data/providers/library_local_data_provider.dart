@@ -1,10 +1,10 @@
-import 'package:app/src/browse/data/data.dart';
 import 'package:core/core.dart';
 import 'package:database/database.dart';
 import 'package:eikyusho_web_scraper/eikyusho_web_scraper.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/src/browse/data/data.dart';
 
 @lazySingleton
 class LibraryLocalDataProvider {

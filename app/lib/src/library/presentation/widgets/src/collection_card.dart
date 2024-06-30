@@ -1,8 +1,10 @@
-import 'package:app/common/common.dart';
-import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 import 'package:resources/resources.dart';
+
+import 'package:app/common/common.dart';
 
 class CollectionCard extends StatelessWidget {
   const CollectionCard({super.key});

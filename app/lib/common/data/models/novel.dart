@@ -1,6 +1,7 @@
-import 'package:app/src/browse/data/data.dart';
 import 'package:eikyusho_web_scraper/eikyusho_web_scraper.dart';
 import 'package:equatable/equatable.dart';
+
+import 'package:app/src/browse/data/data.dart';
 
 class Novel extends Equatable {
   const Novel(

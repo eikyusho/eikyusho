@@ -1,5 +1,3 @@
-import 'package:app/src/library/data/data.dart';
-import 'package:app/src/library/presentation/cubits/cubits.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +7,8 @@ import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/browse/presentation/presentation.dart';
 import 'package:app/src/discover/data/data.dart';
 import 'package:app/src/discover/presentation/presentation.dart';
+import 'package:app/src/library/data/data.dart';
+import 'package:app/src/library/presentation/cubits/cubits.dart';
 
 class AppProvider extends StatelessWidget {
   const AppProvider({required this.child, super.key});

@@ -1,7 +1,7 @@
-import 'package:app/src/library/data/providers/library_local_data_provider.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/src/library/data/providers/library_local_data_provider.dart';
 
 @injectable
 class LibraryRepository {

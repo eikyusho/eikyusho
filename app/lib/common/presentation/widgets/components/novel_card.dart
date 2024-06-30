@@ -1,9 +1,10 @@
-import 'package:app/common/common.dart';
-import 'package:app/common/presentation/presentation.dart';
-import 'package:app/src/browse/data/data.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+
+import 'package:app/common/common.dart';
+import 'package:app/common/presentation/presentation.dart';
+import 'package:app/src/browse/data/data.dart';
 
 class NovelCard extends StatelessWidget {
   const NovelCard({

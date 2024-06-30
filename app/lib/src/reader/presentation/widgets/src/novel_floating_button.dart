@@ -1,4 +1,3 @@
-import 'package:app/src/library/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
+import 'package:app/src/library/presentation/presentation.dart';
 import 'package:app/src/reader/presentation/cubits/cubits.dart';
 
 class NovelFloatingButton extends StatelessWidget {

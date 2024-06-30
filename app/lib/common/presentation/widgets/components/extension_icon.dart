@@ -11,11 +11,13 @@ class ExtensionIcon extends StatelessWidget {
   const ExtensionIcon({
     required this.extension,
     required this.imageSize,
+    this.shadows = false,
     super.key,
   });
 
   final AvailableExtension extension;
   final double imageSize;
+  final bool shadows;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,12 @@ class ExtensionIcon extends StatelessWidget {
       _ => PixelDensity.x3,
     };
 
-    return SizedBox(
+    return Container(
       height: imageSize,
       width: imageSize,
+      decoration: BoxDecoration(
+        boxShadow: shadows ? context.shadows.sm : null,
+      ),
       child: FutureBuilder<ImageProvider>(
         future: getIconLocation(density, extension),
         builder: (context, snapshot) {

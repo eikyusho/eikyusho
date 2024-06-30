@@ -1,3 +1,4 @@
+import 'package:app/src/browse/data/data.dart';
 import 'package:eikyusho_web_scraper/eikyusho_web_scraper.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,6 +9,7 @@ class Novel extends Equatable {
     required this.cover,
     required this.link,
     this.isCompleted,
+    this.extension,
   });
 
   final String title;
@@ -15,6 +17,7 @@ class Novel extends Equatable {
   final String link;
   final EikyushoSource source;
   final bool? isCompleted;
+  final AvailableExtension? extension;
 
   @override
   List<Object?> get props => [title, link, source];

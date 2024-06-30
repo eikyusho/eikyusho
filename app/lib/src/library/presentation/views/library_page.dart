@@ -73,12 +73,14 @@ class LibraryPage extends StatelessWidget {
       novels: novels,
       builder: (context, novel) {
         return ClickableElement(
+          animation: ClickableElementAnimation.grow,
           onTap: () {
             context.router.push(NovelRoute(novel: novel));
           },
           child: NovelCard(
             title: novel.title,
             cover: NetworkImage(novel.cover),
+            extension: novel.extension,
           ),
         );
       },

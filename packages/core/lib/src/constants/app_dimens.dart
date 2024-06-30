@@ -68,6 +68,7 @@ final class AppDimens {
   /// Size: 12
   static const double iconXs = 12;
 
+  /// Size: 16
   static const double iconSm = 16;
 
   /// Size: 20

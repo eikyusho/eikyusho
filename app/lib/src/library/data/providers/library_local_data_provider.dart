@@ -1,3 +1,4 @@
+import 'package:app/src/browse/data/data.dart';
 import 'package:core/core.dart';
 import 'package:database/database.dart';
 import 'package:eikyusho_web_scraper/eikyusho_web_scraper.dart';
@@ -19,6 +20,10 @@ class LibraryLocalDataProvider {
         (isar) => isar.libraryNovels.where().findAll(),
       );
 
+      final extensions = await _db.readOnly(
+        (isar) => isar.extensions.where().findAll(),
+      );
+
       await _db.readOnly(
         (isar) async {
           for (final novel in novels) {
@@ -36,12 +41,19 @@ class LibraryLocalDataProvider {
           (source) => source.uuid == e.source.value!.uuid,
         );
 
+        final dbExtension = extensions.firstWhere(
+          (extension) => extension.uuid == source.uuid,
+        );
+
+        final extension = InstalledExtension.fromDatabase(dbExtension);
+
         return Novel(
           source,
           title: e.title,
           cover: e.cover,
           link: e.link,
           isCompleted: e.completed,
+          extension: extension,
         );
       }).toList();
     } catch (e) {

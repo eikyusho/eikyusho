@@ -15,6 +15,8 @@ class SearchAppBar extends MainAppBarChild {
 
   @override
   Widget build(BuildContext context) {
+    final debouncer = Debouncer(milliseconds: 500);
+
     return Container(
       color: getBlurredBgColor(context),
       padding: const EdgeInsets.symmetric(
@@ -24,7 +26,7 @@ class SearchAppBar extends MainAppBarChild {
       height: height,
       child: TextInput(
         onChanged: (value) {
-          Debouncer(milliseconds: 500).run(() {
+          debouncer.run(() {
             context.read<SearchCubit>().searchLocally(value);
           });
         },

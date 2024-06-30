@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,6 +9,8 @@ import 'package:app/src/search/data/data.dart';
 
 part 'search_state.dart';
 
+enum ShowMode { grid, list }
+
 class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this._searchRepository, this._libraryRepository)
       : super(SearchInitial());
@@ -15,17 +19,34 @@ class SearchCubit extends Cubit<SearchState> {
 
   final LibraryRepository _libraryRepository;
 
+  final showMode = ValueNotifier<ShowMode>(ShowMode.grid);
+
   Future<void> searchLocally(String query) async {
+    emit(SearchLoading());
+
     try {
       final novels = await _libraryRepository.getNovels();
 
-      final results = novels.where((novel) {
+      if (query.isEmpty) {
+        emit(const SearchLoaded([], isLocalSearch: true));
+        return;
+      }
+
+      final filteredNovels = novels.where((novel) {
         return novel.title.toLowerCase().contains(query.toLowerCase());
       }).toList();
 
-      emit(SearchLoaded(results, isLocalSearch: true));
+      emit(SearchLoaded(filteredNovels, isLocalSearch: true));
     } on Exception catch (e) {
       emit(SearchError(e));
     }
+  }
+
+  void changeShowModeToGrid() {
+    showMode.value = ShowMode.grid;
+  }
+
+  void changeShowModeToList() {
+    showMode.value = ShowMode.list;
   }
 }

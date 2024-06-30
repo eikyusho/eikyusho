@@ -9,7 +9,7 @@ class Novel extends Equatable {
     required this.title,
     required this.cover,
     required this.link,
-    this.novelAuthor,
+    this.additionalInfo,
     this.isCompleted,
     this.extension,
     this.isInLibrary,
@@ -21,7 +21,7 @@ class Novel extends Equatable {
   final EikyushoSource source;
   final bool? isCompleted;
   final AvailableExtension? extension;
-  final String? novelAuthor;
+  final String? additionalInfo;
   final bool? isInLibrary;
 
   @override

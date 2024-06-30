@@ -51,6 +51,7 @@ final class AppStrings {
   static String labelChapters = 'Chapters';
   static String labelStatus = 'Status';
   static String labelViews = 'Views';
+  static String labelShowMode = 'Show in';
 
   /// Meta
   static String metaDisabled = 'Disabled';

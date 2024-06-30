@@ -33,6 +33,7 @@ class SearchPage extends StatelessWidget implements AutoRouteWrapper {
       appBar: const MainAppBar(
         child: SearchAppBar(),
       ),
+      extendBodyBehindAppBar: true,
       body: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, state) {
           return switch (state) {
@@ -47,12 +48,37 @@ class SearchPage extends StatelessWidget implements AutoRouteWrapper {
   }
 
   Widget buildPage(SearchLoaded state) {
-    return Column(
-      children: [
-        Expanded(
-          child: buildGrid(state.novels),
-        ),
-      ],
+    return Builder(
+      builder: (context) {
+        final padding = context.screenPadding;
+
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.only(
+                top: padding.top + AppDimens.sm,
+                left: AppDimens.defaultHorizontalPadding,
+                right: AppDimens.defaultHorizontalPadding,
+                bottom: AppDimens.lg,
+              ),
+              sliver: const SliverToBoxAdapter(
+                child: SearchShowMode(),
+              ),
+            ),
+            ValueListenableBuilder(
+              valueListenable: context.read<SearchCubit>().showMode,
+              builder: (context, mode, child) {
+                return switch (mode) {
+                  ShowMode.list => buildList(state.novels, padding),
+                  ShowMode.grid => SliverToBoxAdapter(
+                      child: buildGrid(state.novels),
+                    )
+                };
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -65,8 +91,47 @@ class SearchPage extends StatelessWidget implements AutoRouteWrapper {
     );
   }
 
+  Widget buildList(List<Novel> novels, EdgeInsets padding) {
+    return SliverPadding(
+      padding: EdgeInsets.only(
+        left: AppDimens.defaultHorizontalPadding,
+        right: AppDimens.defaultHorizontalPadding,
+        bottom: padding.bottom + AppDimens.$2xl,
+      ),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            final novel = novels[index];
+            final isLast = index == novels.length - 1;
+
+            return Container(
+              margin: EdgeInsets.only(
+                bottom: isLast ? 0 : AppDimens.md,
+              ),
+              child: ClickableElement(
+                animation: ClickableElementAnimation.grow,
+                onTap: () {
+                  context.router.push(NovelRoute(novel: novel));
+                },
+                child: NovelWideCard(
+                  title: novel.title,
+                  cover: NetworkImage(novel.cover),
+                  extension: novel.extension,
+                  additionalInfo: novel.additionalInfo,
+                ),
+              ),
+            );
+          },
+          childCount: novels.length,
+        ),
+      ),
+    );
+  }
+
   Widget buildGrid(List<Novel> novels) {
     return NovelGrid(
+      hasPadding: false,
+      disableScroll: true,
       novels: novels,
       builder: (context, novel) {
         return ClickableElement(

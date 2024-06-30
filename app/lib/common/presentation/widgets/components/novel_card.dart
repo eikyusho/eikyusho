@@ -46,12 +46,12 @@ class NovelWideCard extends StatelessWidget {
     required this.title,
     required this.cover,
     this.extension,
-    this.author,
+    this.additionalInfo,
     super.key,
   });
 
   final String title;
-  final String? author;
+  final String? additionalInfo;
   final AvailableExtension? extension;
   final ImageProvider cover;
 
@@ -75,7 +75,7 @@ class NovelWideCard extends StatelessWidget {
                 context.textTheme.bodyMd.medium,
                 color: context.colors.textPrimary,
               ),
-              CardText(text: author ?? '', maxLines: 1).textStyle(
+              CardText(text: additionalInfo ?? '', maxLines: 1).textStyle(
                 context.textTheme.bodySm.regular,
                 color: context.colors.textSecondary,
               ),

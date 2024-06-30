@@ -97,12 +97,21 @@ class LibraryPage extends StatelessWidget {
     return Builder(
       builder: (context) {
         final height = context.screenHeight;
+        final padding = context.screenPadding;
 
         return SizedBox(
           height: height,
-          child: NovelList(
-            novels: novels,
-            builder: (context, novel) {
+          child: ListView.separated(
+            padding: EdgeInsets.only(
+              top: padding.top + AppDimens.$2xl,
+              bottom: padding.bottom + AppDimens.$2xl,
+              left: AppDimens.defaultHorizontalPadding,
+              right: AppDimens.defaultHorizontalPadding,
+            ),
+            separatorBuilder: (_, __) => const VSpace(AppDimens.md),
+            itemBuilder: (context, index) {
+              final novel = novels[index];
+
               return ClickableElement(
                 animation: ClickableElementAnimation.grow,
                 onTap: () {
@@ -112,10 +121,11 @@ class LibraryPage extends StatelessWidget {
                   title: novel.title,
                   cover: NetworkImage(novel.cover),
                   extension: novel.extension,
-                  author: novel.novelAuthor,
+                  additionalInfo: novel.additionalInfo,
                 ),
               );
             },
+            itemCount: novels.length,
           ),
         );
       },

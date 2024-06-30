@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
+
 import 'package:core/core.dart';
 import 'package:eikyusho_web_scraper/eikyusho_web_scraper.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:app/config/app.dart';
 import 'package:app/src/browse/data/data.dart';
 import 'package:app/src/discover/data/data.dart';
 
@@ -62,5 +65,15 @@ class DiscoverCubit extends Cubit<DiscoverState> {
     await getSources(withLoading: true);
 
     return true;
+  }
+
+  Future<void> openWebView(BuildContext context) async {
+    if (state is! DiscoverLoaded) return;
+
+    final currentSource = (state as DiscoverLoaded).selected;
+
+    await context.router.push(
+      WebViewRoute(url: currentSource.baseUrl),
+    );
   }
 }

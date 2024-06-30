@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/presentation/widgets/interactions/clickable_element.dart';
 import 'package:app/common/presentation/widgets/layout/blurred_container.dart';
+import 'package:app/src/discover/presentation/cubits/cubits.dart';
 
 @immutable
 final class _Icons {
@@ -68,6 +70,7 @@ class AppNavigationBar extends StatelessWidget {
                 : context.colors.textSecondary;
 
             return NavigationItem(
+              index: index,
               color: color,
               onTap: () => onTap(index),
               icon: destination.icon,
@@ -89,6 +92,7 @@ class NavbarItem {
 
 class NavigationItem extends StatelessWidget {
   const NavigationItem({
+    required this.index,
     required this.color,
     required this.onTap,
     required this.icon,
@@ -96,6 +100,7 @@ class NavigationItem extends StatelessWidget {
     super.key,
   });
 
+  final int index;
   final Color color;
   final SvgGenImage icon;
   final String label;
@@ -106,6 +111,9 @@ class NavigationItem extends StatelessWidget {
     return Expanded(
       child: ClickableElement(
         onTap: onTap,
+        onDoubleTap: () {
+          if (index == 0) context.read<DiscoverCubit>().openWebView(context);
+        },
         animation: ClickableElementAnimation.none,
         child: SizedBox.expand(
           child: Column(

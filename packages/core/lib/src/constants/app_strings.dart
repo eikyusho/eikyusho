@@ -87,6 +87,18 @@ final class AppStrings {
 
   static String emptyStateErrorLoadingNovel = "Couldn't load the novel list.";
 
+  static String emptyStateCollection = 'No Collections';
+  static String emptyStateDescriptionCollection =
+      'Create a collection to organize\nyour novels.';
+
+  static String emptyStateNoReadingNovels = 'No Current Reads';
+  static String emptyStateDescriptionNoReadingNovels =
+      "You aren't reading any novels at\nthe moment.";
+
+  static String emptyStateNoCompletedNovels = 'Empty Shelf';
+  static String emptyStateDescriptionNoCompletedNovels =
+      "You haven't completed any\nnovels yet.";
+
   /// Tips
   static String tipDoubleTapDiscover =
       'Double tap "Discover" to see the WebView.';

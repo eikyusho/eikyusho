@@ -50,9 +50,15 @@ class LibraryPage extends StatelessWidget {
         Expanded(
           child: TabBarView(
             children: [
-              buildNovelsListTab(readingNovels),
-              buildNovelsGridTab(completedNovels),
-              buildCollectionsTab(),
+              if (readingNovels.isEmpty)
+                buildEmptyReadingNovelsTab()
+              else
+                buildNovelsListTab(readingNovels),
+              if (completedNovels.isEmpty)
+                buildEmptyCompletedNovelsTab()
+              else
+                buildNovelsGridTab(completedNovels),
+              if (false) buildEmptyCollectionsTab() else buildCollectionsTab(),
             ],
           ),
         ),
@@ -120,15 +126,49 @@ class LibraryPage extends StatelessWidget {
     return Builder(
       builder: (context) {
         final padding = context.screenPadding;
+        final height = context.screenHeight;
 
-        return SingleChildScrollView(
-          padding: EdgeInsets.only(
-            top: padding.top + AppDimens.$2xl,
-            bottom: padding.bottom + AppDimens.$2xl,
+        return SizedBox(
+          height: height,
+          child: ListView.separated(
+            padding: EdgeInsets.only(
+              top: padding.top + AppDimens.$2xl,
+              bottom: padding.bottom + AppDimens.$2xl,
+              left: AppDimens.defaultHorizontalPadding,
+              right: AppDimens.defaultHorizontalPadding,
+            ),
+            separatorBuilder: (_, __) => const VSpace(AppDimens.md),
+            itemBuilder: (context, index) {
+              return const CollectionCard();
+            },
+            itemCount: 3,
           ),
-          child: const Column(),
         );
       },
+    );
+  }
+
+  Widget buildEmptyReadingNovelsTab() {
+    return EmptyPage(
+      image: Assets.images.emptyList,
+      message: AppStrings.emptyStateNoReadingNovels,
+      description: AppStrings.emptyStateDescriptionNoReadingNovels,
+    );
+  }
+
+  Widget buildEmptyCompletedNovelsTab() {
+    return EmptyPage(
+      image: Assets.images.emptyList,
+      message: AppStrings.emptyStateNoCompletedNovels,
+      description: AppStrings.emptyStateDescriptionNoCompletedNovels,
+    );
+  }
+
+  Widget buildEmptyCollectionsTab() {
+    return EmptyPage(
+      image: Assets.images.emptyList,
+      message: AppStrings.emptyStateCollection,
+      description: AppStrings.emptyStateDescriptionCollection,
     );
   }
 }

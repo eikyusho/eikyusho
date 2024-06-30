@@ -1,2 +1,3 @@
 //GENERATED BARREL FILE
-export 'src/library_tabs.dart';
+export './src/collection_card.dart';
+export './src/library_tabs.dart';

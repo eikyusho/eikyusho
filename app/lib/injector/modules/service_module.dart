@@ -9,9 +9,13 @@ import 'package:injectable/injectable.dart';
 abstract class ServiceModule {
   @preResolve
   @lazySingleton
-  Future<SharedPrefsManager> sharedPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-    return SharedPrefsManager(prefs);
+  Future<HivePrefsManager> hivePrefs() async {
+    final directory = await StorageManager.appDirectory;
+
+    Hive.init(directory.path);
+
+    final box = await Hive.openBox<Object>(StorageKeys.preferences);
+    return HivePrefsManager(Hive, box);
   }
 
   @preResolve

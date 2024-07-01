@@ -1,4 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive/hive.dart';
 
 /// Abstract class for managing preferences
 abstract class PreferencesManager<Manager> {
@@ -15,48 +15,29 @@ abstract class PreferencesManager<Manager> {
   Future<void> clearAll();
 }
 
-/// Implementation of [PreferencesManager] using [SharedPreferences]
-class SharedPrefsManager extends PreferencesManager<SharedPreferences> {
-  const SharedPrefsManager(super.manager);
+/// Implementation of [PreferencesManager] using [Hive]
+class HivePrefsManager extends PreferencesManager<HiveInterface> {
+  const HivePrefsManager(super.manager, this._box);
+
+  final Box<Object> _box;
 
   @override
   Future<void> save<T>(String key, T value) async {
-    switch (value) {
-      case int():
-        await manager.setInt(key, value);
-      case double():
-        await manager.setDouble(key, value);
-      case bool():
-        await manager.setBool(key, value);
-      case String():
-        await manager.setString(key, value);
-      case List<String>():
-        await manager.setStringList(key, value);
-      default:
-        throw Exception('Type not supported');
-    }
+    await _box.put(key, value as Object);
   }
 
   @override
   Future<T?> read<T>(String key) async {
-    if (T == List<String>) return manager.getStringList(key) as T?;
-
-    return switch (T) {
-      int => manager.getInt(key),
-      double => manager.getDouble(key),
-      bool => manager.getBool(key),
-      String => manager.getString(key),
-      _ => throw Exception('Type not supported'),
-    } as T?;
+    return _box.get(key) as T?;
   }
 
   @override
   Future<void> delete(String key) async {
-    await manager.remove(key);
+    await _box.delete(key);
   }
 
   @override
   Future<void> clearAll() async {
-    await manager.clear();
+    await _box.clear();
   }
 }

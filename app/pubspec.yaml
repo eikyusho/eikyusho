@@ -19,6 +19,9 @@ dependencies:
   resources:
     path: ../packages/resources
 
+  localization:
+    path: ../packages/localization
+
   eikyusho_extensions:
     path: ../../extensions
 

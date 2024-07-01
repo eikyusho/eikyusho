@@ -18,6 +18,8 @@ class DiscoverContentCubit extends Cubit<DiscoverContentState> {
       await _fetchRecentlyUpdated(source);
     } on Exception catch (e) {
       emit(DiscoverContentError(e));
+    } catch (e) {
+      emit(DiscoverContentError(Exception(e.toString())));
     }
   }
 

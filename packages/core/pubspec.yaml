@@ -19,6 +19,7 @@ dependencies:
   # * App Utilities
   path: ^1.9.0  # ? File system
   path_provider: ^2.1.3 # ? File system
+  hive: ^2.2.3 # ? User preferences
   shared_preferences: ^2.2.3 # ? Basic local storage
 
   # * Dev Utility

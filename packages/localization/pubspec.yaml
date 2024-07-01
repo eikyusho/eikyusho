@@ -1,4 +1,4 @@
-name: linter
+name: localization
 publish_to: 'none'
 
 environment:
@@ -9,4 +9,11 @@ dependencies:
   # * Core
   flutter:
     sdk: flutter
-  very_good_analysis: ^6.0.0 # ? For linting
+
+  flutter_localizations:
+    sdk: flutter
+
+  intl: any
+
+flutter:
+  generate: true

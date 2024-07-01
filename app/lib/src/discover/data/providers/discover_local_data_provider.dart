@@ -9,7 +9,7 @@ import 'package:app/common/utils/utils.dart';
 class DiscoverLocalDataProvider {
   const DiscoverLocalDataProvider(this._prefsManager, this._db);
 
-  final SharedPrefsManager _prefsManager;
+  final HivePrefsManager _prefsManager;
   final EikyushoDatabase _db;
 
   Future<void> setDiscoverSource(String uuid) async {

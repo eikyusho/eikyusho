@@ -15,9 +15,6 @@ extension ThemeExtension on BuildContext {
 
   bool get isSystemDarkMode => mediaQuery.platformBrightness == Brightness.dark;
 
-  // Temporary fix for the theme issue
-  ThemeMode get themeMode => ThemeMode.system;
-
   BaseTheme get appTheme => AppTheme.selected(theme.brightness);
 
   ColorsThemeExtension get colors {

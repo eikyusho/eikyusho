@@ -14,7 +14,7 @@ class AppNavigation {
   }
 
   static Future<String> _getInitialLocation() async {
-    final prefs = getIt<SharedPrefsManager>();
+    final prefs = getIt<HivePrefsManager>();
 
     final location = await prefs.read<String>(StorageKeys.initialLocation);
 

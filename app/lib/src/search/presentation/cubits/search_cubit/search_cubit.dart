@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +24,7 @@ class SearchCubit extends Cubit<SearchState> {
   final globalMode = ValueNotifier<bool>(false);
   final query = ValueNotifier<String>('');
 
-  Future<void> search(String query) async {
+  Future<void> search(String query, BuildContext context) async {
     if (query.isEmpty) {
       emit(const SearchLoaded([]));
       return;
@@ -31,7 +32,7 @@ class SearchCubit extends Cubit<SearchState> {
 
     try {
       if (globalMode.value) {
-        await _searchGlobally(query);
+        await _searchGlobally(query, context);
       } else {
         await _searchLocally(query);
       }
@@ -57,7 +58,7 @@ class SearchCubit extends Cubit<SearchState> {
     emit(SearchLoaded(filteredNovels, showTip: true));
   }
 
-  Future<void> _searchGlobally(String query) async {
+  Future<void> _searchGlobally(String query, BuildContext context) async {
     emit(SearchLoading());
 
     final novelStream = await _searchRepository.searchNovels(query);
@@ -73,13 +74,19 @@ class SearchCubit extends Cubit<SearchState> {
           emit(const SearchEmpty(showTip: false));
         }
       },
-      cancelOnError: true,
+      onError: (Object e) {
+        context.showSnackBar(
+          message: e.toString(),
+          color: context.colors.error,
+        );
+      },
+      cancelOnError: false,
     );
   }
 
-  void changeGlobalMode() {
+  void changeGlobalMode(BuildContext context) {
     globalMode.value = !globalMode.value;
-    if (query.value.isNotEmpty) search(query.value);
+    if (query.value.isNotEmpty) search(query.value, context);
   }
 
   void changeShowModeToGrid() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:eikyusho_extensions/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
@@ -43,7 +44,7 @@ class ExtensionOptionsBottomSheet extends StatelessWidget {
             const Separator.vertical(size: 40),
             ExtensionMeta(
               label: context.translate.label_language,
-              value: extension.language,
+              value: Language.getName(extension.language),
             ),
           ],
         ),

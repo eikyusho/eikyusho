@@ -120,7 +120,9 @@ class NavigationItem extends StatelessWidget {
               context.read<DiscoverCubit>().openWebView(context);
               return;
             case 2:
-              if (selected) context.read<SearchCubit>().changeGlobalMode();
+              if (selected) {
+                context.read<SearchCubit>().changeGlobalMode(context);
+              }
               return;
             case 3:
             default:

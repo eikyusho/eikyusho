@@ -2,9 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../constants/app_dimens.dart';
+import '../../../core.dart';
 import '../../theme/theme.dart';
-import './class_extensions.dart';
 
 extension ThemeExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
@@ -92,12 +91,18 @@ extension MediaQueryExtension on BuildContext {
 extension SnackBarExtension on BuildContext {
   void showSnackBar({
     required String message,
+    required Color color,
     Duration duration = const Duration(seconds: 3),
   }) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Text(message).textStyle(
+          textTheme.bodyMd.medium,
+          color: colors.textPrimary,
+        ),
         duration: duration,
+        backgroundColor: color,
+        behavior: SnackBarBehavior.floating,
       ),
     );
   }

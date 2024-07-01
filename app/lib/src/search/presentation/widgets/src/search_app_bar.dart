@@ -39,7 +39,7 @@ class SearchAppBar extends MainAppBarChild {
             onChanged: (value) {
               context.read<SearchCubit>().query.value = value;
               debouncer.run(() {
-                context.read<SearchCubit>().search(value);
+                context.read<SearchCubit>().search(value, context);
               });
             },
           );

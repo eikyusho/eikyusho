@@ -84,6 +84,8 @@ class ExtensionCardButton extends StatelessWidget {
   }
 
   void showSnackBarMessage(BuildContext context, ExtensionCardState state) {
+    final isDanger = state is ExtensionCardError;
+
     final message = switch (state) {
       ExtensionCardDownloaded() => state.isUpdate
           ? context.translate.extension_updated
@@ -96,6 +98,9 @@ class ExtensionCardButton extends StatelessWidget {
 
     if (message.isEmpty) return;
 
-    context.showSnackBar(message: '$message: ${extension.name}');
+    context.showSnackBar(
+      message: '$message: ${extension.name}',
+      color: isDanger ? context.colors.error : context.colors.success,
+    );
   }
 }

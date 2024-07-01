@@ -24,18 +24,18 @@ flutter:
   assets:
     - assets/images/
     - assets/avatars/
-    - assets/fonts/
     - assets/icons/
+    - lib/fonts/
 
   fonts:
     - family: Gotham
       fonts:
-        - asset: assets/fonts/gotham-rnd-book.otf
-        - asset: assets/fonts/gotham-rnd-medium.otf
+        - asset: lib/fonts/gotham-rnd-book.otf
+        - asset: lib/fonts/gotham-rnd-medium.otf
           weight: 500
-        - asset: assets/fonts/gotham-rnd-bold.otf
+        - asset: lib/fonts/gotham-rnd-bold.otf
           weight: 700
-        - asset: assets/fonts/gotham-black.otf
+        - asset: lib/fonts/gotham-black.otf
           weight: 900
 
 flutter_gen:

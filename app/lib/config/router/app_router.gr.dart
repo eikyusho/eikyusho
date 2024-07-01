@@ -8,15 +8,12 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-import 'package:flutter/material.dart' as _i15;
-
-import 'package:auto_route/auto_route.dart' as _i13;
-
 import 'package:app/common/common.dart' as _i14;
 import 'package:app/config/router/app_tabs.dart' as _i1;
 import 'package:app/src/browse/presentation/views/browse_page.dart' as _i2;
 import 'package:app/src/browse/presentation/views/extensions_page.dart' as _i5;
+import 'package:app/src/discover/presentation/views/discover_list_page.dart'
+    as _i3;
 import 'package:app/src/discover/presentation/views/discover_page.dart' as _i4;
 import 'package:app/src/library/presentation/views/library_page.dart' as _i6;
 import 'package:app/src/reader/presentation/views/novel_page.dart' as _i7;
@@ -25,9 +22,8 @@ import 'package:app/src/search/presentation/views/search_page.dart' as _i10;
 import 'package:app/src/settings/presentation/views/profile_page.dart' as _i8;
 import 'package:app/src/settings/presentation/views/settings_page.dart' as _i11;
 import 'package:app/src/webview/presentation/views/webview_page.dart' as _i12;
-
-import 'package:app/src/discover/presentation/views/discover_list_page.dart'
-    as _i3;
+import 'package:auto_route/auto_route.dart' as _i13;
+import 'package:flutter/material.dart' as _i15;
 
 abstract class $AppRouter extends _i13.RootStackRouter {
   $AppRouter({super.navigatorKey});

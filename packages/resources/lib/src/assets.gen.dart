@@ -12,6 +12,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
+class $LibGen {
+  const $LibGen();
+
+  /// Directory path: lib/fonts
+  $LibFontsGen get fonts => const $LibFontsGen();
+}
+
 class $AssetsAvatarsGen {
   const $AssetsAvatarsGen();
 
@@ -53,29 +60,6 @@ class $AssetsAvatarsGen {
         a6001AnimePfpsgg,
         a9467MillimNava19Pfpsgg
       ];
-}
-
-class $AssetsFontsGen {
-  const $AssetsFontsGen();
-
-  /// File path: assets/fonts/gotham-black.otf
-  String get gothamBlack => 'packages/resources/assets/fonts/gotham-black.otf';
-
-  /// File path: assets/fonts/gotham-rnd-bold.otf
-  String get gothamRndBold =>
-      'packages/resources/assets/fonts/gotham-rnd-bold.otf';
-
-  /// File path: assets/fonts/gotham-rnd-book.otf
-  String get gothamRndBook =>
-      'packages/resources/assets/fonts/gotham-rnd-book.otf';
-
-  /// File path: assets/fonts/gotham-rnd-medium.otf
-  String get gothamRndMedium =>
-      'packages/resources/assets/fonts/gotham-rnd-medium.otf';
-
-  /// List of all assets
-  List<String> get values =>
-      [gothamBlack, gothamRndBold, gothamRndBook, gothamRndMedium];
 }
 
 class $AssetsIconsGen {
@@ -427,15 +411,38 @@ class $AssetsImagesGen {
       ];
 }
 
+class $LibFontsGen {
+  const $LibFontsGen();
+
+  /// File path: lib/fonts/gotham-black.otf
+  String get gothamBlack => 'packages/resources/lib/fonts/gotham-black.otf';
+
+  /// File path: lib/fonts/gotham-rnd-bold.otf
+  String get gothamRndBold =>
+      'packages/resources/lib/fonts/gotham-rnd-bold.otf';
+
+  /// File path: lib/fonts/gotham-rnd-book.otf
+  String get gothamRndBook =>
+      'packages/resources/lib/fonts/gotham-rnd-book.otf';
+
+  /// File path: lib/fonts/gotham-rnd-medium.otf
+  String get gothamRndMedium =>
+      'packages/resources/lib/fonts/gotham-rnd-medium.otf';
+
+  /// List of all assets
+  List<String> get values =>
+      [gothamBlack, gothamRndBold, gothamRndBook, gothamRndMedium];
+}
+
 class Assets {
   Assets._();
 
   static const String package = 'resources';
 
   static const $AssetsAvatarsGen avatars = $AssetsAvatarsGen();
-  static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $LibGen lib = $LibGen();
 }
 
 class AssetGenImage {

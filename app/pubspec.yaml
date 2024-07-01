@@ -76,13 +76,13 @@ flutter:
   fonts:
     - family: Gotham
       fonts:
-        - asset: ../packages/resources/assets/fonts/gotham-rnd-book.otf
+        - asset: packages/resources/fonts/gotham-rnd-book.otf
           weight: 400
-        - asset: ../packages/resources/assets/fonts/gotham-rnd-medium.otf
+        - asset: packages/resources/fonts/gotham-rnd-medium.otf
           weight: 500
-        - asset: ../packages/resources/assets/fonts/gotham-rnd-bold.otf
+        - asset: packages/resources/fonts/gotham-rnd-bold.otf
           weight: 700
-        - asset: ../packages/resources/assets/fonts/gotham-black.otf
+        - asset: packages/resources/fonts/gotham-black.otf
           weight: 900
 
 import_sorter:

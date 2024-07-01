@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
 import 'package:app/config/app.dart';
 import 'package:app/injector/injector.dart';
+import 'package:app/src/discover/presentation/presentation.dart';
 import 'package:app/src/reader/data/data.dart';
 import 'package:app/src/reader/presentation/cubits/cubits.dart';
 import 'package:app/src/reader/presentation/cubits/novel_cubit/novel_cubit.dart';
@@ -131,13 +133,25 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
   }
 
   Widget buildErrorPage(NovelError state) {
-    return EmptyPage(
-      image: Assets.images.error,
-      message: AppStrings.emptyStateError,
-      description: AppStrings.emptyStateDescriptionError,
-      error: state.error,
-      actionText: AppStrings.buttonWebView,
-      onAction: () {},
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.error,
+          message: context.translate.empty_state_error,
+          description: context.translate.empty_state_description_error,
+          error: state.error,
+          actionText: context.translate.button_webview,
+          onAction: () {
+            if (context.read<NovelCubit>().url == null) {
+              context.read<DiscoverCubit>().openWebView(context);
+              return;
+            }
+            context.router.push(
+              WebViewRoute(url: context.read<NovelCubit>().url!),
+            );
+          },
+        );
+      },
     );
   }
 }

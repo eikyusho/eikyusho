@@ -96,217 +96,217 @@ abstract class AppLocalizations {
   /// No description provided for @page_title_discover.
   ///
   /// In en, this message translates to:
-  /// **'Descobrir'**
+  /// **'Discover'**
   String get page_title_discover;
 
   /// No description provided for @page_title_library.
   ///
   /// In en, this message translates to:
-  /// **'Biblioteca'**
+  /// **'Library'**
   String get page_title_library;
 
   /// No description provided for @page_title_search.
   ///
   /// In en, this message translates to:
-  /// **'Procurar'**
+  /// **'Search'**
   String get page_title_search;
 
   /// No description provided for @page_title_browse.
   ///
   /// In en, this message translates to:
-  /// **'Navegar'**
+  /// **'Browse'**
   String get page_title_browse;
 
   /// No description provided for @page_title_settings.
   ///
   /// In en, this message translates to:
-  /// **'Configurações'**
+  /// **'Settings'**
   String get page_title_settings;
 
   /// No description provided for @page_title_extensions.
   ///
   /// In en, this message translates to:
-  /// **'Extensões'**
+  /// **'Extensions'**
   String get page_title_extensions;
 
   /// No description provided for @section_title_most_popular.
   ///
   /// In en, this message translates to:
-  /// **'Mais popular'**
+  /// **'Most Popular'**
   String get section_title_most_popular;
 
   /// No description provided for @section_title_recently_updated.
   ///
   /// In en, this message translates to:
-  /// **'Atualizado recentemente'**
+  /// **'Recently Updated'**
   String get section_title_recently_updated;
 
   /// No description provided for @section_title_pending_updates.
   ///
   /// In en, this message translates to:
-  /// **'Atualizações pendentes'**
+  /// **'Pending Updates'**
   String get section_title_pending_updates;
 
   /// No description provided for @section_title_available_extensions.
   ///
   /// In en, this message translates to:
-  /// **'Extensões disponíveis'**
+  /// **'Available Extensions'**
   String get section_title_available_extensions;
 
   /// No description provided for @section_title_last_used.
   ///
   /// In en, this message translates to:
-  /// **'Usado por último'**
+  /// **'Last Used'**
   String get section_title_last_used;
 
   /// No description provided for @section_title_chapters.
   ///
   /// In en, this message translates to:
-  /// **'Capítulos'**
+  /// **'Chapters'**
   String get section_title_chapters;
 
   /// No description provided for @section_title_reading.
   ///
   /// In en, this message translates to:
-  /// **'Leitura'**
+  /// **'Reading'**
   String get section_title_reading;
 
   /// No description provided for @section_title_completed.
   ///
   /// In en, this message translates to:
-  /// **'Concluído'**
+  /// **'Completed'**
   String get section_title_completed;
 
   /// No description provided for @section_title_collections.
   ///
   /// In en, this message translates to:
-  /// **'Coleções'**
+  /// **'Collections'**
   String get section_title_collections;
 
   /// No description provided for @settings_title_profile.
   ///
   /// In en, this message translates to:
-  /// **'Perfil'**
+  /// **'Profile'**
   String get settings_title_profile;
 
   /// No description provided for @settings_title_appearance.
   ///
   /// In en, this message translates to:
-  /// **'Aparência'**
+  /// **'Appearance'**
   String get settings_title_appearance;
 
   /// No description provided for @settings_title_preferences.
   ///
   /// In en, this message translates to:
-  /// **'Preferências'**
+  /// **'Preferences'**
   String get settings_title_preferences;
 
   /// No description provided for @settings_title_notifications.
   ///
   /// In en, this message translates to:
-  /// **'Notificações'**
+  /// **'Notifications'**
   String get settings_title_notifications;
 
   /// No description provided for @settings_title_security.
   ///
   /// In en, this message translates to:
-  /// **'Segurança'**
+  /// **'Security'**
   String get settings_title_security;
 
   /// No description provided for @settings_title_backup_restore.
   ///
   /// In en, this message translates to:
-  /// **'Restauração de backup'**
+  /// **'Backup & Restore'**
   String get settings_title_backup_restore;
 
   /// No description provided for @settings_title_about.
   ///
   /// In en, this message translates to:
-  /// **'Sobre'**
+  /// **'About'**
   String get settings_title_about;
 
   /// No description provided for @settings_placeholder_system_theme.
   ///
   /// In en, this message translates to:
-  /// **'Sistema'**
+  /// **'System'**
   String get settings_placeholder_system_theme;
 
   /// No description provided for @settings_placeholder_dark_theme.
   ///
   /// In en, this message translates to:
-  /// **'Escuro'**
+  /// **'Dark'**
   String get settings_placeholder_dark_theme;
 
   /// No description provided for @settings_placeholder_light_theme.
   ///
   /// In en, this message translates to:
-  /// **'Luz'**
+  /// **'Light'**
   String get settings_placeholder_light_theme;
 
   /// No description provided for @button_close.
   ///
   /// In en, this message translates to:
-  /// **'Fechar'**
+  /// **'Close'**
   String get button_close;
 
   /// No description provided for @button_uninstall_extension.
   ///
   /// In en, this message translates to:
-  /// **'Desinstalar Extensão'**
+  /// **'Uninstall Extension'**
   String get button_uninstall_extension;
 
   /// No description provided for @button_cancel.
   ///
   /// In en, this message translates to:
-  /// **'Cancelar'**
+  /// **'Cancel'**
   String get button_cancel;
 
   /// No description provided for @button_confirm.
   ///
   /// In en, this message translates to:
-  /// **'Confirme'**
+  /// **'Confirm'**
   String get button_confirm;
 
   /// No description provided for @button_select_source.
   ///
   /// In en, this message translates to:
-  /// **'Selecione a fonte'**
+  /// **'Select Source'**
   String get button_select_source;
 
   /// No description provided for @button_webview.
   ///
   /// In en, this message translates to:
-  /// **'Visualização da Web'**
+  /// **'WebView'**
   String get button_webview;
 
   /// No description provided for @button_read.
   ///
   /// In en, this message translates to:
-  /// **'Ler'**
+  /// **'Read'**
   String get button_read;
 
   /// No description provided for @button_continue_reading.
   ///
   /// In en, this message translates to:
-  /// **'Continuar'**
+  /// **'Continue'**
   String get button_continue_reading;
 
   /// No description provided for @label_version.
   ///
   /// In en, this message translates to:
-  /// **'Versão'**
+  /// **'Version'**
   String get label_version;
 
   /// No description provided for @label_language.
   ///
   /// In en, this message translates to:
-  /// **'Linguagem'**
+  /// **'Language'**
   String get label_language;
 
   /// No description provided for @label_chapters.
   ///
   /// In en, this message translates to:
-  /// **'Capítulos'**
+  /// **'Chapters'**
   String get label_chapters;
 
   /// No description provided for @label_status.
@@ -318,235 +318,235 @@ abstract class AppLocalizations {
   /// No description provided for @label_views.
   ///
   /// In en, this message translates to:
-  /// **'Visualizações'**
+  /// **'Views'**
   String get label_views;
 
   /// No description provided for @label_show_mode.
   ///
   /// In en, this message translates to:
-  /// **'Mostrar em'**
+  /// **'Show in'**
   String get label_show_mode;
 
   /// No description provided for @hint_search.
   ///
   /// In en, this message translates to:
-  /// **'Procurar'**
+  /// **'Search'**
   String get hint_search;
 
   /// No description provided for @hint_search_globally.
   ///
   /// In en, this message translates to:
-  /// **'Pesquise globalmente'**
+  /// **'Search Globally'**
   String get hint_search_globally;
 
   /// No description provided for @hint_search_locally.
   ///
   /// In en, this message translates to:
-  /// **'Pesquise localmente'**
+  /// **'Search Locally'**
   String get hint_search_locally;
 
   /// No description provided for @meta_disabled.
   ///
   /// In en, this message translates to:
-  /// **'Desabilitado'**
+  /// **'Disabled'**
   String get meta_disabled;
 
   /// No description provided for @toggle_active_extension.
   ///
   /// In en, this message translates to:
-  /// **'Ativo'**
+  /// **'Active'**
   String get toggle_active_extension;
 
   /// No description provided for @toggle_discover_extension.
   ///
   /// In en, this message translates to:
-  /// **'Descobrir'**
+  /// **'Discover'**
   String get toggle_discover_extension;
 
   /// No description provided for @toggle_show_disabled.
   ///
   /// In en, this message translates to:
-  /// **'Mostrar desativado'**
+  /// **'Show Disabled'**
   String get toggle_show_disabled;
 
   /// No description provided for @dialog_uninstall_extension.
   ///
   /// In en, this message translates to:
-  /// **'Desinstalar extensão'**
+  /// **'Uninstall Extension'**
   String get dialog_uninstall_extension;
 
   /// No description provided for @dialog_description_uninstall_extension.
   ///
   /// In en, this message translates to:
-  /// **'Tem certeza de que deseja desinstalar esta extensão?'**
+  /// **'Are you sure you want to uninstall this extension?'**
   String get dialog_description_uninstall_extension;
 
   /// No description provided for @empty_state_no_sources.
   ///
   /// In en, this message translates to:
-  /// **'Nenhuma fonte disponível'**
+  /// **'No sources available'**
   String get empty_state_no_sources;
 
   /// No description provided for @empty_state_description_no_sources.
   ///
   /// In en, this message translates to:
-  /// **'Você ainda não adicionou nenhuma fonte.'**
+  /// **'You have not added any sources yet.'**
   String get empty_state_description_no_sources;
 
   /// No description provided for @empty_state_no_selected_source.
   ///
   /// In en, this message translates to:
-  /// **'Nenhuma fonte selecionada'**
+  /// **'No source selected'**
   String get empty_state_no_selected_source;
 
   /// No description provided for @empty_state_description_no_selected_source.
   ///
   /// In en, this message translates to:
-  /// **'Selecione uma fonte para ver a página de descoberta.'**
+  /// **'Select a source to see the discover page.'**
   String get empty_state_description_no_selected_source;
 
   /// No description provided for @empty_state_error.
   ///
   /// In en, this message translates to:
-  /// **'Algo deu errado'**
+  /// **'Something went wrong'**
   String get empty_state_error;
 
   /// No description provided for @empty_state_description_error.
   ///
   /// In en, this message translates to:
-  /// **'Ocorreu um erro ao carregar a página.'**
+  /// **'An error occurred while loading the page.'**
   String get empty_state_description_error;
 
   /// No description provided for @empty_state_error_loading_sources.
   ///
   /// In en, this message translates to:
-  /// **'Ocorreu um erro ao carregar as fontes.'**
+  /// **'An error occurred while loading the sources.'**
   String get empty_state_error_loading_sources;
 
   /// No description provided for @empty_state_error_loading.
   ///
   /// In en, this message translates to:
-  /// **'Erro ao carregar'**
+  /// **'Loading error'**
   String get empty_state_error_loading;
 
   /// No description provided for @empty_state_description_error_loading.
   ///
   /// In en, this message translates to:
-  /// **'Não foi possível estabelecer uma conexão.'**
+  /// **'Couldn\'t establish a connection.'**
   String get empty_state_description_error_loading;
 
   /// No description provided for @empty_state_error_loading_novel.
   ///
   /// In en, this message translates to:
-  /// **'Não foi possível carregar a lista de romances.'**
+  /// **'Couldn\'t load the novel list.'**
   String get empty_state_error_loading_novel;
 
   /// No description provided for @empty_state_collection.
   ///
   /// In en, this message translates to:
-  /// **'Sem coleções'**
+  /// **'No Collections'**
   String get empty_state_collection;
 
   /// No description provided for @empty_state_description_collection.
   ///
   /// In en, this message translates to:
-  /// **'Crie uma coleção para organizar os seus romances.'**
+  /// **'Create a collection to organize your novels.'**
   String get empty_state_description_collection;
 
   /// No description provided for @empty_state_no_reading_novels.
   ///
   /// In en, this message translates to:
-  /// **'Nenhuma leitura atual'**
+  /// **'No Current Reads'**
   String get empty_state_no_reading_novels;
 
   /// No description provided for @empty_state_description_no_reading_novels.
   ///
   /// In en, this message translates to:
-  /// **'Você não está a ler nenhum romance no momento.'**
+  /// **'You aren\'t reading any novels at the moment.'**
   String get empty_state_description_no_reading_novels;
 
   /// No description provided for @empty_state_no_completed_novels.
   ///
   /// In en, this message translates to:
-  /// **'Prateleira Vazia'**
+  /// **'Empty Shelf'**
   String get empty_state_no_completed_novels;
 
   /// No description provided for @empty_state_description_no_completed_novels.
   ///
   /// In en, this message translates to:
-  /// **'Você ainda não completou nenhum romance.'**
+  /// **'You haven\'t completed any novels yet.'**
   String get empty_state_description_no_completed_novels;
 
   /// No description provided for @empty_state_no_results_found.
   ///
   /// In en, this message translates to:
-  /// **'Nenhum resultado encontrado'**
+  /// **'No Results Found'**
   String get empty_state_no_results_found;
 
   /// No description provided for @empty_state_description_no_results_found.
   ///
   /// In en, this message translates to:
-  /// **'Tente ajustar a sua pesquisa para encontrar o que procura.'**
+  /// **'Try adjusting your search to find what you are looking for.'**
   String get empty_state_description_no_results_found;
 
   /// No description provided for @tip_double_tap_discover.
   ///
   /// In en, this message translates to:
-  /// **'Toque duas vezes em \"Descobrir\" para ver o WebView.'**
+  /// **'Double tap \"Discover\" to see the WebView.'**
   String get tip_double_tap_discover;
 
   /// No description provided for @tip_search_globally.
   ///
   /// In en, this message translates to:
-  /// **'Toque duas vezes em \"Pesquisar\" para pesquisar globalmente.'**
+  /// **'Double tap \"Search\" to search globally.'**
   String get tip_search_globally;
 
   /// No description provided for @tip_search_locally.
   ///
   /// In en, this message translates to:
-  /// **'Toque duas vezes em “Pesquisar” para pesquisar localmente.'**
+  /// **'Double tap \"Search\" to search locally.'**
   String get tip_search_locally;
 
   /// No description provided for @tip_open_webview.
   ///
   /// In en, this message translates to:
-  /// **'Abra o WebView para verificar o conteúdo.'**
+  /// **'Open WebView to check the content.'**
   String get tip_open_webview;
 
   /// No description provided for @extension_installed.
   ///
   /// In en, this message translates to:
-  /// **'Extensão instalada'**
+  /// **'Extension installed'**
   String get extension_installed;
 
   /// No description provided for @extension_updated.
   ///
   /// In en, this message translates to:
-  /// **'Extensão atualizada'**
+  /// **'Extension updated'**
   String get extension_updated;
 
   /// No description provided for @failed_to_install.
   ///
   /// In en, this message translates to:
-  /// **'Falha na instalação'**
+  /// **'Failed to install'**
   String get failed_to_install;
 
   /// No description provided for @failed_to_update.
   ///
   /// In en, this message translates to:
-  /// **'Falha ao atualizar'**
+  /// **'Failed to update'**
   String get failed_to_update;
 
   /// No description provided for @exception_extension_not_found.
   ///
   /// In en, this message translates to:
-  /// **'Extensão não encontrada'**
+  /// **'Extension not found'**
   String get exception_extension_not_found;
 
   /// No description provided for @exception_novel_not_found.
   ///
   /// In en, this message translates to:
-  /// **'Romance não encontrado'**
+  /// **'Novel not found'**
   String get exception_novel_not_found;
 }
 

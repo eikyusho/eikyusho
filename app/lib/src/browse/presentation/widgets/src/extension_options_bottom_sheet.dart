@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -36,19 +37,19 @@ class ExtensionOptionsBottomSheet extends StatelessWidget {
         Row(
           children: [
             ExtensionMeta(
-              label: AppStrings.labelVersion,
+              label: context.translate.label_version,
               value: extension.version,
             ),
             const Separator.vertical(size: 40),
             ExtensionMeta(
-              label: AppStrings.labelLanguage,
+              label: context.translate.label_language,
               value: extension.language,
             ),
           ],
         ),
         const VSpace(AppDimens.lg),
         ToggleTile(
-          text: AppStrings.toggleActiveExtension,
+          text: context.translate.toggle_active_extension,
           value: extension.isEnabled,
           onTap: (value) {
             if (value) {
@@ -60,7 +61,7 @@ class ExtensionOptionsBottomSheet extends StatelessWidget {
         ),
         const VSpace(AppDimens.sm),
         ToggleTile(
-          text: AppStrings.toggleDiscoverExtension,
+          text: context.translate.toggle_discover_extension,
           value: extension.discover,
           onTap: (value) async {
             final cubit = context.read<BrowseCubit>();
@@ -79,7 +80,7 @@ class ExtensionOptionsBottomSheet extends StatelessWidget {
         const VSpace(AppDimens.md),
         ActionButton(
           icon: Assets.icons.trashBold,
-          text: AppStrings.buttonUninstallExtension,
+          text: context.translate.button_uninstall_extension,
           dangerAction: true,
           onTap: () async {
             Future<void> onConfirm() async {
@@ -94,9 +95,9 @@ class ExtensionOptionsBottomSheet extends StatelessWidget {
               context: context,
               builder: (context) => AppDialog(
                 type: DialogType.danger,
-                title: Text(AppStrings.dialogUninstallExtension),
+                title: Text(context.translate.dialog_uninstall_extension),
                 description: Text(
-                  AppStrings.dialogDescriptionUninstallExtension,
+                  context.translate.dialog_description_uninstall_extension,
                 ),
                 onConfirm: onConfirm,
               ),

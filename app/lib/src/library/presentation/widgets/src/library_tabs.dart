@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:localization/localization.dart';
 
 import 'package:app/common/common.dart';
 
@@ -38,9 +39,9 @@ class LibraryTabs extends MainAppBarBottom {
           isScrollable: true,
           tabAlignment: TabAlignment.center,
           tabs: [
-            Tab(text: AppStrings.sectionTitleReading),
-            Tab(text: AppStrings.sectionTitleCompleted),
-            Tab(text: AppStrings.sectionTitleCollections),
+            Tab(text: context.translate.section_title_reading),
+            Tab(text: context.translate.section_title_completed),
+            Tab(text: context.translate.section_title_collections),
           ],
         ),
       ),

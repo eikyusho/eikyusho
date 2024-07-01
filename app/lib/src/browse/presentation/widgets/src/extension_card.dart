@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:eikyusho_extensions/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -103,7 +104,7 @@ class ExtensionCard extends StatelessWidget {
   Widget buildMetadata(BuildContext context, {required bool isDisabled}) {
     if (isDisabled) {
       return Text(
-        AppStrings.metaDisabled,
+        context.translate.meta_disabled,
         style: TextStyle(color: context.colors.warning),
       );
     }

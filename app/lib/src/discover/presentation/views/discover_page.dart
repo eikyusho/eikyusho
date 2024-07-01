@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -117,9 +118,9 @@ class DiscoverPage extends StatelessWidget {
   Widget buildEmptyPage(BuildContext context) {
     return EmptyPage(
       image: Assets.images.emptyList,
-      message: AppStrings.emptyStateNoSources,
-      description: AppStrings.emptyStateDescriptionNoSources,
-      actionText: AppStrings.pageBrowseTitle,
+      message: context.translate.empty_state_no_sources,
+      description: context.translate.empty_state_description_no_sources,
+      actionText: context.translate.page_title_browse,
       onAction: () {
         context.router.push(const ExtensionsRoute());
       },
@@ -129,9 +130,9 @@ class DiscoverPage extends StatelessWidget {
   Widget buildUninitializedPage(BuildContext context) {
     return EmptyPage(
       image: Assets.images.error,
-      message: AppStrings.emptyStateNoSelectedSource,
-      description: AppStrings.emptyStateDescriptionNoSelectedSource,
-      actionText: AppStrings.buttonSelectSource,
+      message: context.translate.empty_state_no_selected_source,
+      description: context.translate.empty_state_description_no_selected_source,
+      actionText: context.translate.button_select_source,
       onAction: () {
         context.showBottomSheet(
           BlocProvider(
@@ -144,20 +145,24 @@ class DiscoverPage extends StatelessWidget {
   }
 
   Widget buildErrorPage(Exception error) {
-    return EmptyPage(
-      image: Assets.images.wentWrong,
-      message: AppStrings.emptyStateError,
-      description: AppStrings.emptyStateDescriptionError,
-      error: error,
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.wentWrong,
+          message: context.translate.empty_state_error,
+          description: context.translate.empty_state_description_error,
+          error: error,
+        );
+      },
     );
   }
 
   Widget buildContentErrorPage(BuildContext context) {
     return EmptyPage(
       image: Assets.images.wentWrong,
-      message: AppStrings.emptyStateErrorLoading,
-      description: AppStrings.emptyStateDescriptionErrorLoading,
-      tip: AppStrings.tipDoubleTapDiscover,
+      message: context.translate.empty_state_error_loading,
+      description: context.translate.empty_state_description_error_loading,
+      tip: context.translate.tip_double_tap_discover,
     );
   }
 }

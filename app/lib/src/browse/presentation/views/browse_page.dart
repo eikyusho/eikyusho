@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -41,7 +42,7 @@ class BrowsePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(AppStrings.toggleShowDisabled).textStyle(
+                Text(context.translate.toggle_show_disabled).textStyle(
                   context.textTheme.bodyMd.medium,
                   color: context.colors.textPrimary,
                 ),
@@ -104,11 +105,15 @@ class BrowsePage extends StatelessWidget {
   }
 
   Widget buildErrorPage(Exception error) {
-    return EmptyPage(
-      image: Assets.images.error,
-      message: AppStrings.emptyStateError,
-      description: AppStrings.emptyStateDescriptionErrorSources,
-      error: error,
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.error,
+          message: context.translate.empty_state_error,
+          description: context.translate.empty_state_error_loading_sources,
+          error: error,
+        );
+      },
     );
   }
 }

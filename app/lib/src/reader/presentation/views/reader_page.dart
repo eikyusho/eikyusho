@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -152,11 +153,15 @@ class _ReaderPageState extends State<ReaderPage> {
   }
 
   Widget buildErrorPage(Exception error) {
-    return EmptyPage(
-      image: Assets.images.wentWrong,
-      message: AppStrings.emptyStateError,
-      description: AppStrings.emptyStateDescriptionError,
-      error: error,
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.wentWrong,
+          message: context.translate.empty_state_error,
+          description: context.translate.empty_state_description_error,
+          error: error,
+        );
+      },
     );
   }
 

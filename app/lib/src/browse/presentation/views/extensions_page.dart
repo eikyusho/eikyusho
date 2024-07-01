@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -43,7 +44,7 @@ class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
       child: Scaffold(
         appBar: MainAppBar(
           showBackButton: true,
-          title: Text(AppStrings.pageExtensionsTitle),
+          title: Text(context.translate.page_title_extensions),
           actionIcon: Assets.icons.dotsThreeOutlineFill,
           actionButton: () {},
         ),
@@ -59,14 +60,18 @@ class ExtensionsPage extends StatelessWidget implements AutoRouteWrapper {
                   child: VSpace(padding.top + AppDimens.$2xl),
                 ),
                 if (hasOutdated) ...[
-                  SectionTitle(title: AppStrings.sectionTitlePendingUpdates),
+                  SectionTitle(
+                    title: context.translate.section_title_pending_updates,
+                  ),
                   ExtensionsListBuilder(
                     bottomPadding: AppDimens.lg,
                     selector: (state) => state.outdated,
                     type: ExtensionCardType.update,
                   ),
                 ],
-                SectionTitle(title: AppStrings.sectionTitleAvailableExtensions),
+                SectionTitle(
+                  title: context.translate.section_title_available_extensions,
+                ),
                 ExtensionsListBuilder(
                   bottomPadding: AppDimens.$2xl,
                   selector: (state) => state.available,

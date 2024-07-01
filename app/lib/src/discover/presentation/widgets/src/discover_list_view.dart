@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 
 import 'package:app/config/app.dart';
 import 'package:app/src/discover/presentation/cubits/cubits.dart';
@@ -18,12 +18,12 @@ class DiscoverMostPopularListView extends StatelessWidget {
     return Column(
       children: [
         DiscoverListHeader(
-          title: Text(AppStrings.discoverListMostPopularTitle),
+          title: Text(context.translate.section_title_most_popular),
           onPressed: (state) {
             context.router.push(
               DiscoverListRoute(
                 novels: state.mostPopular,
-                title: AppStrings.discoverListMostPopularTitle,
+                title: context.translate.section_title_most_popular,
               ),
             );
           },
@@ -54,12 +54,12 @@ class DiscoverRecentlyUpdatedListView extends StatelessWidget {
     return Column(
       children: [
         DiscoverListHeader(
-          title: Text(AppStrings.discoverListRecentlyUpdatedTitle),
+          title: Text(context.translate.section_title_recently_updated),
           onPressed: (state) {
             context.router.navigate(
               DiscoverListRoute(
                 novels: state.recentlyUpdated,
-                title: AppStrings.discoverListRecentlyUpdatedTitle,
+                title: context.translate.section_title_recently_updated,
               ),
             );
           },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -18,7 +19,7 @@ class NovelChapterHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(AppStrings.sectionTitleChapters).textStyle(
+          Text(context.translate.section_title_chapters).textStyle(
             context.textTheme.bodyMd.medium,
             color: context.colors.textPrimary,
           ),

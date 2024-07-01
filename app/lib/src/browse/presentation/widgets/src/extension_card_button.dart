@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -85,10 +86,11 @@ class ExtensionCardButton extends StatelessWidget {
   void showSnackBarMessage(BuildContext context, ExtensionCardState state) {
     final message = switch (state) {
       ExtensionCardDownloaded() => state.isUpdate
-          ? AppStrings.extensionUpdated
-          : AppStrings.extensionInstalled,
-      ExtensionCardError() =>
-        state.isUpdate ? AppStrings.failedToUpdate : AppStrings.failedToInstall,
+          ? context.translate.extension_updated
+          : context.translate.extension_installed,
+      ExtensionCardError() => state.isUpdate
+          ? context.translate.failed_to_update
+          : context.translate.failed_to_install,
       _ => '',
     };
 

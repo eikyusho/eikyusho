@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:localization/localization.dart';
 
 import 'package:app/common/presentation/presentation.dart';
 
@@ -75,14 +76,14 @@ class AppBottomSheet extends StatelessWidget {
               if (type == AppBottomSheetType.doubleAction)
                 Button(
                   type: ButtonType.secondary,
-                  text: AppStrings.buttonClose,
+                  text: primaryText ?? context.translate.button_close,
                   onTap: () {
                     onClose?.call();
                     Navigator.of(context).pop();
                   },
                 ).expanded(),
               Button(
-                text: primaryText ?? AppStrings.buttonClose,
+                text: primaryText ?? context.translate.button_close,
                 onTap: () {
                   if (type == AppBottomSheetType.singleAction) {
                     onClose?.call();

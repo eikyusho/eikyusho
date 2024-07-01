@@ -5,230 +5,230 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get page_title_discover => 'Descobrir';
+  String get page_title_discover => 'Discover';
 
   @override
-  String get page_title_library => 'Biblioteca';
+  String get page_title_library => 'Library';
 
   @override
-  String get page_title_search => 'Procurar';
+  String get page_title_search => 'Search';
 
   @override
-  String get page_title_browse => 'Navegar';
+  String get page_title_browse => 'Browse';
 
   @override
-  String get page_title_settings => 'Configurações';
+  String get page_title_settings => 'Settings';
 
   @override
-  String get page_title_extensions => 'Extensões';
+  String get page_title_extensions => 'Extensions';
 
   @override
-  String get section_title_most_popular => 'Mais popular';
+  String get section_title_most_popular => 'Most Popular';
 
   @override
-  String get section_title_recently_updated => 'Atualizado recentemente';
+  String get section_title_recently_updated => 'Recently Updated';
 
   @override
-  String get section_title_pending_updates => 'Atualizações pendentes';
+  String get section_title_pending_updates => 'Pending Updates';
 
   @override
-  String get section_title_available_extensions => 'Extensões disponíveis';
+  String get section_title_available_extensions => 'Available Extensions';
 
   @override
-  String get section_title_last_used => 'Usado por último';
+  String get section_title_last_used => 'Last Used';
 
   @override
-  String get section_title_chapters => 'Capítulos';
+  String get section_title_chapters => 'Chapters';
 
   @override
-  String get section_title_reading => 'Leitura';
+  String get section_title_reading => 'Reading';
 
   @override
-  String get section_title_completed => 'Concluído';
+  String get section_title_completed => 'Completed';
 
   @override
-  String get section_title_collections => 'Coleções';
+  String get section_title_collections => 'Collections';
 
   @override
-  String get settings_title_profile => 'Perfil';
+  String get settings_title_profile => 'Profile';
 
   @override
-  String get settings_title_appearance => 'Aparência';
+  String get settings_title_appearance => 'Appearance';
 
   @override
-  String get settings_title_preferences => 'Preferências';
+  String get settings_title_preferences => 'Preferences';
 
   @override
-  String get settings_title_notifications => 'Notificações';
+  String get settings_title_notifications => 'Notifications';
 
   @override
-  String get settings_title_security => 'Segurança';
+  String get settings_title_security => 'Security';
 
   @override
-  String get settings_title_backup_restore => 'Restauração de backup';
+  String get settings_title_backup_restore => 'Backup & Restore';
 
   @override
-  String get settings_title_about => 'Sobre';
+  String get settings_title_about => 'About';
 
   @override
-  String get settings_placeholder_system_theme => 'Sistema';
+  String get settings_placeholder_system_theme => 'System';
 
   @override
-  String get settings_placeholder_dark_theme => 'Escuro';
+  String get settings_placeholder_dark_theme => 'Dark';
 
   @override
-  String get settings_placeholder_light_theme => 'Luz';
+  String get settings_placeholder_light_theme => 'Light';
 
   @override
-  String get button_close => 'Fechar';
+  String get button_close => 'Close';
 
   @override
-  String get button_uninstall_extension => 'Desinstalar Extensão';
+  String get button_uninstall_extension => 'Uninstall Extension';
 
   @override
-  String get button_cancel => 'Cancelar';
+  String get button_cancel => 'Cancel';
 
   @override
-  String get button_confirm => 'Confirme';
+  String get button_confirm => 'Confirm';
 
   @override
-  String get button_select_source => 'Selecione a fonte';
+  String get button_select_source => 'Select Source';
 
   @override
-  String get button_webview => 'Visualização da Web';
+  String get button_webview => 'WebView';
 
   @override
-  String get button_read => 'Ler';
+  String get button_read => 'Read';
 
   @override
-  String get button_continue_reading => 'Continuar';
+  String get button_continue_reading => 'Continue';
 
   @override
-  String get label_version => 'Versão';
+  String get label_version => 'Version';
 
   @override
-  String get label_language => 'Linguagem';
+  String get label_language => 'Language';
 
   @override
-  String get label_chapters => 'Capítulos';
+  String get label_chapters => 'Chapters';
 
   @override
   String get label_status => 'Status';
 
   @override
-  String get label_views => 'Visualizações';
+  String get label_views => 'Views';
 
   @override
-  String get label_show_mode => 'Mostrar em';
+  String get label_show_mode => 'Show in';
 
   @override
-  String get hint_search => 'Procurar';
+  String get hint_search => 'Search';
 
   @override
-  String get hint_search_globally => 'Pesquise globalmente';
+  String get hint_search_globally => 'Search Globally';
 
   @override
-  String get hint_search_locally => 'Pesquise localmente';
+  String get hint_search_locally => 'Search Locally';
 
   @override
-  String get meta_disabled => 'Desabilitado';
+  String get meta_disabled => 'Disabled';
 
   @override
-  String get toggle_active_extension => 'Ativo';
+  String get toggle_active_extension => 'Active';
 
   @override
-  String get toggle_discover_extension => 'Descobrir';
+  String get toggle_discover_extension => 'Discover';
 
   @override
-  String get toggle_show_disabled => 'Mostrar desativado';
+  String get toggle_show_disabled => 'Show Disabled';
 
   @override
-  String get dialog_uninstall_extension => 'Desinstalar extensão';
+  String get dialog_uninstall_extension => 'Uninstall Extension';
 
   @override
-  String get dialog_description_uninstall_extension => 'Tem certeza de que deseja desinstalar esta extensão?';
+  String get dialog_description_uninstall_extension => 'Are you sure you want to uninstall this extension?';
 
   @override
-  String get empty_state_no_sources => 'Nenhuma fonte disponível';
+  String get empty_state_no_sources => 'No sources available';
 
   @override
-  String get empty_state_description_no_sources => 'Você ainda não adicionou nenhuma fonte.';
+  String get empty_state_description_no_sources => 'You have not added any sources yet.';
 
   @override
-  String get empty_state_no_selected_source => 'Nenhuma fonte selecionada';
+  String get empty_state_no_selected_source => 'No source selected';
 
   @override
-  String get empty_state_description_no_selected_source => 'Selecione uma fonte para ver a página de descoberta.';
+  String get empty_state_description_no_selected_source => 'Select a source to see the discover page.';
 
   @override
-  String get empty_state_error => 'Algo deu errado';
+  String get empty_state_error => 'Something went wrong';
 
   @override
-  String get empty_state_description_error => 'Ocorreu um erro ao carregar a página.';
+  String get empty_state_description_error => 'An error occurred while loading the page.';
 
   @override
-  String get empty_state_error_loading_sources => 'Ocorreu um erro ao carregar as fontes.';
+  String get empty_state_error_loading_sources => 'An error occurred while loading the sources.';
 
   @override
-  String get empty_state_error_loading => 'Erro ao carregar';
+  String get empty_state_error_loading => 'Loading error';
 
   @override
-  String get empty_state_description_error_loading => 'Não foi possível estabelecer uma conexão.';
+  String get empty_state_description_error_loading => 'Couldn\'t establish a connection.';
 
   @override
-  String get empty_state_error_loading_novel => 'Não foi possível carregar a lista de romances.';
+  String get empty_state_error_loading_novel => 'Couldn\'t load the novel list.';
 
   @override
-  String get empty_state_collection => 'Sem coleções';
+  String get empty_state_collection => 'No Collections';
 
   @override
-  String get empty_state_description_collection => 'Crie uma coleção para organizar os seus romances.';
+  String get empty_state_description_collection => 'Create a collection to organize your novels.';
 
   @override
-  String get empty_state_no_reading_novels => 'Nenhuma leitura atual';
+  String get empty_state_no_reading_novels => 'No Current Reads';
 
   @override
-  String get empty_state_description_no_reading_novels => 'Você não está a ler nenhum romance no momento.';
+  String get empty_state_description_no_reading_novels => 'You aren\'t reading any novels at the moment.';
 
   @override
-  String get empty_state_no_completed_novels => 'Prateleira Vazia';
+  String get empty_state_no_completed_novels => 'Empty Shelf';
 
   @override
-  String get empty_state_description_no_completed_novels => 'Você ainda não completou nenhum romance.';
+  String get empty_state_description_no_completed_novels => 'You haven\'t completed any novels yet.';
 
   @override
-  String get empty_state_no_results_found => 'Nenhum resultado encontrado';
+  String get empty_state_no_results_found => 'No Results Found';
 
   @override
-  String get empty_state_description_no_results_found => 'Tente ajustar a sua pesquisa para encontrar o que procura.';
+  String get empty_state_description_no_results_found => 'Try adjusting your search to find what you are looking for.';
 
   @override
-  String get tip_double_tap_discover => 'Toque duas vezes em \"Descobrir\" para ver o WebView.';
+  String get tip_double_tap_discover => 'Double tap \"Discover\" to see the WebView.';
 
   @override
-  String get tip_search_globally => 'Toque duas vezes em \"Pesquisar\" para pesquisar globalmente.';
+  String get tip_search_globally => 'Double tap \"Search\" to search globally.';
 
   @override
-  String get tip_search_locally => 'Toque duas vezes em “Pesquisar” para pesquisar localmente.';
+  String get tip_search_locally => 'Double tap \"Search\" to search locally.';
 
   @override
-  String get tip_open_webview => 'Abra o WebView para verificar o conteúdo.';
+  String get tip_open_webview => 'Open WebView to check the content.';
 
   @override
-  String get extension_installed => 'Extensão instalada';
+  String get extension_installed => 'Extension installed';
 
   @override
-  String get extension_updated => 'Extensão atualizada';
+  String get extension_updated => 'Extension updated';
 
   @override
-  String get failed_to_install => 'Falha na instalação';
+  String get failed_to_install => 'Failed to install';
 
   @override
-  String get failed_to_update => 'Falha ao atualizar';
+  String get failed_to_update => 'Failed to update';
 
   @override
-  String get exception_extension_not_found => 'Extensão não encontrada';
+  String get exception_extension_not_found => 'Extension not found';
 
   @override
-  String get exception_novel_not_found => 'Romance não encontrado';
+  String get exception_novel_not_found => 'Novel not found';
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -66,8 +67,8 @@ class SearchPage extends StatelessWidget {
                       child: InfoMessage(
                         icon: Assets.icons.infoBold,
                         message: mode
-                            ? AppStrings.tipSearchLocally
-                            : AppStrings.tipSearchGlobally,
+                            ? context.translate.tip_search_locally
+                            : context.translate.tip_search_globally,
                       ),
                     );
                   },
@@ -91,20 +92,29 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget buildEmptyPage(SearchEmpty state) {
-    return EmptyPage(
-      image: Assets.images.notFound,
-      message: AppStrings.emptyStateNoResultsFound,
-      description: AppStrings.emptyStateDescriptionNoResultsFound,
-      tip: state.showTip ? AppStrings.tipSearchGlobally : null,
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.notFound,
+          message: context.translate.empty_state_no_results_found,
+          description:
+              context.translate.empty_state_description_no_results_found,
+          tip: state.showTip ? context.translate.tip_search_globally : null,
+        );
+      },
     );
   }
 
   Widget buildErrorPage(Exception error) {
-    return EmptyPage(
-      image: Assets.images.wentWrong,
-      message: AppStrings.emptyStateError,
-      description: AppStrings.emptyStateDescriptionError,
-      error: error,
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.wentWrong,
+          message: context.translate.empty_state_error,
+          description: context.translate.empty_state_description_error,
+          error: error,
+        );
+      },
     );
   }
 

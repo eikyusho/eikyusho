@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -32,7 +33,7 @@ class DiscoverListContent extends StatelessWidget {
             width: context.responsiveWidth(.5),
           ),
           const VSpace(AppDimens.md),
-          Text(AppStrings.emptyStateErrorLoadingNovel).textStyle(
+          Text(context.translate.empty_state_error_loading_novel).textStyle(
             context.textTheme.bodySm.medium,
             color: context.colors.textPrimary,
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:localization/localization.dart';
 
 import 'package:app/common/common.dart';
 
@@ -23,12 +24,18 @@ class NovelStats extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _NovelStat(label: AppStrings.labelChapters, value: '$chapterCount'),
-        const Separator.vertical(size: separator),
-        _NovelStat(label: AppStrings.labelStatus, value: status.name),
+        _NovelStat(
+          label: context.translate.label_chapters,
+          value: '$chapterCount',
+        ),
         const Separator.vertical(size: separator),
         _NovelStat(
-          label: AppStrings.labelViews,
+          label: context.translate.label_status,
+          value: status.name,
+        ),
+        const Separator.vertical(size: separator),
+        _NovelStat(
+          label: context.translate.label_views,
           value: viewCount,
         ),
       ],

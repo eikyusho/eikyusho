@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -29,8 +30,8 @@ class SearchAppBar extends MainAppBarChild {
         builder: (context, value, child) {
           return TextInput(
             hint: value
-                ? AppStrings.hintSearchGlobally
-                : AppStrings.hintSearchLocally,
+                ? context.translate.hint_search_globally
+                : context.translate.hint_search_locally,
             value: context.read<SearchCubit>().query.value,
             prefixIcon: Assets.icons.magnifyingGlassBold,
             suffixIcon: Assets.icons.slidersHorizontalBold,

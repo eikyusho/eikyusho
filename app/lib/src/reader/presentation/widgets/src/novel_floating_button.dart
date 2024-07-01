@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -54,7 +55,7 @@ class NovelFloatingButton extends StatelessWidget {
           children: [
             Flexible(
               child: Button(
-                text: AppStrings.buttonRead,
+                text: context.translate.button_read,
                 onTap: () {},
               ),
             ),

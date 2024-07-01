@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/presentation/widgets/interactions/clickable_element.dart';
@@ -35,23 +36,23 @@ class AppNavigationBar extends StatelessWidget {
     final destinations = [
       NavbarItem(
         icon: _Icons.discoverIcon,
-        label: AppStrings.pageDiscoverTitle,
+        label: context.translate.page_title_discover,
       ),
       NavbarItem(
         icon: _Icons.libraryIcon,
-        label: AppStrings.pageLibraryTitle,
+        label: context.translate.page_title_library,
       ),
       NavbarItem(
         icon: _Icons.searchIcon,
-        label: AppStrings.pageSearchTitle,
+        label: context.translate.page_title_search,
       ),
       NavbarItem(
         icon: _Icons.browseIcon,
-        label: AppStrings.pageBrowseTitle,
+        label: context.translate.page_title_browse,
       ),
       NavbarItem(
         icon: _Icons.settingsIcon,
-        label: AppStrings.pageSettingsTitle,
+        label: context.translate.page_title_settings,
       ),
     ];
 

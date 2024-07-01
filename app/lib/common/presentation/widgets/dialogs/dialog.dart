@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/presentation/widgets/buttons/button.dart';
@@ -91,12 +92,12 @@ class AppDialog extends StatelessWidget {
               child: Row(
                 children: [
                   Button(
-                    text: AppStrings.buttonCancel,
+                    text: context.translate.button_cancel,
                     type: ButtonType.secondary,
                     onTap: () => Navigator.of(context).pop(),
                   ).expanded(),
                   Button(
-                    text: AppStrings.buttonConfirm,
+                    text: context.translate.button_confirm,
                     onTap: () {
                       onConfirm();
                       Navigator.of(context).pop();

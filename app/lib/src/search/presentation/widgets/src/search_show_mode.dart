@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -19,7 +20,7 @@ class SearchShowMode extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(AppStrings.labelShowMode).textStyle(
+        Text(context.translate.label_show_mode).textStyle(
           context.textTheme.bodySm.medium,
           color: context.colors.textSubdued,
         ),

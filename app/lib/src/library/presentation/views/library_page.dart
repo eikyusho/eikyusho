@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -67,10 +68,14 @@ class LibraryPage extends StatelessWidget {
   }
 
   Widget buildErrorPage() {
-    return EmptyPage(
-      image: Assets.images.wentWrong,
-      message: AppStrings.emptyStateError,
-      description: AppStrings.emptyStateDescriptionError,
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.wentWrong,
+          message: context.translate.empty_state_error,
+          description: context.translate.empty_state_description_error,
+        );
+      },
     );
   }
 
@@ -159,26 +164,40 @@ class LibraryPage extends StatelessWidget {
   }
 
   Widget buildEmptyReadingNovelsTab() {
-    return EmptyPage(
-      image: Assets.images.emptyList,
-      message: AppStrings.emptyStateNoReadingNovels,
-      description: AppStrings.emptyStateDescriptionNoReadingNovels,
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.emptyList,
+          message: context.translate.empty_state_no_reading_novels,
+          description:
+              context.translate.empty_state_description_no_reading_novels,
+        );
+      },
     );
   }
 
   Widget buildEmptyCompletedNovelsTab() {
-    return EmptyPage(
-      image: Assets.images.emptyList,
-      message: AppStrings.emptyStateNoCompletedNovels,
-      description: AppStrings.emptyStateDescriptionNoCompletedNovels,
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.emptyList,
+          message: context.translate.empty_state_no_completed_novels,
+          description:
+              context.translate.empty_state_description_no_completed_novels,
+        );
+      },
     );
   }
 
   Widget buildEmptyCollectionsTab() {
-    return EmptyPage(
-      image: Assets.images.emptyList,
-      message: AppStrings.emptyStateCollection,
-      description: AppStrings.emptyStateDescriptionCollection,
+    return Builder(
+      builder: (context) {
+        return EmptyPage(
+          image: Assets.images.emptyList,
+          message: context.translate.empty_state_collection,
+          description: context.translate.empty_state_description_collection,
+        );
+      },
     );
   }
 }

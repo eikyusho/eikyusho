@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:core/core.dart';
+import 'package:localization/localization.dart';
 import 'package:resources/resources.dart';
 
 import 'package:app/common/common.dart';
@@ -54,9 +54,9 @@ class DiscoverListPage extends StatelessWidget {
   Widget buildEmptyState(BuildContext context) {
     return EmptyPage(
       image: Assets.images.notFound,
-      message: AppStrings.emptyStateError,
-      description: AppStrings.emptyStateErrorLoadingNovel,
-      tip: AppStrings.tipOpenWebView,
+      message: context.translate.empty_state_error,
+      description: context.translate.empty_state_error_loading_novel,
+      tip: context.translate.tip_open_webview,
     );
   }
 }

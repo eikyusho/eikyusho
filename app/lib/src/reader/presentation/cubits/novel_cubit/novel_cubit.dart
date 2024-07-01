@@ -14,11 +14,13 @@ class NovelCubit extends Cubit<NovelState> {
 
   final NovelRepository _novelRepository;
   final ValueNotifier<bool> isAscending = ValueNotifier(true);
+  String? url;
 
   Future<void> getNovelDetails(Novel novel) async {
     emit(NovelLoading());
     try {
       final (details, isLocal) = await _novelRepository.getNovelDetails(novel);
+      url ??= details.link;
       await _loadChapters(details, isLocal: isLocal);
     } on Exception catch (e) {
       emit(NovelError(e));

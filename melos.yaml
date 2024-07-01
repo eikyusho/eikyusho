@@ -59,3 +59,9 @@ scripts:
     exec: flutter pub run import_sorter:main
     packageFilters:
       dependsOn: [ import_sorter ]
+
+  localize:
+    description: Generate localization files.
+    exec: flutter gen-l10n
+    packageFilters:
+      dependsOn: [ flutter_localizations ]

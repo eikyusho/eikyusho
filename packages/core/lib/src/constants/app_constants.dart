@@ -19,14 +19,14 @@ final class AppConstants {
   static const String sourcesPath = 'sources';
 }
 
-class StorageKeys {
-  const StorageKeys._();
+class PreferencesKeys {
+  const PreferencesKeys._();
 
-  static const String preferences = 'preferences';
+  static const String box = 'preferences';
 
-  static const String language = 'language';
   static const String locale = 'locale';
-  
+  static const String themeMode = 'theme_mode';
+
   static const String initialLocation = 'initial_location';
   static const String discoverSelectedSource = 'discover_selected_source';
 }

@@ -110,6 +110,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get button_continue_reading => 'Continue';
 
   @override
+  String get button_random => 'Random';
+
+  @override
   String get label_version => 'Version';
 
   @override

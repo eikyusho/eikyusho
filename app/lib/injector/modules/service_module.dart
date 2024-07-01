@@ -14,7 +14,7 @@ abstract class ServiceModule {
 
     Hive.init(directory.path);
 
-    final box = await Hive.openBox<Object>(StorageKeys.preferences);
+    final box = await Hive.openBox<Object>(PreferencesKeys.box);
     return HivePrefsManager(Hive, box);
   }
 

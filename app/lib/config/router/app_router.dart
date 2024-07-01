@@ -16,7 +16,7 @@ class AppNavigation {
   static Future<String> _getInitialLocation() async {
     final prefs = getIt<HivePrefsManager>();
 
-    final location = await prefs.read<String>(StorageKeys.initialLocation);
+    final location = await prefs.read<String>(PreferencesKeys.initialLocation);
 
     return location ?? DiscoverRoute.name;
   }
@@ -52,6 +52,7 @@ class AppRouter extends $AppRouter {
             AutoRoute(page: LibraryRoute.page, initial: isLibraryInitial),
             AutoRoute(page: SearchRoute.page),
             AutoRoute(page: BrowseRoute.page),
+            AutoRoute(page: SettingsRoute.page),
           ],
         ),
         AutoRoute(page: ExtensionsRoute.page),

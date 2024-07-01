@@ -20,6 +20,14 @@ enum AppThemeMode {
     };
   }
 
+  static AppThemeMode fromThemeMode(ThemeMode themeMode) {
+    return switch (themeMode) {
+      ThemeMode.system => AppThemeMode.system,
+      ThemeMode.light => AppThemeMode.light,
+      ThemeMode.dark => AppThemeMode.dark,
+    };
+  }
+
   static ThemeMode fromString(String? value) {
     return switch (value) {
       'system' => ThemeMode.system,
@@ -37,20 +45,26 @@ class AppCubit extends Cubit<AppState> {
 
   Future<void> loadApp() async {
     final prefThemeMode = await _prefsManager.read<String>(
-      StorageKeys.language,
+      PreferencesKeys.themeMode,
     );
 
     final prefLocale = await _prefsManager.read<String>(
-      StorageKeys.locale,
+      PreferencesKeys.locale,
     );
 
     final themeMode = AppThemeMode.fromString(prefThemeMode);
+    
     final locale = Locale(prefLocale ?? 'en');
 
     emit(state.copyWith(themeMode: themeMode, locale: locale));
   }
 
   void setThemeMode(ThemeMode themeMode) {
+    _prefsManager.save(
+      PreferencesKeys.themeMode,
+      AppThemeMode.fromThemeMode(themeMode).toString(),
+    );
+
     emit(state.copyWith(themeMode: themeMode));
   }
 

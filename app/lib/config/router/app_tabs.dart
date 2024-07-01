@@ -18,6 +18,7 @@ class AppTabs extends StatelessWidget {
         LibraryRoute(),
         SearchRoute(),
         BrowseRoute(),
+        SettingsRoute(),
       ],
       extendBody: true,
       bottomNavigationBuilder: _bottomNavigationBuilder,

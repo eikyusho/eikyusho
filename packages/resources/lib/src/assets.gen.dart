@@ -12,6 +12,49 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
+class $AssetsAvatarsGen {
+  const $AssetsAvatarsGen();
+
+  /// File path: assets/avatars/2885-kaneki-pfpsgg.png
+  AssetGenImage get a2885KanekiPfpsgg =>
+      const AssetGenImage('assets/avatars/2885-kaneki-pfpsgg.png');
+
+  /// File path: assets/avatars/3731-ghost-pfpsgg.png
+  AssetGenImage get a3731GhostPfpsgg =>
+      const AssetGenImage('assets/avatars/3731-ghost-pfpsgg.png');
+
+  /// File path: assets/avatars/4347-tanjiro-pfpsgg.png
+  AssetGenImage get a4347TanjiroPfpsgg =>
+      const AssetGenImage('assets/avatars/4347-tanjiro-pfpsgg.png');
+
+  /// File path: assets/avatars/5235-dark-boy-pfpsgg.png
+  AssetGenImage get a5235DarkBoyPfpsgg =>
+      const AssetGenImage('assets/avatars/5235-dark-boy-pfpsgg.png');
+
+  /// File path: assets/avatars/5930-aesthetic-mao-mao-pfpsgg.png
+  AssetGenImage get a5930AestheticMaoMaoPfpsgg =>
+      const AssetGenImage('assets/avatars/5930-aesthetic-mao-mao-pfpsgg.png');
+
+  /// File path: assets/avatars/6001-anime-pfpsgg.png
+  AssetGenImage get a6001AnimePfpsgg =>
+      const AssetGenImage('assets/avatars/6001-anime-pfpsgg.png');
+
+  /// File path: assets/avatars/9467-millim-nava-19-pfpsgg.png
+  AssetGenImage get a9467MillimNava19Pfpsgg =>
+      const AssetGenImage('assets/avatars/9467-millim-nava-19-pfpsgg.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        a2885KanekiPfpsgg,
+        a3731GhostPfpsgg,
+        a4347TanjiroPfpsgg,
+        a5235DarkBoyPfpsgg,
+        a5930AestheticMaoMaoPfpsgg,
+        a6001AnimePfpsgg,
+        a9467MillimNava19Pfpsgg
+      ];
+}
+
 class $AssetsFontsGen {
   const $AssetsFontsGen();
 
@@ -389,19 +432,25 @@ class Assets {
 
   static const String package = 'resources';
 
+  static const $AssetsAvatarsGen avatars = $AssetsAvatarsGen();
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName, {this.size = null});
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
 
   static const String package = 'resources';
 
   final Size? size;
+  final Set<String> flavors;
 
   Image image({
     Key? key,
@@ -477,20 +526,22 @@ class AssetGenImage {
 class SvgGenImage {
   const SvgGenImage(
     this._assetName, {
-    this.size = null,
+    this.size,
+    this.flavors = const {},
   }) : _isVecFormat = false;
 
   const SvgGenImage.vec(
     this._assetName, {
-    this.size = null,
+    this.size,
+    this.flavors = const {},
   }) : _isVecFormat = true;
 
   final String _assetName;
+  final Size? size;
+  final Set<String> flavors;
+  final bool _isVecFormat;
 
   static const String package = 'resources';
-
-  final Size? size;
-  final bool _isVecFormat;
 
   SvgPicture svg({
     Key? key,
@@ -513,12 +564,23 @@ class SvgGenImage {
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
     @deprecated bool cacheColorFilter = false,
   }) {
+    final BytesLoader loader;
+    if (_isVecFormat) {
+      loader = AssetBytesLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+      );
+    } else {
+      loader = SvgAssetLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+        theme: theme,
+      );
+    }
     return SvgPicture(
-      _isVecFormat
-          ? AssetBytesLoader(_assetName,
-              assetBundle: bundle, packageName: package)
-          : SvgAssetLoader(_assetName,
-              assetBundle: bundle, packageName: package),
+      loader,
       key: key,
       matchTextDirection: matchTextDirection,
       width: width,
@@ -529,7 +591,6 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      theme: theme,
       colorFilter: colorFilter ??
           (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,

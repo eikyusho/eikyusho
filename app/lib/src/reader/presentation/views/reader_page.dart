@@ -26,8 +26,6 @@ class ReaderPage extends StatefulWidget implements AutoRouteWrapper {
     return BlocProvider(
       create: (context) => ReaderCubit(
         getIt<NovelRepository>(),
-        chapters: chapters,
-        chapter: chapter,
       )..loadChapter(chapter, chapters),
       child: this,
     );
@@ -41,8 +39,8 @@ class _ReaderPageState extends State<ReaderPage> {
   @override
   void initState() {
     super.initState();
-    _currentPage = context.read<ReaderCubit>().currentPage;
-    _pageController = context.read<ReaderCubit>().pageController;
+    _currentPage = widget.chapters.indexOf(widget.chapter);
+    _pageController = PageController(initialPage: _currentPage);
   }
 
   @override
@@ -59,7 +57,9 @@ class _ReaderPageState extends State<ReaderPage> {
               context.showBottomSheet(
                 BlocProvider.value(
                   value: context.read<ReaderCubit>(),
-                  child: const ReaderOptionsBottomSheet(),
+                  child: ReaderOptionsBottomSheet(
+                    _pageController,
+                  ),
                 ),
               );
             },

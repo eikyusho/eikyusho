@@ -7,11 +7,13 @@ import 'package:app/common/common.dart';
 import 'package:app/src/reader/presentation/widgets/src/reader_settings.dart';
 
 class ReaderOptionsBottomSheet extends StatelessWidget {
-  const ReaderOptionsBottomSheet({super.key});
+  const ReaderOptionsBottomSheet(this._pageController, {super.key});
+
+  final PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
-    return const DefaultTabController(
+    return DefaultTabController(
       length: 3,
       child: AppBottomSheet(
         type: AppBottomSheetType.noAction,
@@ -20,14 +22,16 @@ class ReaderOptionsBottomSheet extends StatelessWidget {
             height: 252,
             child: TabBarView(
               children: [
-                ReaderSettings(),
-                Text('Settings'),
-                Text('About'),
+                ReaderSettings(
+                  _pageController,
+                ),
+                const Text('Settings'),
+                const Text('About'),
               ],
             ),
           ),
-          VSpace(AppDimens.$4xl),
-          ReaderOptionsBottomSheetTabs(),
+          const VSpace(AppDimens.$4xl),
+          const ReaderOptionsBottomSheetTabs(),
         ],
       ),
     );

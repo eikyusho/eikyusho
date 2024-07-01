@@ -10,14 +10,18 @@ import 'package:app/config/app.dart';
 import 'package:app/src/reader/presentation/cubits/cubits.dart';
 
 class ReaderSettings extends StatelessWidget {
-  const ReaderSettings({super.key});
+  const ReaderSettings(this._pageController, {super.key});
+
+  final PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Expanded(
-          child: ReaderChapterSlider(),
+        Expanded(
+          child: ReaderChapterSlider(
+            _pageController,
+          ),
         ),
         const VSpace(AppDimens.md),
         BlocBuilder<ReaderCubit, ReaderState>(
@@ -127,7 +131,9 @@ class ReaderSettingsButton extends StatelessWidget {
 }
 
 class ReaderChapterSlider extends StatelessWidget {
-  const ReaderChapterSlider({super.key});
+  const ReaderChapterSlider(this._pageController, {super.key});
+
+  final PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -172,10 +178,10 @@ class ReaderChapterSlider extends StatelessWidget {
           AppIconButton(
             Assets.icons.caretLeftBold,
             onPressed: () {
-              context.read<ReaderCubit>().pageController.previousPage(
-                    duration: AppMisc.normalDuration,
-                    curve: Curves.easeInOut,
-                  );
+              _pageController.previousPage(
+                duration: AppMisc.normalDuration,
+                curve: Curves.easeInOut,
+              );
             },
             size: AppDimens.buttonXs,
             color: AppColors.transparent,
@@ -193,10 +199,7 @@ class ReaderChapterSlider extends StatelessWidget {
                   value: context.read<ReaderCubit>().currentPage.toDouble(),
                   max: state.chapters.length.toDouble(),
                   onChanged: (value) {
-                    context
-                        .read<ReaderCubit>()
-                        .pageController
-                        .jumpToPage(value.toInt());
+                    _pageController.jumpToPage(value.toInt());
                   },
                 ),
               ),
@@ -205,10 +208,10 @@ class ReaderChapterSlider extends StatelessWidget {
           AppIconButton(
             Assets.icons.caretRightBold,
             onPressed: () {
-              context.read<ReaderCubit>().pageController.nextPage(
-                    duration: AppMisc.normalDuration,
-                    curve: Curves.easeInOut,
-                  );
+              _pageController.nextPage(
+                duration: AppMisc.normalDuration,
+                curve: Curves.easeInOut,
+              );
             },
             size: AppDimens.buttonXs,
             color: AppColors.transparent,

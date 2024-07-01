@@ -13,8 +13,7 @@ class EmptyPage extends StatelessWidget {
     this.tip,
     this.error,
     this.actionIcon,
-    this.actionText,
-    this.onAction,
+    this.child,
     super.key,
   });
 
@@ -24,14 +23,13 @@ class EmptyPage extends StatelessWidget {
   final String description;
   final String? tip;
   final Exception? error;
-  final String? actionText;
-  final VoidCallback? onAction;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     final hasTip = tip != null;
     final hasError = error != null;
-    final hasAction = actionText != null && onAction != null;
+    final hasChild = child != null;
     final padding = context.screenPadding;
 
     return SizedBox.expand(
@@ -72,17 +70,17 @@ class EmptyPage extends StatelessWidget {
               ),
               const VSpace(AppDimens.$2xl),
             ],
-            if (hasAction) ...[
+            if (hasChild) ...[
               if (!hasTip && !hasError) const Spacer(),
-              ActionButton(
-                icon: actionIcon,
-                center: true,
-                text: actionText!,
-                onTap: onAction!,
-              ).px(AppDimens.$2xl),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimens.$2xl,
+                ),
+                child: child,
+              ),
             ],
             const VSpace(AppDimens.xl),
-            if (!hasAction && !hasTip && !hasError) const Spacer(),
+            if (!hasChild && !hasTip && !hasError) const Spacer(),
           ],
         ),
       ),

@@ -33,6 +33,8 @@
   "button_webview": "Visualização da Web",
   "button_read": "Ler",
   "button_continue_reading": "Continuar",
+  "button_details": "Abrir detalhes",
+  "button_help": "Ajuda",
   "label_version": "Versão",
   "label_language": "Linguagem",
   "label_chapters": "Capítulos",

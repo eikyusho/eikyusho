@@ -285,6 +285,18 @@ abstract class AppLocalizations {
   /// **'Read'**
   String get button_read;
 
+  /// No description provided for @button_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Details'**
+  String get button_details;
+
+  /// No description provided for @button_help.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get button_help;
+
   /// No description provided for @button_continue_reading.
   ///
   /// In en, this message translates to:

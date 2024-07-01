@@ -1,9 +1,13 @@
 //GENERATED BARREL FILE
+export './cubit/app_cubit.dart';
 export './views/empty_page.dart';
 export './widgets/buttons/action_button.dart';
 export './widgets/buttons/button.dart';
+export './widgets/buttons/fat_icon_button.dart';
 export './widgets/buttons/icon_button.dart';
 export './widgets/buttons/progress_button.dart';
+export './widgets/buttons/text_button.dart';
+export './widgets/components/error_bottom_sheet.dart';
 export './widgets/components/expandable_details.dart';
 export './widgets/components/extension_icon.dart';
 export './widgets/components/novel_card.dart';

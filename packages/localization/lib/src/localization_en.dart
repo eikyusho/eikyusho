@@ -101,6 +101,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get button_read => 'Read';
 
   @override
+  String get button_details => 'Open Details';
+
+  @override
+  String get button_help => 'Help';
+
+  @override
   String get button_continue_reading => 'Continue';
 
   @override

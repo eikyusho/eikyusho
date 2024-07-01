@@ -32,6 +32,8 @@
   "button_select_source": "Select Source",
   "button_webview": "WebView",
   "button_read": "Read",
+  "button_details": "Open Details",
+  "button_help": "Help",
   "button_continue_reading": "Continue",
   "label_version": "Version",
   "label_language": "Language",

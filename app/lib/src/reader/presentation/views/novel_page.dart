@@ -8,7 +8,6 @@ import 'package:resources/resources.dart';
 import 'package:app/common/common.dart';
 import 'package:app/config/app.dart';
 import 'package:app/injector/injector.dart';
-import 'package:app/src/discover/presentation/presentation.dart';
 import 'package:app/src/reader/data/data.dart';
 import 'package:app/src/reader/presentation/cubits/cubits.dart';
 import 'package:app/src/reader/presentation/cubits/novel_cubit/novel_cubit.dart';
@@ -135,21 +134,27 @@ class NovelPage extends StatelessWidget implements AutoRouteWrapper {
   Widget buildErrorPage(NovelError state) {
     return Builder(
       builder: (context) {
+        final message = context.translate.empty_state_error;
+        final description = context.translate.empty_state_description_error;
+
         return EmptyPage(
           image: Assets.images.error,
-          message: context.translate.empty_state_error,
-          description: context.translate.empty_state_description_error,
-          error: state.error,
-          actionText: context.translate.button_webview,
-          onAction: () {
-            if (context.read<NovelCubit>().url == null) {
-              context.read<DiscoverCubit>().openWebView(context);
-              return;
-            }
-            context.router.push(
-              WebViewRoute(url: context.read<NovelCubit>().url!),
-            );
-          },
+          message: message,
+          description: description,
+          child: ActionTextButton(
+            icon: Assets.icons.infoBold,
+            text: context.translate.button_details,
+            onTap: () {
+              context.showBottomSheet(
+                ErrorBottomSheet(
+                  message: message,
+                  description: description,
+                  error: state.error,
+                  url: context.read<NovelCubit>().url,
+                ),
+              );
+            },
+          ),
         );
       },
     );

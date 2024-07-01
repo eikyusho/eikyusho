@@ -101,6 +101,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get button_read => 'Ler';
 
   @override
+  String get button_details => 'Abrir detalhes';
+
+  @override
+  String get button_help => 'Ajuda';
+
+  @override
   String get button_continue_reading => 'Continuar';
 
   @override

@@ -93,7 +93,7 @@ class DiscoverPage extends StatelessWidget {
         final padding = context.screenPadding;
 
         if (state is DiscoverContentError) {
-          return buildContentErrorPage(context);
+          return buildContentErrorPage(context, state.error);
         }
 
         return SingleChildScrollView(
@@ -120,10 +120,14 @@ class DiscoverPage extends StatelessWidget {
       image: Assets.images.emptyList,
       message: context.translate.empty_state_no_sources,
       description: context.translate.empty_state_description_no_sources,
-      actionText: context.translate.page_title_browse,
-      onAction: () {
-        context.router.push(const ExtensionsRoute());
-      },
+      child: ActionButton(
+        icon: null,
+        center: true,
+        text: context.translate.page_title_browse,
+        onTap: () {
+          context.router.push(const ExtensionsRoute());
+        },
+      ),
     );
   }
 
@@ -132,15 +136,19 @@ class DiscoverPage extends StatelessWidget {
       image: Assets.images.error,
       message: context.translate.empty_state_no_selected_source,
       description: context.translate.empty_state_description_no_selected_source,
-      actionText: context.translate.button_select_source,
-      onAction: () {
-        context.showBottomSheet(
-          BlocProvider(
-            create: (_) => context.read<DiscoverCubit>(),
-            child: const SelectSourceBottomSheet(),
-          ),
-        );
-      },
+      child: ActionButton(
+        center: true,
+        icon: Assets.icons.puzzlePieceBold,
+        text: context.translate.button_select_source,
+        onTap: () {
+          context.showBottomSheet(
+            BlocProvider(
+              create: (_) => context.read<DiscoverCubit>(),
+              child: const SelectSourceBottomSheet(),
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -157,12 +165,28 @@ class DiscoverPage extends StatelessWidget {
     );
   }
 
-  Widget buildContentErrorPage(BuildContext context) {
+  Widget buildContentErrorPage(BuildContext context, Exception error) {
+    final message = context.translate.empty_state_error_loading;
+    final description = context.translate.empty_state_description_error_loading;
+
     return EmptyPage(
       image: Assets.images.wentWrong,
-      message: context.translate.empty_state_error_loading,
-      description: context.translate.empty_state_description_error_loading,
-      tip: context.translate.tip_double_tap_discover,
+      message: message,
+      description: description,
+      child: ActionTextButton(
+        icon: Assets.icons.infoBold,
+        text: context.translate.button_details,
+        onTap: () {
+          context.showBottomSheet(
+            ErrorBottomSheet(
+              message: message,
+              description: description,
+              error: error,
+              url: null,
+            ),
+          );
+        },
+      ),
     );
   }
 }

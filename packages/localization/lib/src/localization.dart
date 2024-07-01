@@ -309,6 +309,12 @@ abstract class AppLocalizations {
   /// **'Random'**
   String get button_random;
 
+  /// No description provided for @button_about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get button_about;
+
   /// No description provided for @label_version.
   ///
   /// In en, this message translates to:

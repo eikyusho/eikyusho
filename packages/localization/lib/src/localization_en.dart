@@ -113,6 +113,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get button_random => 'Random';
 
   @override
+  String get button_about => 'About';
+
+  @override
   String get label_version => 'Version';
 
   @override

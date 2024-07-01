@@ -113,6 +113,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get button_random => 'Aleatório';
 
   @override
+  String get button_about => 'Sobre';
+
+  @override
   String get label_version => 'Versão';
 
   @override

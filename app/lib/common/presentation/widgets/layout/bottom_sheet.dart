@@ -5,7 +5,7 @@ import 'package:localization/localization.dart';
 
 import 'package:app/common/presentation/presentation.dart';
 
-enum AppBottomSheetType { singleAction, doubleAction }
+enum AppBottomSheetType { singleAction, doubleAction, noAction }
 
 class AppBottomSheet extends StatelessWidget {
   const AppBottomSheet({
@@ -70,31 +70,33 @@ class AppBottomSheet extends StatelessWidget {
           ),
           const VSpace(AppDimens.$2xl),
           ...children,
-          const VSpace(AppDimens.lg),
-          Row(
-            children: [
-              if (type == AppBottomSheetType.doubleAction)
+          if (type != AppBottomSheetType.noAction) ...[
+            const VSpace(AppDimens.lg),
+            Row(
+              children: [
+                if (type == AppBottomSheetType.doubleAction)
+                  Button(
+                    type: ButtonType.secondary,
+                    text: primaryText ?? context.translate.button_close,
+                    onTap: () {
+                      onClose?.call();
+                      Navigator.of(context).pop();
+                    },
+                  ).expanded(),
                 Button(
-                  type: ButtonType.secondary,
                   text: primaryText ?? context.translate.button_close,
                   onTap: () {
-                    onClose?.call();
+                    if (type == AppBottomSheetType.singleAction) {
+                      onClose?.call();
+                    } else {
+                      onPrimaryAction?.call();
+                    }
                     Navigator.of(context).pop();
                   },
                 ).expanded(),
-              Button(
-                text: primaryText ?? context.translate.button_close,
-                onTap: () {
-                  if (type == AppBottomSheetType.singleAction) {
-                    onClose?.call();
-                  } else {
-                    onPrimaryAction?.call();
-                  }
-                  Navigator.of(context).pop();
-                },
-              ).expanded(),
-            ],
-          ).gap(AppDimens.sm),
+              ],
+            ).gap(AppDimens.sm),
+          ],
         ],
       ),
     );

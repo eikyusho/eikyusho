@@ -9,7 +9,7 @@ import 'package:app/common/common.dart';
 import 'package:app/config/app.dart';
 import 'package:app/injector/injector.dart';
 import 'package:app/src/reader/data/data.dart';
-import 'package:app/src/reader/presentation/cubits/cubits.dart';
+import 'package:app/src/reader/presentation/presentation.dart';
 
 @RoutePage()
 class ReaderPage extends StatefulWidget implements AutoRouteWrapper {
@@ -26,7 +26,9 @@ class ReaderPage extends StatefulWidget implements AutoRouteWrapper {
     return BlocProvider(
       create: (context) => ReaderCubit(
         getIt<NovelRepository>(),
-      )..loadChapter(chapter),
+        chapters: chapters,
+        chapter: chapter,
+      )..loadChapter(chapter, chapters),
       child: this,
     );
   }
@@ -39,8 +41,8 @@ class _ReaderPageState extends State<ReaderPage> {
   @override
   void initState() {
     super.initState();
-    _currentPage = widget.chapters.indexOf(widget.chapter);
-    _pageController = PageController(initialPage: _currentPage);
+    _currentPage = context.read<ReaderCubit>().currentPage;
+    _pageController = context.read<ReaderCubit>().pageController;
   }
 
   @override
@@ -53,7 +55,14 @@ class _ReaderPageState extends State<ReaderPage> {
           appBar: MainAppBar(
             title: Text(chapter.novel.title),
             showBackButton: true,
-            actionButton: () {},
+            actionButton: () {
+              context.showBottomSheet(
+                BlocProvider.value(
+                  value: context.read<ReaderCubit>(),
+                  child: const ReaderOptionsBottomSheet(),
+                ),
+              );
+            },
           ),
           extendBodyBehindAppBar: true,
           body: PageView.builder(
@@ -62,7 +71,11 @@ class _ReaderPageState extends State<ReaderPage> {
             onPageChanged: (index) {
               if (index != _currentPage) {
                 setState(() => _currentPage = index);
-                context.read<ReaderCubit>().loadChapter(chapters[index]);
+                context.read<ReaderCubit>().currentPage = index;
+                context.read<ReaderCubit>().loadChapter(
+                      chapters[index],
+                      chapters,
+                    );
               }
             },
             itemBuilder: (context, index) {

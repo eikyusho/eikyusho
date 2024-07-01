@@ -30,7 +30,10 @@ class ChapterTile extends StatelessWidget {
         borderRadius: AppDimens.radiusLg,
         onTap: () {
           context.router.push(
-            ReaderRoute(chapter: chapter, chapters: chapters),
+            ReaderRoute(
+              chapter: chapter,
+              chapters: chapters,
+            ),
           );
         },
         child: Container(

@@ -10,13 +10,18 @@ final class ReaderLoading extends ReaderState {
 }
 
 final class ReaderLoaded extends ReaderState {
-  const ReaderLoaded(this.chapter, {required this.content});
+  const ReaderLoaded(
+    this.chapter, {
+    required this.content,
+    required this.chapters,
+  });
 
+  final List<Chapter> chapters;
   final Chapter chapter;
   final String content;
 
   @override
-  List<Object> get props => [chapter, content];
+  List<Object> get props => [chapter, content, chapters];
 }
 
 final class ReaderError extends ReaderState {

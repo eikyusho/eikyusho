@@ -4,3 +4,4 @@ export './src/novel_chapters.dart';
 export './src/novel_floating_button.dart';
 export './src/novel_info.dart';
 export './src/novel_stats.dart';
+export './src/reader_options_bottom_sheet.dart';
